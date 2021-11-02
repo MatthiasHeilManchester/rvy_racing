@@ -1,0 +1,31 @@
+######################################################################
+# Below is mostly taken from the web. Common things to ignore for C++
+######################################################################
+# ---------------------------------------------------------------------
+# Non-trivial recipe used to globally ignore the possible addition of
+# any binaries/executables. These lines MUST(!) remain at the top of
+# the file.
+# ---------------------------------------------------------------------
+#     **THE THREE RULES BELOW MUST STAY AT THE TOP OF THE FILE.**
+# ---------------------------------------------------------------------
+# Ignore all files
+*
+
+# Unignore all files that have an extension
+!*.*
+
+# Unignore all directories
+!*/
+# ---------------------------------------------------------------------
+
+# Temporary files
+*~
+*#
+.#*
+*.tmp
+
+#Dot files
+.*
+
+# Except this file
+!.gitignore
