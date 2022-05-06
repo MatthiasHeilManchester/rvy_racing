@@ -1,0 +1,29 @@
+TODO:
+
+- Don't download race data repeatedly but say that wget has been skipped and explain how to force new upload (delete/move file; specify name)
+
+- check dns/dnf
+
+- test option to provide best time from multiple races
+
+- Put race rankings into separate data file, then write extra script
+  to generate overall rankings from them
+  
+- read in race numbers (for rouvy url).
+
+   Logic:
+
+     create master file for upcoming official races. If that exists, read it
+     and display on webpage (with link to race webpages)
+
+     for races for which official races exist, offer specification
+     of additional user generated ones. Display generated webpage link
+     and ask for confirmation.
+
+
+- rankings get re-generated from scratch every time a new race is done (so we can process new users; they get dns for races before they joined the group), but html pages get backed up before overwriting them.
+
+
+- Master file for each race contains multiplier.
+
+- Calendar: https://codeshack.io/event-calendar-php/
