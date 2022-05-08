@@ -1,6 +1,10 @@
 #! /bin/bash
 
 
+# hierher read in race details from generated race id file (generated from
+# master list (official races) and user generated ones)
+
+
 #https://my.rouvy.com/onlinerace/detail/86636
 #https://my.rouvy.com/onlinerace/detail/87429
 
@@ -96,7 +100,7 @@ for race_number in `echo $race_number_list`; do
     done
 
 
-    html_file="html/results_race"$race_number".html"
+    html_file="generated_html/results_race"$race_number".html"
     cat html_templates/html_start.txt > $html_file
     echo "<h2>Race "$race_number"</h2>" >>  $html_file
     echo "<h3>Alphabetical list</h3>" >>  $html_file
