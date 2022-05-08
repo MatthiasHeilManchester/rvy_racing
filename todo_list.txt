@@ -1,5 +1,42 @@
 TODO:
 
+Overall structure:
+
+race_info/
+
+        current_race_series.dat points to:
+
+        test_races/
+        rouvy_2022/
+        fake_commute/
+        ...
+
+                contain:
+
+                all_completed_races.dat // lists directories of
+                completed races for creating league table
+                
+                next_race.dat // points to next open race (for which
+                races can be contributed)
+
+                race1/
+                race2/
+                race3/
+                ...
+
+                        contain:
+
+                        official_races.dat
+
+                                urls
+
+                        user_contributed_races.dat
+
+                                urls
+                
+        
+
+
 - Don't download race data repeatedly but say that wget has been skipped and explain how to force new upload (delete/move file; specify name)
 
 - check dns/dnf
