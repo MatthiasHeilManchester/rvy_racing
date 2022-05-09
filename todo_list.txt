@@ -26,10 +26,13 @@ race_info/
 
                         contain:
 
-                        official_races.dat
+                        official_races.dat 
 
                                 urls
 
+
+                          user_contributed_race_{id}.dat contains itself
+                        
                         user_contributed_races.dat
 
                                 urls
