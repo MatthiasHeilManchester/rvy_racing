@@ -1,5 +1,10 @@
 TODO:
 
+
+
+Extract route id from race webpage search for "virtual-routes/detail"
+
+				<h3><img class="flagIco" src="https://cdn.rouvy.com/www/images/flags/IT.png" alt="IT"><a href="/virtual-routes/detail/91851">PEDALITALY Etna - Sicily - Italy</a></h3>
 Overall structure:
 
 race_info/
