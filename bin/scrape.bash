@@ -1,5 +1,6 @@
 #! /bin/bash
 
+# KEEP AS BACKUP BUT THIS IS ABOUT TO GO
 
 # hierher read in race details from generated race id file (generated from
 # master list (official races) and user generated ones)
