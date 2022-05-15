@@ -31,12 +31,10 @@ fi
 url_list=`cat official_race.dat`
 cd downloaded_official_race_results
 
-
 # Initialise race reslts
 race_result_list=""
 
 
-# hierher do these checks again
 race_date_from_race1="dummy"
 route_id_from_race1="dummy"
 route_title="dummy"
@@ -49,23 +47,45 @@ race_number=0
 for url in `echo $url_list`; do
     let race_number=$race_number+1
     html_file="downloaded_race_results_file"$race_number".html"
-    echo "about to download " $html_file
     if [ -e $html_file ]; then
         if [ $verbose_debug == 1 ]; then echo "Have already downloaded "$html_file; fi
     else
         wget -O $html_file $url
     fi
+    
+    if [ $race_number -eq 1 ]; then
+        
+        race_date_from_race1=`../$bin_dir/extract_parameters_from_rouvy_race_page.bash $html_file_name --date`
+        route_id_from_race1=`../$bin_dir/extract_parameters_from_rouvy_race_page.bash $html_file_name --route_id`
+        route_title=`../$bin_dir/extract_parameters_from_rouvy_race_page.bash $html_file_name --route_title`
 
+    else
+
+        race_date=`../$bin_dir/extract_parameters_from_rouvy_race_page.bash $html_file_name --date`
+        route_id=`../$bin_dir/extract_parameters_from_rouvy_race_page.bash $html_file_name --route_id`
+        if [ "$race_date" != "$race_date_from_race1" ]; then
+            echo "WARNING: official races 1 and "$race_number" are on different dates: -"$race_date"- and -"$race_date_from_race1"-"
+        else
+            if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and "$race_number" are on same date!"; fi 
+        fi
+        if [ "$route_id" != "$route_id_from_race1" ]; then
+            echo "WARNING: official races 1 and "$race_number" are on different routes: -"$route_id"- and -"$route_id_from_race1"-"
+        else
+            if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and "$race_number" are on same route!"; fi 
+        fi
+    fi
+    
+    # Do we have users?
+    if [ ! -e ../../user_list.txt ]; then
+        echo "ERROR: Don't have user data in " `pwd`"../../user_list.txt"
+        exit 1
+    fi
     user_list=`cat ../../user_list.txt`
     
     rm -f .tmp_result_file
     for user in `echo $user_list`; do
-        # echo "doing user: " $user
         awk -f ../$bin_dir/extract_finish_time_for_user_from_rouvy_race_results.awk -v user=$user $html_file  >> .tmp_result_file
     done
-
-    #cat .tmp_result_file
-
 
     # Results for this race
     result_file="results_race"$race_number".dat"
@@ -74,9 +94,6 @@ for url in `echo $url_list`; do
     # Sort by name of user
     sort .tmp_result_file > $result_file
     rm -f .tmp_result_file
-    
-    #echo "Result: "
-    #cat $result_file
     
 # End of loop over races
 done
