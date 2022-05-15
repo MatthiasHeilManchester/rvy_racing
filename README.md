@@ -1,22 +1,23 @@
 # To do
-- publish races series by series
-- do overall league table
-- add user-contributed races (create dummy to appropriate php webpage) which should be told what race series/number we're dealing with.
+- publish races, series by series
+- create overall league table (separate script!)
+- add option for user-contributed races
+   - add link to appropriate php script when creating race data in `all_races_in_series.html`; php file should be told what race series/number we're dealing with so user contributed data is written in the right place.
 
 ---
 
-# Create new race series:
-- Create series directory:
+# Create a new race series:
+- Create race series directory, so for a `fake_commute` series, say, do
     ```bash
     cd master_race_series  
     mkdir fake_commute
     cd fake_commute
     ```
-- Create user list
+- Create the user list
     ```bash
     emacs user_list.txt
     ``` 
-    which contains, e.g.
+    which contains the rouvy usernames of all riders, e.g.
     ```bash
     > cat master_race_data/fake_commute/user_list.txt
     ```
@@ -30,9 +31,11 @@
 
 ---
 
-# Create new race(s) in series
+# Create new official race(s) in series
 
-- Create race directory and specify instances of races (typically three for different timezones) by adding urls of rouvy races to `official_races.dat`:
+- Each official race is typically repeated several times (for different timezones). The different rouvy races (all on the same route, of course) are staged as follows:
+
+- Create race directory and specify URLs of races:
 ```bash
 
 # Go to race series directory
@@ -52,21 +55,25 @@ https://my.rouvy.com/onlinerace/live/87063
 https://my.rouvy.com/onlinerace/live/87064
 ```
 
-- Keep going until all races are created.
+In our specific example the file is
+```bash
+master_race_series/fake_commute/race00001/official_races.dat
+```
+- You can create as many races as you want; they are ordered alphanumerically, so assuming you stick the to conventions above, by the 5-digit number in the race directory.
 
 ---
 
-# Stage races 
+# Stage the races 
 
-We extract information about dates and times of races, names of routes, etc. from rouvy html files (downloaded if not yet available; delete directory  `downloaded_official_race_pages/` to force a new download if anything has been changed).
+Once the (typically multiple) rouvy races for a given route are specified, using the steps described in the previous step, we extract information about dates and times of races, names of routes, etc. from rouvy html files. These are downloaded if not yet available (delete the directory  `downloaded_official_race_pages/` in the race directory to force a new download if anything has been changed).
 
 Information is cross-checked (e.g. different instances of the race have to be on the same route, on the same day, etc.) and then summarised in the html file 
 ```bash
 master_race_series/fake_commute/all_races_in_series.html
 ```
-say. This file lists the race details (in reverse chrononological order) and provides links to the race results (initially populated with a dummy text which gets overwritten when the results are processed (see below)).
+say. This file lists the race details (in reverse chrononological order) for all races, and provides links to the race results. These are initially populated with a dummy text which gets overwritten when the results are processed (see below).
 
-- Run the script `bin/stage_official_races.bash`, specifying the name of the race series, e.g.
+- To stage the races run the script `bin/stage_official_races.bash` in the home directory, specifying the name of the race series, e.g.
 ```bash
 bin/stage_official_races.bash fake_commute
 ``` 
@@ -78,13 +85,15 @@ bin/publish_races.bash
 ```
 in the home directory. This does the following:
 - Make a backup of the content of the `generated_html/` directory, labels the tar file with time and date of the backup and moves it to the `backups_of_generated_html` directory.
-- Tar up the relevant staged html files (with directory structure) from the `master_race_series/` directory and unpack them in `generated_html/`.
+- Tar up the relevant staged html files (with their directory structure, so relative links remain functional) from the `master_race_series/` directory and unpack them in `generated_html/`.
+
+Once this is done, the races are visible to outside users.
 
 ---
 
 # Post-process races
 
-Once a race is over, the race html file needs to be downloaded again. This is done race by race, so to process `race00002` from the `fake_commute` series, do
+Once a race is over, the race html file needs to be downloaded again to obtain the finish times (using the best times from the multiple races on the route). This is done separately for each race, so to process `race00002` from the `fake_commute` series, do
 ```bash
 # Go to the relevant race directory
 cd master_race_series/fake_commute/race00002
@@ -96,11 +105,10 @@ This downloads the html files of the rouvy race pages (which should by now conta
 ```bash
 master_race_series/fake_commute/race00002/results.html
 ```
-This overwrittes the dummy text created when initially staging the race.
-
+This overwrites the dummy text created when the stage was initially staged.
 Check the results, e.g. by doing
 ```bash
 firefox master_race_series/fake_commute/all_races_in_series.html
 ```
-and if everything looks ok, (re-)publish the races; see above.
+and if everything looks ok, (re-)publish the races as described above.
 
