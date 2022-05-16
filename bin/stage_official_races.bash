@@ -126,6 +126,12 @@ for dir in `echo $dir_list`; do
     race_time_from_race1="dummy"
     route_id_from_race1="dummy"
     route_title="dummy"
+    day="dummy"
+    month="dummy"
+    year="dummy"
+    
+    # an array to look up th month-names
+    month_names=(not_a_month Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
     
     # Loop over all races, download race html file from rouvy
     # and check that they're all
@@ -151,9 +157,6 @@ for dir in `echo $dir_list`; do
             day=`echo $race_date_from_race1 | awk '{print substr($0,4,2)}'`
             month=`echo $race_date_from_race1 | awk '{print substr($0,1,2)}'`
             year=`echo $race_date_from_race1 | awk '{print substr($0,7)}'`
-
-            # an array to look up th month-names
-            month_names=(not_a_month Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
 
             
             echo "Date : " $day " " ${month_names[${month}]} " " $year
@@ -188,7 +191,10 @@ for dir in `echo $dir_list`; do
     
     # Prepare link to rouvy race ranking (dummy page until race is over and has been processed)
     if [ ! -e ../results.html ]; then
-        echo "Race hasn't been raced or processed yet!" > ../results.html
+        echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" > ../results.html
+        echo "<b>Route:</b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> ../results.html
+        echo "<br><br>" >> ../results.html
+        echo "Race hasn't been raced or processed yet!" >> ../results.html
     fi
     race_results_file=`basename $dir`/results.html
     echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
@@ -213,6 +219,10 @@ echo "Races staged. Here are the files that need to be installed:"
 echo " " 
 ls -l master_race_data/$race_series/all_races_in_series.html master_race_data/$race_series/*/results.html
 echo " "
+echo "To install them on the webpage run"
+echo " "
+echo "     bin/publish_webpages.bash"
+echo " "
 echo "Note that the results.html files are placeholders. They will be overwritten"
 echo "when individual races are  processed by running"
 echo " "
@@ -220,5 +230,10 @@ echo "     bin/process_race_outcome.bash"
 echo " "
 echo "in the relevant race directory."
 echo " "
+echo "Once that's done run"
+echo " "
+echo "     bin/publish_webpages.bash"
+echo " "
+echo "again."
 echo "======================================================================"
 echo " "

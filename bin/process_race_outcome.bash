@@ -114,6 +114,8 @@ for race_result in `echo $race_result_list`; do
 done
 
 
+# hierher add race data
+# hierher add results from previous races
 html_file="../results.html"
 cat ../$bin_dir/../html_templates/html_start.txt > $html_file
 `echo $paste_command`| awk -f ../$bin_dir/create_rank_table_for_race.awk > .tmp_file

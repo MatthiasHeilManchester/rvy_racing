@@ -1,5 +1,8 @@
 # To do
-- publish races, series by series
+- [publish races, series by series]
+- Add race info to results.html (recycle information that's already being generated when creating dummy text).
+- Make sure that race00001 is created in empty directory
+- tab complete race series!
 - create overall league table (separate script!)
 - add option for user-contributed races
    - add link to appropriate php script when creating race data in `all_races_in_series.html`; php file should be told what race series/number we're dealing with so user contributed data is written in the right place.
