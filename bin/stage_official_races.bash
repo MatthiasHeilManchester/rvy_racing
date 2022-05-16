@@ -134,7 +134,7 @@ for dir in `echo $dir_list`; do
     for url in `echo $url_list`; do
         html_file="downloaded_race_file"$race_number".html"
         if [ -e $html_file ]; then
-            if [ $verbose_debug == 1 ]; then echo "Have already downloaded "$html_file; fi
+            if [ $verbose_debug == 1 ]; then echo "INFO: Have already downloaded "$html_file; fi
         else
             wget -O $html_file $url
         fi

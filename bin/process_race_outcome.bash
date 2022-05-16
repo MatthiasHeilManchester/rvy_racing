@@ -48,7 +48,7 @@ for url in `echo $url_list`; do
     let race_number=$race_number+1
     html_file="downloaded_race_results_file"$race_number".html"
     if [ -e $html_file ]; then
-        if [ $verbose_debug == 1 ]; then echo "Have already downloaded "$html_file; fi
+        if [ $verbose_debug == 1 ]; then echo "INFO: Have already downloaded "$html_file; fi
     else
         wget -O $html_file $url
     fi
@@ -85,8 +85,14 @@ for url in `echo $url_list`; do
     rm -f .tmp_result_file
     for user in `echo $user_list`; do
         awk -f ../$bin_dir/extract_finish_time_for_user_from_rouvy_race_results.awk -v user=$user $html_file  >> .tmp_result_file
+        #echo " "
+        #echo "tmp file"
+        #cat .tmp_result_file
+        #echo "end tmp file"
+        #echo " "
     done
 
+    
     # Results for this race
     result_file="results_race"$race_number".dat"
     race_result_list=$race_result_list" "$result_file
