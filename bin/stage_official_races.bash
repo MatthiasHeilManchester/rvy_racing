@@ -194,6 +194,8 @@ for dir in `echo $dir_list`; do
         echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" > ../results.html
         echo "<b>Route:</b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> ../results.html
         echo "<br><br>" >> ../results.html
+        # Copy race info into tmp file which can be merged when processing the race
+        cp ../results.html .results_start.html
         echo "Race hasn't been raced or processed yet!" >> ../results.html
     fi
     race_results_file=`basename $dir`/results.html
