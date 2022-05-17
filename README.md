@@ -63,7 +63,15 @@ In our specific example the file is
 master_race_series/fake_commute/race00001/official_races.dat
 ```
 - You can create as many races as you want; they are ordered alphanumerically, so assuming you stick the to conventions above, by the 5-digit number in the race directory.
-
+- In fact, there's a script that will create the "next" race directory for you and open the `official_races.dat` file for you! Run it in the race series directory, e.g.  
+  ```bash
+  # Go to the relevant race series
+  cd master_race_series/fake_commute
+  
+  # Run the script
+  ../../bin/create_next_race.bash
+  ```
+  Note that if you abandon this, the directory will remain there (empty), so make sure you delete it before doing it properly (otherwise race 3 will turn   into race 4 with race 3 being empty!).
 ---
 
 # Stage the races 
