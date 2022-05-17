@@ -1,0 +1,89 @@
+#! /bin/bash
+
+
+
+# Just one command line argument
+if [ $# -ne 1 ]; then
+ echo "Please specify the race series"
+ exit 1
+fi
+
+
+
+# Be verbose for debugging?
+verbose_debug=0
+
+# Name of race series
+race_series=$1
+
+# Script should be run from home directory
+home_dir=`pwd`
+if [ ! -e master_race_data ]; then
+    echo "ERROR: Script ought to be run from home directory, so that"
+    echo "directory master_race_data is available as ./master_race_data."
+    echo "You are in $home_dir"
+    exit 1
+fi
+
+# Does race series even exist?
+if [ ! -e master_race_data/$race_series ]; then
+    echo "ERROR: Race series master_race_data/$race_series doesn't exist!"
+    exit 1
+fi
+echo " "
+echo "==========================================================================="
+echo " "
+echo "Setting up/updating league table for series : "$race_series
+html_file=master_race_data/$race_series/league_table.html
+cat $home_dir/html_templates/html_start.txt > $html_file
+
+
+# Do we have users?
+if [ ! -e ./master_race_data/$race_series/user_list.txt ]; then
+    echo "ERROR: No users for series, i.e. master_race_data/$race_series/user_list.txt doesn't exist!"
+    exit 1
+fi
+
+# Create an associative array
+declare -A total_points
+
+# Loop over all races in this series
+race_number_in_series=0
+dir_list=`ls -d master_race_data/$race_series/race?????`
+for dir in `echo $dir_list`; do
+
+    # Bump
+    let race_number_in_series=$race_number_in_series+1
+    echo " "
+    echo "Doing race "$race_number_in_series" in series"
+
+    # Go into race
+    cd $dir
+    if [ ! -e results.html ]; then
+        echo "WARNING: results.html in"`pwd`" doesn't exist; ignoring."
+    else
+        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=${total_points["$4"]}+"$10"; "}}' results.html`
+        eval $command
+    fi
+    cd $home_dir
+done
+
+
+
+
+echo "<h3>Overall league table after "$race_number_in_series" races</h3>" >>  $html_file
+echo "<table border=1>" >>  $html_file
+echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
+rm -f .tmp_league_table.dat
+rm -f .tmp_league_table2.dat
+for i in ${!total_points[@]}; do
+    echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> </tr>" >> .tmp_league_table.dat
+done
+echo ".tmp:"
+cat  .tmp_league_table.dat
+sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
+
+echo ".tmp2:"
+cat  .tmp_league_table2.dat
+awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf("%s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
+cat $home_dir/html_templates/html_end.txt >> $html_file
