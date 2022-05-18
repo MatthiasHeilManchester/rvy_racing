@@ -59,6 +59,24 @@ for url in `echo $url_list`; do
         wget -O $html_file $url
     fi
     
+    # Check if the race has actually been processed
+    number_of_official_results_strings=`grep -c 'OFFICIAL RESULTS' $html_file`
+    if [ $number_of_official_results_strings == 0 ]; then
+        echo "Race doesn't seem to have been run yet, according to rouvy"
+        echo "race page "
+        echo " "
+        echo "    "$url
+        echo " "
+        echo "which contains the string 'OFFICIAL RESULTS' " $number_of_official_results_strings " times."
+        echo " "
+        echo "Aborting"
+        echo " "
+        exit 1
+    else
+        echo "Downloaded webpage contains the string 'OFFICIAL RESULTS' " $number_of_official_results_strings " times."
+        echo "This suggests that the race was completed on rouvy. Yay!"
+    fi
+    
     if [ $race_number -eq 1 ]; then
         
         race_date_from_race1=`../$bin_dir/extract_parameters_from_rouvy_race_page.bash $html_file --date`

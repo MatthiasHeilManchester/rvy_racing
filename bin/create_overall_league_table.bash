@@ -62,7 +62,8 @@ for dir in `echo $dir_list`; do
     if [ ! -e results.html ]; then
         echo "WARNING: results.html in"`pwd`" doesn't exist; ignoring."
     else
-        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=${total_points["$4"]}+"$10"; "}}' results.html`
+        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=0${total_points["$4"]}+0"$10"; "}}' results.html`
+        echo $command
         eval $command
     fi
     cd $home_dir
@@ -79,11 +80,17 @@ rm -f .tmp_league_table2.dat
 for i in ${!total_points[@]}; do
     echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> </tr>" >> .tmp_league_table.dat
 done
-echo ".tmp:"
-cat  .tmp_league_table.dat
+#echo ".tmp:"
+#cat  .tmp_league_table.dat
 sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
 
-echo ".tmp2:"
-cat  .tmp_league_table2.dat
+#echo ".tmp2:"
+#cat  .tmp_league_table2.dat
 awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf("%s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
 cat $home_dir/html_templates/html_end.txt >> $html_file
+
+echo " " >>  $html_file
+echo "<hr>" >>  $html_file
+echo "League table processed: "`date`  >>  $html_file
+
+
