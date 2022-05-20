@@ -2,10 +2,11 @@
 
 # Create the next race (assuming existing ones are already numbered
 # race?????
-existing_race_list=`find . -name 'race[0-9][0-9][0-9][0-9][0-9]' -type d`
+existing_race_list=`find . -name 'race[0-9][0-9][0-9][0-9][0-9]' -type d | sort`
 next_race_number=0;
 count=1
 for race in `echo $existing_race_list`; do
+    echo "Existing race: " $race
     let count=$count+1
     test_race_number=`echo $count | awk '{printf "%05d\n",$1}'`
     next_race_number=`echo $race | awk '{printf "%05d\n",(substr($1,7,5)+1)}'`
@@ -29,3 +30,17 @@ echo "Add the URLs of the (sub)-races (for different timezones)."
 echo "============================================================="
 echo " "
 emacs official_race.dat 
+echo " "
+echo "============================================================="
+echo "Done!"
+echo "I've created "
+echo " " 
+echo "             "$new_dir"/official_race.dat" 
+echo " " 
+echo "Please make sure you stage this race by running"
+echo " " 
+echo "             bin/stage_official_races.bash <race_series>" 
+echo " " 
+echo "in the home directory."
+echo "============================================================="
+echo " "

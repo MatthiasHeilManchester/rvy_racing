@@ -56,7 +56,7 @@ for url in `echo $url_list`; do
     if [ -e $html_file ]; then
         if [ $verbose_debug == 1 ]; then echo "INFO: Have already downloaded "$html_file; fi
     else
-        wget -O $html_file $url
+        wget -O $html_file  $url
     fi
     
     # Check if the race has actually been processed
@@ -69,7 +69,8 @@ for url in `echo $url_list`; do
         echo " "
         echo "which contains the string 'OFFICIAL RESULTS' " $number_of_official_results_strings " times."
         echo " "
-        echo "Aborting"
+        rm -f $html_file
+        echo "Aborting after deleting the downloaded file!"
         echo " "
         exit 1
     else
@@ -149,12 +150,12 @@ html_file="../results.html"
 cat ../$bin_dir/../html_templates/html_start.txt > $html_file
 
 
+
 echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" >> $html_file
-echo "<b>Route:</b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> $html_file
+echo "<b>Route: </b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> $html_file
 echo "<br><br>" >> $html_file
 
 `echo $paste_command`| awk -f ../$bin_dir/create_rank_table_for_race.awk > .tmp_file
-echo "<h3>Race Result</h3>" >>  $html_file
 echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Finish time</td>  <td>Points</td> </tr>" >>  $html_file
 sort -k 5 -o .sorted_tmp_file .tmp_file
@@ -162,9 +163,10 @@ awk 'BEGIN{count=1}{printf(" %s %i %s",$1,count," </td><td>"); for (i=2;i<=NF;i+
 awk 'BEGIN{count=1;score[1]=40; score[2]=30; score[3]=25; for (i=4;i<=23;i++){score[i]=24-i}}{printf $1" "$2" "$3" "$4" "$5" "$6" "$7; start_of_time=substr($7,1,2); if (start_of_time=="DN"){printf(" </td> <td> 0 </td> ")}else{printf(" </td> <td> %i </td> ",score[count])}; print " </tr>"; count++}' .sorted_tmp_file2 >>  $html_file
 
 echo "</table>" >>  $html_file
-echo " " >>  $html_file
+echo "<br>"  >>  $html_file
+echo "Race processed: "`date`  >>  $html_file
+echo "<br>" >>  $html_file
 echo "<hr>" >>  $html_file
 echo " " >>  $html_file
-echo "Race processed: "`date`  >>  $html_file
-cat ../$bin_dir/../html_templates/html_end.txt >> $html_file
 
+cat ../$bin_dir/../html_templates/html_end.txt >> $html_file

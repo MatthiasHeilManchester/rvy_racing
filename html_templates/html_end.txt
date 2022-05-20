@@ -1,4 +1,2 @@
-
-</table>
   </body>
 </html>

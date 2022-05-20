@@ -50,6 +50,7 @@ declare -A total_points
 # Loop over all races in this series
 race_number_in_series=0
 dir_list=`ls -d master_race_data/$race_series/race?????`
+rev_dir_list=`echo $dir_list | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }'`
 for dir in `echo $dir_list`; do
 
     # Bump
@@ -62,9 +63,11 @@ for dir in `echo $dir_list`; do
     if [ ! -e results.html ]; then
         echo "WARNING: results.html in"`pwd`" doesn't exist; ignoring."
     else
-        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=0${total_points["$4"]}+0"$10"; "}}' results.html`
-        echo $command
+        # Prefix #10 declares numbers to be decimals in base 10
+        # https://stackoverflow.com/questions/21049822/value-too-great-for-base-error-token-is-09
+        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=10#${total_points["$4"]}+10#"$10"; "}}' results.html`
         eval $command
+        awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
     fi
     cd $home_dir
 done
@@ -72,7 +75,7 @@ done
 
 
 
-echo "<h3>Overall league table after "$race_number_in_series" races</h3>" >>  $html_file
+echo "<h2>Overall league table</h2>" >>  $html_file
 echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat
@@ -87,10 +90,20 @@ sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
 #echo ".tmp2:"
 #cat  .tmp_league_table2.dat
 awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf("%s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
+
+echo "<table>" >>  $html_file
+echo "<br>" >>  $html_file
+echo "League table processed: "`date`  >>  $html_file
+echo "<br>" >>  $html_file
+echo "<hr>" >>  $html_file
+echo " " >>  $html_file
+
+echo "<h2>Individual race results:</h2>" >> $html_file
+for dir in `echo $rev_dir_list`; do
+    cat $dir/.tmp_html_body_for_race.html >>  $html_file
+done
+
 cat $home_dir/html_templates/html_end.txt >> $html_file
 
-echo " " >>  $html_file
-echo "<hr>" >>  $html_file
-echo "League table processed: "`date`  >>  $html_file
 
 
