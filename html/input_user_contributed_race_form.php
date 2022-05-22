@@ -11,10 +11,8 @@
 <?php
 
 
-// hierher
-// define variables and set to empty values
-// $race_url_number=0;
 
+// hierher used? needed?
 $race_url_number_is_valid=true;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -36,6 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
 }
 
+// hierher used?
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -44,11 +43,52 @@ function test_input($data) {
 }
 ?>
 
-<h2>User contributed races</h2>
+<?php
+
+ // GET REQUIRED RACE DATA FROM URL
+
+ // Route ID (postfix in url of route on rouvy)
+ $route_id=$_GET['route_id'];
+
+ // Route title 
+ $route_title=$_GET['route_title'];
+
+ // Name of race series
+ $race_series=$_GET['race_series'];
+
+ // Number of race in series
+ $race_number=$_GET['race_number'];
+
+ // Race date (GMT)
+ $race_date_string=$_GET['race_date_string'];
+
+ // Remember data for the next scripts
+ session_start();
+ $_SESSION['route_id'] = $route_id;
+ $_SESSION['race_series'] = $race_series;
+ $_SESSION['race_number'] = $race_number;
+ $_SESSION['race_date_string'] = $race_date_string;
+
+ ?>
+
+
+
+<h2>User contributed race for <em>Race <?php echo $race_number ?></em> in
+  the race series <em><?php echo $race_series ?></em>.</h2>
+
+<ul>
+<li> The race must be held on the route
+  <a href="https://my.rouvy.com/virtual-routes/detail/<?php echo
+           $route_id?>"><?php echo $route_title ?></a>.
+<li> The race must be held on <?php echo $race_date_string ?> (GMT).
+</ul>
+<br>
+Please go
+to <a href="https://my.rouvy.com/onlinerace">https://my.rouvy.com/onlinerace</a>
+to create your race.
+
 Rouvy races are identified by the final number in the URL for the race
 registration page.
-<br>
-<br>
 Once you have created the race, please check the URL of its
 registration page and enter the race ID below.
 <br>
@@ -57,17 +97,18 @@ registration page and enter the race ID below.
 <br>
 <br>
 If your race registration page is
-<code>https://my.rouvy.com/onlinerace/detail/87800</code>, please
-enter 87800.
-
+<br><br>
+  <code>https://my.rouvy.com/onlinerace/detail/87800</code>
+  <br><br>
+    please enter
+    <br><br>
+      87800
+    <br><br>
 <br>
 <br>
 <hr>
 <br>
 <br>
-
-
-
 
 <form action="input_user_contributed_race_form_part2.php" method="post">
   Please enter the race ID: <input type="text" name="race_url_number">

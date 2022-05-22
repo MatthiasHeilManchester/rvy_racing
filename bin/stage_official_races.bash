@@ -198,8 +198,17 @@ for dir in `echo $dir_list`; do
         cp ../results.html .results_start.html
         echo "Race hasn't been raced or processed yet!" >> ../results.html
     fi
-    race_results_file=`basename $dir`/results.html
-    echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
+
+    # Provide link in summary file -- either to race results (if they've been processed)
+    # or to option to add private race
+    not_processed_yet_count=`grep -c "Race hasn't been raced or processed yet!" ../results.html`
+    if [ $not_processed_yet_count != 0 ]; then
+        # hierher racenumber -1; # hierher remove time from date
+        echo "Race not raced yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id"&route_title="$route_title"&race_number="$race_number"&race_series="$race_series"&race_date_string="$day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # hierher needs to be relative, so it's accsible from var/www etc. not absolute 
+    else
+        race_results_file=`basename $dir`/results.html
+        echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
+    fi
     
     # Add to race info for overall series (reverse order)
     touch $home_dir/master_race_data/$race_series/all_races_in_series.html
