@@ -5,16 +5,22 @@
 existing_race_list=`find . -name 'race[0-9][0-9][0-9][0-9][0-9]' -type d | sort`
 next_race_number=0;
 count=1
-for race in `echo $existing_race_list`; do
-    echo "Existing race: " $race
-    let count=$count+1
-    test_race_number=`echo $count | awk '{printf "%05d\n",$1}'`
-    next_race_number=`echo $race | awk '{printf "%05d\n",(substr($1,7,5)+1)}'`
-    if [ $test_race_number -ne $next_race_number ]; then
-        echo "ERROR: Directory " $race " is not enumerated consistently!"
-        exit 1
-    fi
-done
+if [ "$existing_race_list" == "" ]; then
+    echo "no race yet"
+    next_race_number=00001
+else
+    echo "have races: " $existing_race_list
+    for race in `echo $existing_race_list`; do
+        echo "Existing race: " $race
+        let count=$count+1
+        test_race_number=`echo $count | awk '{printf "%05d\n",$1}'`
+        next_race_number=`echo $race | awk '{printf "%05d\n",(substr($1,7,5)+1)}'`
+        if [ $test_race_number -ne $next_race_number ]; then
+            echo "ERROR: Directory " $race " is not enumerated consistently!"
+            exit 1
+        fi
+    done
+fi
 
 new_dir=race$next_race_number
 if [ -e $new_dir ]; then

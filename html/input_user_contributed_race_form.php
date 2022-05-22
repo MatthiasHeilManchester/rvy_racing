@@ -45,7 +45,7 @@ function test_input($data) {
 
 <?php
 
- // GET REQUIRED RACE DATA FROM URL
+ // GET REQUIRED RACE DATA FROM URL: THIS IS THE DATA FOR THE OFFICIAL RACE!
 
  // Route ID (postfix in url of route on rouvy)
  $route_id=$_GET['route_id'];
@@ -62,7 +62,7 @@ function test_input($data) {
  // Race date (GMT)
  $race_date_string=$_GET['race_date_string'];
 
- // Remember data for the next scripts
+ // Remember data for the next scripts; all for the official race(s)
  session_start();
  $_SESSION['route_id'] = $route_id;
  $_SESSION['race_series'] = $race_series;

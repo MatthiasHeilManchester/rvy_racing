@@ -39,11 +39,11 @@
 #  - html file that provides info and links to rouvy race pages
 #    for official races in
 #
-#      ./master_race_data/$1/all_races_in_series.html
+#      ./generated_race_data/$1/all_races_in_series.html
 #
 #  - placeholder html files for race results in
 #
-#      ./master_race_data/$1/race?????results.html
+#      ./generated_race_data/$1/race?????results.html
 #
 #    This is over-written when
 #
@@ -58,10 +58,8 @@ if [ $# -ne 1 ]; then
  exit 1
 fi
 
-
-
 # Be verbose for debugging?
-verbose_debug=0
+verbose_debug=1
 
 # Name of race series
 race_series=$1
@@ -84,7 +82,7 @@ echo " "
 echo "==========================================================================="
 echo " "
 echo "Setting up series : "$race_series
-rm -f master_race_data/$race_series/all_races_in_series.html
+rm -f generated_race_data/$race_series/all_races_in_series.html
 
 
 # Do we have users?
@@ -96,7 +94,9 @@ fi
 
 # Loop over all races in this series
 race_number_in_series=0
-dir_list=`ls -d master_race_data/$race_series/race?????`
+cd master_race_data
+dir_list=`ls -d $race_series/race?????`
+cd ../generated_race_data
 for dir in `echo $dir_list`; do
 
     # Bump
@@ -105,12 +105,32 @@ for dir in `echo $dir_list`; do
     echo "Doing race "$race_number_in_series" in series"
 
     # Go into race
+    if [ ! -e $dir ]; then
+        echo "Making directory: "`pwd`$dir
+        mkdir -p $dir
+    else
+        echo "Directory: "`pwd`$dir" already exists."
+    fi
+    
     cd $dir
+
+    # Create link to official race data
+    if [ ! -e official_race.dat ]; then
+        ln -s ../../../master_race_data/$dir/official_race.dat
+    fi
+    
+    # Check download diretories or create them
     if [ -e downloaded_official_race_pages ]; then
         if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_official_race_pages already exists."; fi
     else
         mkdir downloaded_official_race_pages
-        if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_official_race_pages dir"; fi
+        if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_official_race_pages directory"; fi
+    fi
+    if [ -e downloaded_contributed_race_pages ]; then
+        if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_contributed_race_pages already exists."; fi
+    else
+        mkdir downloaded_contributed_race_pages
+        if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_contributed_race_pages directory"; fi
     fi
     
     # Read the URLs of the official races
@@ -118,6 +138,7 @@ for dir in `echo $dir_list`; do
         echo "ERROR: No races specified via official_race.dat in " `pwd`
         exit 1
     fi
+
     
     url_list=`cat official_race.dat`
     cd downloaded_official_race_pages
@@ -211,9 +232,9 @@ for dir in `echo $dir_list`; do
     fi
     
     # Add to race info for overall series (reverse order)
-    touch $home_dir/master_race_data/$race_series/all_races_in_series.html
-    mv $home_dir/master_race_data/$race_series/all_races_in_series.html .tmp
-    cat .race.html .tmp >> $home_dir/master_race_data/$race_series/all_races_in_series.html
+    touch $home_dir/generated_race_data/$race_series/all_races_in_series.html
+    mv $home_dir/generated_race_data/$race_series/all_races_in_series.html .tmp
+    cat .race.html .tmp >> $home_dir/generated_race_data/$race_series/all_races_in_series.html
     rm -f .tmp
     rm .race.html
 
@@ -228,7 +249,7 @@ done
 cd $home_dir
 echo "Races staged. Here are the files that need to be installed:"
 echo " " 
-ls -l master_race_data/$race_series/all_races_in_series.html master_race_data/$race_series/*/results.html
+ls -l generated_race_data/$race_series/all_races_in_series.html generated_race_data/$race_series/*/results.html
 echo " "
 echo "To install them on the webpage run"
 echo " "
