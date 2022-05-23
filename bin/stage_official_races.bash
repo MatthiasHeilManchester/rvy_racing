@@ -126,6 +126,8 @@ for dir in `echo $dir_list`; do
         mkdir downloaded_official_race_pages
         if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_official_race_pages directory"; fi
     fi
+
+    # hierher this happens over in other directory; delete
     if [ -e downloaded_contributed_race_pages ]; then
         if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_contributed_race_pages already exists."; fi
     else

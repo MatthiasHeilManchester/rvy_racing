@@ -27,7 +27,7 @@ if [ ! -e ../master_race_data ]; then
     echo "You are in $home_dir"
     exit 1
 fi
-
+echo "HOME DIR : "$home_dir
 
 echo $race_series >> ../user_uploaded_data/shitte.txt
 echo $race_url >> ../user_uploaded_data/shitte.txt
@@ -72,35 +72,68 @@ fi
 
 # Go to race directory and check things out
 cd $race_dir
-if [ ! -e  contributed_race.dat ]; then
-    echo $race_url > contributed_race.dat
+
+
+if [ -e downloaded_contributed_race_pages ]; then
+    if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_contributed_race_pages already exists."; fi
 else
-    existing_url_list=`cat  contributed_race.dat`
-    for existing_url in `echo $existing_url`; do
-        echo "Existing url: "$existing_url
-        if [ $race_url == $existing_url ]; then
-            echo "New race url "$race_url" is the same as existing race url "$existing_url
-            echo "Skipping"
-            exit
-        else
-            echo "New race url "$race_url" differs from existing race url "$existing_url
-        fi
-    done
+    mkdir downloaded_contributed_race_pages
+    if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_contributed_race_pages directory"; fi
 fi
 
-#- download race html file to check if it exists and check consistency (route id and date)
+echo "i AM HERE : "`pwd`
+
+next_contributed_race_number=1
+n_existing_contributed_races=`wc -l contributed_race.dat | awk '{print $1}'`
+let next_contributed_race_number=`expr $next_contributed_race_number + $n_existing_contributed_races`
+echo "next contrib race number : "$next_contributed_race_number
+
+# Now download the race html file
+html_file="downloaded_contributed_race_pages/downloaded_contributed_race_file"$next_contributed_race_number".html"
+echo "doing wget with race_url "$race_url
+wget -O $html_file $race_url
 
 
-# Get route id from first official race and compare against this
-# echo $route_id >> ../user_uploaded_data/shitte.txt
+# Check if route title and 
+race_date=`$home_dir/../bin/extract_parameters_from_rouvy_race_page.bash $html_file --date`
+race_time=`$home_dir/../bin/extract_parameters_from_rouvy_race_page.bash $html_file --time`
+route_id=`$home_dir/../bin/extract_parameters_from_rouvy_race_page.bash  $html_file --route_id`
 
-# Get race date string from first official race and compare against this
-# and against the version from 
-# echo $race_date_string >> ../user_uploaded_data/shitte.txt
-
-
-# If all tests pass add this to the list of user-contributed races in contributed_race_data.dat
-#echo $race_url >> ../user_uploaded_data/shitte.txt
+echo "Race date of user contributed race (from url file): "$race_date
+echo "Race time of user contributed race (from url file): "$race_time
+echo "Route ID of user contributed race  (from url file): "$route_id
 
 
+
+# hierher re-enable checks
+
+#if [ "$race_date" != "$race_date_from_race1" ]; then
+#    echo "WARNING: official races 1 and "$race_number" are on different dates: -"$race_date"- and -"$race_date_from_race1"-"
+#else
+#    if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and "$race_number" are on same date!"; fi 
+#fi
+#if [ "$route_id" != "$route_id_from_race1" ]; then
+#    echo "WARNING: official races 1 and "$race_number" are on different routes: -"$route_id"- and -"$route_id_from_race1"-"
+#else
+#    if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and "$race_number" are on same route!"; fi 
+#fi
+
+
+touch contributed_race.dat
+existing_url_list=`cat  contributed_race.dat`
+race_is_new=1
+for existing_url in `echo $existing_url_list`; do
+    echo "Existing url: "$existing_url
+    if [ $race_url == $existing_url ]; then
+        echo "New race url "$race_url" is the same as existing race url "$existing_url
+        echo "Deleting downloaded file and not adding this race (again) to contributed races."
+        rm -f $html_file
+        race_is_new=0
+    fi
+done
+
+if [ $race_is_new -eq 1 ]; then
+    echo $race_url >> contributed_race.dat
+    echo "<li>  <a href="$race_url">Contributed race $race_number: $race_time (GMT)</a>" # hierher >> .race.html
+fi
 
