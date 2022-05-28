@@ -18,23 +18,23 @@ race_series=$1
 
 # Script should be run from home directory
 home_dir=`pwd`
-if [ ! -e master_race_data ]; then
+if [ ! -e generated_race_data ]; then
     echo "ERROR: Script ought to be run from home directory, so that"
-    echo "directory master_race_data is available as ./master_race_data."
+    echo "directory generated_race_data is available as ./generated_race_data."
     echo "You are in $home_dir"
     exit 1
 fi
 
 # Does race series even exist?
-if [ ! -e master_race_data/$race_series ]; then
-    echo "ERROR: Race series master_race_data/$race_series doesn't exist!"
+if [ ! -e generated_race_data/$race_series ]; then
+    echo "ERROR: Race series generated_race_data/$race_series doesn't exist!"
     exit 1
 fi
 echo " "
 echo "==========================================================================="
 echo " "
 echo "Setting up/updating league table for series : "$race_series
-html_file=master_race_data/$race_series/league_table.html
+html_file=generated_race_data/$race_series/league_table.html
 cat $home_dir/html_templates/html_start.txt > $html_file
 
 
@@ -49,7 +49,7 @@ declare -A total_points
 
 # Loop over all races in this series
 race_number_in_series=0
-dir_list=`ls -d master_race_data/$race_series/race?????`
+dir_list=`ls -d generated_race_data/$race_series/race?????`
 rev_dir_list=`echo $dir_list | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }'`
 for dir in `echo $dir_list`; do
 
@@ -75,7 +75,7 @@ done
 
 
 
-echo "<h2>Overall league table</h2>" >>  $html_file
+echo "<h2>Overall league table for race series <em>"$race_series"</em></h2>" >>  $html_file
 echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat

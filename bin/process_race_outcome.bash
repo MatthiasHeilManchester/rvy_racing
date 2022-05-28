@@ -8,17 +8,46 @@ verbose_debug=1
 #echo "The script you are running has basename `basename "$0"`, dirname `dirname "$0"`"
 bin_dir=`dirname "$0"`
 
-
-# hierher also deal with contributed races
-if [ ! -e official_race.dat ]; then
+# This should be run two levels below the generated_race_data directory
+my_dir=`pwd`
+cd ../..
+dir_name=`basename \`pwd\``
+cd $my_dir
+echo $dir_name
+if [ "$dir_name" != "generated_race_data" ]; then
     echo " "
-    echo "ERROR: Script should be run in race directory "
-    echo "(e.g. in master_race_data/test_series/race00001) where"
-    echo "info about constituent races is provided in official_race.dat"
+    echo "ERROR: Script should be run in generated race directory "
+    echo "(e.g. in generated_race_data/fake_commute/race00001"
     echo " "
     exit
 fi
 
+# hierher cat with contributed_race.dat and use the combined one here
+if [ ! -e official_race.dat ]; then
+    echo " "
+    echo "ERROR: Official races do not seem to have been staged!"
+    echo "There is no (symlink) to official_race.dat in"`pwd`
+    exit
+fi
+
+
+
+# Get userlist from master directory
+my_dir=`pwd`
+cd ..
+the_path=`realpath --relative-to=../ .`
+the_file=../../master_race_data/$the_path/user_list.txt
+
+# Do we have users?
+if [ ! -e $the_file ]; then
+    echo "ERROR: Don't have user data in $my_dir"
+    echo "I'm in "`pwd`
+    exit 1
+fi
+user_list=`cat $the_file`
+cd $my_dir
+
+    
 # Get race number from directory name
 let race_number_in_series=`printf '%s\n' "${PWD##*/}" | awk '{print substr($1,5,5)}'`+0
 
@@ -102,14 +131,7 @@ for url in `echo $url_list`; do
             if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and "$race_number" are on same route!"; fi 
         fi
     fi
-    
-    # Do we have users?
-    if [ ! -e ../../user_list.txt ]; then
-        echo "ERROR: Don't have user data in " `pwd`"../../user_list.txt"
-        exit 1
-    fi
-    user_list=`cat ../../user_list.txt`
-    
+
     rm -f .tmp_result_file
     for user in `echo $user_list`; do
         awk -f ../$bin_dir/extract_finish_time_for_user_from_rouvy_race_results.awk -v user=$user $html_file  >> .tmp_result_file
@@ -144,8 +166,6 @@ for race_result in `echo $race_result_list`; do
 done
 
 
-# hierher add race data
-# hierher add results from previous races
 html_file="../results.html"
 cat ../$bin_dir/../html_templates/html_start.txt > $html_file
 
@@ -160,7 +180,12 @@ echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Finish time</td>  <td>Points</td> </tr>" >>  $html_file
 sort -k 5 -o .sorted_tmp_file .tmp_file
 awk 'BEGIN{count=1}{printf(" %s %i %s",$1,count," </td><td>"); for (i=2;i<=NF;i++){printf(" %s ",$i)}; print " ";count++}' .sorted_tmp_file >  .sorted_tmp_file2 
-awk 'BEGIN{count=1;score[1]=40; score[2]=30; score[3]=25; for (i=4;i<=23;i++){score[i]=24-i}}{printf $1" "$2" "$3" "$4" "$5" "$6" "$7; start_of_time=substr($7,1,2); if (start_of_time=="DN"){printf(" </td> <td> 0 </td> ")}else{printf(" </td> <td> %i </td> ",score[count])}; print " </tr>"; count++}' .sorted_tmp_file2 >>  $html_file
+awk 'BEGIN{count=1;score[1]=40; score[2]=30; score[3]=25; for (i=4;i<=23;i++){score[i]=24-i}}{printf $1" "$2" "$3" "$4" "$5" "$6" "$7; start_of_time=substr($7,1,2); 
+if (start_of_time=="DN"){
+printf(" </td> <td> 0 </td> ")
+}else{
+printf(" </td> <td> %i </td> ",score[count])
+}; print " </tr>"; count++}' .sorted_tmp_file2 >>  $html_file
 
 echo "</table>" >>  $html_file
 echo "<br>"  >>  $html_file

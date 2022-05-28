@@ -111,7 +111,7 @@ If your race registration page is
 <br>
 
 <form action="input_user_contributed_race_form_part2.php" method="post">
-  Please enter the race ID: <input type="text" name="race_url_number">
+  Please enter the race ID: <input type="text" name="newly_contributed_race_url_number">
   <br>
   <br>
   <input type="submit" name="submit" value="Submit">  

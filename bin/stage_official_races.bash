@@ -96,9 +96,14 @@ fi
 race_number_in_series=0
 cd master_race_data
 dir_list=`ls -d $race_series/race?????`
+
+echo "DIR LIST : "$dir_list
+
 cd ../generated_race_data
 for dir in `echo $dir_list`; do
 
+
+ 
     # Bump
     let race_number_in_series=$race_number_in_series+1
     echo " "
@@ -109,38 +114,41 @@ for dir in `echo $dir_list`; do
         echo "Making directory: "`pwd`$dir
         mkdir -p $dir
     else
-        echo "Directory: "`pwd`$dir" already exists."
+        echo "Directory: "`pwd`"/$dir already exists."
     fi
     
     cd $dir
 
-    # Create link to official race data
-    if [ ! -e official_race.dat ]; then
-        ln -s ../../../master_race_data/$dir/official_race.dat
-    fi
-    
-    # Check download diretories or create them
+    # Check download directories or create them
     if [ -e downloaded_official_race_pages ]; then
         if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_official_race_pages already exists."; fi
     else
         mkdir downloaded_official_race_pages
         if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_official_race_pages directory"; fi
     fi
-
-    # hierher this happens over in other directory; delete
     if [ -e downloaded_contributed_race_pages ]; then
         if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_contributed_race_pages already exists."; fi
     else
         mkdir downloaded_contributed_race_pages
         if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_contributed_race_pages directory"; fi
     fi
-    
-    # Read the URLs of the official races
-    if [ ! -e official_race.dat ]; then
-        echo "ERROR: No races specified via official_race.dat in " `pwd`
-        exit 1
-    fi
 
+    echo "hierher I'm here: "`pwd`
+
+    # Create link to official race data
+    if [ ! -e official_race.dat ]; then
+        if [ ! -e ../../../master_race_data/$dir/official_race.dat ]; then
+            echo "ERROR: official_race.dat doesn't exist in master race directory"
+            echo "../../../master_race_data/$dir/official_race.dat"
+            echo "I'm here: "`pwd`
+            exit 1
+        else
+            echo "official_race.dat doesn't exist in master race directory; making link"
+            ln -s ../../../master_race_data/$dir/official_race.dat
+        fi
+    fi
+    
+    
     
     url_list=`cat official_race.dat`
     cd downloaded_official_race_pages
@@ -169,6 +177,8 @@ for dir in `echo $dir_list`; do
         fi
 
         # Extract race date and time from downloaded html files
+
+        # Do first race first (provides reference data that we can check the others against
         if [ $race_number -eq 1 ]; then
             
             html_file_name=`ls downloaded_race_file1.html`
@@ -189,6 +199,8 @@ for dir in `echo $dir_list`; do
             echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" > .race.html
             echo "<b>Route:</b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> .race.html
             echo "<ul>" >> .race.html
+
+        # Subsequent races: Check their data for consistency
         else
             html_file_name=`ls downloaded_race_file$race_number.html`
             race_date=`$home_dir/bin/extract_parameters_from_rouvy_race_page.bash $html_file_name --date`
@@ -226,8 +238,10 @@ for dir in `echo $dir_list`; do
     # or to option to add private race
     not_processed_yet_count=`grep -c "Race hasn't been raced or processed yet!" ../results.html`
     if [ $not_processed_yet_count != 0 ]; then
-        # hierher racenumber -1; # hierher remove time from date
-        echo "Race not raced yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id"&route_title="$route_title"&race_number="$race_number"&race_series="$race_series"&race_date_string="$day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # hierher needs to be relative, so it's accsible from var/www etc. not absolute 
+
+        # Undo increment from above
+        let race_number=$race_number-1
+        echo "Race not raced yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number"&race_series="$race_series"&race_date_string="$day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # hierher needs to be relative, so it's accsible from var/www etc. not absolute 
     else
         race_results_file=`basename $dir`/results.html
         echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
@@ -242,7 +256,7 @@ for dir in `echo $dir_list`; do
 
 
     # Get read for the next one
-    cd $home_dir
+    cd $home_dir/generated_race_data
     
 done
 

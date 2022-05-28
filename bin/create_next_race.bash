@@ -1,17 +1,37 @@
 #! /bin/bash
 
+# Create a new race in the race series directory
+if [ ! -e ../../master_race_data ] || [ ! -e user_list.txt  ]; then
+    echo "You're in the wrong directory. This is supposed to be run in the "
+    echo "race series directory, e.g. in "
+    echo " "
+    echo "      master_race_data/fake_commute"
+    echo " "
+    echo "which must contain the file "
+    echo " "
+    echo "      user_list.txt"
+    echo " "
+    echo "You are in:"
+    echo " "
+    echo "       "`pwd`
+    echo " "
+    echo "which contains:"
+    echo " "
+    ls -l
+    echo " "
+    exit 1
+fi
+
 # Create the next race (assuming existing ones are already numbered
 # race?????
 existing_race_list=`find . -name 'race[0-9][0-9][0-9][0-9][0-9]' -type d | sort`
 next_race_number=0;
 count=1
 if [ "$existing_race_list" == "" ]; then
-    echo "no race yet"
     next_race_number=00001
 else
     echo "have races: " $existing_race_list
     for race in `echo $existing_race_list`; do
-        echo "Existing race: " $race
         let count=$count+1
         test_race_number=`echo $count | awk '{printf "%05d\n",$1}'`
         next_race_number=`echo $race | awk '{printf "%05d\n",(substr($1,7,5)+1)}'`

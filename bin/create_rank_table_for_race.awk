@@ -12,7 +12,7 @@ BEGIN{error=0}
  # First mention of name is in column 1
  ref_name=$1;
  # Loop over the other columns in increments of 3 and check if the names
- # match hierher check by breaking input file
+ # match 
  for (i=2;i<=NF/3;i++)
   {
    col=3*(i-1)+1;
@@ -50,14 +50,29 @@ BEGIN{error=0}
     {
      default_best_time=1.0e36;
      best_time=default_best_time;
-     dnf_count=0;
+     best_raw_time="no time"
+     dnf_count=0
      for (i=1;i<=NF/3;i++)
       {
        col=3*(i-1)+3;
        # Do we have a number?
        if (($col!="dnf")&&($col!="dns"))
         {
-         if ($col<best_time) best_time=$col
+         # Raw time: 13:04:14.7 or 3:04:14.7
+         raw_time=$col
+         hour_end=match(raw_time,":")
+         hours=substr(raw_time,1,hour_end-1);
+         minutes=substr(raw_time,hour_end+1,2);
+         seconds=substr(raw_time,hour_end+4,2);
+         tenth_seconds=substr(raw_time,hour_end+7,1);
+         #print hours" "minutes" "seconds" "tenth_seconds
+         tenth_sec_time=tenth_seconds+10*(seconds+60*(minutes+60*hours))
+         #print "hierher time bestime -- " tenth_sec_time " -- " best_time
+         if (tenth_sec_time<best_time)
+          {
+           best_time=tenth_sec_time
+           best_raw_time=raw_time
+          }
         }
       }
      # Haven't changed the default best time so there's been no valid time: dnf
@@ -67,7 +82,7 @@ BEGIN{error=0}
       }
      else
       {
-       printf"<td> %s </td>",best_time
+       printf"<td> %s </td>",best_raw_time
       }
     }
   }
