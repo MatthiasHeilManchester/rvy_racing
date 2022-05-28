@@ -34,6 +34,7 @@ if [ ! -e ../master_race_data ]; then
     exit 1
 fi
 
+
 # check that required data exists as official race series and race
 master_series_dir=../master_race_data/$race_series
 if [ ! -e $master_series_dir ]; then
@@ -101,22 +102,27 @@ fi
 cd $race_dir
 
 # How many contributed races do we already have (we're appending to this file)
-#echo "contributed_race.dat : "$home_dir/$contributed_race_data_race_dir/contributed_race.dat
 touch $home_dir/$contributed_race_data_race_dir/contributed_race.dat
-#echo "SHOULD i MAKE A LINK FROM HERE: "`pwd`" to  $home_dir/$contributed_race_data_race_dir/contributed_race.dat ?"
-ln -s $home_dir/$contributed_race_data_race_dir/contributed_race.dat .
+if [ ! -e contributed_race.dat ]; then
+    ln -s $home_dir/$contributed_race_data_race_dir/contributed_race.dat .
+fi
 next_contributed_race_number=1
 n_existing_contributed_races=`wc -l $home_dir/$contributed_race_data_race_dir/contributed_race.dat | awk '{print $1}'`
 let next_contributed_race_number=`expr $next_contributed_race_number + $n_existing_contributed_races`
 
 # Now download the race html file
 html_file="downloaded_contributed_race_pages/downloaded_contributed_race_file"$next_contributed_race_number".html"
-#echo "html file : "$html_file
+echo "html file : "$html_file
 #echo "race url "$newly_created_race_url
 #pwd
 wget -O $html_file $newly_created_race_url
 
+
 #cat $html_file
+if [ ! -e $html_file ]; then
+    echo "ERROR: Could download "$html_file" in "`pwd`
+    exit 1
+fi
 
 # Check if route and date agree
 newly_contributed_race_date=`$home_dir/../bin/extract_parameters_from_rouvy_race_page.bash $html_file --date`
@@ -138,6 +144,7 @@ if [ "$newly_contributed_route_id" == "" ]; then
 fi
 if [ $something_wrong -eq 1 ]; then
     rm $html_file
+    echo "DIAGNOSTIC: URL of user contributed race                      :  "$newly_created_race_url
     echo "DIAGNOSTIC: Race date of user contributed race (from url file): -"$newly_contributed_race_date"-"
     echo "DIAGNOSTIC: Race time of user contributed race (from url file): -"$newly_contributed_race_time"-"
     echo "DIAGNOSTIC: Route ID of user contributed race  (from url file): -"$newly_contributed_route_id"-"

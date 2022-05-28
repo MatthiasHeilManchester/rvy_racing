@@ -149,7 +149,7 @@ for dir in `echo $dir_list`; do
     fi
 
     # Create empty file (or just touch)
-    touch contributed_race.dat
+    # touch contributed_race.dat
         
     url_list=`cat official_race.dat`
     cd downloaded_official_race_pages
