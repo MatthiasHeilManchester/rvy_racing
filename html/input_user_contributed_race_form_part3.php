@@ -26,9 +26,9 @@ $command_string="../bin/add_user_contributed_races.bash " .
 " " . $route_id . 
 " " . $race_number .
 " " . "\"" . $race_date_string . "\"";
-echo $command_string;
-$scripts=shell_exec($command_string);
-echo $scripts;
+//echo $command_string;
+$success_string=shell_exec($command_string);
+echo "<pre>".$success_string."</pre>";
 
 
 ?>

@@ -73,7 +73,7 @@ function test_input($data) {
 
 
 
-<h2>User contributed race for <em>Race <?php echo $race_number ?></em> in
+<h2>Create a user contributed race for <em>Race <?php echo $race_number ?></em> in
   the race series <em><?php echo $race_series ?></em>.</h2>
 
 <ul>

@@ -29,6 +29,12 @@ if [ ! -e official_race.dat ]; then
     echo "There is no (symlink) to official_race.dat in"`pwd`
     exit
 fi
+if [ ! -e contributed_race.dat ]; then
+    echo " "
+    echo "ERROR: Official races do not seem to have been staged!"
+    echo "There is no (symlink) to contributed_race.dat in"`pwd`
+    exit
+fi
 
 
 
@@ -85,7 +91,7 @@ for url in `echo $url_list`; do
     if [ -e $html_file ]; then
         if [ $verbose_debug == 1 ]; then echo "INFO: Have already downloaded "$html_file; fi
     else
-        wget -O $html_file  $url
+        wget -q -O $html_file  $url
     fi
     
     # Check if the race has actually been processed

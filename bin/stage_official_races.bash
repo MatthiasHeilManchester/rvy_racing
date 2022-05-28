@@ -147,9 +147,10 @@ for dir in `echo $dir_list`; do
             ln -s ../../../master_race_data/$dir/official_race.dat
         fi
     fi
-    
-    
-    
+
+    # Create empty file (or just touch)
+    touch contributed_race.dat
+        
     url_list=`cat official_race.dat`
     cd downloaded_official_race_pages
     race_number=1
@@ -173,7 +174,7 @@ for dir in `echo $dir_list`; do
         if [ -e $html_file ]; then
             if [ $verbose_debug == 1 ]; then echo "INFO: Have already downloaded "$html_file; fi
         else
-            wget -O $html_file $url
+            wget -q -O $html_file $url
         fi
 
         # Extract race date and time from downloaded html files
@@ -241,7 +242,7 @@ for dir in `echo $dir_list`; do
 
         # Undo increment from above
         let race_number=$race_number-1
-        echo "Race not raced yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number"&race_series="$race_series"&race_date_string="$day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # hierher needs to be relative, so it's accsible from var/www etc. not absolute 
+        echo "Race not raced yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # hierher needs to be relative, so it's accsible from var/www etc. not absolute 
     else
         race_results_file=`basename $dir`/results.html
         echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
