@@ -25,18 +25,33 @@ if [ ! -e master_race_data/$race_series ]; then
     echo "ERROR: Race series master_race_data/$race_series doesn't exist!"
     exit 1
 fi
+
+# Has it been staged?
+if [ ! -e generated_race_data/$race_series ]; then
+    echo "ERROR: Race series generated_race_data/$race_series doesn't exist; race probably hasn't been staged!"
+    exit 1
+fi
+
+
 echo " "
 echo "==========================================================================="
 echo " "
 echo "(Re-)processing all completed races up series : "$race_series
-cd master_race_data/$race_series
+cd generated_race_data/$race_series
 for dir in `ls -d race*`; do
-#    echo $dir;
-    cd $dir;
+    echo " "
+    echo "--------------------------------------------------------"
+    echo " " 
+    echo "Doing: " $dir
+    cd $dir
     ../../../bin/process_race_outcome.bash
     cd ..
-done;
+done
 
+echo "Done. now run "
+echo " "
+echo "    bin/create_overall_league_table.bash "
+echo " " 
 
 
 

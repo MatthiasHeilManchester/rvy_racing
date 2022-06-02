@@ -43,8 +43,8 @@ BEGIN{error=0}
      printf "<td> DNS </td>"
     }
    # Not all DNS: So the user would have started at least one race
-   # but may have DNFed, so check again to see if any of the non DNS races
-   # have a non-DNF outcome. This will be the time. Keep track of all the times
+   # but may have DNF/DSQed, so check again to see if any of the non DNS races
+   # have a non-DNF/DSQ outcome. This will be the time. Keep track of all the times
    # and use the best one
    else
     {
@@ -56,7 +56,7 @@ BEGIN{error=0}
       {
        col=3*(i-1)+3;
        # Do we have a number?
-       if (($col!="dnf")&&($col!="dns"))
+       if (($col!="dnf")&&($col!="dsq")&&($col!="dns"))
         {
          # Raw time: 13:04:14.7 or 3:04:14.7
          raw_time=$col
@@ -75,10 +75,10 @@ BEGIN{error=0}
           }
         }
       }
-     # Haven't changed the default best time so there's been no valid time: dnf
+     # Haven't changed the default best time so there's been no valid time: dnf/dsq
      if (best_time==default_best_time)
       {
-       printf "<td> DNS </td>"
+       printf "<td> DNF/DSQ </td>"
       }
      else
       {

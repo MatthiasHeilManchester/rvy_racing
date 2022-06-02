@@ -1,19 +1,18 @@
 #! /bin/bash
 
 # Be verbose for debugging?
-verbose_debug=1
+verbose_debug=0
 
 
 # Where's the bin directory? (That's where the awk script lives)
 #echo "The script you are running has basename `basename "$0"`, dirname `dirname "$0"`"
 bin_dir=`dirname "$0"`
 
-# This should be run two levels below the generated_race_data directory
+# This should be run two levels below the generated_race_data directory, i.e. in the actual race directory
 my_dir=`pwd`
 cd ../..
 dir_name=`basename \`pwd\``
 cd $my_dir
-echo $dir_name
 if [ "$dir_name" != "generated_race_data" ]; then
     echo " "
     echo "ERROR: Script should be run in generated race directory "
@@ -57,6 +56,9 @@ cd $my_dir
 # Get race number from directory name
 let race_number_in_series=`printf '%s\n' "${PWD##*/}" | awk '{print substr($1,5,5)}'`+0
 
+
+# hierher probably rename these to downloaded_race_results and delete the others
+
 # Provide storage for results
 if [ -e downloaded_official_race_results ]; then
     if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_official_race_results already exists."; fi
@@ -66,7 +68,7 @@ else
 fi
 
 # Read the URLs of the official races
-url_list=`cat official_race.dat`
+url_list=`cat official_race.dat contributed_race.dat`
 cd downloaded_official_race_results
 
 # Initialise race reslts
@@ -109,8 +111,10 @@ for url in `echo $url_list`; do
         echo " "
         exit 1
     else
-        echo "Downloaded webpage contains the string 'OFFICIAL RESULTS' " $number_of_official_results_strings " times."
-        echo "This suggests that the race was completed on rouvy. Yay!"
+        if [ $verbose_debug == 1 ]; then
+            echo "Downloaded webpage contains the string 'OFFICIAL RESULTS' " $number_of_official_results_strings " times."
+            echo "This suggests that the race was completed on rouvy. Yay!"
+        fi
     fi
     
     if [ $race_number -eq 1 ]; then
@@ -181,6 +185,12 @@ echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " 
 echo "<b>Route: </b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> $html_file
 echo "<br><br>" >> $html_file
 
+echo "<b>Contributing races:</b>" >> ../results.html
+echo "<ul>"  >> ../results.html
+cat ../official_race_list_items.html >> ../results.html
+cat ../contributed_race_list_items.html >> ../results.html
+echo "</ul>"  >> ../results.html
+
 `echo $paste_command`| awk -f ../$bin_dir/create_rank_table_for_race.awk > .tmp_file
 echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Finish time</td>  <td>Points</td> </tr>" >>  $html_file
@@ -201,3 +211,11 @@ echo "<hr>" >>  $html_file
 echo " " >>  $html_file
 
 cat ../$bin_dir/../html_templates/html_end.txt >> $html_file
+
+echo " "
+echo "Done; now run "
+echo " "
+echo "     bin/stage_official_races.bash"
+echo " "
+echo "again to update the results."
+echo " " 

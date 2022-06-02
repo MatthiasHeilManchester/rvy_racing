@@ -18,9 +18,9 @@
 #  awk -f extract_finish_time_for_user_from_rouvy_race_results.awk -v user=MatthiasHeil downloaded_race_results_file2.html
 #
 # Required offset is hard coded in BEGIN block. This is what needs to be changed if rouvy
-# change their html. Currently the finish time appears 23 lines below first mention of user.
+# change their html. Currently the finish time appears ... lines below first mention of user.
 #---------------------------------------------------------------------------------------
-BEGIN{offset_from_first_occurence=0; found=0; required_offset=23;}
+BEGIN{offset_from_first_occurence=0; found=0; required_offset=26;}
 {
   # If we haven't found username yet, keep looking
   if ( (match($0,"/"user)) && (offset_from_first_occurence==0) ) 

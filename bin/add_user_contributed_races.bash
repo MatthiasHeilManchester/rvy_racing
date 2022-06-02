@@ -50,75 +50,62 @@ if [ ! -e $master_race_dir ]; then
 fi
 
 
-# Create corresponding directories for contributed race (this simply provides storage for
-# the contributed race files (to mirror setup in master_race_series), to allow clean
-# restore, should the generated stuff be deleted (which, as its name suggest, should be
-# legal). Not tried out yet but should be easy enough to.
+# Check that relevant directories exist
 series_dir=../contributed_race_data/$race_series
 if [ ! -e $series_dir ]; then
-    echo "Race series dir for contributed race of series "$race_series" doesn't exist yet: "$series_dir
-    mkdir $series_dir
-else
-    echo "Race series dir for contributed race of series "$race_series" already exists: "$series_dir
-    ls -l $series_dir
+    echo "ERROR: Race series dir for contributed race of series "$race_series" doesn't exist yet: "$series_dir
+    exit 1
 fi
-race_dir=../contributed_race_data/$race_series/race`echo $race_number | awk '{printf "%05d\n",$1}'`
-if [ ! -e $race_dir ]; then
-    echo "Race dir doesn't exist yet: "$race_dir
-    mkdir $race_dir
-else
-    echo "Race dir already exists: "$race_dir
-    ls -l $race_dir
+contributed_race_data_race_dir=../contributed_race_data/$race_series/race`echo $race_number | awk '{printf "%05d\n",$1}'`
+if [ ! -e $contributed_race_data_race_dir ]; then
+    echo "ERROR: Race dir doesn't exist yet: "$contributed_race_data_race_dir
+    exit 1
 fi
-contributed_race_data_race_dir=$race_dir
 
 
-# Create corresponding directories for contributed race in generated_race_data
-series_dir=../generated_race_data/$race_series
-if [ ! -e $series_dir ]; then
-    echo "Race series dir for contributed race of series "$race_series" doesn't exist yet: "$series_dir
-    mkdir $series_dir
-else
-    echo "Race series dir for contributed race of series "$race_series" already exists: "$series_dir
-    ls -l $series_dir
-fi
+
+
+
+# This is where we're actually assembling all the data
+series_dir_for_overview="../generated_race_data/"$race_series
 race_dir=../generated_race_data/$race_series/race`echo $race_number | awk '{printf "%05d\n",$1}'`
 if [ ! -e $race_dir ]; then
-    echo "Race dir doesn't exist yet: "$race_dir
-    mkdir $race_dir
-else
-    echo "Race dir already exists: "$race_dir
-    ls -l $race_dir
+    echo "ERROR: Race dir doesn't exist yet: "$race_dir
+    exit 1
+fi
+if [ ! -e $race_dir/downloaded_contributed_race_pages ]; then
+    echo "ERROR: $race_dir/downloaded_contributed_race_pages doesn't exist."
+    exit 1
 fi
 
-if [ -e $race_dir/downloaded_contributed_race_pages ]; then
-    if [ $verbose_debug -eq 1 ]; then echo "$race_dir/downloaded_contributed_race_pages already exists."; fi
-else
-    mkdir $race_dir/downloaded_contributed_race_pages
-    if [ $verbose_debug -eq 1 ]; then echo "made $race_dir/downloaded_contributed_race_pages directory"; fi
-fi
 
 # Go to generated race directory and check things out
 cd $race_dir
 
-# How many contributed races do we already have (we're appending to this file)
-touch $home_dir/$contributed_race_data_race_dir/contributed_race.dat
+# Need to have a link to contributed race file
 if [ ! -e contributed_race.dat ]; then
-    ln -s $home_dir/$contributed_race_data_race_dir/contributed_race.dat .
+    echo "ERROR: Need a link to contributed_race.dat"
+    exit 1
 fi
+
+# Need to have a link to contributed race list items
+if [ ! -e contributed_race_list_items.html ]; then
+    echo "ERROR: Need a link to contributed_race_list_items.html"
+    exit 1
+fi
+
+# How many races do we alrady have?
 next_contributed_race_number=1
-n_existing_contributed_races=`wc -l $home_dir/$contributed_race_data_race_dir/contributed_race.dat | awk '{print $1}'`
+n_existing_contributed_races=`wc -l contributed_race.dat | awk '{print $1}'`
 let next_contributed_race_number=`expr $next_contributed_race_number + $n_existing_contributed_races`
 
-# Now download the race html file
+
+# Download race file for check of consitency with offical race
 html_file="downloaded_contributed_race_pages/downloaded_contributed_race_file"$next_contributed_race_number".html"
-echo "html file : "$html_file
+#echo "html file : "$html_file
 #echo "race url "$newly_created_race_url
 #pwd
 wget -O $html_file $newly_created_race_url
-
-
-#cat $html_file
 if [ ! -e $html_file ]; then
     echo "ERROR: Could download "$html_file" in "`pwd`
     exit 1
@@ -164,8 +151,8 @@ newly_contributed_race_date_string=`echo $day " " ${month_names[${month}]} " " $
 
 # Check date of race
 we_have_an_error=0
-echo "race: -"$race_date_string"-"
-echo "cont: -"$newly_contributed_race_date_string"-"
+#echo "race: -"$race_date_string"-"
+#echo "cont: -"$newly_contributed_race_date_string"-"
 if [ "$race_date_string" != "$newly_contributed_race_date_string"]; then
     echo "ERROR: Newly contributed  race is on a different date ( -"$newly_contributed_race_date_string"- GMT ) from date of official race ( -"$race_date_string"- GMT )"
     we_have_an_error=1
@@ -191,7 +178,9 @@ fi
 
 existing_url_list=`cat $home_dir/$contributed_race_data_race_dir/contributed_race.dat`
 race_is_new=1
+nrace=1 # start with one to include the current one
 for existing_url in `echo $existing_url_list`; do
+    let nrace=`expr $nnrace + 1`
     if [ $newly_created_race_url == $existing_url ]; then
         if [ $verbose_debug == 1 ]; then
             echo "New race url "$newly_created_race_url" is the same as existing race url "$existing_url
@@ -204,8 +193,14 @@ done
 
 if [ $race_is_new -eq 1 ]; then
     echo $newly_created_race_url >> $home_dir/$contributed_race_data_race_dir/contributed_race.dat
-    echo "<li>  <a href="$newly_created_race_url">Contributed race $race_number: $race_time (GMT)</a>" # hierher >> .race.html
-    echo "Congratulations. Your contributed race was successfully added hierher spawn re-generation of race list"
+    echo "<li>  <a href="$newly_created_race_url">Contributed race $nrace: $newly_contributed_race_time (GMT)</a>" >> contributed_race_list_items.html
+    echo "Congratulations. Your contributed race was successfully added."
+    echo "It will become visible on"
+    echo " " 
+    echo "       <a href="$series_dir_for_overview"/all_races_in_series.html>Race Page</a>"
+    echo " " 
+    echo "when that gets re-generated by stage_official_races.bash which should running as"
+    echo "a cron job or can be manually activiated."
     exit 0
 else
     echo "Race had already been added; not adding it again. Please have a look on <a href="hierher">the race page</a> for the list of existing user-contributed races."
