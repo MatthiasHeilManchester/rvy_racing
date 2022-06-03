@@ -1,20 +1,20 @@
 #! /bin/bash
 
 
-if [ ! -e  master_race_data ]; then
+if [ ! -e  generated_race_data ]; then
     echo "ERROR: Script must be run in home directory so master_race_data is"
-    echo "accessible as ./master_race_data"
+    echo "accessible as ./generated_race_data"
     echo " "
     echo "You are in: "`pwd`
     echo " " 
     exit
 fi
-cd master_race_data
+cd generated_race_data
 
 
 # Extracting generated data for all series and races
 #https://superuser.com/questions/513304/how-to-combine-the-tar-command-with-find
-find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' \) -print0  | tar -cf generated_html_files.tar --null -T -
+find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' -o -iname 'league_table.html' \) -print0  | tar -cf generated_html_files.tar --null -T -
 
 
 

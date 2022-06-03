@@ -9,10 +9,17 @@
   <body>
 
 
+<input type="radio" name="tabs" id="tab1" checked />
+<label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2" />
+<label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3" />
+<label for="tab3">Races</label><input type="radio" name="tabs" id="tab4" />
+<label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5" />
+<label for="tab5">Contact</label>
 
 
+<div class="tab content1">
 
-    <h1>Welcome to Rvy Racing</h1>
+    <h1>Rvy Racing: Welcome</h1>
     This is the official homepage of Rvy Racing - short for, yes, you
     guessed it: "Rouvy Racing".
     <br><br>(The abbreviation is a meek attempt
@@ -27,7 +34,7 @@
     <a href="https://www.kinomap.com">kinomap</a>.
     <br><br>
     If you're interested in joining our race series, please register
-    on our <a href="bla.html">phpBB Discussion Board</a>.
+    on our <a href="hierher.html">phpBB Discussion Board</a>.
     Once we have your rouvy username
     and a few other details (which do not include your credit card number!),
     you will automatically be included in the rankings for each race
@@ -36,9 +43,16 @@
     from doing the actual racing. Easy (and free!) so do join us.
     And then hammer it - not so easy...<br><br>
     The schedule of upcoming races, the rankings, and the overall
-    league table are available <a href="bla.html">here</a>.
+    league table are available <a href="hierher.html">here</a>.
 
-    
+</div>
+
+
+
+<div class="tab content2">
+  
+    <h1>Rvy Racing: The rules</h1>
+
     
 <h2>Race rules:</h2>
 <ul>
@@ -120,8 +134,32 @@ are a few rules anyway.
   <li> And now go racing! Hard!<br><br>
 </ol>
 
+</div>
 
 
+
+<div class="tab content3">
+
+  <h1>Rvy Racing: The races</h1>
+
+    <?php readfile("all_races_in_series.html"); ?>
+  
+
+</div>
+
+
+
+<div class="tab content4">
+  
+  <h1>Rvy Racing: The league table</h1>
+  <?php readfile("league_table.html"); ?>
+
+</div>
+
+
+<div class="tab content5">
+  Tab5 Contents
+</div> 
     
   </body>
 </html>
