@@ -21,7 +21,6 @@ if [ "$dir_name" != "generated_race_data" ]; then
     exit
 fi
 
-# hierher cat with contributed_race.dat and use the combined one here
 if [ ! -e official_race.dat ]; then
     echo " "
     echo "ERROR: Official races do not seem to have been staged!"
@@ -57,19 +56,18 @@ cd $my_dir
 let race_number_in_series=`printf '%s\n' "${PWD##*/}" | awk '{print substr($1,5,5)}'`+0
 
 
-# hierher probably rename these to downloaded_race_results and delete the others
 
 # Provide storage for results
-if [ -e downloaded_official_race_results ]; then
-    if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_official_race_results already exists."; fi
+if [ -e downloaded_race_results ]; then
+    if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_race_results already exists."; fi
 else
-    mkdir downloaded_official_race_results
-    if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_official_race_results dir"; fi
+    mkdir downloaded_race_results
+    if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_race_results dir"; fi
 fi
 
 # Read the URLs of the official races
 url_list=`cat official_race.dat contributed_race.dat`
-cd downloaded_official_race_results
+cd downloaded_race_results
 
 # Initialise race reslts
 race_result_list=""
@@ -143,8 +141,16 @@ for url in `echo $url_list`; do
     fi
 
     rm -f .tmp_result_file
+
+    rm -f .log_file_for_most_likely_offset.dat
+    offset=`../$bin_dir/explore_most_likely_offset_for_finish_time.bash $html_file .log_file_for_most_likely_offset.dat`
+    if [ $offset == 0 ]; then
+        echo "Inconsistency in determination of offset; see "`pwd`"/.log_file_for_most_likely_offset.dat for details."
+        exit 1
+    fi
     for user in `echo $user_list`; do
-        awk -f ../$bin_dir/extract_finish_time_for_user_from_rouvy_race_results.awk -v user=$user $html_file  >> .tmp_result_file
+        awk -f ../$bin_dir/extract_finish_time_for_user_from_rouvy_race_results.awk -v user=$user -v required_offset=$offset $html_file  >> .tmp_result_file
+        # DEBUG
         #echo " "
         #echo "tmp file"
         #cat .tmp_result_file

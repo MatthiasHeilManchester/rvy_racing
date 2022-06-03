@@ -10,41 +10,6 @@
 
 <?php
 
-
-
-// hierher used? needed?
-$race_url_number_is_valid=true;
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-  if (empty($_POST["race_url_number"]))
-  {
-   $race_url_number_Err = "Race url number is required";
-   $race_url_number_is_valid=false;
-  }
-  else 
-  {
-  $race_url_number = test_input($_POST["race_url_number"]);
-  // check if race_url_number only contains numbers
-  if (!preg_match('/^[0-9]*$/',$race_url_number)) 
-  {
-  $race_url_number_Err = "Only numbers allowed"; 
-  $race_url_number_is_valid=false;
-  }
-  }
-  
-}
-
-// hierher used?
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-?>
-
-<?php
-
  // GET REQUIRED RACE DATA FROM URL: THIS IS THE DATA FOR THE OFFICIAL RACE!
 
  // Route ID (postfix in url of route on rouvy)

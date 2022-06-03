@@ -56,7 +56,7 @@ BEGIN{error=0}
       {
        col=3*(i-1)+3;
        # Do we have a number?
-       if (($col!="dnf")&&($col!="dsq")&&($col!="dns"))
+       if (($col!="dnf")&&($col!="dsq")&&($col!="dns")&&($col!="ERROR_IN_EXTRACTING_FINISH_TIME"))
         {
          # Raw time: 13:04:14.7 or 3:04:14.7
          raw_time=$col
@@ -67,7 +67,7 @@ BEGIN{error=0}
          tenth_seconds=substr(raw_time,hour_end+7,1);
          #print hours" "minutes" "seconds" "tenth_seconds
          tenth_sec_time=tenth_seconds+10*(seconds+60*(minutes+60*hours))
-         #print "hierher time bestime -- " tenth_sec_time " -- " best_time
+         #print "time best_time -- " tenth_sec_time " -- " best_time
          if (tenth_sec_time<best_time)
           {
            best_time=tenth_sec_time
@@ -78,7 +78,7 @@ BEGIN{error=0}
      # Haven't changed the default best time so there's been no valid time: dnf/dsq
      if (best_time==default_best_time)
       {
-       printf "<td> DNF/DSQ </td>"
+       printf "<td> DNF/DSQ/ERROR </td>"
       }
      else
       {

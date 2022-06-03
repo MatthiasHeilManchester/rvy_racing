@@ -12,9 +12,6 @@ fi
 # More output for debugging
 verbose_debug=0
 
-# hierher get rid of all output for verbose_debug=0
-
-
 # Convert input params to sensibly named variables. All data is
 # for master race (for validation of newly created one), apart
 # from newly_created_race_url.
@@ -203,6 +200,6 @@ if [ $race_is_new -eq 1 ]; then
     echo "a cron job or can be manually activiated."
     exit 0
 else
-    echo "Race had already been added; not adding it again. Please have a look on <a href="hierher">the race page</a> for the list of existing user-contributed races."
+    echo "Race had already been added; not adding it again. Please have a look on <a href="$series_dir_for_overview"/all_races_in_series.html>Race Page</a> for the list of existing user-contributed races."
 fi
 
