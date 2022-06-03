@@ -104,7 +104,7 @@ html_file="downloaded_contributed_race_pages/downloaded_contributed_race_file"$n
 #pwd
 wget -O $html_file $newly_created_race_url
 if [ ! -e $html_file ]; then
-    echo "ERROR: Could download "$html_file" in "`pwd`
+    echo "ERROR: Couldn't download "$html_file" in "`pwd`
     exit 1
 fi
 
