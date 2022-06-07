@@ -14,7 +14,6 @@ fi
 echo " " 
 echo "one off preparation: "
 echo " "
-echo "sudo group add webmasters"
 echo "sudo groupadd webmasters"
 echo "sudo usermod -a -G webmasters matthias"
 echo "sudo usermod -a -G webmasters www-data"

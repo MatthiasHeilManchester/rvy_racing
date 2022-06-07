@@ -63,7 +63,7 @@ offset_from_heuristic1=`awk -v log_file=$log_file 'BEGIN{
   #------------------------- 
   # Looking for username  
   #-------------------------
-  if ($0 ~ /<a class=\"username\" href=/) 
+  if ($0 ~ /<a class="username" href=/) 
    {
     print offset " " $0 > log_file
     if (offset<min_username_offset) min_username_offset=offset;
