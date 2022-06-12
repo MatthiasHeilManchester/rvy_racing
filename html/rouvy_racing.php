@@ -8,7 +8,8 @@
   </head>
   <body>
 
-
+    <img src="rvy_racing.png" width=200px>
+    
 <input type="radio" name="tabs" id="tab1" checked />
 <label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2" />
 <label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3" />
@@ -22,28 +23,27 @@
     <h1>Rvy Racing: Welcome</h1>
     This is the official homepage of Rvy Racing - short for, yes, you
     guessed it: "Rouvy Racing".
-    <br><br>(The abbreviation is a meek attempt
+    <br><br>The abbreviation is a meek attempt
     to avoid trouble with
     <a href="http://www.rouvy.com">Rouvy</a>'s legal department, and we
     should stress that this site is not affiliated
     with or endorsed by them; we're simply using their great platform 
-    to host our races.) <br><br>
+    to host our races. <br><br>
     The group emerged from
     <a href="https://www.robirini66.com">RBF</a>, originally
     set up by Robi Rini, but discontinued when he moved to
     <a href="https://www.kinomap.com">kinomap</a>.
     <br><br>
     If you're interested in joining our race series, please register
-    on our <a href="hierher.html">phpBB Discussion Board</a>.
-    Once we have your rouvy username
+    on our <a href="http://www.matthias-heil.co.uk/phpbb/">phpBB
+    Discussion Board</a>. Once we have your rouvy username
     and a few other details (which do not include your credit card number!),
     you will automatically be included in the rankings for each race
-    (as DNS if you don't turn up; instructions for how to "turn up"
-    are below). There's nothing else to do, apart
+    (as DNS if you don't turn up). There's nothing else to do, apart
     from doing the actual racing. Easy (and free!) so do join us.
-    And then hammer it - not so easy...<br><br>
+    And then hammer it -- not so easy...<br><br>
     The schedule of upcoming races, the rankings, and the overall
-    league table are available <a href="hierher.html">here</a>.
+    league table are available via the tabs above.
 
 </div>
 
@@ -58,24 +58,26 @@
 <ul>
   <li> There will be two races a week, on Wednesday and Saturday
     during "the season" which runs from the start of October to the
-    end of April.<br><br>
+    end of March.<br><br>
   <li> Each race will be repeated three times (to cater for different
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
     on <a href="https://my.rouvy.com/onlinerace">Rouvy</a> as usual. 
     Direct links to the races are also provided directly from
-    <a href="bla.html">our race page</a> which lists dates, times,
-    routes, etc. <br><br>
+    <a href="all_races_in_series.html">our race page</a> which lists
+    dates, times, routes, etc. <br><br>
   <li> If none of the official times suit you, you can also arrange
     your own race
     on <a href="https://my.rouvy.com/onlinerace">Rouvy</a>.
     The race must be on
     the same day (in GMT) as the official races. This gives everybody
-    24 hours to do the route. Make sure you
-    <a href="bla.html">register your race here</a> so our machinery can extract
+    24 hours to do the route. Make sure you follow the link <b>"Add your
+    own?"</b> for the appropriate race in the 
+    <a href="all_races_in_series.html">race list</a> so our machinery can extract
     the finish time and insert it into the compound ranking. The
     registration page will check that the race is held on the right
-    route and on the right day.<br><br>
+    route and on the right day. Note that the link disappears and is
+    replaced by the race results once the race has been processed.<br><br>
   <li> You cannot get credit for individual rides (i.e. rides done outside
     races). This is mainly a technical issue: Rouvy doesn't provide
     script-based access to the finish times for individual rides and maintaining
@@ -112,14 +114,33 @@ are a few rules anyway.
     seem to require this any more anyway but if yours does, do it!
     Note that it may even make you faster... <br><br>
   <li> You may have noticed that Rouvy allows you to specify your
-    weight. For the implications of this fact you are referred to rule 1.<br><br>
-  <li> Banter on the <a href="bla.html">discussion board</a>
+    weight. For the implications of this fact you are referred to rule
+    1.<br><br>
+  <li> Make sure that your average power (W/kg) is displayed on the
+    rouvy route pages and that the link to the activity (magnifying
+    glass) is accessible.
+    The picture below (click on it to magnify) shows how to annoy
+    people. Please don't! You may
+    have privacy concerns (though I don't know what they would be...) but
+    people simply want to be able to convince themselves that other
+    racer's data looks plausible. Personally I don't think it's a huge
+    deal and I get annoyed about endless "cheater" discussions (see below), but if
+    you hide your data, you're rasising questions. If you want to keep
+    your data hidden, please race elsewhere.
+    <center><a href="nonono.png"><img src="nonono.png"
+                                      width=500px></a></center>
+    Similarly, it would be appreciated if you kept your strava profile
+                                      public and used a HRM. However,
+                                      this will not be enforced.<br><br>
+  <li> Banter on
+  the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion
+      board</a>
     is actively encouraged. Taking
     yourself (or this whole thing) too seriously is not. Launching
     debates about possible cheaters (or other rule 1 violators) is
     strictly <em>verboten</em>. If you have any
-    concerns, please contact the race organiser (via a private message
-    on the <a href="bla.html">message board</a>), so they
+    concerns, please contact the race organiser (via a private (!) message
+    on the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion board</a>), so they
     can have a quiet word (and/or escalate things if necessary; see
     below).<br><br>
   <li> No overtly political etc. discussions because it's likely to create
@@ -158,7 +179,13 @@ are a few rules anyway.
 
 
 <div class="tab content5">
-  Tab5 Contents
+Please use the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion
+      board</a> for constructive suggestions for improvement, bug
+      reports/fixes, etc. <br><br>
+Those interested in the coding aspect are welcome to contribute to the
+      machinery via
+the  <a href="https://github.com/MatthiasHeilManchester/rouvy_racing">
+    github repository</a>.
 </div> 
     
   </body>

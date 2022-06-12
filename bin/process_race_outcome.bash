@@ -53,7 +53,8 @@ cd $my_dir
 
     
 # Get race number from directory name
-let race_number_in_series=`printf '%s\n' "${PWD##*/}" | awk '{print substr($1,5,5)}'`+0
+command=`printf '%s\n' "${PWD##*/}" | awk '{print "echo $((10#"substr($1,5,5)"))"}' `
+race_number_in_series=`eval $command`
 
 
 
