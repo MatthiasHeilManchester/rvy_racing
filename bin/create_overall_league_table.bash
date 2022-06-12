@@ -65,7 +65,9 @@ for dir in `echo $dir_list`; do
     else
         # Prefix #10 declares numbers to be decimals in base 10
         # https://stackoverflow.com/questions/21049822/value-too-great-for-base-error-token-is-09
-        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=10#${total_points["$4"]}+10#"$10"; "}}' results.html`
+        command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=$((10#$((${total_points["$4"]}))))+$((10#"$10")); "}}' results.html`
+	#echo $command
+	#exit
         eval $command
         awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
     fi
