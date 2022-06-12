@@ -12,7 +12,7 @@ fi
 cd master_race_data
 tar cvfz ../transfer_data/master_race_data.tar.gz *
 
+cd ../contributed_race_data
+tar cvfz ../transfer_data/contributed_race_data.tar.gz *
 
-# hierher:
-# - do same with contributed race data but get rid of all the generated stuff in there. tmp download directories can be created on the fly and they're emotied anyway.
-# - also check if all download directories in generated_race_data are actually needed/used.
+

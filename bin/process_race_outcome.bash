@@ -66,7 +66,7 @@ else
 fi
 
 # Read the URLs of the official races
-url_list=`cat official_race.dat contributed_race.dat`
+url_list=`awk '{print $0" "}' official_race.dat; awk '{print $0}' contributed_race.dat`
 cd downloaded_race_results
 
 # Initialise race reslts
@@ -91,6 +91,7 @@ for url in `echo $url_list`; do
     if [ -e $html_file ]; then
         if [ $verbose_debug == 1 ]; then echo "INFO: Have already downloaded "$html_file; fi
     else
+        #echo "wgetting $url"
         wget -q -O $html_file  $url
     fi
     

@@ -123,15 +123,7 @@ for dir in `echo $dir_list`; do
         echo "Directory: "`pwd`"/$dir already exists."
     fi
     cd $dir
-
-    # This is mainly workspace
-    if [ -e downloaded_contributed_race_pages ]; then
-        if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_contributed_race_pages already exists."; fi
-    else
-        mkdir downloaded_contributed_race_pages
-        if [ $verbose_debug == 1 ]; then echo "made "`pwd`"/downloaded_contributed_race_pages directory"; fi
-    fi
-
+    
     # Create/touch contributed race file (will contain urls)
     touch contributed_race.dat
 

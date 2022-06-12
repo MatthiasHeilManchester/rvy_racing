@@ -70,11 +70,6 @@ if [ ! -e $race_dir ]; then
     echo "ERROR: Race dir doesn't exist yet: "$race_dir
     exit 1
 fi
-if [ ! -e $race_dir/downloaded_contributed_race_pages ]; then
-    echo "ERROR: $race_dir/downloaded_contributed_race_pages doesn't exist."
-    exit 1
-fi
-
 
 # Go to generated race directory and check things out
 cd $race_dir
