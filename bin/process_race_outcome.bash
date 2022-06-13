@@ -39,7 +39,9 @@ fi
 # Get userlist from master directory
 my_dir=`pwd`
 cd ..
-the_path=`realpath --relative-to=../ .`
+thingy=`readlink -f .` 
+the_path=`basename $thingy`
+#the_path=`realpath --relative-to=../ .`
 the_file=../../master_race_data/$the_path/user_list.txt
 
 # Do we have users?

@@ -44,7 +44,7 @@ tar xf generated_html_files.tar
 rm -f generated_html_files.tar
 
 # Copy across style file and general page
-dir_list=`find  . -maxdepth 1 -type d`
+dir_list=`find  . -mindepth 1 -maxdepth 1 -type d`
 for dir in `echo $dir_list`; do
     cp ../html/style.css $dir
     cp ../html/rvy_racing.php $dir
