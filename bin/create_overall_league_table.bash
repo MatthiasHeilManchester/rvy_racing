@@ -63,7 +63,7 @@ for dir in `echo $dir_list`; do
     if [ ! -e results.html ]; then
         echo "WARNING: results.html in"`pwd`" doesn't exist; ignoring."
     else
-        # Prefix #10 declares numbers to be decimals in base 10
+        # Prefix 10# declares numbers to be decimals in base 10
         # https://stackoverflow.com/questions/21049822/value-too-great-for-base-error-token-is-09
         command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=$((10#$((${total_points["$4"]}))))+$((10#"$10")); "}}' results.html`
 	#echo $command

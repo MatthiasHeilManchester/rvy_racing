@@ -44,7 +44,24 @@
     And then hammer it -- not so easy...<br><br>
     The schedule of upcoming races, the rankings, and the overall
     league table are available via the tabs above.
-
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h3>Warning:</h3>
+    Rouvy do not provide a formal API to their (our!) data, so the 
+    information required to maintain our league table is extracted
+    from their webpages. There is a good chance
+    that the machinery developed to do this will break when they
+    move their route and race pages
+    from <a href="https://my.rouvy.com">
+      https://my.rouvy.com</a> to <a href="https://www.rouvy.com">
+      https://www.rouvy.com</a>, and it
+    may, in fact, prove impossible to continue this approach. If this
+    happens, we may have to suspend the races (or at least their
+    transfer to the league table) for a bit... Various possible alternatives
+    exist but they'd need to be implemented (quickly) and are not
+    super-attractive. Anyway, let's not worry about this just yet... 
 </div>
 
 
@@ -63,8 +80,8 @@
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
     on <a href="https://my.rouvy.com/onlinerace">Rouvy</a> as usual. 
-    Direct links to the races are also provided directly from
-    <a href="all_races_in_series.html">our race page</a> which lists
+    Direct links to the races are also provided directly from the race
+    tab on this page. This lists
     dates, times, routes, etc. <br><br>
   <li> If none of the official times suit you, you can also arrange
     your own race
@@ -72,8 +89,10 @@
     The race must be on
     the same day (in GMT) as the official races. This gives everybody
     24 hours to do the route. Make sure you follow the link <b>"Add your
-    own?"</b> for the appropriate race in the 
-    <a href="all_races_in_series.html">race list</a> so our machinery can extract
+      own?"</b> for the appropriate race in the race tab on this page
+    <center><a href="add_your_own.jpg"><img src="add_your_own.jpg"
+                                      width=500px></a></center>
+    This allows our machinery to extract
     the finish time and insert it into the compound ranking. The
     registration page will check that the race is held on the right
     route and on the right day. Note that the link disappears and is
@@ -123,7 +142,7 @@ are a few rules anyway.
     people. Please don't! You may
     have privacy concerns (though I don't know what they would be...) but
     people simply want to be able to convince themselves that other
-    racer's data looks plausible. Personally I don't think it's a huge
+    racers' data looks plausible. Personally I don't think it's a huge
     deal and I get annoyed about endless "cheater" discussions (see below), but if
     you hide your data, you're rasising questions. If you want to keep
     your data hidden, please race elsewhere.
@@ -142,7 +161,10 @@ are a few rules anyway.
     concerns, please contact the race organiser (via a private (!) message
     on the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion board</a>), so they
     can have a quiet word (and/or escalate things if necessary; see
-    below).<br><br>
+    below).
+ <center><a href="private_message.jpg"><img src="private_message.jpg"
+                                      width=500px></a></center>
+    <br><br>
   <li> No overtly political etc. discussions because it's likely to create
     tension. This is not censorship - there are plenty of other forums
     on the internet (or in your local pub!) where you can raise your
@@ -184,7 +206,7 @@ Please use the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion
       reports/fixes, etc. <br><br>
 Those interested in the coding aspect are welcome to contribute to the
       machinery via
-the  <a href="https://github.com/MatthiasHeilManchester/rouvy_racing">
+the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
     github repository</a>.
 </div> 
     

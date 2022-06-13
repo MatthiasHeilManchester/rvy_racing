@@ -47,7 +47,7 @@ rm -f generated_html_files.tar
 dir_list=`find  . -maxdepth 1 -type d`
 for dir in `echo $dir_list`; do
     cp ../html/style.css $dir
-    cp ../html/rouvy_racing.php $dir
+    cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
     cp ../html/nonono.png $dir
 done
