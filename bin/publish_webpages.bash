@@ -50,6 +50,8 @@ for dir in `echo $dir_list`; do
     cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
     cp ../html/nonono.png $dir
+    cp ../html/add_your_own.jpg $dir
+    cp ../html/private_message.jpg $dir
 done
 
 

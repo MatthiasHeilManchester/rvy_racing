@@ -66,9 +66,12 @@ for dir in `echo $dir_list`; do
         # Prefix 10# declares numbers to be decimals in base 10
         # https://stackoverflow.com/questions/21049822/value-too-great-for-base-error-token-is-09
         command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=$((10#$((${total_points["$4"]}))))+$((10#"$10")); "}}' results.html`
-	#echo $command
+	#echo "hierher "$command
 	#exit
         eval $command
+        #echo "bla hierher: " ${total_points[MatthiasHeil]}
+        #echo "bla hierher: " ${total_points[whitesheep]}
+        #echo "bla hierher: " ${total_points[stfmgr_65]}
         awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
     fi
     cd $home_dir
@@ -82,11 +85,12 @@ echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat
 rm -f .tmp_league_table2.dat
-for i in ${!total_points[@]}; do
+for i in "${!total_points[@]}"; do
     echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> </tr>" >> .tmp_league_table.dat
 done
 #echo ".tmp:"
 #cat  .tmp_league_table.dat
+#echo "end .tmp"
 sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
 
 #echo ".tmp2:"

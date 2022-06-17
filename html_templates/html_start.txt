@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Rouvy Racing</title>
+    <title>Rvy Racing</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <style>

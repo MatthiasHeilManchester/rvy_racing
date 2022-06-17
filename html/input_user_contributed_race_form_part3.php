@@ -10,6 +10,7 @@
   
 <?php
 
+
 // Recover -- these are all for the official race (apart from the race 
 // url of the newly contributed race
 session_start();

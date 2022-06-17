@@ -98,8 +98,8 @@ cd master_race_data
 dir_list=`ls -d $race_series/race?????`
 
 
-echo "I'm here"`pwd`
-echo "DIR LIST : "$dir_list
+#echo "I'm here"`pwd`
+#echo "DIR LIST : "$dir_list
 
 
 # Loop over all races in series (as identified in master directory)
@@ -147,7 +147,8 @@ for dir in `echo $dir_list`; do
 
     # Kill existing official races html list items
     rm -f official_race_list_items.html
-
+    rm -f results.html
+    
     # Check download directories or create them
     if [ -e downloaded_official_race_pages ]; then
         if [ $verbose_debug == 1 ]; then echo `pwd`"/downloaded_official_race_pages already exists."; fi
@@ -315,6 +316,13 @@ for dir in `echo $dir_list`; do
 
     
 done
+
+
+
+# Tell us what we're doing (on top!)
+echo "<h2>Overall race programme for race series <em>"$race_series"</em></h2>" > .tmp.txt
+cat .tmp.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html > .tmp2.txt
+mv .tmp2.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html
 
 
 # Tell us what you've done

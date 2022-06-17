@@ -59,7 +59,7 @@
       https://www.rouvy.com</a>, and it
     may, in fact, prove impossible to continue this approach. If this
     happens, we may have to suspend the races (or at least their
-    transfer to the league table) for a bit... Various possible alternatives
+    transfer to the league table) for a bit. Various possible alternatives
     exist but they'd need to be implemented (quickly) and are not
     super-attractive. Anyway, let's not worry about this just yet... 
 </div>
@@ -115,7 +115,7 @@
     will be very very proud of them. Everybody else will have had a
     great time busting their guts twice a week (which is what it's all
     about!). And your parents/partners/children/hamsters/... may still
-    be very very proud of you! So there then!
+    be very very proud of you. So there then.
 </ul>
 
 <h2>Other rules: Behave yourselves!</h2>
@@ -150,7 +150,13 @@ are a few rules anyway.
                                       width=500px></a></center>
     Similarly, it would be appreciated if you kept your strava profile
                                       public and used a HRM. However,
-                                      this will not be enforced.<br><br>
+                                      this will not be
+    enforced.<br><br>
+  <li> If you sign up for a race on rouvy, please make sure you
+  actually turn up (or unregister a.s.a.p., if at all possible). People generally
+  like to race with other people, and turning up in the expectation to
+  find a proper stampede only to find that half the people couldn't
+  actually be bothered is annoying.<br><br> 
   <li> Banter on
   the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion
       board</a>
