@@ -55,7 +55,9 @@ echo "I'm opening the new official_race.dat for you."
 echo "Add the URLs of the (sub)-races (for different timezones)."
 echo "============================================================="
 echo " "
-emacs official_race.dat 
+echo "Opening file with: "$EDITOR
+echo " "
+$EDITOR official_race.dat 
 echo " "
 echo "============================================================="
 echo "Done!"
