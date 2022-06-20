@@ -62,30 +62,100 @@ echo "==========================================================================
 echo " "
 echo "Bolshily processing races in series : "$race_series
 
+
+# Create log file
+date_string=`date --utc | sed 's/ /_/g'`
+log_file="bolshy_logs/bolshy_process_races_"$date_string".log"
+echo "log file: "$log_file
+
 orig_dir=`pwd`
 cd generated_race_data/$race_series
 rm -f *.log
 cd $orig_dir
 
+
+
 # Stage 'em
-bin/stage_official_races.bash $race_series > generated_race_data/$race_series/stage_official_races1.log
+echo " "  > $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling stage_official_races from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/stage_official_races.bash $race_series >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done calling stage_official_races from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+
 
 # Process race by race
-bin/process_race_outcome_for_all_races_in_series.bash $race_series > generated_race_data/$race_series/process_race_outcome.log
-
-# Stage 'em
-# why do we do it again. We're actually deleting stuff hierher update elsewhere too if we don't need it. bin/stage_official_races.bash $race_series > generated_race_data/$race_series/stage_official_races2.log
+echo " " >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling /process_race_outcome_for_all_races_in_series from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/process_race_outcome_for_all_races_in_series.bash $race_series >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done process_race_outcome_for_all_races_in_series from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
 
 
 # Create league table
-bin/create_overall_league_table.bash $race_series > generated_race_data/$race_series/create_overall_leaguet_table.log
+echo " " >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling create_overall_league_table.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/create_overall_league_table.bash $race_series >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done create_overall_league_table.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
 
 
-# Publish!
-bin/publish_webpages.bash > generated_race_data/$race_series/publish_webpages.log
+
+# Publish 'em
+echo " " >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling publish_webpages.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/publish_webpages.bash >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done publish_webpages.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+
+
 
 echo " " 
 echo "Done the lot, ending with updated webpages!"
+echo " "
+echo "Log file: "
+echo " "
+echo "          $ $log_file
+echo " "
 echo " " 
 
 exit 0

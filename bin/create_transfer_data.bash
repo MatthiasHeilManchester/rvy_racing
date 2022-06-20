@@ -10,9 +10,9 @@ if [ ! -e master_race_data ]; then
 fi
 
 cd master_race_data
-tar cvfz ../transfer_data/master_race_data.tar.gz *
+tar cfz ../transfer_data/master_race_data.tar.gz *
 
 cd ../contributed_race_data
-tar cvfz ../transfer_data/contributed_race_data.tar.gz *
+tar cfz ../transfer_data/contributed_race_data.tar.gz *
 
 

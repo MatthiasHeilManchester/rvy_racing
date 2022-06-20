@@ -62,10 +62,52 @@ echo "==========================================================================
 echo " "
 echo "Bolshily setting up series : "$race_series
 
+
+# Create log file
+date_string=`date --utc | sed 's/ /_/g'`
+log_file="bolshy_logs/bolshy_stage_races_"$date_string".log"
+echo "log file: "$log_file
+
 # Stage 'em
-bin/stage_official_races.bash $race_series > generated_race_data/$race_series/stage_official_races.log
+echo " "  > $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling stage_official_races from bolshy_stage_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/stage_official_races.bash $race_series >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done calling stage_official_races from bolshy_stage_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
 
 # Publish 'em
-bin/publish_webpages.bash > generated_race_data/$race_series/publish_webpages.log
+echo " " >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling publish_webpages.bash from bolshy_stage_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/publish_webpages.bash >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Calling publish_webpages.bash from bolshy_stage_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+
+echo "Done the lot, ending up with uupdated webpages!"
+echo " " 
+echo "Log file: "
+echo " "
+echo "          "$log_file
+echo " "
+echo " " 
 
 exit 0
