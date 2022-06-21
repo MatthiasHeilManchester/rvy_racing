@@ -111,6 +111,7 @@ echo "##############################################################" >> $log_fi
 echo " " >> $log_file
 
 
+
 # Create league table
 echo " " >> $log_file
 echo "##############################################################"  >> $log_file
@@ -124,6 +125,27 @@ echo " " >> $log_file
 echo "##############################################################" >> $log_file
 echo " " >> $log_file
 echo "Done create_overall_league_table.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+
+
+
+# Update race list with results
+
+# Stage 'em
+echo " "  >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling stage_official_races from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/stage_official_races.bash $race_series >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done calling stage_official_races from bolshy_process_races.bash" >> $log_file
 echo " " >> $log_file
 echo "##############################################################" >> $log_file
 echo " " >> $log_file
@@ -154,7 +176,7 @@ echo "Done the lot, ending with updated webpages!"
 echo " "
 echo "Log file: "
 echo " "
-echo "          $ $log_file
+echo "          "$log_file
 echo " "
 echo " " 
 

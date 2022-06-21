@@ -97,12 +97,12 @@ bin/publish_webpages.bash >> $log_file
 echo " " >> $log_file
 echo "##############################################################" >> $log_file
 echo " " >> $log_file
-echo "Calling publish_webpages.bash from bolshy_stage_races.bash" >> $log_file
+echo "Done publish_webpages.bash from bolshy_stage_races.bash" >> $log_file
 echo " " >> $log_file
 echo "##############################################################" >> $log_file
 echo " " >> $log_file
 
-echo "Done the lot, ending up with uupdated webpages!"
+echo "Done the lot, ending up with updated webpages!"
 echo " " 
 echo "Log file: "
 echo " "

@@ -147,7 +147,7 @@ for dir in `echo $dir_list`; do
 
     # Kill existing official races html list items
     rm -f official_race_list_items.html
-    rm -f results.html
+
     
     # Check download directories or create them
     if [ -e downloaded_official_race_pages ]; then
@@ -297,7 +297,6 @@ for dir in `echo $dir_list`; do
     # or to option to add private race
     not_processed_yet_count=`grep -c "Race hasn't been raced or processed yet!" ../results.html`
     if [ $not_processed_yet_count != 0 ]; then
-
         # Undo increment from above
         let race_number=$race_number-1
         echo "Race not raced/processed yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
@@ -321,6 +320,7 @@ done
 
 # Tell us what we're doing (on top!)
 echo "<h2>Overall race programme for race series <em>"$race_series"</em></h2>" > .tmp.txt
+echo "Race programme compiled: "`date --utc` >> .tmp.txt
 cat .tmp.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html > .tmp2.txt
 mv .tmp2.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html
 

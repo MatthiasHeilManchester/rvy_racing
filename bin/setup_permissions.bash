@@ -23,9 +23,15 @@ echo " "
 
 
 
-sudo chgrp -R webmasters ./contributed_race_data
-sudo chgrp -R webmasters ./generated_race_data
-sudo chmod -R ug+rwx generated_race_data
-sudo chmod -R ug+rwx contributed_race_data
-sudo chmod -R g+s generated_race_data
-sudo chmod -R g+s contributed_race_data
+dir_list="backups_of_generated_html contributed_race_data generated_race_data generated_html bolshy_logs"
+for dir in `echo $dir_list`; do
+
+    sudo chgrp -R webmasters ./$dir
+    sudo chmod -R ug+rwx $dir
+    sudo chmod -R g+s $dir
+done
+
+exit
+    
+
+
