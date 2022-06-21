@@ -67,7 +67,7 @@ race_series=$1
 # Script should be run from home directory
 home_dir=`pwd`
 if [ ! -e master_race_data ]; then
-    echo "ERROR: Script ought to be run from home directory, so that"
+    echo -e "\033[0;31mERROR:\033[0m Script ought to be run from home directory, so that"
     echo "directory master_race_data is available as ./master_race_data."
     echo "You are in $home_dir"
     exit 1
@@ -75,7 +75,7 @@ fi
 
 # Does race series even exist?
 if [ ! -e master_race_data/$race_series ]; then
-    echo "ERROR: Race series master_race_data/$race_series doesn't exist!"
+    echo -e "\033[0;31mERROR:\033[0m Race series master_race_data/$race_series doesn't exist!"
     exit 1
 fi
 echo " "
@@ -87,7 +87,7 @@ rm -f generated_race_data/$race_series/all_races_in_series.html
 
 # Do we have users?
 if [ ! -e ./master_race_data/$race_series/user_list.txt ]; then
-    echo "ERROR: No users for series, i.e. master_race_data/$race_series/user_list.txt doesn't exist!"
+    echo -e "\033[0;31mERROR:\033[0m No users for series, i.e. master_race_data/$race_series/user_list.txt doesn't exist!"
     exit 1
 fi
 
@@ -166,7 +166,7 @@ for dir in `echo $dir_list`; do
     # Create link to official race data
     if [ ! -e official_race.dat ]; then
         if [ ! -e ../../../master_race_data/$dir/official_race.dat ]; then
-            echo "ERROR: official_race.dat doesn't exist in master race directory"
+            echo -e "\033[0;31mERROR:\033[0m official_race.dat doesn't exist in master race directory"
             echo "../../../master_race_data/$dir/official_race.dat"
             echo "I'm here: "`pwd`
             exit 1

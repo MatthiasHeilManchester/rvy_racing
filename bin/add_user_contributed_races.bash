@@ -25,7 +25,7 @@ race_date_string=$5
 # called from php script in html directory)
 home_dir=`pwd`
 if [ ! -e ../master_race_data ]; then
-    echo "ERROR: Script ought to be run one level below home directory, so that"
+    echo -e "\033[0;31mERROR:\033[0m Script ought to be run one level below home directory, so that"
     echo "directory master_race_data is available as ../master_race_data."
     echo "You are in $home_dir"
     exit 1
@@ -50,12 +50,12 @@ fi
 # Check that relevant directories exist
 series_dir=../contributed_race_data/$race_series
 if [ ! -e $series_dir ]; then
-    echo "ERROR: Race series dir for contributed race of series "$race_series" doesn't exist yet: "$series_dir
+    echo -e "\033[0;31mERROR:\033[0m Race series dir for contributed race of series "$race_series" doesn't exist yet: "$series_dir
     exit 1
 fi
 contributed_race_data_race_dir=../contributed_race_data/$race_series/race`echo $race_number | awk '{printf "%05d\n",$1}'`
 if [ ! -e $contributed_race_data_race_dir ]; then
-    echo "ERROR: Race dir doesn't exist yet: "$contributed_race_data_race_dir
+    echo -e "\033[0;31mERROR:\033[0m Race dir doesn't exist yet: "$contributed_race_data_race_dir
     exit 1
 fi
 
@@ -67,7 +67,7 @@ fi
 series_dir_for_overview="../generated_race_data/"$race_series
 race_dir=../generated_race_data/$race_series/race`echo $race_number | awk '{printf "%05d\n",$1}'`
 if [ ! -e $race_dir ]; then
-    echo "ERROR: Race dir doesn't exist yet: "$race_dir
+    echo -e "\033[0;31mERROR:\033[0m Race dir doesn't exist yet: "$race_dir
     exit 1
 fi
 
@@ -83,7 +83,7 @@ cd $race_dir
 rm -f .date.dat
 date --utc > .date.dat
 if [ ! -e .date.dat ]; then
-    echo "ERROR: Don't appear to have write permission in "`pwd`
+    echo -e "\033[0;31mERROR:\033[0m Don't appear to have write permission in "`pwd`
     echo "Locking is likely to fail..."
 fi
 rm -f .date.dat
@@ -115,7 +115,7 @@ done
 
 
 if [ $max_while -gt 0 ]; then    
-    echo "ERROR: Kept finding lock file: "
+    echo -e "\033[0;31mERROR:\033[0m Kept finding lock file: "
     echo " "
     echo "     "`pwd`/lock_file.lock
     echo " "
@@ -132,13 +132,13 @@ fi
 
 # Need to have a link to contributed race file
 if [ ! -e contributed_race.dat ]; then
-    echo "ERROR: Need a link to contributed_race.dat"
+    echo -e "\033[0;31mERROR:\033[0m Need a link to contributed_race.dat"
     exit 1
 fi
 
 # Need to have a link to contributed race list items
 if [ ! -e contributed_race_list_items.html ]; then
-    echo "ERROR: Need a link to contributed_race_list_items.html"
+    echo -e "\033[0;31mERROR:\033[0m Need a link to contributed_race_list_items.html"
     exit 1
 fi
 
@@ -155,7 +155,7 @@ html_file="downloaded_contributed_race_pages/downloaded_contributed_race_file"$n
 #pwd
 wget -O $html_file $newly_created_race_url
 if [ ! -e $html_file ]; then
-    echo "ERROR: Couldn't download "$html_file" in "`pwd`
+    echo -e "\033[0;31mERROR:\033[0m Couldn't download "$html_file" in "`pwd`
     exit 1
 fi
 
@@ -166,15 +166,15 @@ newly_contributed_route_id=`$home_dir/../bin/extract_parameters_from_rouvy_race_
 
 something_wrong=0
 if [ "$newly_contributed_race_date" == "" ]; then
-    echo "ERROR: Race is (probably) already running; but please report the occurence of this error message [date]"
+    echo -e "\033[0;31mERROR:\033[0m Race is (probably) already running; but please report the occurence of this error message [date]"
     something_wrong=1
 fi
 if [ "$newly_contributed_race_time" == "" ]; then
-    echo "ERROR: Race is (probably) already running; but please report the occurence of this error message [time]"
+    echo -e "\033[0;31mERROR:\033[0m Race is (probably) already running; but please report the occurence of this error message [time]"
     something_wrong=1
 fi
 if [ "$newly_contributed_route_id" == "" ]; then
-    echo "ERROR: Race is (probably) already running; but please report the occurence of this error message [id]"
+    echo -e "\033[0;31mERROR:\033[0m Race is (probably) already running; but please report the occurence of this error message [id]"
     something_wrong=1
 fi
 if [ $something_wrong -eq 1 ]; then
@@ -202,7 +202,7 @@ we_have_an_error=0
 #echo "race: -"$race_date_string"-"
 #echo "cont: -"$newly_contributed_race_date_string"-"
 if [ "$race_date_string" != "$newly_contributed_race_date_string"]; then
-    echo "ERROR: Newly contributed  race is on a different date ( -"$newly_contributed_race_date_string"- GMT ) from date of official race ( -"$race_date_string"- GMT )"
+    echo -e "\033[0;31mERROR:\033[0m Newly contributed  race is on a different date ( -"$newly_contributed_race_date_string"- GMT ) from date of official race ( -"$race_date_string"- GMT )"
     we_have_an_error=1
 else
     if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and newly contributed race are on same date: " $newly_contributed_race_date_string" and "$race_date_string; fi 
@@ -210,7 +210,7 @@ fi
 
 # Check route
 if [ "$route_id" != "$newly_contributed_route_id" ]; then
-    echo "ERROR: Newly contributed race is on a <a href=\""$newly_created_race_url"\">different route</a> from from that of the <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id"\">official race</a>"
+    echo -e "\033[0;31mERROR:\033[0m Newly contributed race is on a <a href=\""$newly_created_race_url"\">different route</a> from from that of the <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id"\">official race</a>"
     we_have_an_error=1
 else
     if [ $verbose_debug == 1 ]; then echo "OK: Newly created race is on the same route as the official race!"; fi 
@@ -252,7 +252,7 @@ if [ $race_is_new -eq 1 ]; then
     echo " "
     exit 0
 else
-    echo "ERROR: Race had already been added; not adding it again. <br><br>Please have a look on the <a href=\"../generated_html/$race_series/rvy_racing.php\"><b>race pages</b></a> for the list of currently existing user-contributed races."
+    echo -e "\033[0;31mERROR:\033[0m Race had already been added; not adding it again. <br><br>Please have a look on the <a href=\"../generated_html/$race_series/rvy_racing.php\"><b>race pages</b></a> for the list of currently existing user-contributed races."
     exit 1
 fi
 

@@ -14,7 +14,7 @@ race_series=$1
 # Script should be run from home directory
 home_dir=`pwd`
 if [ ! -e master_race_data ]; then
-    echo "ERROR: Script ought to be run from home directory, so that"
+    echo -e "\033[0;31mERROR:\033[0m Script ought to be run from home directory, so that"
     echo "directory master_race_data is available as ./master_race_data."
     echo "You are in $home_dir"
     exit 1
@@ -22,13 +22,13 @@ fi
 
 # Does race series even exist?
 if [ ! -e master_race_data/$race_series ]; then
-    echo "ERROR: Race series master_race_data/$race_series doesn't exist!"
+    echo -e "\033[0;31mERROR:\033[0m Race series master_race_data/$race_series doesn't exist!"
     exit 1
 fi
 
 # Has it been staged?
 if [ ! -e generated_race_data/$race_series ]; then
-    echo "ERROR: Race series generated_race_data/$race_series doesn't exist; race probably hasn't been staged!"
+    echo -e "\033[0;31mERROR:\033[0m Race series generated_race_data/$race_series doesn't exist; race probably hasn't been staged!"
     exit 1
 fi
 

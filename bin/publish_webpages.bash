@@ -2,7 +2,7 @@
 
 
 if [ ! -e  generated_race_data ]; then
-    echo "ERROR: Script must be run in home directory so generated_race_data is"
+    echo -e "\033[0;31mERROR:\033[0m Script must be run in home directory so generated_race_data is"
     echo "accessible as ./generated_race_data"
     echo " "
     echo "You are in: "`pwd`
@@ -22,7 +22,7 @@ find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' -o -iname '
 # Backup old generated html (which is served by webserver)
 cd ..
 if [ ! -e backups_of_generated_html ]; then
-    echo "ERROR: Script must be run in home directory so backups_of_generated_html is"
+    echo -e "\033[0;31mERROR:\033[0m Script must be run in home directory so backups_of_generated_html is"
     echo "accessible as ./backups_of_generated_html"
     echo " "
     echo "You are in: "`pwd`

@@ -15,7 +15,7 @@ dir_name=`basename \`pwd\``
 cd $my_dir
 if [ "$dir_name" != "generated_race_data" ]; then
     echo " "
-    echo "ERROR: Script should be run in generated race directory "
+    echo -e "\033[0;31mERROR:\033[0m Script should be run in generated race directory "
     echo "(e.g. in generated_race_data/fake_commute/race00001"
     echo " "
     exit
@@ -23,13 +23,13 @@ fi
 
 if [ ! -e official_race.dat ]; then
     echo " "
-    echo "ERROR: Official races do not seem to have been staged!"
+    echo -e "\033[0;31mERROR:\033[0m Official races do not seem to have been staged!"
     echo "There is no (symlink) to official_race.dat in"`pwd`
     exit
 fi
 if [ ! -e contributed_race.dat ]; then
     echo " "
-    echo "ERROR: Official races do not seem to have been staged!"
+    echo -e "\033[0;31mERROR:\033[0m Official races do not seem to have been staged!"
     echo "There is no (symlink) to contributed_race.dat in"`pwd`
     exit
 fi
@@ -46,7 +46,7 @@ the_file=../../master_race_data/$the_path/user_list.txt
 
 # Do we have users?
 if [ ! -e $the_file ]; then
-    echo "ERROR: Don't have user data in $my_dir"
+    echo -e "\033[0;31mERROR:\033[0m Don't have user data in $my_dir"
     echo "I'm in "`pwd`
     exit 1
 fi

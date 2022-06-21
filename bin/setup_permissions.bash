@@ -5,7 +5,7 @@
 # to
 #--------------------------------------------------------------------------
 if [ ! -e master_race_data ]; then
-    echo "ERROR: Script ought to be run from home directory, so that"
+    echo -e "\033[0;31mERROR:\033[0m Script ought to be run from home directory, so that"
     echo "directory master_race_data is available as ./master_race_data."
     echo "You are in "`pwd`
     exit 1
