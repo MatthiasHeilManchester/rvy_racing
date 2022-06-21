@@ -99,7 +99,7 @@ awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for 
 
 echo "<table>" >>  $html_file
 echo "<br>" >>  $html_file
-echo "League table processed: "`date`  >>  $html_file
+echo "League table processed: "`date --utc`  >>  $html_file
 echo "<br>" >>  $html_file
 echo "<hr>" >>  $html_file
 echo " " >>  $html_file

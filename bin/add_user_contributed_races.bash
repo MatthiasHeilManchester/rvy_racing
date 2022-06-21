@@ -81,7 +81,7 @@ cd $race_dir
 # Check if lock File exists, if not create it and set trap on exit
 # but first check if we even have write permission here!
 rm -f .date.dat
-date > .date.dat
+date --utc > .date.dat
 if [ ! -e .date.dat ]; then
     echo "ERROR: Don't appear to have write permission in "`pwd`
     echo "Locking is likely to fail..."

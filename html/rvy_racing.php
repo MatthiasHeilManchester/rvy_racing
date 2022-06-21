@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Rouvy racing</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
@@ -207,13 +208,23 @@ are a few rules anyway.
 
 
 <div class="tab content5">
-Please use the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion
-      board</a> for constructive suggestions for improvement, bug
-      reports/fixes, etc. <br><br>
-Those interested in the coding aspect are welcome to contribute to the
+  <ul>
+<li> Please use the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion
+      board</a> for, well, for discussions, I guess. Constructive suggestions for improvement, bug
+  reports/fixes, are also welcome. <br><br>
+  <li >The race organiser can be contacted directly via
+  the "Contact us" link on the registration page:
+  <center><a href="contact.jpg"><img src="contact.jpg"
+                                      width=500px></a></center>
+  You don't have to have registered to do this, though you will have
+                                      to register if you want to
+                                      participate in the races (or
+                                      rather: get credit for them!).<br><br> 
+<li> Those interested in the coding aspect are welcome to contribute to the
       machinery via
 the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
     github repository</a>.
+</ul>
 </div> 
     
   </body>

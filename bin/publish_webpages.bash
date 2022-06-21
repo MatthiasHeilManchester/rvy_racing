@@ -29,7 +29,7 @@ if [ ! -e backups_of_generated_html ]; then
     echo " " 
     exit
 fi
-backup_file="backups_of_generated_html/backup_"`date | sed 's/ /_/g'`".tar.gz"
+backup_file="backups_of_generated_html/backup_"`date --utc | sed 's/ /_/g'`".tar.gz"
 tar  cfz $backup_file generated_html
 
 # Kill previous version
@@ -52,6 +52,7 @@ for dir in `echo $dir_list`; do
     cp ../html/nonono.png $dir
     cp ../html/add_your_own.jpg $dir
     cp ../html/private_message.jpg $dir
+    cp ../html/contact.jpg $dir
 done
 
 

@@ -215,7 +215,7 @@ printf(" </td> <td> %i </td> ",score[count])
 
 echo "</table>" >>  $html_file
 echo "<br>"  >>  $html_file
-echo "Race processed: "`date`  >>  $html_file
+echo "Race processed: "`date --utc `  >>  $html_file
 echo "<br>" >>  $html_file
 echo "<hr>" >>  $html_file
 echo " " >>  $html_file

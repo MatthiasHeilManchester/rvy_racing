@@ -34,7 +34,7 @@ fi
 orig_dir=`pwd`
 cd generated_race_data
 rm -f .date.dat
-date > .date.dat
+date --utc > .date.dat
 if [ ! -e .date.dat ]; then
     echo "ERROR: Don't appear to have write permission in "`pwd`
     echo "Locking is likely to fail..."
