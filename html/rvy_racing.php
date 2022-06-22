@@ -6,10 +6,20 @@
     <title>Rouvy racing</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    /*<style>
+       https://stackoverflow.com/questions/23984629/how-to-set-min-font-size-in-css
+      #myImage {
+          width: max(200px, min(30vw, 500px));
+      }
+      #tabImage {
+          width: max(200px, min(30vw, 250px));
+      }
+    </style>*/
+      
   </head>
   <body>
 
-    <img src="rvy_racing.png" width=200px>
+    <img id="tabImage" src="rvy_racing.png">
     
 <input type="radio" name="tabs" id="tab1" checked />
 <label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2" />
@@ -91,8 +101,8 @@
     the same day (in GMT) as the official races. This gives everybody
     24 hours to do the route. Make sure you follow the link <b>"Add your
       own?"</b> for the appropriate race in the race tab on this page
-    <center><a href="add_your_own.jpg"><img src="add_your_own.jpg"
-                                      width=500px></a></center>
+    <center><a href="add_your_own.jpg"><img id="myImage" src="add_your_own.jpg"
+                                      ></a></center>
     This allows our machinery to extract
     the finish time and insert it into the compound ranking. The
     registration page will check that the race is held on the right
@@ -147,8 +157,8 @@ are a few rules anyway.
     deal and I get annoyed about endless "cheater" discussions (see below), but if
     you hide your data, you're rasising questions. If you want to keep
     your data hidden, please race elsewhere.
-    <center><a href="nonono.png"><img src="nonono.png"
-                                      width=500px></a></center>
+    <center><a href="nonono.png"><img id="myImage" src="nonono.png"
+                                      ></a></center>
     Similarly, it would be appreciated if you kept your strava profile
                                       public and used a HRM. However,
                                       this will not be
@@ -169,8 +179,8 @@ are a few rules anyway.
     on the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion board</a>), so they
     can have a quiet word (and/or escalate things if necessary; see
     below).
- <center><a href="private_message.jpg"><img src="private_message.jpg"
-                                      width=500px></a></center>
+ <center><a href="private_message.jpg"><img id="myImage" src="private_message.jpg"
+                                      ></a></center>
     <br><br>
   <li> No overtly political etc. discussions because it's likely to create
     tension. This is not censorship - there are plenty of other forums
@@ -214,8 +224,8 @@ are a few rules anyway.
   reports/fixes, are also welcome. <br><br>
   <li >The race organiser can be contacted directly via
   the "Contact us" link on the registration page:
-  <center><a href="contact.jpg"><img src="contact.jpg"
-                                      width=500px></a></center>
+  <center><a href="contact.jpg"><img id="myImage" src="contact.jpg"
+                                      ></a></center>
   You don't have to have registered to do this, though you will have
                                       to register if you want to
                                       participate in the races (or

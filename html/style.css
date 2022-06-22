@@ -5,7 +5,7 @@ input ~ .tab { display: none }          /* hide contents *//* show contents only
 #tab2:checked ~ .tab.content2,
 #tab3:checked ~ .tab.content3,
 #tab4:checked ~ .tab.content4,
-#tab5:checked ~ .tab.content5 { display: block; }
+#tab5:checked ~ .tab.content5 { display: block; font-size:  max(10px, min(3vw, 20px));}
 input + label {             /* box with rounded corner */
   border: 1px solid #999;
   background: #EEE;
@@ -17,9 +17,19 @@ input + label {             /* box with rounded corner */
 input:checked + label {     /* white background for selected tab */
   background: #FFF;
   border-bottom: 1px solid transparent;
+  font-size: max(8px, min(5vw, 25px));
 }
 input ~ .tab {          /* grey line between tab and contents */
   border-top: 1px solid #999;
   padding: 12px;
+  font-size: max(6px, min(5vw, 10px));
 }
 
+
+/* https://stackoverflow.com/questions/23984629/how-to-set-min-font-size-in-css*/
+#myImage {
+    width: max(200px, min(30vw, 500px));
+}
+#tabImage {
+    width: max(200px, min(30vw, 250px));
+}
