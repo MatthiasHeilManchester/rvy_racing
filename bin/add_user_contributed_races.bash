@@ -1,6 +1,10 @@
 #!/bin/bash
 
 
+#-------------------------------------------------------------
+# Script called from php to add user contributed race. Webpage
+# gets updated!
+#-------------------------------------------------------------
 
 # Five command line arguments
 if [ $# -ne 5 ]; then

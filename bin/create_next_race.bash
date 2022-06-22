@@ -1,5 +1,10 @@
 #! /bin/bash
 
+
+#---------------------------------------------------------------
+# Helper script to create new official race. 
+#---------------------------------------------------------------
+
 # Create a new race in the race series directory
 if [ ! -e ../../master_race_data ] || [ ! -e user_list.txt  ]; then
     echo "You're in the wrong directory. This is supposed to be run in the "

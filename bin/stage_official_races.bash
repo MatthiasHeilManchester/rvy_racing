@@ -34,22 +34,6 @@
 #        https://my.rouvy.com/onlinerace/live/87049
 #        https://my.rouvy.com/onlinerace/live/87050
 #
-# Script produces:
-#
-#  - html file that provides info and links to rouvy race pages
-#    for official races in
-#
-#      ./generated_race_data/$1/all_races_in_series.html
-#
-#  - placeholder html files for race results in
-#
-#      ./generated_race_data/$1/race?????results.html
-#
-#    This is over-written when
-#
-#       bin/process_race_outcome.bash
-#
-#    is executed in the relevant race directory.
 #--------------------------------------------------------
 
 # Just one command line argument
@@ -81,7 +65,7 @@ fi
 echo " "
 echo "==========================================================================="
 echo " "
-echo "Setting up series : "$race_series
+echo "Staging race series : "$race_series
 rm -f generated_race_data/$race_series/all_races_in_series.html
 
 
@@ -97,9 +81,6 @@ race_number_in_series=0
 cd master_race_data
 dir_list=`ls -d $race_series/race?????`
 
-
-#echo "I'm here"`pwd`
-#echo "DIR LIST : "$dir_list
 
 
 # Loop over all races in series (as identified in master directory)
@@ -327,25 +308,6 @@ mv .tmp2.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html
 
 # Tell us what you've done
 cd $home_dir
-echo "Races staged. Here are the files that need to be installed:"
-echo " " 
-ls -l generated_race_data/$race_series/all_races_in_series.html generated_race_data/$race_series/*/results.html
-echo " "
-echo "To install them on the webpage run"
-echo " "
-echo "     bin/publish_webpages.bash"
-echo " "
-echo "Note that the results.html files are placeholders. They will be overwritten"
-echo "when individual races are  processed by running"
-echo " "
-echo "     bin/process_race_outcome.bash"
-echo " "
-echo "in the relevant race directory."
-echo " "
-echo "Once that's done run"
-echo " "
-echo "     bin/publish_webpages.bash"
-echo " "
-echo "again."
+echo "Races staged." 
 echo "======================================================================"
 echo " "

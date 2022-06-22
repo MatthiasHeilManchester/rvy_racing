@@ -1,6 +1,12 @@
 
 #! /bin/bash
 
+#--------------------------------------------------------
+# Script to stage races, process them, update the league
+# table and publish the lot. Run this when races are
+# finished. May get itself confused if races are still
+# running.
+#--------------------------------------------------------
 
 # Just one command line argument
 if [ $# -ne 1 ]; then
@@ -67,12 +73,6 @@ echo "Bolshily processing races in series : "$race_series
 date_string=`date --utc | sed 's/ /_/g'`
 log_file="bolshy_logs/bolshy_process_races_"$date_string".log"
 echo "log file: "$log_file
-
-orig_dir=`pwd`
-cd generated_race_data/$race_series
-rm -f *.log
-cd $orig_dir
-
 
 
 # Stage 'em

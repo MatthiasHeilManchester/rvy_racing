@@ -1,5 +1,9 @@
 #! /bin/bash
 
+#---------------------------------------------------------
+# Process race outcome for all races in specified series
+#---------------------------------------------------------
+
 # Just one command line argument
 if [ $# -ne 1 ]; then
  echo "Please specify the race series"

@@ -1,6 +1,31 @@
 
 ---
 
+# Rvy_racing:
+
+Web machinery to host a series of races on rouvy and maintain an overall league table. Plonk it into public_html on your favourite (linux-based) web server and you're done. Contributions/suggestions for improvement/bug reports/fixes are welcome. Please use the Issues feature of this repository.
+
+
+Below we provide details of the overall process, but the amount of detail provided is now excessive (and is likely to go out of date, so please treat with caution). The process is now fully automated and only requires two (or three) steps:
+
+Intervention is required to:
+## Create a new official race 
+See below.
+##  Stage the races
+```bash
+bin/bolshy_stage_races.bash <race_series>
+```
+This updates the race list, but does not attempt to process races or update the league table. Webpages are updated immediately.
+##  Process the races
+```bash
+bin/bolshy_stage_races.bash <race_series>
+```
+This stages the races, processes them and updates the league table. Webpages are updated immediately.
+
+
+---
+---
+
 # Create a new race series:
 - Create race series directory, so for a `fake_commute` series, say, do
     ```bash
@@ -84,7 +109,7 @@ bin/stage_official_races.bash fake_commute
 # Publish races
 Run 
 ```bash
-bin/publish_races.bash
+bin/publish_webpages.bash
 ```
 in the home directory. This does the following:
 - Make a backup of the content of the `generated_html/` directory, labels the tar file with time and date of the backup and moves it to the `backups_of_generated_html` directory.
@@ -115,11 +140,23 @@ firefox master_race_series/fake_commute/all_races_in_series.html
 ```
 and if everything looks ok, (re-)publish the races as described above.
 
+Again, there's a script that runs this process for all races in a series:
+```bash
+# Process all races in series
+bin/process_race_outcome_for_all_races_in_series.bash fake_commute
+
+```
+This has to be run in the home directory.
+
 ---
 
 # Create/update league table
+Finally, we update the league table from the home directory
 
-hierher
+```bash
+# Create league table for specified race series
+bin/create_overall_league_table.bash fake_commute
+```
 
-and if everything looks ok, (re-)publish the races as described above.
+If everything looks ok, (re-)publish the races as described above.
 

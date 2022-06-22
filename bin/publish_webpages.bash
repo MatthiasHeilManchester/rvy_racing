@@ -1,5 +1,8 @@
 #! /bin/bash
 
+#-----------------------------------------------------------------
+# publish webpages (after backing up the old ones!)
+#-----------------------------------------------------------------
 
 if [ ! -e  generated_race_data ]; then
     echo -e "\033[0;31mERROR:\033[0m Script must be run in home directory so generated_race_data is"

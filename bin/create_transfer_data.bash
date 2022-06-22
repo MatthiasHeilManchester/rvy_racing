@@ -1,5 +1,10 @@
 #! /bin/bash
 
+#--------------------------------------------------------
+# Back up data to be transferred (and reinstalled) on
+# different server (keeping data and code separate)
+#--------------------------------------------------------
+
 # Script should be run from home directory
 home_dir=`pwd`
 if [ ! -e master_race_data ]; then

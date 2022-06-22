@@ -1,14 +1,14 @@
 #! /bin/bash
 
-
+#-------------------------------------------------------------
+# Create overall league table from processed individual races
+#-------------------------------------------------------------
 
 # Just one command line argument
 if [ $# -ne 1 ]; then
  echo "Please specify the race series"
  exit 1
 fi
-
-
 
 # Be verbose for debugging?
 verbose_debug=0

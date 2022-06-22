@@ -2,7 +2,8 @@
 
 #--------------------------------------------------------------------------
 # Change permissions for directories that apache needs to be able to write
-# to
+# to. Typically only needed on local machines; webserver seems to have
+# permissions set correctly (generously) by default.
 #--------------------------------------------------------------------------
 if [ ! -e master_race_data ]; then
     echo -e "\033[0;31mERROR:\033[0m Script ought to be run from home directory, so that"

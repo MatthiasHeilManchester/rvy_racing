@@ -1,6 +1,11 @@
 #! /bin/bash
 
 
+#----------------------------------------------------
+# Backup/wipe/reinstall race data. Mainly used during
+# development.
+#----------------------------------------------------
+
 # Script should be run from home directory
 home_dir=`pwd`
 if [ ! -e master_race_data ]; then
@@ -35,7 +40,7 @@ done
 echo "done wiping"
 
 # Reinstall
-echo "done restoring"
+echo "restoring"
 cd contributed_race_data
 tar xfz ../transfer_data/contributed_race_data.tar.gz
 cd ../master_race_data

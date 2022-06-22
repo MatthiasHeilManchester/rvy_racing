@@ -1,5 +1,13 @@
 #! /bin/bash
 
+
+#---------------------------------------------------------------
+# Process race outcome for a single specific race (comprising
+# all the official and contributed actual races).
+# This is where the real magic happens (and will break when
+# rouvy move/rewrite their webpages).
+#---------------------------------------------------------------
+
 # Be verbose for debugging?
 verbose_debug=0
 

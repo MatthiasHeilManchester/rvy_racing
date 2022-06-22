@@ -2,6 +2,8 @@
 
 
 #-------------------------------------------------------------------------------
+# Heuristics to find out where finish times are recorded in rouvy html file.
+#
 # Race results contain usernames twice, e.g.
 #
 # 	<a class="username" href="/Procat">Procat</a>

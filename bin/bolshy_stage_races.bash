@@ -1,5 +1,8 @@
 #! /bin/bash
 
+#--------------------------------------------------------
+# Script to stage races and update webpages.
+#--------------------------------------------------------
 
 # Just one command line argument
 if [ $# -ne 1 ]; then
