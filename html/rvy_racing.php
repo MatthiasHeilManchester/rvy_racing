@@ -148,7 +148,7 @@ are a few rules anyway.
     racers' data looks plausible. Personally I don't think it's a huge
     deal and I get annoyed about endless "cheater" discussions (see below), but if
     you hide your data, you're rasising questions. If you want to keep
-    your data hidden, please race elsewhere.r>
+    your data hidden, please race elsewhere.
     This allows our machinery to extract
     the finish time and insert it into the compound ranking. The
     registration page will check that the race is held on the right
