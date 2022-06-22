@@ -5,17 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Rouvy racing</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    /*<style>
-       https://stackoverflow.com/questions/23984629/how-to-set-min-font-size-in-css
-      #myImage {
-          width: max(200px, min(30vw, 500px));
-      }
-      #tabImage {
-          width: max(200px, min(30vw, 250px));
-      }
-    </style>*/
-      
+    <script src="script.js"></script>      
   </head>
   <body>
 
@@ -101,8 +91,64 @@
     the same day (in GMT) as the official races. This gives everybody
     24 hours to do the route. Make sure you follow the link <b>"Add your
       own?"</b> for the appropriate race in the race tab on this page
+    <br><br>
     <center><a href="add_your_own.jpg"><img id="myImage" src="add_your_own.jpg"
-                                      ></a></center>
+                                            ></a></center>
+    <br>
+    This allows our machinery to extract
+    the finish time and insert it into the compound ranking. The
+    registration page will check that the race is held on the right
+    route and on the right day. Note that the link disappears and is
+    replaced by the race results once the race has been processed.<br><br>
+  <li> You cannot get credit for individual rides (i.e. rides done outside
+    races). This is mainly a technical issue: Rouvy doesn't provide
+    script-based access to the finish times for individual rides and maintaining
+    spreadsheets by hand is not an option. Sorry. If you absolutely want to ride
+    by yourself, create your own race (see above) and password protect it; keep
+    the password to yourself and nobody will bother you.<br><br>
+  <li> If you participate in multiple instances of a race, your best
+    time will count.<br><br>
+  <li> Points will be awarded according to the UCI cyclocross scheme:
+    40 points for the winner; 30 for second; 25 for third; 20 for
+    fourth; 19 for fifth; then decreasing by one for each subsequent
+    position (but kindly stopping at zero!).<br><br>
+  <li> The person with the most points at the end of the "season"
+    shall be known as "The Winner". Their
+    parents/partners/children/hamsters/...
+    will be very very proud of them. Everybody else will have had a
+    great time busting their guts twice a week (which is what it's all
+    about!). And your parents/partners/children/hamsters/... may still
+    be very very proud of you. So there then.
+</ul>
+
+<h2>Other rules: Behave yourselves!</h2>
+There shouldn't be any need for rules. We're all here to have fun
+racing and that's that.
+<br><br>
+Sadly, past experience shows that there are certain issues that
+raise tempers, so to avoid endless (and pointless) discussions, here
+are a few rules anyway.
+<ol>
+  <li> Don't be an idiot. <br><br>
+  <li> All races must be for "smart trainers only". Rouvy is the sole judge
+  of which trainers fall into that category. <br><br>
+  <li> Calibrate your trainer when needed. Most modern trainers don't
+    seem to require this any more anyway but if yours does, do it!
+    Note that it may even make you faster... <br><br>
+  <li> You may have noticed that Rouvy allows you to specify your
+    weight. For the implications of this fact you are referred to rule
+    1.<br><br>
+  <li> Make sure that your average power (W/kg) is displayed on the
+    rouvy route pages and that the link to the activity (magnifying
+    glass) is accessible.
+    The picture below (click on it to magnify) shows how to annoy
+    people. Please don't! You may
+    have privacy concerns (though I don't know what they would be...) but
+    people simply want to be able to convince themselves that other
+    racers' data looks plausible. Personally I don't think it's a huge
+    deal and I get annoyed about endless "cheater" discussions (see below), but if
+    you hide your data, you're rasising questions. If you want to keep
+    your data hidden, please race elsewhere.r>
     This allows our machinery to extract
     the finish time and insert it into the compound ranking. The
     registration page will check that the race is held on the right
@@ -157,8 +203,10 @@ are a few rules anyway.
     deal and I get annoyed about endless "cheater" discussions (see below), but if
     you hide your data, you're rasising questions. If you want to keep
     your data hidden, please race elsewhere.
+    <br><br>
     <center><a href="nonono.png"><img id="myImage" src="nonono.png"
                                       ></a></center>
+    <br>
     Similarly, it would be appreciated if you kept your strava profile
                                       public and used a HRM. However,
                                       this will not be
@@ -179,6 +227,7 @@ are a few rules anyway.
     on the <a href="http://www.matthias-heil.co.uk/phpbb/">discussion board</a>), so they
     can have a quiet word (and/or escalate things if necessary; see
     below).
+    <br><br>
  <center><a href="private_message.jpg"><img id="myImage" src="private_message.jpg"
                                       ></a></center>
     <br><br>
@@ -224,8 +273,10 @@ are a few rules anyway.
   reports/fixes, are also welcome. <br><br>
   <li >The race organiser can be contacted directly via
   the "Contact us" link on the registration page:
+  <br><br>
   <center><a href="contact.jpg"><img id="myImage" src="contact.jpg"
                                       ></a></center>
+  <br>
   You don't have to have registered to do this, though you will have
                                       to register if you want to
                                       participate in the races (or
