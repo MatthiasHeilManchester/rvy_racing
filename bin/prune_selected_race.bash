@@ -117,71 +117,19 @@ done
 
 
 echo " "
-echo "Done. Please re-stage/process the races, running either"
+echo "Done. Please wipe/reinstall data using"
+echo " "
+echo "  bin/create_transfer_data_and_wipe_and_restore.bash"
+echo " " 
+echo "and then re-stage/process the races, running either"
 echo " "
 echo "  bin/bolshy_process_races.bash "$race_series
 echo " "
 echo "or"
 echo " " 
-echo "  bin/bolshy_stage_races.bash "$race_series"
+echo "  bin/bolshy_stage_races.bash "$race_series
 echo " " 
 
 
 exit
 
-
-
-echo " "
-echo "==========================================================================="
-echo " "
-echo "Bolshily setting up series : "$race_series
-
-
-# Create log file
-date_string=`date --utc | sed 's/ /_/g'`
-log_file="bolshy_logs/bolshy_stage_races_"$date_string".log"
-echo "log file: "$log_file
-
-# Stage 'em
-echo " "  > $log_file
-echo "##############################################################"  >> $log_file
-echo " " >> $log_file
-echo "Calling stage_official_races from bolshy_stage_races.bash" >> $log_file
-echo " " >> $log_file
-echo "##############################################################" >> $log_file
-echo " " >> $log_file
-bin/stage_official_races.bash $race_series >> $log_file
-echo " " >> $log_file
-echo "##############################################################" >> $log_file
-echo " " >> $log_file
-echo "Done calling stage_official_races from bolshy_stage_races.bash" >> $log_file
-echo " " >> $log_file
-echo "##############################################################" >> $log_file
-echo " " >> $log_file
-
-# Publish 'em
-echo " " >> $log_file
-echo "##############################################################"  >> $log_file
-echo " " >> $log_file
-echo "Calling publish_webpages.bash from bolshy_stage_races.bash" >> $log_file
-echo " " >> $log_file
-echo "##############################################################" >> $log_file
-echo " " >> $log_file
-bin/publish_webpages.bash >> $log_file
-echo " " >> $log_file
-echo "##############################################################" >> $log_file
-echo " " >> $log_file
-echo "Done publish_webpages.bash from bolshy_stage_races.bash" >> $log_file
-echo " " >> $log_file
-echo "##############################################################" >> $log_file
-echo " " >> $log_file
-
-echo "Done the lot, ending up with updated webpages!"
-echo " " 
-echo "Log file: "
-echo " "
-echo "          "$log_file
-echo " "
-echo " " 
-
-exit 0
