@@ -75,7 +75,7 @@
 <h2>Race rules:</h2>
 <ul>
   <li> There will be two races a week, on Wednesday and Saturday
-    during "the season" which runs from the start of October to the
+    during "the season" which runs from the beginning of October to the
     end of March.<br><br>
   <li> Each race will be repeated three times (to cater for different
     timezones). Once the route has been published (typically a week in
