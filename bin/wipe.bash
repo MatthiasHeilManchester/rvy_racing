@@ -2,7 +2,7 @@
 
 
 #----------------------------------------------------
-# Backup/wipe/reinstall race data. Mainly used during
+# Wipe race data. Mainly used during
 # development.
 #----------------------------------------------------
 
@@ -17,18 +17,13 @@ fi
 
 
 echo " " 
-echo "This is going to wipe and reinstall master and contributed race data"
+echo "This is going to wipe master and contributed race data"
 echo "so it can be re-processed cleanly."
 echo "Involves find with rm -rf so have a deep breath first..."
 echo " "
 read -p "Press enter to continue"
 echo " " 
 
-
-# Back it up
-echo "backing up"
-bin/create_transfer_data.bash 
-echo "done backing up"
 
 # Wipe
 echo "wiping"
@@ -38,16 +33,6 @@ for dir in `echo $dir_list`; do
     rm -rf $dir
 done
 echo "done wiping"
-
-# Reinstall
-echo "restoring"
-cd contributed_race_data
-tar xfz ../transfer_data/contributed_race_data.tar.gz
-cd ../master_race_data
-tar xfz ../transfer_data/master_race_data.tar.gz
-cd ..
-echo "done restoring"
-
 
 exit
 
