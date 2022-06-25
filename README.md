@@ -25,7 +25,7 @@ This stages the races, processes them and updates the league table. Webpages are
 
 ## Maintenance: Remove a race (e.g. because the route got deleted or some other disaster)
 
-Delete race 11 (in current list) from series rvy_racing:
+Delete race 11 (in current list) from series `rvy_racing`:
 
 ```bash
 bin/prune_selected_race.bash rvy_racing 11
