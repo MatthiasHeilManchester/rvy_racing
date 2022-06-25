@@ -23,8 +23,21 @@ bin/bolshy_stage_races.bash <race_series>
 This stages the races, processes them and updates the league table. Webpages are updated immediately.
 
 
+## Maintenance: Remove a race (e.g. because the route got deleted or some other disaster)
+
+Delete race 11 (in current list) from series rvy_racing:
+
+```bash
+bin/prune_selected_race.bash rvy_racing 11
+bin/create_transfer_data_and_wipe_and_restore.bash
+bin/bolshy_process_races.bash rvy_racing
+```
+All subsequent races are shuffled into place.
+
 ---
 ---
+
+Here's the step-by-step procedure (all wrapped up in the bolshy scripts):
 
 # Create a new race series:
 - Create race series directory, so for a `fake_commute` series, say, do

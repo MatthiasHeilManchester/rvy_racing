@@ -37,7 +37,7 @@
     <br><br>
     If you're interested in joining our race series, please register
     on our <a href="https://www.matthias-heil.co.uk/phpbb/">phpBB
-    Discussion Board</a>. Once we have your rouvy username
+    Discussion Board</a> (see below for detailed instructions). Once we have your rouvy username
     and a few other details (which do not include your credit card number!),
     you will automatically be included in the rankings for each race
     (as DNS if you don't turn up). There's nothing else to do, apart
@@ -45,6 +45,62 @@
     And then hammer it -- not so easy...<br><br>
     The schedule of upcoming races, the rankings, and the overall
     league table are available via the tabs above.
+    <br>
+    <br>
+    <hr>
+    <br>
+    <h3>How to register</h3>
+    Here's a step-by-step guide for how to register:
+    <ol>
+      <li> Go to the discussion board at
+        <center><a href="https://www.matthias-heil.co.uk/phpbb/">https://www.matthias-heil.co.uk/phpbb/</a></center>
+      <li> Click on "Register" in the top right corner:
+        <br><br>
+        <center><a href="registration1.jpg"><img id="myImage" src="registration1.jpg"
+                                                 ></a><br><small>[click on
+          screenshot to enlarge]</small></center>
+        <br>
+      <li> Read the terms and conditions (or not...) and accept:
+        <br><br>
+        <center><a href="registration2.jpg"><img id="myImage" src="registration2.jpg"
+                                                 ></a><br><small>[click on
+          screenshot to enlarge]</small></center>
+        <br>
+      <li> Fill in the required details.
+        <br><br>      
+        <b>Note:</b>
+        <br><br>
+        <ul>
+          <li> Make sure that your chosen username (in the first box)
+          doesn't contain any whitespace. So "<em>JoeCool</em>"
+            or "<em>Joe_Cool</em>"
+            are OK; "<em>Joe Cool</em>" isn't.        <br><br>
+
+          <li> Make sure that your email
+            address is correct otherwise you'll never find out that your
+            registration has been processed.
+        </ul>
+        <br><br>
+        <center><a href="registration3.jpg"><img id="myImage" src="registration3.jpg"
+                                                 ></a><br><small>[click on
+          screenshot to enlarge]</small></center>
+        <br>
+      <li> When you're done it should look a bit like this:
+        <br><br>
+        <center><a href="registration4.jpg"><img id="myImage" src="registration4.jpg"
+                                                 ></a><br><small>[click on
+          screenshot to enlarge]</small></center>
+        Now press "submit".
+        <br><br>
+        <li> Wait for your registration to be approved by the race
+        organiser. He does sleep (sometimes) so this may not be
+        instantaneous, but rest assured that it'll be dealt with as
+        soon as possible. You'll receive an email to the email address
+        that you specified during the registration.
+        <br><br>
+        <li> Still can't get it to work? Contact the race organiser
+        directly; see the Contact tab for details.
+    </ol>
     <br>
     <br>
     <hr>
@@ -148,7 +204,7 @@ are a few rules anyway.
     people simply want to be able to convince themselves that other
     racers' data looks plausible. Personally I don't think it's a huge
     deal and I get annoyed about endless "cheater" discussions (see below), but if
-    you hide your data, you're rasising questions. If you want to keep
+    you hide your data, you're raising questions. If you want to keep
     your data hidden, please race elsewhere.
     <br><br>
     <center><a href="nonono.png"><img id="myImage" src="nonono.png"
