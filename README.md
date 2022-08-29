@@ -18,7 +18,7 @@ bin/bolshy_stage_races.bash <race_series>
 This updates the race list, but does not attempt to process races or update the league table. Webpages are updated immediately.
 ##  Process the races
 ```bash
-bin/bolshy_stage_races.bash <race_series>
+bin/bolshy_process_races.bash <race_series>
 ```
 This stages the races, processes them and updates the league table. Webpages are updated immediately.
 
