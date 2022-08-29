@@ -105,12 +105,16 @@ def main(argv):
    specified_race_name="Dummy_ignore"
 
 
+
    # Now start the actual web stuff
    #-------------------------------
 
    # Fire it up
    #-----------
    driver = webdriver.Chrome('/usr/bin/chromedriver')
+
+   sys.exit()
+   
    driver.get('https://my.rouvy.com/en')
    driver.maximize_window()
 
@@ -168,14 +172,16 @@ def main(argv):
       
    race_number=1
    for current_date_and_time_string in  date_and_time_string_array:
-       print(date_and_time_string)
+       print("About to create race at: ",date_and_time_string)
    
        if 1==1:
-
+          
+           print("CURRENT URL at start of creating the actual race",driver.current_url)
+           
            smart_trainers_only_tick = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[2]/div[1]/label/span")
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(smart_trainers_only_tick)).click()
 
-           # hierher replace dummy_ignore by actual race name"    
+           # Race name hierher do enumeration of subraces by letters?
            race_name=specified_race_name+" (race "+str(race_number)+")"
            race_number += 1
            race_name_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[1]/div[1]/div[2]/input")
@@ -205,11 +211,17 @@ def main(argv):
            print("new url: ",new_url)
            while (new_url == old_url):
                print("clicking again")
-               WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
+               #WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
                new_url=driver.current_url
                print("new url: ",new_url)
 
-           print("Done race",race_name)
+           print("Done race ",race_name)
+
+           driver.get('https://my.rouvy.com/onlinerace/create')
+           print("CURRENT URL (should be race create page): ",driver.current_url)
+
+
+
 
    print("Done")
    wait = input("Hit return to shut down")
@@ -218,8 +230,6 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
-
-
 
    # Table
    #/html/body/div[3]/div/div/div/div[3]/div/div[2]/div[1]
