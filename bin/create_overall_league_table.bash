@@ -81,7 +81,7 @@ done
 
 
 echo "<h2>Overall league table for race series <em>"$race_series"</em></h2>" >>  $html_file
-echo "<h3>Note: The series hasn't started yet -- this is all dummy data accumulated during beta testing</h3>" >>  $html_file
+echo "<h3>Note: The series hasn't started yet -- this is all dummy data from pre-season testing</h3>" >>  $html_file
 echo "<table border=1>" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat

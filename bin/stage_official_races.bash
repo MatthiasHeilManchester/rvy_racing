@@ -301,7 +301,7 @@ done
 
 # Tell us what we're doing (on top!)
 echo "<h2>Overall race programme for race series <em>"$race_series"</em></h2>" > .tmp.txt
-echo "<h3>Note: The series hasn't started yet -- this is all dummy data accumulated during beta testing</h3>" >> .tmp.txt
+echo "<h3>Note: The series hasn't started yet -- this is all dummy data from pre-season testing</h3>" >> .tmp.txt
 echo "Race programme compiled: "`date --utc` >> .tmp.txt
 cat .tmp.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html > .tmp2.txt
 mv .tmp2.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html
