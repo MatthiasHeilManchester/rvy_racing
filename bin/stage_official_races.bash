@@ -215,8 +215,15 @@ for dir in `echo $dir_list`; do
             day=`echo $race_date_from_race1 | awk '{print substr($0,4,2)}'`
             month=`echo $race_date_from_race1 | awk '{print substr($0,1,2)}'`
             year=`echo $race_date_from_race1 | awk '{print substr($0,7)}'`
-
-            
+	    
+	    # https://coderwall.com/p/cobcna/bash-removing-leading-zeroes-from-a-variable
+	    day=$(echo $day | sed 's/^0*//')
+	    month=$(echo $month | sed 's/^0*//')
+	    year=$(echo $year | sed 's/^0*//')
+	    
+	    #echo "bla: " $day " " ${month} " " $year
+            #exit
+	    
             echo "Date : " $day " " ${month_names[${month}]} " " $year
             echo "Route: " $route_title
             echo " "
