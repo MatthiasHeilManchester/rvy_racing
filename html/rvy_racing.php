@@ -74,8 +74,14 @@
           <li> Make sure that your chosen username (in the first box)
           doesn't contain any whitespace. So "<em>JoeCool</em>"
             or "<em>Joe_Cool</em>"
-            are OK; "<em>Joe Cool</em>" isn't.        <br><br>
-
+            are OK; "<em>Joe Cool</em>" isn't. Other than that you
+          can choose what you want.     <br><br>
+          <li> The rouvy username is case sensitive, so make sure you enter it
+            exactly as specified on rouvy. (Example: If your rouvy
+            username is <em>JoeCool</em> you won't be recognised (and thus
+            won't get any points!) if you enter <em>joecool</em>
+            here.)
+            <br><br>
           <li> Make sure that your email
             address is correct otherwise you'll never find out that your
             registration has been processed.
