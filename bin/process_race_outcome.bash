@@ -198,6 +198,10 @@ html_file="../results.html"
 cat ../$bin_dir/../html_templates/html_start.txt > $html_file
 
 
+# https://coderwall.com/p/cobcna/bash-removing-leading-zeroes-from-a-variable
+day=$(echo $day | sed 's/^0*//')
+month=$(echo $month | sed 's/^0*//')
+year=$(echo $year | sed 's/^0*//')
 
 echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" >> $html_file
 echo "<b>Route: </b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> $html_file
