@@ -232,7 +232,7 @@ existing_url_list=`cat $home_dir/$contributed_race_data_race_dir/contributed_rac
 race_is_new=1
 nrace=1 # start with one to include the current one
 for existing_url in `echo $existing_url_list`; do
-    let nrace=`expr $nnrace + 1`
+    let nrace=`expr $nrace + 1`
     if [ $newly_created_race_url == $existing_url ]; then
         if [ $verbose_debug == 1 ]; then
             echo "New race url "$newly_created_race_url" is the same as existing race url "$existing_url

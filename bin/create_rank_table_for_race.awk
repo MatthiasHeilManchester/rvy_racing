@@ -37,10 +37,10 @@ BEGIN{error=0}
        dns_count++
       }
     }
-   # DNS? If so, that's it.
+   # Dit not even register? If so, that's it.
    if (dns_count==NF/3)
     {
-     printf "<td> DNS </td>"
+     printf "<td> DNR </td>"
     }
    # Not all DNS: So the user would have started at least one race
    # but may have DNF/DSQed, so check again to see if any of the non DNS races
@@ -78,7 +78,7 @@ BEGIN{error=0}
      # Haven't changed the default best time so there's been no valid time: dnf/dsq
      if (best_time==default_best_time)
       {
-       printf "<td> DNF/DSQ/ERROR </td>"
+       printf "<td> DNS/DNF/DSQ/ERROR </td>"
       }
      else
       {
