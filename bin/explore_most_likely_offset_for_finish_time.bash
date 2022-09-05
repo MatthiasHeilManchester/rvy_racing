@@ -39,7 +39,34 @@ log_file=$2
 
 
 #==================================================================================
-# Heuristic 1: Look for offsets between start of new user record (identified by avatar)
+# WE'RE NOW JUST USING THIS ONE; CAN USE THE FULL LOGIC/SCAN BELOW TO REVISIT
+# DATA IF ROUVY'S HTML CHANGES.
+# 
+# Heuristic 2: Offset of 19 tends to occur in official rouvy races in which age is
+# characterised by "YOB"; otherwise appears to be 16.
+#==================================================================================
+count_yob=`grep -c "YOB" $html_file`
+if [ $count_yob == 1 ]; then
+    offset_from_heuristic=19
+elif [ $count_yob == 0 ]; then
+    offset_from_heuristic=16
+else
+    echo "Using YOB count to determine offset. YOB count should be 0 or 1 but is "$count_yob >> $log_file
+    exit 1
+fi
+echo $offset_from_heuristic
+exit 0
+
+###############################################################################
+###############################################################################
+
+do_heuristics1_from_first_principles=0
+if [ $do_heuristics1_from_first_principles == 1 ]; then
+
+#==================================================================================
+# NO LONGER USED BECAUSE IT BREAKS FOR RACES WHICH NOBODY ATTENDED
+#
+# first principles heuristic 1: Look for offsets between start of new user record (identified by avatar)
 # and mention of username and time-like strings (surrounded by <span></span> which
 # represented finish time and time gap.
 #==================================================================================
