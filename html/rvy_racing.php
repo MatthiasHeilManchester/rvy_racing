@@ -60,6 +60,11 @@
                                                  ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
+        <br>
+        [Note: Sometimes there seems to be a problem where upon clicking "submit" in the final step (see below), you're returned to the empty form all over again. Aaaargh! No idea what's 
+going on 
+there. My offer to register you as proxy still stands. The message board is third-party software and this seems to be an intermittent bug. Will explore. For now: Sorry!]
+        <br><br>
       <li> Read the terms and conditions (or not...) and accept:
         <br><br>
         <center><a href="registration2.jpg"><img id="myImage" src="registration2.jpg"
