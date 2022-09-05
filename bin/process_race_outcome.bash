@@ -228,7 +228,7 @@ printf(" </td> <td> %i </td> ",score[count])
 echo "</table>" >>  $html_file
 echo "<br>"  >>  $html_file
 echo "Race processed: "`date --utc `  >>  $html_file
-echo "<br>Please report any mistakes via the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion board</a>"  >>  $html_file
+echo "<br>DNR = 'Did Not Register'.<br>Please report any errors via the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion board</a>"  >>  $html_file
 
 echo "<br>" >>  $html_file
 echo "<hr>" >>  $html_file
