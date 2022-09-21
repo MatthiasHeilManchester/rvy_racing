@@ -10,14 +10,14 @@
   <body>
 
     <img id="tabImage" src="rvy_racing.png">
-    
 <input type="radio" name="tabs" id="tab1" checked />
 <label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2" />
 <label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3" />
 <label for="tab3">Races</label><input type="radio" name="tabs" id="tab4" />
 <label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5" />
-<label for="tab5">FAQ</label>
-<label for="tab6">Contact</label>
+<label for="tab5">Contact/FAQ</label>
+
+<!-- <input type="radio" name="tabs" id="tab6" /><label for="tab6">Contact</label> -->
 
 
 <div class="tab content1">
@@ -282,12 +282,39 @@ are a few rules anyway.
 
 
 <div class="tab content5">
-<h1>Rvy Racing: FAQ</h1>
+<h1>Rvy Racing: Contact/FAQ</h1>
 
+<h1>Contact</h1>
+
+
+  <ul>
+<li> Please use the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
+      board</a> for, well, for discussions, I guess. Constructive suggestions for improvement, bug
+  reports/fixes, are also welcome. <br><br>
+  <li >The race organiser can be contacted directly via
+  the "Contact us" link on the registration page:
+  <br><br>
+  <center><a href="contact.jpg"><img id="myImage" src="contact.jpg"
+                                      ></a></center>
+  <br>
+  You don't have to have registered to do this, though you will have
+                                      to register if you want to
+                                      participate in the races (or
+                                      rather: get credit for them!).<br><br> 
+<li> Those interested in the coding aspect are welcome to contribute to the
+      machinery via
+the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
+    github repository</a>.
+</ul>
+
+
+  <hr>
+  
+<h1>FAQ</h1>
 <ul>
-  <li> <b>How to change settings in the profile on the phpBB Discussion
+  <li> <h2><b>How to change settings in the profile on the phpBB Discussion
   Forum (e.g. to add your strava url if you forgot to do so when you
-  first registered):</b>
+  first registered):</b></h2>
   <ul>
   <li> Click on your username (here assumed to be joe_cool) in the top right corner:
     <br><br>
@@ -318,9 +345,8 @@ are a few rules anyway.
     <br>
     <br>
   </ul>
-  <ul>
-    <li> <b>How to subscribe to a forum (so you get an email when a new
-    response is posted):</b>
+    <li> <h2><b>How to subscribe to a forum (so you get an email when a new
+    response is posted):</b></h2>
       <ul>
         <li> Click on the appropriate forum (here the "Races" one):
           <br><br>
@@ -335,6 +361,8 @@ are a few rules anyway.
           <center><a href="subscribe_to_forum2.jpg"><img id="myImage" src="subscribe_to_forum2.jpg"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
+	  <br>
+	  Now you'll get lots of lovely emails to distract you from your work.
           <br>
           <br>
         <li> Had enough of all these emails? Click on "Unsubscribe
@@ -351,28 +379,6 @@ are a few rules anyway.
 </div>
 
 
-<div class="tab content6">
-<h1>Rvy Racing: Contact</h1>
-  <ul>
-<li> Please use the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
-      board</a> for, well, for discussions, I guess. Constructive suggestions for improvement, bug
-  reports/fixes, are also welcome. <br><br>
-  <li >The race organiser can be contacted directly via
-  the "Contact us" link on the registration page:
-  <br><br>
-  <center><a href="contact.jpg"><img id="myImage" src="contact.jpg"
-                                      ></a></center>
-  <br>
-  You don't have to have registered to do this, though you will have
-                                      to register if you want to
-                                      participate in the races (or
-                                      rather: get credit for them!).<br><br> 
-<li> Those interested in the coding aspect are welcome to contribute to the
-      machinery via
-the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
-    github repository</a>.
-</ul>
-</div> 
     
   </body>
 </html>
