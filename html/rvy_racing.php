@@ -16,7 +16,8 @@
 <label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3" />
 <label for="tab3">Races</label><input type="radio" name="tabs" id="tab4" />
 <label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5" />
-<label for="tab5">Contact</label>
+<label for="tab5">FAQ</label>
+<label for="tab6">Contact</label>
 
 
 <div class="tab content1">
@@ -281,6 +282,76 @@ are a few rules anyway.
 
 
 <div class="tab content5">
+<h1>Rvy Racing: FAQ</h1>
+
+<ul>
+  <li> <b>How to change settings in the profile on the phpBB Discussion
+  Forum (e.g. to add your strava url if you forgot to do so when you
+  first registered):</b>
+  <ul>
+  <li> Click on your username (here assumed to be joe_cool) in the top right corner:
+    <br><br>
+    <center><a href="profile1.jpg"><img id="myImage" src="profile1.jpg"
+                                             ></a><br><small>[click on
+        screenshot to enlarge]</small></center>
+    <br>
+    <br>
+  <li> Click on "Profile" in the drop-down menu:
+    <br><br>
+    <center><a href="profile2.jpg"><img id="myImage" src="profile2.jpg"
+                                             ></a><br><small>[click on
+        screenshot to enlarge]</small></center>
+    <br>
+    <br>
+  <li> Click on "Edit Profile" 
+    <br><br>
+    <center><a href="profile3.jpg"><img id="myImage" src="profile3.jpg"
+                                             ></a><br><small>[click on
+        screenshot to enlarge]</small></center>
+    <br>
+    <br>
+  <li> Fill in/update whatever you want to add/change: 
+    <br><br>
+    <center><a href="profile4.jpg"><img id="myImage" src="profile4.jpg"
+                                             ></a><br><small>[click on
+        screenshot to enlarge]</small></center>
+    <br>
+    <br>
+  </ul>
+  <ul>
+    <li> <b>How to subscribe to a forum (so you get an email when a new
+    response is posted):</b>
+      <ul>
+        <li> Click on the appropriate forum (here the "Races" one):
+          <br><br>
+          <center><a href="subscribe_to_forum1.jpg"><img id="myImage" src="subscribe_to_forum1.jpg"
+                                              ></a><br><small>[click on
+              screenshot to enlarge]</small></center>
+          <br>
+          <br>
+        <li> Click on "Subscribe forum" (which, strangely, is already
+        ticked, even though you're not subscribed yet!):
+          <br><br>
+          <center><a href="subscribe_to_forum2.jpg"><img id="myImage" src="subscribe_to_forum2.jpg"
+                                              ></a><br><small>[click on
+              screenshot to enlarge]</small></center>
+          <br>
+          <br>
+        <li> Had enough of all these emails? Click on "Unsubscribe
+        forum" and you'll be left alone again.
+          <br><br>
+          <center><a href="subscribe_to_forum3.jpg"><img id="myImage" src="subscribe_to_forum3.jpg"
+                                              ></a><br><small>[click on
+              screenshot to enlarge]</small></center>
+          <br>
+          <br>
+      </ul>
+  </ul>
+
+</div>
+
+
+<div class="tab content6">
 <h1>Rvy Racing: Contact</h1>
   <ul>
 <li> Please use the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
