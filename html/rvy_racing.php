@@ -144,7 +144,9 @@ there. My offer to register you as proxy still stands. The message board is thir
 <ul>
   <li> There will be two races a week, on Wednesday and Saturday
     during "the season" which runs from the beginning of October to the
-    end of March.<br><br>
+    end of March. The midweek races will be shorter (under an hour); the
+    Saturday ones will a bit longer: between 1 and 2 hours with a bit of
+    uphill thrown in... <br><br>
   <li> Each race will be repeated three times (to cater for different
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
