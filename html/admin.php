@@ -98,7 +98,13 @@ define('IN_PHPBB', true);
 // hierher update path to phpbb (install on pi
 // as on actual server)
 //$phpbb_root_path = './forum/';
+
+// Pi:
 $phpbb_root_path = '/var/www/html/';
+
+// godaddy:
+$phpbb_root_path = '/home/jcx8vb3xd9vs/public_html/phpbb/';
+
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 

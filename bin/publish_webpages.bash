@@ -60,6 +60,13 @@ for dir in `echo $dir_list`; do
     cp ../html/registration2.jpg $dir
     cp ../html/registration3.jpg $dir
     cp ../html/registration4.jpg $dir
+    cp ../html/subscribe_to_forum1.jpg $dir
+    cp ../html/subscribe_to_forum2.jpg $dir
+    cp ../html/subscribe_to_forum3.jpg $dir
+    cp ../html/profile1.jpg $dir
+    cp ../html/profile2.jpg $dir
+    cp ../html/profile3.jpg $dir
+    cp ../html/profile4.jpg $dir
 done
 
 
