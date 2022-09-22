@@ -24,14 +24,15 @@ def main(argv):
    date_string = ''
    route_string = ''
    password_string=''
+   race_number_string=''
    try:
-      opts, args = getopt.getopt(argv,"hd:r:p:",["date=","route=","password="])
+      opts, args = getopt.getopt(argv,"hd:r:p:n:",["date=","route=","password=","race_number="])
    except getopt.GetoptError:
-      print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password>')
+      print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>')
       sys.exit(2)
    for opt, arg in opts:
       if opt == '-h':
-         print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route>')
+         print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>')
          sys.exit()
       elif opt in ("-r", "--route"):
          route_string = arg
@@ -39,14 +40,22 @@ def main(argv):
          date_string = arg
       elif opt in ("-p", "--password"):
          password_string = arg
+      elif opt in ("-n", "--race_number"):
+         race_number_string = arg
 
 
-   # Check: route and date must be specified      
+   # Check: all args must be specified      
    if (route_string==''):
        print('Specify route string with --route')
        sys.exit(2)
    if (date_string==''):
        print('Specify date string with --date')
+       sys.exit(2)
+   if (race_number_string==''):
+       print('Specify race number string with --race_number')
+       sys.exit(2)
+   if (password_string==''):
+       print('Specify password string with --password')
        sys.exit(2)
 
        
@@ -59,8 +68,9 @@ def main(argv):
        sys.exit(2)
 
    # Tell us what we're doing     
-   print('Route is ', route_string)
-   print('Date  is ', date_string)
+   print('Route        is ', route_string)
+   print('Date         is ', date_string)
+   print('Race number  is ', race_number_string)
 
 
    # Default times (make adjustable)
@@ -101,8 +111,8 @@ def main(argv):
    for date_and_time_string in  date_and_time_string_array:
        print("Creating race at: ",date_and_time_string)
        
-   # hierher read in; this should be something like "rvy_racing race n" or just the number?   
-   specified_race_name="Dummy_ignore"
+   # Race name (later modified with upper case letter to identify sub-race for different time-zones
+   specified_race_name="rvy_racing race "+race_number_string+ " "
 
 
 
@@ -113,7 +123,7 @@ def main(argv):
    #-----------
    driver = webdriver.Chrome('/usr/bin/chromedriver')
 
-   sys.exit()
+   #sys.exit()
    
    driver.get('https://my.rouvy.com/en')
    driver.maximize_window()
@@ -181,8 +191,9 @@ def main(argv):
            smart_trainers_only_tick = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[2]/div[1]/label/span")
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(smart_trainers_only_tick)).click()
 
-           # Race name hierher do enumeration of subraces by letters?
-           race_name=specified_race_name+" (race "+str(race_number)+")"
+           # Race name
+           race_name=specified_race_name+chr(64+race_number)
+           print("Race name: ",race_name)
            race_number += 1
            race_name_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[1]/div[1]/div[2]/input")
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(race_name_field)).send_keys(race_name)
@@ -206,14 +217,14 @@ def main(argv):
            create_race_button = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[7]/div/input[3]")
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
 
-           new_url=driver.current_url
-           print("old url: ",old_url)
-           print("new url: ",new_url)
-           while (new_url == old_url):
-               print("clicking again")
-               #WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
-               new_url=driver.current_url
-               print("new url: ",new_url)
+           #new_url=driver.current_url
+           #print("old url: ",old_url)
+           #print("new url: ",new_url)
+           #while (new_url == old_url):
+           #    print("clicking again")
+           #    #WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
+           #    new_url=driver.current_url
+           #    print("new url: ",new_url)
 
            print("Done race ",race_name)
 

@@ -10,72 +10,74 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 import sys, getopt
 import re
+import datetime
 
 #==============================================================
 # Main
 #==============================================================
 def main(argv):
 
-
-
    # Process command line args
    #--------------------------
-   date_string = ''
-   route_string = ''
+   #date_string = ''
+   #route_string = ''
    password_string=''
+   race_number_string=''
    try:
-      opts, args = getopt.getopt(argv,"hd:r:p:",["date=","route=","password="])
+      opts, args = getopt.getopt(argv,"hp:n:",["password=","race_number="])
    except getopt.GetoptError:
-      print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password>')
+      print('extract_race_urls_from_rouvy_via_selenium.py --password <password> --race_number <race_number>')
       sys.exit(2)
    for opt, arg in opts:
       if opt == '-h':
-         print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password>')
+         print('extract_race_urls_from_rouvy_via_selenium.py --password <password> --race_number <race_number>')
          sys.exit()
-      elif opt in ("-r", "--route"):
-         route_string = arg
-      elif opt in ("-d", "--date"):
-         date_string = arg
       elif opt in ("-p", "--password"):
          password_string = arg
-
-
-   # Check: route and date must be specified      
-   if (route_string==''):
-       print('Specify route string with --route')
+      elif opt in ("-n", "--race_number"):
+         race_number_string = arg
+         
+   # Check: all args must be specified      
+   #if (route_string==''):
+   #    print('Specify route string with --route')
+   #    sys.exit(2)
+   #if (date_string==''):
+   #    print('Specify date string with --date')
+   #    sys.exit(2)
+   if (race_number_string==''):
+       print('Specify race number string with --race_number')
        sys.exit(2)
-   if (date_string==''):
-       print('Specify date string with --date')
+   if (password_string==''):
+       print('Specify password string with --password')
        sys.exit(2)
-
        
    # Check if specified date is valid
-   date_is_valid = re.match('^\d{2}\.\d{2}\.\d{4}$',date_string)
-   if date_is_valid:
-       print("date is valid")
-   else:
-       print("date is invalid")
-       sys.exit(2)
+   #date_is_valid = re.match('^\d{2}\.\d{2}\.\d{4}$',date_string)
+   #if date_is_valid:
+   #    print("date is valid")
+   #else:
+   #    print("date is invalid")
+   #    sys.exit(2)#
 
    # Tell us what we're doing     
-   print('Route is ', route_string)
-   print('Date  is ', date_string)
+   #print('Route is ', route_string)
+   #print('Date  is ', date_string)
 
 
    # Default times (make adjustable)
-   time_array=["07:00","15:00","18:00"]
-   date_and_time_string_array=[]
-   for time in time_array:
-       date_and_time_string=date_string+" "+time
-       date_and_time_string_array.append(date_and_time_string)
+   #time_array=["07:00","15:00","18:00"]
+   #date_and_time_string_array=[]
+   #for time in time_array:
+   #    date_and_time_string=date_string+" "+time
+   #    date_and_time_string_array.append(date_and_time_string)
 
    # Show us what we're going to do    
-   for date_and_time_string in  date_and_time_string_array:
-       print("Creating race at: ",date_and_time_string)
+   #for date_and_time_string in  date_and_time_string_array:
+   #    print("Creating race at: ",date_and_time_string)
 
 
-   # hierher read in; this should be something like "rvy_racing race n" or just the number?   
-   specified_race_name="dummy_ignore"
+   # Race name
+   specified_race_name="rvy_racing race "+race_number_string
 
    # Now start the actual web stuff
    #-------------------------------
@@ -186,11 +188,14 @@ def main(argv):
    print("---------master_race_list:------------")
 
       
-   print("Scanned all invited races")
-   wait = input("Hit return to shut down")
+   print("Scanned all races")
+   #wait = input("Hit return to shut down")
    print("Shutting down")
 
    
    sys.exit()
 
    
+
+if __name__ == "__main__":
+   main(sys.argv[1:])
