@@ -24,7 +24,7 @@ define('IN_PHPBB', true);
 $phpbb_root_path = '/var/www/html/';
 
 // godaddy:
-// hierher revert $phpbb_root_path = '/home/jcx8vb3xd9vs/public_html/phpbb/';
+//$phpbb_root_path = '/home/jcx8vb3xd9vs/public_html/phpbb/';
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
@@ -50,7 +50,7 @@ if($user->data['is_registered'])
   }
 }
 
-// hierher kill
+// hierher: Delete temporary work around
 $admin_is_logged_in=1;
 
 if ( $admin_is_logged_in == 1 ){
@@ -60,22 +60,20 @@ if ( $admin_is_logged_in == 1 ){
 <!-- ========================================== -->
 <!-- The actual form in html-->
 <!-- ==========================================-->
-<h2>Admin menu</h2>
-<form method="post" action="process_admin.php">
+<h2>Register new official races menu</h2>
+<form method="post" action="process_register_new_race.php" id="register_race_form">
   <br><br>
-  <input type="radio" name="Action" value="register">Register races
+  <ul>
+  <li>Race number (within season; two per week) <br> <input type="number" name="race_number"></li>
   <br>
-  <input type="radio" name="Action" value="stage">Stage races
-  <br>
-  <input type="radio" name="Action" value="process">Process races
+  <li>Race URLs:<br><textarea rows="4" cols="50" name="urls_from_text_area" form="register_race_form"></textarea></li>
+  </ul>
   <br>
   <input type="submit" name="submit_name" value="Submit">
 </form>
 <!-- ========================================== -->
 <!-- End of form in html-->
 <!-- ==========================================-->
-
-
 
 <?php
    

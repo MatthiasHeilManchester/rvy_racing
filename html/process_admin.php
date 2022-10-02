@@ -16,6 +16,11 @@ if (isset($_POST['Action']))
   system("cd .. ; bin/bolshy_stage_races.bash rvy_racing");
   echo "</pre>";       
   }
+  elseif ($_POST['Action']=="register")
+  {
+  echo "about to register";
+  include 'register_new_race.php';
+  }
   else
   {
   echo "Error: Action \"".$_POST['Action']."\" not recognised.";
