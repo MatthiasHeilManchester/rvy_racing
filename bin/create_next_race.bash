@@ -1,6 +1,20 @@
 #! /bin/bash
 
 
+# If provided the one and only command line argument specifies
+# file with race urls
+if [ $# -gt 1 ]; then
+    echo "Only zero or one args allowed; you specified: "$#
+    exit
+fi
+
+race_url_file=""
+if [ $# -eq 1 ]; then
+    race_url_file=$1
+fi
+
+
+
 #---------------------------------------------------------------
 # Helper script to create new official race. 
 #---------------------------------------------------------------
@@ -54,16 +68,39 @@ if [ -e $new_dir ]; then
 fi
 mkdir $new_dir
 cd $new_dir
-echo " "
-echo "============================================================="
-echo "I'm opening the new official_race.dat for you."
-echo "Add the URLs of the (sub)-races (for different timezones)."
-echo "============================================================="
-echo " "
-echo "Opening file with: "$EDITOR
-echo " "
-$EDITOR official_race.dat 
-echo " "
+
+
+
+if [ "$race_url_file" != "" ]; then
+    echo "using race url file: " $race_url_file
+    if [ -e $race_url_file ]; then
+        cat $race_url_file > official_race.dat
+    else
+        echo "Race url file "
+        echo " "
+        echo "      "$race_url_file
+        echo " "
+        echo "does not exist. Make sure you specify the absolute path!"
+        cd ..
+        echo "I'm deleting the newly created race directory: "$new_dir
+        rm -rf $new_dir
+        exit
+    fi
+else
+    echo "using editor to input race urls"
+    echo " "
+    echo "============================================================="
+    echo "I'm opening the new official_race.dat for you."
+    echo "Add the URLs of the (sub)-races (for different timezones)."
+    echo "============================================================="
+    echo " "
+    echo "Opening file with: "$EDITOR
+    echo " "
+    $EDITOR official_race.dat 
+    echo " "
+fi
+
+echo " " 
 echo "============================================================="
 echo "Done!"
 echo "I've created "
