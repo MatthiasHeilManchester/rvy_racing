@@ -24,7 +24,7 @@ define('IN_PHPBB', true);
 $phpbb_root_path = '/var/www/html/';
 
 // godaddy:
-// hierher revert $phpbb_root_path = '/home/jcx8vb3xd9vs/public_html/phpbb/';
+$phpbb_root_path = '/home/jcx8vb3xd9vs/public_html/phpbb/';
 
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
@@ -50,10 +50,10 @@ if($user->data['is_registered'])
   }
 }
 
-// hierher kill
-$admin_is_logged_in=1;
 
 if ( $admin_is_logged_in == 1 ){
+
+echo "Admin is logged in!";
 
   ?>
 
@@ -63,11 +63,12 @@ if ( $admin_is_logged_in == 1 ){
 <h2>Admin menu</h2>
 <form method="post" action="process_admin.php">
   <br><br>
-  <input type="radio" name="Action" value="register">Register races
+  <input type="radio" name="Action" value="process">Process races
   <br>
   <input type="radio" name="Action" value="stage">Stage races
   <br>
-  <input type="radio" name="Action" value="process">Process races
+  <input type="radio" name="Action" value="register">Register new
+  official races
   <br>
   <input type="submit" name="submit_name" value="Submit">
 </form>
@@ -82,9 +83,8 @@ if ( $admin_is_logged_in == 1 ){
  } 
 # Not logged in yet, so go to phpbb login page
 else {
-// hierher update url to actual one
 echo "Please log into phpBB as admin, then reload the page.";
-echo "<br><br><a href=\"http://192.168.0.67/index.php\" target=\"_blank\">Link to phpBB (will open in new window)</a>";
+echo "<br><br><a href=\"https://www.matthias-heil.co.uk/phpbb/\" target=\"_blank\">Link to phpBB (will open in new window)</a>";
   }
     
    ?>
