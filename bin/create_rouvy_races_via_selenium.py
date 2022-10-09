@@ -207,15 +207,19 @@ def main(argv):
 
            route_name = route_string # "Tuttensee 1st trial ever"
            route_keywords_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[2]/div[2]/div[2]/input")
-           WebDriverWait(driver,20).until(EC.element_to_be_clickable(route_keywords_field)).send_keys(route_name)
+           WebDriverWait(driver,40).until(EC.element_to_be_clickable(route_keywords_field)).send_keys(route_name)
 
            route_select_button = (By.XPATH,"/html/body/ul[1]")
-           WebDriverWait(driver,20).until(EC.element_to_be_clickable(route_select_button)).click()
+           WebDriverWait(driver,40).until(EC.element_to_be_clickable(route_select_button)).click()
 
            old_url=driver.current_url
            
+           wait = input("Hit return to click on create race button")
+
            create_race_button = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[7]/div/input[3]")
-           WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
+           WebDriverWait(driver,40).until(EC.element_to_be_clickable(create_race_button)).click()
+           
+           wait = input("Have clicked on create race button; hit return to continue")
 
            #new_url=driver.current_url
            #print("old url: ",old_url)
