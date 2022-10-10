@@ -78,7 +78,7 @@ BEGIN{error=0}
      # Haven't changed the default best time so there's been no valid time: dnf/dsq
      if (best_time==default_best_time)
       {
-       printf "<td> DNS/DNF/DSQ/ERROR </td>"
+       printf "<td> Other </td>"
       }
      else
       {

@@ -46,6 +46,7 @@ fi
 
 # Create an associative array
 declare -A total_points
+declare -A total_races
 
 # Loop over all races in this series
 race_number_in_series=0
