@@ -17,8 +17,52 @@ csv_file=$1
 echo "Operating on csv file: "$csv_file
 
 
+# Create a new race in the race series directory
+if [ ! -e ../../master_race_data ] || [ ! -e $csv_file  ]; then
+    echo "You're in the wrong directory. This is supposed to be run in the "
+    echo "race series directory, e.g. in "
+    echo " "
+    echo "      master_race_data/rvy_racing"
+    echo " "
+    echo "which must contain the file "
+    echo " "
+    echo "     "$csv_file
+    echo " "
+    echo "Bailing."
+    exit 1;
+fi
+
+# Check if the first line contains caption
+first_entry_is_user_name=`awk -F',' 'BEGIN{first_line_done=0}
+    {if (first_line_done==0){first_line_done=1; gsub("\"","",$1); if ($1=="Username"){print 1}else{print 0}}}' $csv_file `
+
+if [ $first_entry_is_user_name -eq 0 ]; then
+    echo "csv file must contain caption/title and the first entry has to be \"Username\n";
+    exit
+fi
+
+# Check number of entries (note the trailing comma)
+ncols=`awk -F',' 'BEGIN{first_line_done=0}
+    {if (first_line_done==0){first_line_done=1; print NF}}' $csv_file `
+
+if [ $ncols -ne 9 ]; then
+    echo "csv file must contain 8 columns: "
+    echo "-- \"Username\""
+    echo "-- \"Rouvy username (case sensitive!)\""
+    echo "-- \"First name\""
+    echo "-- \"Surname\""
+    echo "-- \"Strava URL\""
+    echo "-- \"Year of birth\""
+    echo "-- \"Gender\""
+    echo "-- \"Display of user info allowed on non-password protected pages\""
+    exit
+else
+    echo "Number of columns is ok"
+fi
+
+
 # Generated updated user_list.txt file for general processing
-# Extracts ony rouvy username (from field 2)
+# Extracts ony rouvy username (from field 2); skip caption line
 awk -F',' 'BEGIN{first_line_done=0}
     {if (first_line_done==0){first_line_done=1}else{gsub("\"","",$2); print $2}}' $csv_file > user_list.txt
 

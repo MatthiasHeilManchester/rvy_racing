@@ -68,6 +68,9 @@ echo "Admin is logged in!";
   <input type="radio" name="Action" value="register">Register new
   official races
   <br>
+  <input type="radio" name="Action" value="upload_user_list">Upload user list
+  in csv format from phpBB
+  <br>
   <input type="submit" name="submit_name" value="Submit">
 </form>
 <!-- ========================================== -->

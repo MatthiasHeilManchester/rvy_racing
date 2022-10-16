@@ -21,6 +21,11 @@ if (isset($_POST['Action']))
   echo "about to register";
   include 'register_new_race.php';
   }
+  elseif ($_POST['Action']=="upload_user_list")
+  {
+  echo "about to upload user list";
+  include 'upload_user_list.php';
+  }
   else
   {
   echo "Error: Action \"".$_POST['Action']."\" not recognised.";
