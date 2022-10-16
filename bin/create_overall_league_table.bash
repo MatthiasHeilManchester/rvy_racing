@@ -96,7 +96,7 @@ sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
 
 #echo ".tmp2:"
 #cat  .tmp_league_table2.dat
-awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf("%s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
+awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf(" %s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
 
 echo "<table>" >>  $html_file
 echo "<br>" >>  $html_file
