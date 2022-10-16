@@ -49,8 +49,9 @@ if($user->data['is_registered'])
 
   }
 }
-
 if ( $admin_is_logged_in == 1 ){
+
+echo "Admin is logged in!";
 
   ?>
 
@@ -63,6 +64,9 @@ if ( $admin_is_logged_in == 1 ){
   <input type="radio" name="Action" value="process">Process races
   <br>
   <input type="radio" name="Action" value="stage">Stage races
+  <br>
+  <input type="radio" name="Action" value="register">Register new
+  official races
   <br>
   <input type="submit" name="submit_name" value="Submit">
 </form>
@@ -77,9 +81,8 @@ if ( $admin_is_logged_in == 1 ){
  } 
 # Not logged in yet, so go to phpbb login page
 else {
-// hierher update url to actual one
 echo "Please log into phpBB as admin, then reload the page.";
-echo "<br><br><a href=\"http://192.168.0.67/index.php\" target=\"_blank\">Link to phpBB (will open in new window)</a>";
+echo "<br><br><a href=\"https://www.matthias-heil.co.uk/phpbb/\" target=\"_blank\">Link to phpBB (will open in new window)</a>";
   }
     
    ?>

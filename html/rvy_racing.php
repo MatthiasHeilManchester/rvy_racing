@@ -378,8 +378,11 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
       </ul>
   </ul>
 
-</div>
+<center>
+  <a href="https://matthias-heil.co.uk/rvy_racing/html/admin.php">Admin menu</a>
+</center>
 
+</div>
 
     
   </body>

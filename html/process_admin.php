@@ -28,7 +28,7 @@ if (isset($_POST['Action']))
 }
 else
 {
-echo "do nothing";
+echo "Script called directly; doing nothing";
 }
 
 echo "<br><hr><br>";
