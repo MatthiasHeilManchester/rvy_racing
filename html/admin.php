@@ -49,8 +49,6 @@ if($user->data['is_registered'])
 
   }
 }
-
-
 if ( $admin_is_logged_in == 1 ){
 
 echo "Admin is logged in!";
