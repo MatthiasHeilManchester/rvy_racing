@@ -171,6 +171,24 @@ echo " " >> $log_file
 
 
 
+echo " " >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling pad_results_with_private_data.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/pad_results_with_private_data.bash  $race_series  >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done publish_webpages.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+
+
+
 echo " " 
 echo "Done the lot, ending with updated webpages!"
 echo " "
