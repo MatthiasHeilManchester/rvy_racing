@@ -182,7 +182,7 @@ bin/pad_results_with_private_data.bash  $race_series  >> $log_file
 echo " " >> $log_file
 echo "##############################################################" >> $log_file
 echo " " >> $log_file
-echo "Done publish_webpages.bash from bolshy_process_races.bash" >> $log_file
+echo "Done pad_results_with_private_data.bash from bolshy_process_races.bash" >> $log_file
 echo " " >> $log_file
 echo "##############################################################" >> $log_file
 echo " " >> $log_file
