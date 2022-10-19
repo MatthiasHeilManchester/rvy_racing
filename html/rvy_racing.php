@@ -169,7 +169,15 @@ there. My offer to register you as proxy still stands. The message board is thir
     the finish time and insert it into the compound ranking. The
     registration page will check that the race is held on the right
     route and on the right day. Note that the link disappears and is
-    replaced by the race results once the race has been processed.<br><br>
+    replaced by the race results once the race has been
+    processed. <br>Finally, there's a "feature" (bug?) which means that races
+    can't be added while the race is deemed to be running (i.e. while
+    the rouvy webpage displays the elapsed time since the race start). If
+    this is the case, a suitable error message is displayed. You
+    can upload races before and after the race. If you forget to
+    do this while the "Add your own" button is active
+    just send an email to the race organiser and he'll do it for you
+    retrospectively. <br><br>
   <li> You cannot get credit for individual rides (i.e. rides done outside
     races). This is mainly a technical issue: Rouvy doesn't provide
     script-based access to the finish times for individual rides and maintaining
@@ -344,6 +352,9 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
     <center><a href="profile4.jpg"><img id="myImage" src="profile4.jpg"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
+    <br>
+    <br>
+  <li> Don't forget to press the "Submit" button!
     <br>
     <br>
   </ul>
