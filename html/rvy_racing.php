@@ -22,6 +22,36 @@
 
 <div class="tab content1">
 
+
+  <center>
+    <table border=1 style="width:60%; background-color:white">
+      <tr> <td>
+	  <h3>News: Monster of the month</h3>
+    Given that people may join this group at random points in the season (October-March) it seems unfair to have them linger at the end of the league table forever, so here's
+    a new feature: the "Monster of the Month" competition, a mini-league table extracted from all the races in a given month.    
+  <?php
+   $race_series="rvy_racing";
+   $glob_string="../".$race_series."_*/league_table.html";
+   //echo "glob string : ".$glob_string;
+   $result_file_list = glob($glob_string);
+   //echo "result file list: ".$result_file_list;
+   echo "<ul>";
+   foreach ($result_file_list as $result_file)
+   {
+    //echo "result file = ".$result_file."<br>";
+    $string_length=strlen($result_file);
+    $year_start=$string_length-22;
+    $year=substr($result_file,$year_start,4);
+    $month_start=$string_length-26;
+    $month=substr($result_file,$month_start,3);
+	   echo "<li ><a href=\"$result_file\">".$month." ".$year."</a> <br>";
+}
+	   echo "</ul>";
+    ?>
+      </td> </tr>
+    </table>
+    </center>
+      
     <h1>Rvy Racing: Welcome</h1>
     This is the official homepage of Rvy Racing - short for, yes, you
     guessed it: "Rouvy Racing".

@@ -151,6 +151,28 @@ echo "##############################################################" >> $log_fi
 echo " " >> $log_file
 
 
+# Add monster of the month outcomes
+
+echo " "  >> $log_file
+echo "##############################################################"  >> $log_file
+echo " " >> $log_file
+echo "Calling process_monster_of_the_month.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+bin/process_monster_of_the_month.bash $race_series >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+echo "Done calling process_monster_of_the_month.bash from bolshy_process_races.bash" >> $log_file
+echo " " >> $log_file
+echo "##############################################################" >> $log_file
+echo " " >> $log_file
+
+
+
+
+
 
 # Publish 'em
 echo " " >> $log_file
