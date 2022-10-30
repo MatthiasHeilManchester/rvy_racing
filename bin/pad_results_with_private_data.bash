@@ -34,9 +34,15 @@ if [ ! -e $bash_script_for_sed_based_padding ]; then
     exit 1
 fi
 
-cd generated_html/$race_series
-file_list='league_table.html'
-file_list=$file_list" "`find . -name 'results.html'`
-for file in `echo $file_list`; do
-    $bash_script_for_sed_based_padding $file
+
+home_dir=`pwd`
+dir_list=`ls -d generated_html/$race_series*`
+for dir in `echo $dir_list`; do
+    cd $dir
+    file_list='league_table.html'
+    file_list=$file_list" "`find . -name 'results.html'`
+    for file in `echo $file_list`; do
+	$bash_script_for_sed_based_padding $file
+    done
+    cd $home_dir
 done
