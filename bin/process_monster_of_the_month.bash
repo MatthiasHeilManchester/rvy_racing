@@ -118,7 +118,7 @@ for month_index in `echo $month_list`; do
     bin/create_overall_league_table.bash $month_race_series
     
     # Monster it up!
-    sed -i "s/<h2>Overall league table/<h1>Monster of the Month<\/h1><h2>Overall league table/" $month_dir/league_table.html
+    sed -i "s/<h2>Overall league table/<h1>(Watt-)Monster of the Month<\/h1><h2>Overall league table/" $month_dir/league_table.html
 
 done
 
