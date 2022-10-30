@@ -50,7 +50,8 @@ declare -A total_races
 
 # Loop over all races in this series
 race_number_in_series=0
-dir_list=`ls -d generated_race_data/$race_series/race?????`
+#dir_list=`ls -d generated_race_data/$race_series/race?????`
+dir_list=`find generated_race_data/$race_series -name 'race?????'`
 rev_dir_list=`echo $dir_list | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }'`
 for dir in `echo $dir_list`; do
 
@@ -92,12 +93,15 @@ done
 #echo ".tmp:"
 #cat  .tmp_league_table.dat
 #echo "end .tmp"
-sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
+if [ -e  .tmp_league_table.dat ]; then
+    sort -k 6 -n -r .tmp_league_table.dat > .tmp_league_table2.dat
+fi
 
 #echo ".tmp2:"
 #cat  .tmp_league_table2.dat
-awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf(" %s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
-
+if [ -e  .tmp_league_table2.dat ]; then
+    awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf(" %s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
+fi
 echo "<table>" >>  $html_file
 echo "<br>" >>  $html_file
 echo "League table processed: "`date --utc`  >>  $html_file
