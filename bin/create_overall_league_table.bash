@@ -52,7 +52,11 @@ declare -A total_races
 race_number_in_series=0
 #dir_list=`ls -d generated_race_data/$race_series/race?????`
 dir_list=`find generated_race_data/$race_series -name 'race?????'`
-rev_dir_list=`echo $dir_list | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }'`
+rev_dir_list_aux=`echo $dir_list | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }'`
+rev_dir_list=`echo $rev_dir_list_aux | awk '{for (i=1;i<NF;i++){print $i}}' | sort -r -n`
+#echo "dir list : "$dir_list
+#echo "rev_dir list : "$rev_dir_list
+
 for dir in `echo $dir_list`; do
 
     # Bump
