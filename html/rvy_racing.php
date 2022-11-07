@@ -55,7 +55,11 @@
 		   }
 		   }
 		   echo "</ul>";
-    ?>
+?>
+Related to this: Feel free to join our races any time to try it out. There's no password
+protection, so just turn up. If you then decide to join us (see below for instructions)
+your previous efforts will be incorporated retrospectively next time the league table is
+updated. 
       </td> </tr>
     </table>
     </center>
