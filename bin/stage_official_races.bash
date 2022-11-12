@@ -289,7 +289,7 @@ for dir in `echo $dir_list`; do
     if [ $not_processed_yet_count != 0 ]; then
         # Undo increment from above
         let race_number=$race_number-1
-        echo "Race not raced/processed yet! <a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day" "${month_names[${month}]}" "$year"\">Add your own?</a>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
+        echo "Race not raced/processed yet!<ul> <li><a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day" "${month_names[${month}]}" "$year"\">Add your own?</a><li><a href=\"../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day" "${month_names[${month}]}" "$year"\">Find the most popular race</a></ul>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
     else
         race_results_file=`basename $dir`/results.html
         echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
