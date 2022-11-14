@@ -42,7 +42,9 @@ for dir in `echo $dir_list`; do
     file_list='league_table.html'
     file_list=$file_list" "`find . -name 'results.html'`
     for file in `echo $file_list`; do
-	$bash_script_for_sed_based_padding $file
+	if [ -e $file ]; then
+	    $bash_script_for_sed_based_padding $file
+	fi
     done
     cd $home_dir
 done

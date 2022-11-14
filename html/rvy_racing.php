@@ -33,16 +33,19 @@
 	   $race_series="rvy_racing";
 	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
 	   echo "<ul>";
-		   foreach ($month_list as $my_month)
+           foreach ($month_list as $my_month)
 	  {
 	  $glob_string="../".$race_series."_".$my_month."*/league_table.html";
-	  //echo "glob string : ".$glob_string;
 	  $result_file_list = glob($glob_string);
-	  if (count($result_file_list)!=1)
+	  if (count($result_file_list)>1)
 	  {
-	  echo "Error: Too many entries in result file list: ".$result_file_list;
-	  die();
+	    echo "Error: Too many entries in result file list: ".$result_file_list;
+	    //die();
 	  }
+	  if (count($result_file_list)<1)
+	  {
+	    echo "ERROR: No league tables yet, so there are no monthly league tables either!\n";
+	  }	  
 	  foreach ($result_file_list as $result_file)
 	  {
 	  //echo "result file = ".$result_file."<br>";
