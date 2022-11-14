@@ -204,25 +204,26 @@ newly_contributed_race_date_string=`echo $day " " ${month_names[${month}]} " " $
 # Check date of race
 we_have_an_error=0
 
-echo "DEBUG: "
-echo "first official race race date: -"$race_date_string"-"
-echo "newly contributed race date  : -"$newly_contributed_race_date_string"-"
-off_no_whitespace="$(echo -e "${race_date_string}" | tr -d '[:space:]')"
-con_no_whitespace="$(echo -e "${newly_contributed_race_date_string}" | tr -d '[:space:]')"
-echo "NW first official race race date: -"$off_no_whitespace"-"
-echo "NW newly contributed race date  : -"$con_no_whitespace"-"
-echo "length off nw: "${#off_no_whitespace}
-echo "length con nw: "${#con_no_whitespace}
-echo "END DEBUG: "
+#echo "DEBUG: "
+#echo "first official race race date: -"$race_date_string"-"
+#echo "newly contributed race date  : -"$newly_contributed_race_date_string"-"
+#off_no_whitespace="$(echo -e "${race_date_string}" | tr -d '[:space:]')"
+#con_no_whitespace="$(echo -e "${newly_contributed_race_date_string}" | tr -d '[:space:]')"
+#echo "NW first official race race date: -"$off_no_whitespace"-"
+#echo "NW newly contributed race date  : -"$con_no_whitespace"-"
+#echo "length off nw: "${#off_no_whitespace}
+#echo "length con nw: "${#con_no_whitespace}
+#echo "END DEBUG: "
 
 #if [ "$race_date_string" == "$newly_contributed_race_date_string" ]; then
 if [ "$off_no_whitespace" == "$con_no_whitespace" ]; then
     if [ $verbose_debug == 1 ]; then echo "OK: official races 1 and newly contributed race are on same date: " $newly_contributed_race_date_string" and "$race_date_string; fi
-    echo "DEBUG: WE DONT HAVE A DATE ERROR"
+    we_have_an_error=0
+    #echo "DEBUG: WE DONT HAVE A DATE ERROR"
 else
     echo -e "Error: Newly contributed  race is on a different date ( -"$newly_contributed_race_date_string"- GMT ) from date of official race ( -"$race_date_string"- GMT )"
     we_have_an_error=1
-    echo "DEBUG: WE HAVE A DATE ERROR"
+    #echo "DEBUG: WE HAVE A DATE ERROR"
 fi
 
 # Check route
@@ -262,8 +263,10 @@ if [ $race_is_new -eq 1 ]; then
     echo "Congratulations. Your contributed race was successfully added."
     cd $home_dir/..
     bin/bolshy_stage_races.bash $race_series
+    # | grep 'log file: bolshy_logs`
     echo " " 
     echo "I've updated the webpages too!"
+    echo $log_file_info
     echo " "
     echo "      <h2><a href=\"../generated_html/$race_series/rvy_racing.php\"><b>Return to the race pages</b></a></h2>"
     echo " "
