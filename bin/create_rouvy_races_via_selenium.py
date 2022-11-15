@@ -10,7 +10,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 import sys, getopt
 import re
+import time
 import datetime
+from dateutil import parser
+
+
 
 #==============================================================
 # Main
@@ -28,11 +32,11 @@ def main(argv):
    try:
       opts, args = getopt.getopt(argv,"hd:r:p:n:",["date=","route=","password=","race_number="])
    except getopt.GetoptError:
-      print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>')
+      print('\nUsage:\ncreate_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>\n\nExample:\n ./create_rouvy_races_via_selenium.py --date 02.12.2022 --route "Passo dello Stelvio via Umbrailpass" --password "gumbo11" --race_number 19\n')
       sys.exit(2)
    for opt, arg in opts:
       if opt == '-h':
-         print('create_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>')
+         print('\nUsage:\ncreate_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>\n\nExample:\n ./create_rouvy_races_via_selenium.py --date 02.12.2022 --route "Passo dello Stelvio via Umbrailpass" --password "gumbo11" --race_number 19\n')
          sys.exit()
       elif opt in ("-r", "--route"):
          route_string = arg
@@ -76,8 +80,8 @@ def main(argv):
    # Default times (make adjustable)
    time_array=["07:00","15:00","18:00"]
    date_and_time_string_array=[]
-   for time in time_array:
-       date_and_time_string=date_string+" "+time
+   for my_time in time_array:
+       date_and_time_string=date_string+" "+my_time
        date_and_time_string_array.append(date_and_time_string)
 
    # Nest day
@@ -103,17 +107,29 @@ def main(argv):
 
    # Race times on next day
    time_array=["02:00"]
-   for time in time_array:
-       date_and_time_string=day_after_main_race_day+"."+day_after_main_race_month+"."+day_after_main_race_year+" "+time
+   for my_time in time_array:
+       date_and_time_string=day_after_main_race_day+"."+day_after_main_race_month+"."+day_after_main_race_year+" "+my_time
        date_and_time_string_array.append(date_and_time_string)
    
-   # Show us what we're going to do    
+   # Show us what we're going to do
+   weekday_string=parser.parse(date_string).strftime("%a") 
    for date_and_time_string in  date_and_time_string_array:
        print("Creating race at: ",date_and_time_string)
-       
+
+   
+   if ( (weekday_string != 'Wed') and (weekday_string != 'Sat') ) :
+      print("\n=========================================================================")
+      print("Warning! Race is on ",weekday_string,"! Are you sure this is correct?")
+      print("=========================================================================\n")
+      wait = input("Hit return to continue")
+
+   
    # Race name (later modified with upper case letter to identify sub-race for different time-zones
    specified_race_name="rvy_racing race "+race_number_string+ " "
 
+
+   #print("done");
+   #sys.exit()
 
 
    # Now start the actual web stuff
@@ -213,13 +229,16 @@ def main(argv):
            WebDriverWait(driver,40).until(EC.element_to_be_clickable(route_select_button)).click()
 
            old_url=driver.current_url
-           
-           wait = input("Hit return to click on create race button")
+
+           # Not really sure why it needs that wait, but sleep is better than remembering
+           # to hit return...
+           #wait = input("Hit return to click on create race button")
+           time.sleep(5)
 
            create_race_button = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[7]/div/input[3]")
            WebDriverWait(driver,40).until(EC.element_to_be_clickable(create_race_button)).click()
            
-           wait = input("Have clicked on create race button; hit return to continue")
+           # wait = input("Have clicked on create race button; hit return to continue")
 
            #new_url=driver.current_url
            #print("old url: ",old_url)
@@ -233,14 +252,91 @@ def main(argv):
            print("Done race ",race_name)
 
            driver.get('https://my.rouvy.com/onlinerace/create')
-           print("CURRENT URL (should be race create page): ",driver.current_url)
+           #print("CURRENT URL (should be race create page): ",driver.current_url)
 
 
 
 
-   print("Done")
-   wait = input("Hit return to shut down")
+   print("Done setting up races; now extract urls")
+   # wait = input("Hit return to shut down")
+   #print("Shutting down")
+   #wait = input("Extract urls")
+
+   ############################################################################
+   # start from here
+
+   # Go there directly (subsequent xpaths don't work, even though they seem to be correct
+   driver.get('https://my.rouvy.com/onlinerace')
+   
+   
+   # Locate table that contains the future events
+   table_xpath="/html/body/div[3]/div/div/div/div[2]/div/div[1]/div/div/table/tbody"
+   
+   # Get number of rows
+   tr_xpath=table_xpath+"/tr"
+   
+   # Note plural in call.
+   elements=driver.find_elements(By.XPATH,tr_xpath)
+   nrow = len(elements)
+   
+   # Get number of columns
+   #td_xpath=table_xpath+"/tr[2]/td"
+   #elements=driver.find_elements(By.XPATH,td_xpath)
+   #ncol = len(elements)
+   
+   # Prepare list of race urls
+   race_url_list=[]
+   
+   # Loop over all entries in table (until it gets itself confused; this is almost
+   # certainly when it hits the separator "Invitations"; I only want to read the
+   # the ones listed under "MY registrations to events"
+   irow=1
+   while True:
+      irow=irow+1
+      
+      # Race title is in column 2
+      race_title_xpath="/html/body/div[3]/div/div/div/div[2]/div/div[1]/div/div/table/tbody/tr["+str(irow)+"]/td[2]"
+      
+      # Link to race is in column 4
+      race_link_xpath ="/html/body/div[3]/div/div/div/div[2]/div/div[1]/div/div/table/tbody/tr["+str(irow)+"]/td[4]/a"
+      
+      # Read the swine
+      try:
+         
+         # Get race title
+         
+         # Note singular in call
+         race_title=driver.find_element(By.XPATH,race_title_xpath).text
+         
+         # "in" strips out the postfix that enumerates the specific instance
+         # of the race
+         if specified_race_name in race_title:
+            print("race name matches: ",race_title," = ",specified_race_name)
+            race_url_direct=driver.find_element(By.XPATH,race_link_xpath).get_attribute("href")
+            print("URL OF RACE INTO FILE2: ",race_url_direct)
+            race_url_list.append(race_url_direct)
+            print("number of entries: ",len(race_url_list))
+            print(race_url_list)
+            
+      except:
+         break
+      
+   print("---------master_race_list:------------")
+   race_url_list.reverse()
+   for url in race_url_list:
+      print(url)
+   print("---------master_race_list:------------")
+      
+      
+   print("Scanned all races")
    print("Shutting down")
+   
+   
+   sys.exit()
+
+
+   # end here
+   ############################################################################
         
 
 if __name__ == "__main__":
