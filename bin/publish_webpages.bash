@@ -48,7 +48,26 @@ rm -f generated_html_files.tar
 
 # Copy across style file and general page
 dir_list=`find  . -mindepth 1 -maxdepth 1 -type d`
+
+# Find actual race directory (without month modifiers)
+shortest_length=`echo $dir_list | wc -c`
+shortest_dir="-"
 for dir in `echo $dir_list`; do
+    length=`echo $dir | wc -c` 
+    if [ $length -lt $shortest_length ]; then
+	shortest_dir=$dir
+	shortest_length=$length
+    fi
+done
+
+if [ $shortest_dir == "-" ]; then
+    echo "ERROR: Didn't find shortest directory; copying the lot."
+else    
+    echo "Found shortest dir: "$shortest_dir
+    dir_list=$shortest_dir
+fi
+for dir in `echo $dir_list`; do
+    echo "Copying generic web stuff for dir: "$dir
     cp ../html/style.css $dir
     cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
