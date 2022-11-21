@@ -52,19 +52,18 @@
    ?>
   
   
-  <h1>Want the most popular race?</h1>
-  <h3><em>Race <?php echo $race_number ?></em> in
+  <h2>Want the most popular race?</h2>
+  <em>Race <?php echo $race_number ?></em> in
     the race series <em><?php echo $race_series ?></em>: <ul><li> Route:
 	<a href="https://my.rouvy.com/virtual-routes/detail/<?php echo
 		 $route_id?>"><?php echo $route_title ?></a> 
       <li> Date: <?php echo $race_date_string ?> (GMT).</ul>
-  </h3>
   
   <?php
 
    // Loading animation
    echo "<div id=\"loading_image\">";
-   echo "<center><img src=\"cyclist.gif\" height=300><h2>Patience please. I'm interrogating rouvy -- while cycling up a hill!</h2></center>";
+   echo "<img src=\"cyclist.gif\" width=20%><br><br>Patience please. I'm interrogating rouvy -- while cycling up a hill!";
    echo "</div>";
 
    // Make loading animation visible
@@ -87,7 +86,8 @@
 
 ?>
 
-<h3>Please make sure you un-register on rouvy if you can't make it!</h3>
+<br><br>
+Please make sure you un-register on rouvy if you can't make it!
 
 
 </body>
