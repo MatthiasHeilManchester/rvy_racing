@@ -207,8 +207,12 @@ we_have_an_error=0
 #echo "DEBUG: "
 #echo "first official race race date: -"$race_date_string"-"
 #echo "newly contributed race date  : -"$newly_contributed_race_date_string"-"
-#off_no_whitespace="$(echo -e "${race_date_string}" | tr -d '[:space:]')"
-#con_no_whitespace="$(echo -e "${newly_contributed_race_date_string}" | tr -d '[:space:]')"
+#echo "END DEBUG: "
+
+off_no_whitespace="$(echo -e "${race_date_string}" | tr -d '[:space:]')"
+con_no_whitespace="$(echo -e "${newly_contributed_race_date_string}" | tr -d '[:space:]')"
+
+#echo "DEBUG: "
 #echo "NW first official race race date: -"$off_no_whitespace"-"
 #echo "NW newly contributed race date  : -"$con_no_whitespace"-"
 #echo "length off nw: "${#off_no_whitespace}
@@ -231,11 +235,11 @@ if [ "$route_id" != "$newly_contributed_route_id" ]; then
     echo -e "Error: Newly contributed race is on a <a href=\""$newly_created_race_url"\">different route</a> from from that of the <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id"\">official race</a>"
     we_have_an_error=1
 else
-    if [ $verbose_debug == 1 ]; then echo "OK: Newly created race is on the same route as the official race!"; fi 
+    if [ $verbose_debug -eq 1 ]; then echo "OK: Newly created race is on the same route as the official race!"; fi 
 fi
 
 
-if [ $we_have_an_error == 1 ]; then
+if [ $we_have_an_error -eq 1 ]; then
     rm -f $html_file
     echo " "
     echo "Please use your browser's back button (twice) to return to the original form and check your input."
