@@ -33,7 +33,8 @@ print "<br><br><center><a href=\"".$newly_contributed_race_url."\" target=\"_bla
 print "Once checked, please click here to confirm <br><br>";
 print "<center><a href=\"input_user_contributed_race_form_part3.php\"><b>CONFIRM</b></a></center><br><br>";
 print " ";
-print "<b>Warning:</b> Processing can take a few seconds but should time out after at most 10 seconds.";
+print "<b>Warning:</b> Processing can take a while but should complete
+within 20 seconds or so.";
 }
 ?>
 
