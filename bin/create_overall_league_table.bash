@@ -79,6 +79,7 @@ for dir in `echo $dir_list`; do
         #echo "bla hierher: " ${total_points[whitesheep]}
         #echo "bla hierher: " ${total_points[stfmgr_65]}
         awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
+	sed -i 's/<\/body>//g' .tmp_html_body_for_race.html
     fi
     cd $home_dir
 done
@@ -106,7 +107,7 @@ fi
 if [ -e  .tmp_league_table2.dat ]; then
     awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf(" %s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
 fi
-echo "<table>" >>  $html_file
+echo "</table>" >>  $html_file
 echo "<br>" >>  $html_file
 echo "League table processed: "`date --utc`  >>  $html_file
 echo "<br>" >>  $html_file
@@ -120,5 +121,9 @@ done
 
 cat $home_dir/html_templates/html_end.txt >> $html_file
 
+
+# Now rectify ties (should really have built this in above so it's a bit of a hack to do this now but...
+$home_dir/bin/rectify_ties.bash $html_file > .junk.txt
+mv .junk.txt $html_file
 
 
