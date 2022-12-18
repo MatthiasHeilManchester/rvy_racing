@@ -15,9 +15,14 @@ if [ ! -e master_race_data ]; then
 fi
 
 cd master_race_data
-tar cfz ../transfer_data/master_race_data.tar.gz *
+#tar cfz ../transfer_data/master_race_data.tar.gz *
+find . \( -not -type l -and -not -name . -and -not -type d \) > .junk.txt
+tar cfz ../transfer_data/master_race_data.tar.gz --files-from=.junk.txt
+rm .junk.txt
 
 cd ../contributed_race_data
-tar cfz ../transfer_data/contributed_race_data.tar.gz *
-
+#tar cfz ../transfer_data/contributed_race_data.tar.gz *
+find . \( -not -type l -and -not -name . -and -not -type d \) > .junk.txt
+tar cfz ../transfer_data/contributed_race_data.tar.gz --files-from=.junk.txt
+rm .junk.txt
 

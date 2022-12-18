@@ -52,7 +52,7 @@ declare -A total_races
 race_number_in_series=0
 #dir_list=`ls -d generated_race_data/$race_series/race?????`
 dir_list=`find generated_race_data/$race_series -name 'race?????'`
-rev_dir_list_aux=`echo $dir_list | awk '{ for (i=NF; i>1; i--) printf("%s ",$i); print $1; }'`
+rev_dir_list_aux=`echo $dir_list | awk '{ for (i=NF; i>=1; i--) printf("%s ",$i); print $1; }'`
 rev_dir_list=`echo $rev_dir_list_aux | awk '{for (i=1;i<NF;i++){print $i}}' | sort -r -n`
 #echo "dir list : "$dir_list
 #echo "rev_dir list : "$rev_dir_list
@@ -116,6 +116,12 @@ echo " " >>  $html_file
 
 echo "<h2>Individual race results:</h2>" >> $html_file
 for dir in `echo $rev_dir_list`; do
+    #echo "#"
+    #echo "#"
+    #echo "APPENDING $dir/.tmp_html_body_for_race.html to $html_file"
+    #echo "IN "`pwd`
+    #echo "#"
+    #echo "#"
     cat $dir/.tmp_html_body_for_race.html >>  $html_file
 done
 
