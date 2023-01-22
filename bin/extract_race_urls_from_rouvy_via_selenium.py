@@ -95,15 +95,19 @@ def main(argv):
    else:
       print("I'm logging in with password: --",password_string,"--")
 
+
       # Login
-      email_field_for_login = By.XPATH,("/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[1]/input")
+      # email_field_for_login = By.XPATH,("/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[1]/input")
+      email_field_for_login = By.XPATH,("/html/body/div[2]/div/div/div[1]/div[1]/div/form/div[1]/input")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(email_field_for_login)).send_keys("M.Heil@maths.manchester.ac.uk")
 
 
-      password_field_for_login = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[2]/input")
+      #password_field_for_login = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[2]/input")
+      password_field_for_login = (By.XPATH,"/html/body/div[2]/div/div/div[1]/div[1]/div/form/div[2]/input")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(password_field_for_login)).send_keys(password_string)
       
-      login_button_on_homepage = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/input[1]")
+      #login_button_on_homepage = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/input[1]")
+      login_button_on_homepage = (By.XPATH,"/html/body/div[2]/div/div/div[1]/div[1]/div/form/input[1]")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(login_button_on_homepage)).click()
 
 
