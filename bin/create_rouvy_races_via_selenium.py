@@ -32,11 +32,11 @@ def main(argv):
    try:
       opts, args = getopt.getopt(argv,"hd:r:p:n:",["date=","route=","password=","race_number="])
    except getopt.GetoptError:
-      print('\nUsage:\ncreate_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>\n\nExample:\n ./create_rouvy_races_via_selenium.py --date 02.12.2022 --route "Passo dello Stelvio via Umbrailpass" --password "gumbo11" --race_number 19\n')
+      print('\nUsage:\ncreate_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>\n\nExample:\n ./create_rouvy_races_via_selenium.py --date 02.12.2022 --route "Passo dello Stelvio via Umbrailpass" --password "my_fancy_password" --race_number 19\n')
       sys.exit(2)
    for opt, arg in opts:
       if opt == '-h':
-         print('\nUsage:\ncreate_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>\n\nExample:\n ./create_rouvy_races_via_selenium.py --date 02.12.2022 --route "Passo dello Stelvio via Umbrailpass" --password "gumbo11" --race_number 19\n')
+         print('\nUsage:\ncreate_rouvy_races.py --date <date (dd.mm.yyyy)> --route <route> --password <password> --race_number <race_number>\n\nExample:\n ./create_rouvy_races_via_selenium.py --date 02.12.2022 --route "Passo dello Stelvio via Umbrailpass" --password "my_fancy_password" --race_number 19\n')
          sys.exit()
       elif opt in ("-r", "--route"):
          route_string = arg
