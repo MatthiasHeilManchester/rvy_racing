@@ -1,0 +1,27 @@
+-- style paragraphs etc. (grey background; each paragraph in boxes)
+
+
+-- Common header/footer for all files:
+
+
+        If you convert the file names of your .html pages to .php
+        - then at the top of each of your .php pages you can use
+        one line of code to include the content from your
+        header.php
+
+        <?php include('header.php'); ?>
+
+        Do the same in the footer of each page to include the
+        content from your footer.php file
+
+        <?php include('footer.php'); ?>
+
+        No JavaScript / Jquery or additional included files
+        required.
+        
+
+-- Get rid of tabs and get easy to navigate dropdown menu in common
+   css which brings in relevant text/links; see rouvy homepage.
+   Rules stay; Races/league table have options.
+
+   https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_mobile_navbar
