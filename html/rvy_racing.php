@@ -26,11 +26,17 @@
   <center>
     <table border=1 style="width:60%; background-color:white">
       <tr> <td>
-	  <h3>News: (Watt-)Monster of the Month</h3>
-    Given that people may join this group at random points in the season (October-March) it seems unfair to have them linger at the end of the league table forever, so here's
+	  <h3>(Watt-)Monster of the Month</h3>
+    Given that people may join this group at random points in the
+    season it seems unfair to have them linger at the end of the league table forever, so here's
 	  a new feature: the "(Watt-)Monster of the Month" competition, a mini-league table extracted from all the races in a given month. Now you can experience the end-of-season madness every month. Yay!  
 	  <?php
-	   $race_series="rvy_racing";
+           if (1==1)
+           {
+           echo "<center><h4>(Watt-)Monster of the month not set up yet for the
+           summer season</h4></center>";}
+           else {
+           $race_series="rvy_racing";
 	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
 	   echo "<ul>";
            foreach ($month_list as $my_month)
@@ -58,7 +64,7 @@
 		   }
 		   }
 		   echo "</ul>";
-?>
+}?>
 Related to this: Feel free to join our races any time to try it out. There's no password
 protection, so just turn up. If you then decide to join us (see below for instructions)
 your previous efforts will be incorporated retrospectively next time the league table is
@@ -80,6 +86,11 @@ updated.
     <a href="https://www.robirini66.com">RBF</a>, originally
     set up by Robi Rini, but discontinued when he moved to
     <a href="https://www.kinomap.com">kinomap</a>.
+    <br><br>
+    The <a href="https://www.matthias-heil.co.uk/rvy_racing/rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">final
+    league table from the Winter 22-23 Season</a> has now been
+    archived. We're currently doing a summer series (from
+    May-September) with just one race a week.
     <br><br>
     If you're interested in joining our race series, please register
     on our <a href="https://www.matthias-heil.co.uk/phpbb/">phpBB
@@ -188,10 +199,11 @@ there. My offer to register you as proxy still stands. The message board is thir
 <h2>Race rules:</h2>
 <ul>
   <li> There will be two races a week, on Wednesday and Saturday
-    during "the season" which runs from the beginning of October to the
+    during "the winter season" which runs from the beginning of October to the
     end of March. The midweek races will be shorter (under an hour); the
     Saturday ones will be a bit longer: between 1 and 2 hours with a bit of
-    uphill thrown in... <br><br>
+    uphill thrown in... In summer (beginning of May to end of September) we only do one race
+    a week on a Wednesday. <br><br>
   <li> Each race will be repeated several times (to cater for different
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
