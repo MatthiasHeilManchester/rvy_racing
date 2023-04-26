@@ -190,7 +190,7 @@ def main(argv):
       explore_drop_down_menu = (By.XPATH,"/html/body/nav/div/div[2]/ul[2]/li[2]/a")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(explore_drop_down_menu)).click()
       
-      race_option_in_explore_drop_down_menu =  (By.XPATH,"/html/body/nav/div/div[2]/ul[2]/li[2]/ul/li[5]")
+      race_option_in_explore_drop_down_menu =  (By.XPATH,"/html/body/nav/div/div[2]/ul[2]/li[2]/ul/li[4]")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(race_option_in_explore_drop_down_menu)).click()
       
       print("CURRENT URL (AFTER CLICKING): ",driver.current_url)
@@ -208,6 +208,8 @@ def main(argv):
 
    # Click on "Create online race" button:
    create_online_race_button = (By.XPATH,"/html/body/div[3]/div/div/div/div[2]/div/div[2]/div/a")
+   print("create_online_race_button: ",create_online_race_button);
+
    WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_online_race_button)).click()
       
    race_number=1
@@ -217,8 +219,9 @@ def main(argv):
        if 1==1:
           
            print("CURRENT URL at start of creating the actual race",driver.current_url)
-           
+
            smart_trainers_only_tick = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[2]/div[1]/label/span")
+           print("smart_trainers_only_tick: ",smart_trainers_only_tick);
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(smart_trainers_only_tick)).click()
 
            # Race name
