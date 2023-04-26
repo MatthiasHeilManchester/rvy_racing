@@ -24,8 +24,8 @@
 
 
   <center>
-    <table border=1 style="width:60%; background-color:white">
-      <tr> <td>
+    <table border=1, style="border-spacing:10px; width:60%; background-color:white">
+      <tr style="border: none";> <td style="border: none";>
 	  <h3>(Watt-)Monster of the Month</h3>
     Given that people may join this group at random points in the
     season it seems unfair to have them linger at the end of the league table forever, so here's
@@ -33,8 +33,8 @@
 	  <?php
            if (1==1)
            {
-           echo "<center><h4>(Watt-)Monster of the month not set up yet for the
-           summer season</h4></center>";}
+           echo "<p><center><b>[(Watt-)Monster of the month not set up yet for the
+           summer season...]</b></center></p>";}
            else {
            $race_series="rvy_racing";
 	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
@@ -202,8 +202,8 @@ there. My offer to register you as proxy still stands. The message board is thir
     during "the winter season" which runs from the beginning of October to the
     end of March. The midweek races will be shorter (under an hour); the
     Saturday ones will be a bit longer: between 1 and 2 hours with a bit of
-    uphill thrown in... In summer (beginning of May to end of September) we only do one race
-    a week on a Wednesday. <br><br>
+    uphill thrown in... In summer (from the beginning of May to the end
+    of September) we only do one race a week on a Wednesday. <br><br>
   <li> Each race will be repeated several times (to cater for different
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
@@ -297,7 +297,10 @@ are a few rules anyway.
   actually turn up (or unregister a.s.a.p., if at all possible). People generally
   like to race with other people, and turning up in the expectation to
   find a proper stampede only to find that half the people couldn't
-  actually be bothered is annoying.<br><br> 
+    actually be bothered is annoying.<br><br>
+    Related to this: It would be good if you could sign up
+    for the races a.s.a.p. Well attended races tend to attract yet more racers and stampedes
+    are more fun than TT-style solo races.<br><br>
   <li> Banter on
   the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
       board</a>
