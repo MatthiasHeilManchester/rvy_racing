@@ -33,8 +33,7 @@
 	  <?php
            if (1==1)
            {
-           echo "<p><center><b>[(Watt-)Monster of the month not set up yet for the
-           summer season...]</b></center></p>";}
+           echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";}
            else {
            $race_series="rvy_racing";
 	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
