@@ -173,3 +173,37 @@ bin/create_overall_league_table.bash fake_commute
 
 If everything looks ok, (re-)publish the races as described above.
 
+
+---
+
+# Add user contributed race after the "Add your own?" button has disappeared
+
+Go to `contributed_race_data/race00001`, say. The files `contributed_race.dat` will contain
+something like
+```bash
+https://my.rouvy.com/onlinerace/detail/121707
+https://my.rouvy.com/onlinerace/detail/121821
+https://my.rouvy.com/onlinerace/detail/121787
+https://my.rouvy.com/onlinerace/detail/121769
+```
+Add the url of the additional race there.
+
+Similarly, the file `contributed_race_list_items.html` will contain
+```bash
+<li> <a href=https://my.rouvy.com/onlinerace/detail/121707>Contributed race 1: 09:05:00 (GMT)</a>
+<li> <a href=https://my.rouvy.com/onlinerace/detail/121821>Contributed race 2: 16:10:00 (GMT)</a>
+<li> <a href=https://my.rouvy.com/onlinerace/detail/121787>Contributed race 3: 04:55:00 (GMT)</a>
+<li> <a href=https://my.rouvy.com/onlinerace/detail/121769>Contributed race 4: 11:15:00 (GMT)</a> 
+```
+Again just add the corresponding new entry (same url, just in list form, with the race time from the webpage).
+
+Then re-run
+```bash
+bin/bolshy_stage_races.bash <race_series>
+```
+in the home directory and re-process the races with
+```bash
+bin/bolshy_process_races.bash <race_series>
+```
+Done.
+
