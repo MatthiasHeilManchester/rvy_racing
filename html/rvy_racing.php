@@ -31,12 +31,13 @@
     season it seems unfair to have them linger at the end of the league table forever, so here's
 	  a new feature: the "(Watt-)Monster of the Month" competition, a mini-league table extracted from all the races in a given month. Now you can experience the end-of-season madness every month. Yay!  
 	  <?php
-           if (1==1)
+           if (1==0)
            {
            echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";}
            else {
            $race_series="rvy_racing";
-	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
+	   #$month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
+	   $month_list=["May","Jun","Jul","Aug","Sep"];
 	   echo "<ul>";
            foreach ($month_list as $my_month)
 	  {
