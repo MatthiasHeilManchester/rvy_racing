@@ -227,7 +227,9 @@ there. My offer to register you as proxy still stands. The message board is thir
     registration page will check that the race is held on the right
     route and on the right day. Note that the link disappears and is
     replaced by the race results once the race has been
-    processed. <br>Finally, there's a "feature" (bug?) which means that races
+    processed. <br><br>Please do not delete races on rouvy once you've
+    registered them here. It breaks the scripts! <br><br>Finally,
+    there's a "feature" (bug?) which means that races
     can't be added while the race is deemed to be running (i.e. while
     the rouvy webpage displays the elapsed time since the race start). If
     this is the case, a suitable error message is displayed. You
