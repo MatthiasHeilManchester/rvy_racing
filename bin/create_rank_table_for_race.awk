@@ -60,14 +60,70 @@ BEGIN{error=0}
         {
          # Raw time: 13:04:14.7 or 3:04:14.7
          raw_time=$col
+
+	 # test:
+	 #raw_time="13:59:59.10"
+	 
          hour_end=match(raw_time,":")
          hours=substr(raw_time,1,hour_end-1);
          minutes=substr(raw_time,hour_end+1,2);
          seconds=substr(raw_time,hour_end+4,2);
-         tenth_seconds=substr(raw_time,hour_end+7,1);
-         #print hours" "minutes" "seconds" "tenth_seconds
+
+
+	 # tenth of seconds are usually output as a single digit
+	 # i.e. ".0" to ".9" but for some reason ten tenth is recorded
+	 # ".10" (rather than bumping the seconds and setting the tenths
+	 # to zero). Do it manually (and keep bumping...)
+	 tenth_seconds=0;
+         full_length=length(raw_time);
+         tenth_start=index(raw_time,".");
+         tenth_length=full_length-tenth_start;
+
+	 # Length of the string measuring tenth is two
+	 if (tenth_length==2)
+	 {
+	  # Well, it had better be "10" otherwise there's
+	  # yet another problem...
+          tenth_seconds_test=substr(raw_time,tenth_start+1,2);
+          if (tenth_seconds_test!="10")
+	  {
+	   print "ERROR IN create_rank_table_for_race.awk: TWO DIGITS BUT tenth_seconds_test = " tenth_seconds_test " != 10";
+	  }
+	  # Al fine; now reset tenth to zero and bump seconds
+	  else
+	  {
+           tenth_seconds=0;
+	   seconds+=1;
+	   # ...but keep width
+	   if (seconds<10)
+	   {
+	    seconds="0"seconds
+	   }
+	   # bump minutes if necessary
+           if (seconds==60)
+	   {
+	       seconds="00";
+	       minutes+=1;
+	       if (minutes<10)
+		   minutes="0"minutes
+	       endif
+	   }
+	   #... and hours
+	   if (minutes==60)
+	   {
+	       minutes="00";
+	       hours+=1;
+	   }
+	   raw_time=hours":"minutes":"seconds"."tenth_seconds
+	  }
+	 }
+	 # This is the standard case: single digit tenth:
+	 else
+	 {
+	  tenth_seconds=substr(raw_time,hour_end+7,1);
+	 }
+
          tenth_sec_time=tenth_seconds+10*(seconds+60*(minutes+60*hours))
-         #print "time best_time -- " tenth_sec_time " -- " best_time
          if (tenth_sec_time<best_time)
           {
            best_time=tenth_sec_time
