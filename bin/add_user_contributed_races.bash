@@ -130,6 +130,8 @@ if [ $max_while -gt 0 ]; then
     echo " "
     echo "Please try again later. If this problem persists, please report it on the"
     echo "discussion board."
+    echo " " 
+    echo "(If this happens on the raspberry pi, run bin/setup_permissions.bash)."
     echo " "
     exit
 fi
@@ -265,6 +267,9 @@ if [ $race_is_new -eq 1 ]; then
     echo $newly_created_race_url >> $home_dir/$contributed_race_data_race_dir/contributed_race.dat
     echo "<li>  <a href="$newly_created_race_url">Contributed race $nrace: $newly_contributed_race_time (GMT)</a>" >> contributed_race_list_items.html
     echo "Congratulations. Your contributed race was successfully added."
+    echo " "
+    echo "PLEASE DO NOT DELETE THE RACE ON THE ROUVY WEBPAGES!"
+    echo " "
     cd $home_dir/..
     bin/bolshy_stage_races.bash $race_series
     # | grep 'log file: bolshy_logs`

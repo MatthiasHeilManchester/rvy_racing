@@ -87,7 +87,12 @@
 ?>
 
 <br><br>
-Please make sure you un-register on rouvy if you can't make it!
+Please
+<ul>
+  <li> make sure you un-register on rouvy if you can't make it,</li>
+  <li> do not delete any contributed races on the rouvy webpage after they have been registered here (via the "Add your own" option in the race list).</li>
+</ul>
+Thank you!
 
 
 </body>

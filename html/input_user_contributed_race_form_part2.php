@@ -38,5 +38,9 @@ within 20 seconds or so.";
 }
 ?>
 
+<br>
+<br>
+<b>NOTE: Please do not delete the race on rouvy once it has been registered here!</b>
+
 </body>
 </html>

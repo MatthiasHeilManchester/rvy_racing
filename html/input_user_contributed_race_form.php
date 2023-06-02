@@ -82,7 +82,9 @@ If your race registration page is
   <input type="submit" name="submit" value="Submit">  
 </form>
 
-
+<br>
+<br>
+<b>NOTE: Please do not delete the race on rouvy once it has been registered here!</b>
 
 
 
