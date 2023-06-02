@@ -38,13 +38,13 @@ array_assignment_string="count_array=("
 count=1
 for url in `echo $url_list`; do
     file="$tmp_dir/race_file"$count".html"
-    wget --content-on-error --output-document=$file $url
+    wget --output-document=$file $url
     let count=$count+1
 
     
-    # If page has the words "Server Error" the race has probably been deleted
-    n_server_error_list=`grep -c "Server Error" $file`
-    if [ $n_server_error_list -gt 0 ]; then
+    # If page is empty the race has probably been deleted
+    file_length=`wc -m $file | awk '{print $1}'`
+    if [ $file_length -eq 0 ]; then
 	array_assignment_string=$array_assignment_string" \"[race not accessible on rouvy]\""
     else	
 	# If page doesn't have the word STARTLIST the race is over
