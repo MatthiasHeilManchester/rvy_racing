@@ -249,6 +249,10 @@ there. My offer to register you as proxy still stands. The message board is thir
     40 points for the winner; 30 for second; 25 for third; 20 for
     fourth; 19 for fifth; then decreasing by one for each subsequent
     position (but kindly stopping at zero!).<br><br>
+  <li> Crashes of the virtual kind (e.g. rouvy going down during a race;
+    connection problems; race results not uploading, or races being deleted
+    (see above); etc) will all be treated like real crashes: we'll all be
+    sorry, but <em>c'est la vie</em> (as the Germans don't say). <br><br>
   <li> The person with the most points at the end of the "season"
     shall be known as "The Winner". Their
     parents/partners/children/hamsters/...
