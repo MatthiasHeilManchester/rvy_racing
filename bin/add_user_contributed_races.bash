@@ -198,7 +198,8 @@ month_names=(not_a_month Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec)
 
 # Prettify date
 day=`echo $newly_contributed_race_date | awk '{print substr($0,4,2)}'`
-month=`echo $newly_contributed_race_date | awk '{print substr($0,1,2)}'`
+#Sed removes padding
+month=`echo $newly_contributed_race_date | awk '{print substr($0,1,2)}' | sed 's/^0*//'`
 year=`echo $newly_contributed_race_date | awk '{print substr($0,7)}'`
 newly_contributed_race_date_string=`echo $day " " ${month_names[${month}]} " " $year`
 
