@@ -9,12 +9,12 @@
   </head>
   <body>
 
-    <img id="tabImage" src="rvy_racing.png">
-<input type="radio" name="tabs" id="tab1" checked />
-<label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2" />
-<label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3" />
-<label for="tab3">Races</label><input type="radio" name="tabs" id="tab4" />
-<label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5" />
+    <img id="tabImage" src="rvy_racing.png" alt="rvy_racing logo">
+    <input type="radio" name="tabs" id="tab1" checked>
+<label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2">
+<label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3">
+<label for="tab3">Races</label><input type="radio" name="tabs" id="tab4">
+<label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5">
 <label for="tab5">Contact/FAQ</label>
 
 <!-- <input type="radio" name="tabs" id="tab6" /><label for="tab6">Contact</label> -->
@@ -25,7 +25,7 @@
 
   <center>
     <table border=1, style="border-spacing:10px; width:60%; background-color:white">
-      <tr style="border: none";> <td style="border: none";>
+      <tr style="border: none"> <td style="border: none">
 	  <h3>(Watt-)Monster of the Month</h3>
     Given that people may join this group at random points in the
     season it seems unfair to have them linger at the end of the league table forever, so here's
@@ -113,7 +113,8 @@ updated.
         <center><a href="https://www.matthias-heil.co.uk/phpbb/">https://www.matthias-heil.co.uk/phpbb/</a></center>
       <li> Click on "Register" in the top right corner:
         <br><br>
-        <center><a href="registration1.jpg"><img id="myImage" src="registration1.jpg"
+        <center><a href="registration1.jpg"><img class="myImage"
+                                                 src="registration1.jpg" alt="registration"
                                                  ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
@@ -124,7 +125,8 @@ there. My offer to register you as proxy still stands. The message board is thir
         <br><br>
       <li> Read the terms and conditions (or not...) and accept:
         <br><br>
-        <center><a href="registration2.jpg"><img id="myImage" src="registration2.jpg"
+        <center><a href="registration2.jpg"><img class="myImage"
+                                                 src="registration2.jpg" alt="registration"
                                                  ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
@@ -149,14 +151,14 @@ there. My offer to register you as proxy still stands. The message board is thir
             registration has been processed.
         </ul>
         <br><br>
-        <center><a href="registration3.jpg"><img id="myImage" src="registration3.jpg"
-                                                 ></a><br><small>[click on
+        <center><a href="registration3.jpg"><img class="myImage" src="registration3.jpg"
+ alt="registration"                                                 ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
       <li> When you're done it should look a bit like this:
         <br><br>
-        <center><a href="registration4.jpg"><img id="myImage" src="registration4.jpg"
-                                                 ></a><br><small>[click on
+        <center><a href="registration4.jpg"><img class="myImage" src="registration4.jpg"
+   alt="registration"                                               ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         Now press "submit".
         <br><br>
@@ -219,8 +221,8 @@ there. My offer to register you as proxy still stands. The message board is thir
     24 hours to do the route. Make sure you follow the link <b>"Add your
       own?"</b> for the appropriate race in the race tab on this page
     <br><br>
-    <center><a href="add_your_own.jpg"><img id="myImage" src="add_your_own.jpg"
-                                            ></a></center>
+    <center><a href="add_your_own.jpg"><img class="myImage" src="add_your_own.jpg"
+ alt="add your own race"                                            ></a></center>
     <br>
     This allows our machinery to extract
     the finish time and insert it into the compound ranking. The
@@ -292,8 +294,8 @@ are a few rules anyway.
     you hide your data, you're raising questions. If you want to keep
     your data hidden, please race elsewhere.
     <br><br>
-    <center><a href="nonono.png"><img id="myImage" src="nonono.png"
-                                      ></a></center>
+    <center><a href="nonono.png"><img class="myImage" src="nonono.png"
+ alt="nonono"                                      ></a></center>
     <br>
     Similarly, it would be appreciated if you kept your strava profile
                                       public and used a HRM. However,
@@ -319,8 +321,8 @@ are a few rules anyway.
     can have a quiet word (and/or escalate things if necessary; see
     below).
     <br><br>
- <center><a href="private_message.jpg"><img id="myImage" src="private_message.jpg"
-                                      ></a></center>
+ <center><a href="private_message.jpg"><img class="myImage" src="private_message.jpg"
+   alt="private message"                                   ></a></center>
     <br><br>
   <li> No overtly political etc. discussions because it's likely to create
     tension. This is not censorship -- there are plenty of other forums
@@ -370,7 +372,7 @@ are a few rules anyway.
   <li >The race organiser can be contacted directly via
   the "Contact us" link on the registration page:
   <br><br>
-  <center><a href="contact.jpg"><img id="myImage" src="contact.jpg"
+  <center><a href="contact.jpg"><img class="myImage" src="contact.jpg" alt="contact"
                                       ></a></center>
   <br>
   You don't have to have registered to do this, though you will have
@@ -394,28 +396,32 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
   <ul>
   <li> Click on your username (here assumed to be joe_cool) in the top right corner:
     <br><br>
-    <center><a href="profile1.jpg"><img id="myImage" src="profile1.jpg"
+    <center><a href="profile1.jpg"><img class="myImage"
+                                             src="profile1.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
     <br>
   <li> Click on "Profile" in the drop-down menu:
     <br><br>
-    <center><a href="profile2.jpg"><img id="myImage" src="profile2.jpg"
+    <center><a href="profile2.jpg"><img class="myImage"
+                                             src="profile2.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
     <br>
   <li> Click on "Edit Profile" 
     <br><br>
-    <center><a href="profile3.jpg"><img id="myImage" src="profile3.jpg"
+    <center><a href="profile3.jpg"><img class="myImage"
+                                             src="profile3.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
     <br>
   <li> Fill in/update whatever you want to add/change: 
     <br><br>
-    <center><a href="profile4.jpg"><img id="myImage" src="profile4.jpg"
+    <center><a href="profile4.jpg"><img class="myImage"
+                                             src="profile4.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
@@ -429,7 +435,8 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
       <ul>
         <li> Click on the appropriate forum (here the "Races" one):
           <br><br>
-          <center><a href="subscribe_to_forum1.jpg"><img id="myImage" src="subscribe_to_forum1.jpg"
+          <center><a href="subscribe_to_forum1.jpg"><img class="myImage"
+                                              src="subscribe_to_forum1.jpg" alt="subscribe"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
           <br>
@@ -437,7 +444,8 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
         <li> Click on "Subscribe forum" (which, strangely, is already
         ticked, even though you're not subscribed yet!):
           <br><br>
-          <center><a href="subscribe_to_forum2.jpg"><img id="myImage" src="subscribe_to_forum2.jpg"
+          <center><a href="subscribe_to_forum2.jpg"><img class="myImage"
+                                              src="subscribe_to_forum2.jpg" alt="subscribe"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
 	  <br>
@@ -447,7 +455,8 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
         <li> Had enough of all these emails? Click on "Unsubscribe
         forum" and you'll be left alone again.
           <br><br>
-          <center><a href="subscribe_to_forum3.jpg"><img id="myImage" src="subscribe_to_forum3.jpg"
+          <center><a href="subscribe_to_forum3.jpg"><img class="myImage"
+                                              src="subscribe_to_forum3.jpg" alt="subscribe"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
           <br>
