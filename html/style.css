@@ -37,9 +37,9 @@ input ~ .tab {          /* grey line between tab and contents */
 
 
 /* https://stackoverflow.com/questions/23984629/how-to-set-min-font-size-in-css*/
-#myImage {
+.myImage {
     width: max(200px, min(30vw, 500px));
 }
-#tabImage {
+.tabImage {
     width: max(200px, min(30vw, 250px));
 }

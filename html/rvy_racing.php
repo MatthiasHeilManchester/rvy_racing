@@ -9,7 +9,7 @@
   </head>
   <body>
 
-    <img id="tabImage" src="rvy_racing.png" alt="rvy_racing logo">
+    <img class="tabImage" src="rvy_racing.png" alt="rvy_racing logo">
     <input type="radio" name="tabs" id="tab1" checked>
 <label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2">
 <label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3">
@@ -24,7 +24,7 @@
 
 
   <center>
-    <table border=1, style="border-spacing:10px; width:60%; background-color:white">
+    <table style="border-width: medium; border-spacing:10px; width:60%; background-color:white">
       <tr style="border: none"> <td style="border: none">
 	  <h3>(Watt-)Monster of the Month</h3>
     Given that people may join this group at random points in the
