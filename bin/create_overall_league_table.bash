@@ -35,7 +35,7 @@ echo "==========================================================================
 echo " "
 echo "Setting up/updating league table for series : "$race_series
 html_file=generated_race_data/$race_series/league_table.html
-cat $home_dir/html_templates/html_start.txt > $html_file
+# cat $home_dir/html_templates/html_start.txt > $html_file
 
 
 # Do we have users?
@@ -87,8 +87,8 @@ done
 
 
 
-echo "<h2>Overall league table for race series <em>"$race_series"</em></h2>" >>  $html_file
-echo "<table border=1>" >>  $html_file
+echo "<h2>Overall league table for race series <em>"$race_series"</em></h2>" >  $html_file
+echo "<table style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat
 rm -f .tmp_league_table2.dat
@@ -125,7 +125,7 @@ for dir in `echo $rev_dir_list`; do
     cat $dir/.tmp_html_body_for_race.html >>  $html_file
 done
 
-cat $home_dir/html_templates/html_end.txt >> $html_file
+# cat $home_dir/html_templates/html_end.txt >> $html_file
 
 
 # Now rectify ties (should really have built this in above so it's a bit of a hack to do this now but...

@@ -6,6 +6,18 @@
     <title>Rvy_racing</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>      
+      
+    <style>
+    table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 15px;
+    }
+    </style>
+
+
+
+
   </head>
   <body>
 
@@ -24,8 +36,8 @@
 
 
   <center>
-    <table style="border-width: medium; border-spacing:10px; width:60%; background-color:white">
-      <tr style="border: none"> <td style="border: none">
+    <table style="border-spacing:10px; width:60%; background-color:white;">
+      <tr style="border: none"> <td style="border: none; padding: 35px;">
 	  <h3>(Watt-)Monster of the Month</h3>
     Given that people may join this group at random points in the
     season it seems unfair to have them linger at the end of the league table forever, so here's

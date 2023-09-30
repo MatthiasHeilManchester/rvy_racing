@@ -214,7 +214,8 @@ cat ../contributed_race_list_items.html >> ../results.html
 echo "</ul>"  >> ../results.html
 
 `echo $paste_command`| awk -f ../$bin_dir/create_rank_table_for_race.awk > .tmp_file
-echo "<table border=1>" >>  $html_file
+#echo "<table border=1>" >>  $html_file
+echo "<table style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Finish time</td>  <td>Points</td> </tr>" >>  $html_file
 sort -k 5 -o .sorted_tmp_file .tmp_file
 awk 'BEGIN{count=1}{printf(" %s %i %s",$1,count," </td><td>"); for (i=2;i<=NF;i++){printf(" %s ",$i)}; print " ";count++}' .sorted_tmp_file >  .sorted_tmp_file2 

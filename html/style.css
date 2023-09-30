@@ -43,3 +43,7 @@ input ~ .tab {          /* grey line between tab and contents */
 .tabImage {
     width: max(200px, min(30vw, 250px));
 }
+
+.center {
+text-align: center;
+}
