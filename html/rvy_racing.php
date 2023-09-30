@@ -48,8 +48,8 @@
            echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";}
            else {
            $race_series="rvy_racing";
-	   #$month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
-	   $month_list=["May","Jun","Jul","Aug","Sep"];
+	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
+	   #$month_list=["May","Jun","Jul","Aug","Sep"];
 	   echo "<ul>";
            foreach ($month_list as $my_month)
 	  {
@@ -62,7 +62,7 @@
 	  }
 	  if (count($result_file_list)<1)
 	  {
-	    echo "ERROR: No league tables yet, so there are no monthly league tables either!\n";
+	    //echo "ERROR: No league tables yet, so there are no monthly league tables either!\n";
 	  }	  
 	  foreach ($result_file_list as $result_file)
 	  {

@@ -34,21 +34,23 @@ fi
 # Back home?
 home_dir=`pwd`
 
-# Winter series or summer series?
-winter=0
+# hierher Winter series or summer series?
+winter=1
 
-# hierher update year
+# hierher update year (all relative to start in oct)
+current_year_string="2023" #hierher
+next_year_string="2024" #hierher
 
 # Loop over months
 if [ $winter == 1 ]; then
     echo "Doing Winter series for Monster of the month"
+    year_string=$current_year_string
     month_string="Oct"
-    year_string="2022"
     month_list="10 11 12 1 2 3"
 else
     echo "Doing Summer series for Monster of the month"
     month_string="May"
-    year_string="2023"
+    year_string=$next_year_string
     month_list="5 6 7 8 9"
 fi
 
@@ -56,40 +58,40 @@ for month_index in `echo $month_list`; do
     cd $home_dir
     if [ $month_index -eq 10 ]; then	
 	month_string="Oct"
-	year_string="2022"
+	year_string=$current_year_string
     elif [ $month_index -eq 11 ]; then	
 	month_string="Nov"
-	year_string="2022"
+	year_string=$current_year_string
     elif [ $month_index -eq 12 ]; then	
 	month_string="Dec"
-	year_string="2022"
+	year_string=$current_year_string
     elif [ $month_index -eq 1 ]; then	
 	month_string="Jan"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 2 ]; then	
 	month_string="Feb"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 3 ]; then	
 	month_string="Mar"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 4 ]; then	
 	month_string="Apr"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 5 ]; then	
 	month_string="May"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 6 ]; then	
 	month_string="Jun"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 7 ]; then	
 	month_string="Jul"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 8 ]; then	
 	month_string="Aug"
-	year_string="2023"
+	year_string=$next_year_string
     elif [ $month_index -eq 9 ]; then	
 	month_string="Sep"
-	year_string="2023"
+	year_string=$next_year_string
     else
 	echo "Error; wrong month index: "$month_index
 	exit 1
