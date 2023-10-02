@@ -27,7 +27,7 @@ else
 {
  if (is_integer($3))
 {
- col_of_points=NF-2;
+ col_of_points=9;
  col_of_rank=3;
  points=$col_of_points;
  rank=$col_of_rank;

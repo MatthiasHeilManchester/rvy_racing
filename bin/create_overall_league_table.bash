@@ -46,7 +46,7 @@ fi
 
 # Create an associative array
 declare -A total_points
-declare -A total_races
+declare -A races_completed
 
 # Loop over all races in this series
 race_number_in_series=0
@@ -78,6 +78,15 @@ for dir in `echo $dir_list`; do
         #echo "bla hierher: " ${total_points[MatthiasHeil]}
         #echo "bla hierher: " ${total_points[whitesheep]}
         #echo "bla hierher: " ${total_points[stfmgr_65]}
+
+
+	# Get the total number of races completed
+	# Entry 7 contains time as hh:mm:ss.t so if that entry contains a colon, we have a race time
+	command=`awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print "let races_completed["$4"]=$((10#$((${races_completed["$4"]}))))+1; "}}}' results.html`
+	#echo "COMMAND: "$command
+	eval $command
+
+	# Fill up body of file with individual race results (strip out body tags)
         awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
 	sed -i 's/<\/body>//g' .tmp_html_body_for_race.html
     fi
@@ -89,11 +98,15 @@ done
 
 echo "<h2>Overall league table for race series <em>"$race_series"</em></h2>" >  $html_file
 echo "<table style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
-echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> </tr>" >>  $html_file
+echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> <td># of races</td> <td>points/race</td> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat
 rm -f .tmp_league_table2.dat
+rm -f .tmp_league_table3.dat
 for i in "${!total_points[@]}"; do
-    echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> </tr>" >> .tmp_league_table.dat
+    ncompleted=0;
+    if [ "${races_completed[$i]}" != "" ]; then ncompleted=${races_completed[$i]}; fi
+    # hierher kill echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> <td> " ${races_completed[$i]} " </td> </tr>" >> .tmp_league_table.dat
+    echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> <td> " $ncompleted " </td> </tr>" >> .tmp_league_table.dat
 done
 #echo ".tmp:"
 #cat  .tmp_league_table.dat
@@ -105,8 +118,17 @@ fi
 #echo ".tmp2:"
 #cat  .tmp_league_table2.dat
 if [ -e  .tmp_league_table2.dat ]; then
-    awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf(" %s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> $html_file
+    awk 'BEGIN{count=1;}{if ($1 == "<tr>"){printf("<tr> <td> %s </td>", count); for (i=2;i<=NF;i++){printf(" %s",$i)}; count++}; print " "}' .tmp_league_table2.dat >> .tmp_league_table3.dat
 fi
+
+# add points per race
+if [ -e  .tmp_league_table3.dat ]; then
+    # points in column 9 number of races in 12
+    awk '{if ($1 == "<tr>"){for (i=1;i<=12;i++){printf(" %s",$i)}; print " </td> <td> "; if ($12==0){print "-"}else{printf("%4.2f",$9/$12); print " </td> </tr>"}}}' .tmp_league_table3.dat >> $html_file
+fi
+
+
+
 echo "</table>" >>  $html_file
 echo "<br>" >>  $html_file
 echo "League table processed: "`date --utc`  >>  $html_file
@@ -131,5 +153,3 @@ done
 # Now rectify ties (should really have built this in above so it's a bit of a hack to do this now but...
 $home_dir/bin/rectify_ties.bash $html_file > .junk.txt
 mv .junk.txt $html_file
-
-
