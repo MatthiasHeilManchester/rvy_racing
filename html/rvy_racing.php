@@ -106,7 +106,6 @@ updated.
       <li><a href="../../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23</a> </li>
       <li><a href="../../rvy_racing_archived_seasons/rvy_racing_summer_23/league_table.html">Summer 23</a> </li>
     </ul>
-    <br><br>
     If you're interested in joining our race series, please register
     on our <a href="https://www.matthias-heil.co.uk/phpbb/">phpBB
     Discussion Board</a> (see below for detailed instructions). Once we have your rouvy username
