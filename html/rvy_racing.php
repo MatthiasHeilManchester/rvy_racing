@@ -99,13 +99,13 @@ updated.
     set up by Robi Rini, but discontinued when he moved to
     <a href="https://www.kinomap.com">kinomap</a>.
     <br><br>
+    We're currently doing the Winter Series 23-24 (from
+    October-March) with two races a week.
     The final league tables from the previous seasons have now been archived:
     <ul>
       <li><a href="../../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23</a> </li>
       <li><a href="../../rvy_racing_archived_seasons/rvy_racing_summer_23/league_table.html">Summer 23</a> </li>
     </ul>
-    We're currently doing the Winter Series 23-24 (from
-    October-March) with two races a week.
     <br><br>
     If you're interested in joining our race series, please register
     on our <a href="https://www.matthias-heil.co.uk/phpbb/">phpBB
