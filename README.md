@@ -8,6 +8,58 @@ Web machinery to host a series of races on rouvy and maintain an overall league 
 
 Below we provide details of the overall process, but the amount of detail provided is now excessive (and is likely to go out of date, so please treat with caution). The process is now fully automated and only requires two (or three) steps:
 
+
+## Update for new season
+- Move `final league_table.html` to
+  
+      rvy_racing_archived_seasons
+  
+  and update title to indicate that it's from a past season.
+  
+- Commit the lot.
+
+- Move existing (live) rvy_racing directory out of the way (but keep it!) and then create a clean checkout. Webpage is now broken.
+
+- Add
+  
+       rvy_racing/user_data.csv
+       rvy_racing/user_list.txt
+
+   from previous season to directory
+
+       master_race_data
+
+- Create (manually) the directory
+
+       master_race_data/rvy_racing/race00001
+
+-  Create first batch of official races on pi using selenium script
+   and manually add the urls displayed at the end to the newly created file
+    
+       master_race_data/rvy_racing/race00001/official_races.dat
+
+- Stage the races:
+
+      bin/bolshy_stage_races.bash rvy_racing
+
+  The page is now live again.
+
+- At the start of the winter season: Update current/next year in the script
+
+       bin/process_monster_of_the_month.bash
+
+   (current = year in which winter season starts)
+
+- Update month_list in rvy_racing.php
+
+- Machinery is now ready and subsequent races can be added with selenium script (on pi)
+  and uploaded via the webpage.
+  
+- Commit and hope for the best; keep an eye on it when processing the first few races
+
+---    
+
+
 Intervention is required to:
 ## Create a new official race 
 See below.
