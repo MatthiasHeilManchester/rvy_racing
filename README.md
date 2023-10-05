@@ -259,3 +259,30 @@ bin/bolshy_process_races.bash <race_series>
 ```
 Done.
 
+# Tidy things up if a muppet user deleted their contributed race on rouvy, blocking the processing of races (because the file, which can't found, doesn't contain the "OFFICIAL RESULTS" string...)
+
+Go to the relevant directory, back things up
+```bash
+cd contributed_race_data/rvy_racing/race00001/
+mkdir junk
+cp contributed_race* junk/
+```
+Edit the two generated file to remove the lines referring to the missing race (and for prettiness change the numbering of the remaining ones)
+```bash
+emacs contributed_race.dat
+emacs contributed_race_list_items.html
+```
+Now go to the generated race data directory to get rid of all the information that's already been downloaded.
+```bash
+cd generated_race_data/rvy_racing/race00001/
+mkdir junk
+mv downloaded_* junk/
+```
+Finally, re-stage/re-process the races
+```bash
+cd ../../..
+bin/bolshy_stage_races.bash rvy_racing
+bin/bolshy_process_races.bash rvy_racing
+```
+Don't forget to send sweary email to the rvy_racing mailing list.
+
