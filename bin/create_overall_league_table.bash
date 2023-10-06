@@ -97,8 +97,11 @@ done
 
 
 echo "<h2>Overall league table for race series <em>"$race_series"</em></h2>" >  $html_file
-echo "<table style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
-echo "<tr style=\"background-color:yellow\"> <td>Rank</td> <td>Rouvy username</td> <td>Points</td> <td># of races</td> <td>points/race</td> </tr>" >>  $html_file
+echo "<div style=\"text-align:center; font-size:medium;\">[Click on \"Points\", \"# of races\" or \"Points/Race\" to re-sort. Overall rank remains based on total number of points.]</div><br>" >>  $html_file
+
+# Crazy hacky duplication with user_csv_to_txt_and_sed.bash; if you update the stuff below update there too (it fills in the private data)
+echo "<table id=\"overall_league_table\" style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
+echo "<tr style=\"background-color:yellow\"> <th>Rank</th> <th>Rouvy username</th> <th class=\"th_sortable\" onclick=\"sortTable(6)\">Points</th> <th class=\"th_sortable\" onclick=\"sortTable(7)\"># of races</th> <th class=\"th_sortable\" onclick=\"sortTable(8)\">Points/Race</th> </tr>" >>  $html_file
 rm -f .tmp_league_table.dat
 rm -f .tmp_league_table2.dat
 rm -f .tmp_league_table3.dat
@@ -124,7 +127,7 @@ fi
 # add points per race
 if [ -e  .tmp_league_table3.dat ]; then
     # points in column 9 number of races in 12
-    awk '{if ($1 == "<tr>"){for (i=1;i<=12;i++){printf(" %s",$i)}; print " </td> <td> "; if ($12==0){print "-"}else{printf("%4.2f",$9/$12); print " </td> </tr>"}}}' .tmp_league_table3.dat >> $html_file
+    awk '{if ($1 == "<tr>"){for (i=1;i<=12;i++){printf(" %s",$i)}; print " </td> <td> "; if ($12==0){print "0"}else{printf("%4.2f",$9/$12); print " </td> </tr>"}}}' .tmp_league_table3.dat >> $html_file
 fi
 
 

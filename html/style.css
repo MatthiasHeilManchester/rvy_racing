@@ -44,6 +44,17 @@ input ~ .tab {          /* grey line between tab and contents */
     width: max(200px, min(30vw, 250px));
 }
 
+
+
+/* class for triggering sorting of table when clicking on header */
+.th_sortable {
+    cursor: url(click-to-sort_thumbnail.png), nw-resize;
+}
+
 .center {
 text-align: center;
 }
+
+
+
+

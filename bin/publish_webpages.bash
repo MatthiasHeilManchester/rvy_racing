@@ -71,6 +71,7 @@ for dir in `echo $dir_list`; do
     cp ../html/style.css $dir
     cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
+        cp ../html/click-to-sort_thumbnail.png $dir
     cp ../html/nonono.png $dir
     cp ../html/add_your_own.jpg $dir
     cp ../html/private_message.jpg $dir
