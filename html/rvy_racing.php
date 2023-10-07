@@ -368,7 +368,7 @@ are a few rules anyway.
 <div class="tab content4">
   
   <h1>Rvy Racing: The league table</h1>
-  <?php readfile("league_table.html"); ?>
+  <?php readfile("league_table_wed.html"); ?>
 
 </div>
 

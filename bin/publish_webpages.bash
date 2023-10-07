@@ -18,7 +18,7 @@ cd generated_race_data
 # Extracting generated data for all series and races
 # https://superuser.com/questions/513304/how-to-combine-the-tar-command-with-find
 # Also use -h in tar follow links so make a deep copy
-find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' -o -iname 'league_table.html' \) -print0 | tar -hcf  generated_html_files.tar --null -T -
+find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' -o -iname 'league_table*.html' \) -print0 | tar -hcf  generated_html_files.tar --null -T -
 
 
 
@@ -71,7 +71,7 @@ for dir in `echo $dir_list`; do
     cp ../html/style.css $dir
     cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
-        cp ../html/click-to-sort_thumbnail.png $dir
+    cp ../html/click-to-sort_thumbnail.png $dir
     cp ../html/nonono.png $dir
     cp ../html/add_your_own.jpg $dir
     cp ../html/private_message.jpg $dir

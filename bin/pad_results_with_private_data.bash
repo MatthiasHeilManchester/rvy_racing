@@ -40,6 +40,12 @@ dir_list=`ls -d generated_html/$race_series*`
 for dir in `echo $dir_list`; do
     cd $dir
     file_list='league_table.html'
+    if [ -e league_table_wed.html ]; then
+	file_list=$file_list" league_table_wed.html"
+    fi
+    if [ -e league_table_sat.html ]; then
+	file_list=$file_list" league_table_sat.html"
+    fi
     file_list=$file_list" "`find . -name 'results.html'`
     for file in `echo $file_list`; do
 	if [ -e $file ]; then
