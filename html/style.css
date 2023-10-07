@@ -48,7 +48,9 @@ input ~ .tab {          /* grey line between tab and contents */
 
 /* class for triggering sorting of table when clicking on header */
 .th_sortable {
-    cursor: url(click-to-sort_thumbnail.png), nw-resize;
+    /*cursor: url(click-to-sort_thumbnail.png), nw-resize;*/
+    cursor: ns-resize;
+
 }
 
 .center {
