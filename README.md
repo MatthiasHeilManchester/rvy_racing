@@ -23,11 +23,25 @@ Below we provide details of the overall process, but the amount of detail provid
 - Add
   
        rvy_racing/user_data.csv
-       rvy_racing/user_list.txt
 
-   from previous season to directory
+   from previous season to race series sub directory in
 
        master_race_data
+
+  In that directory, run
+
+       ../../bin/user_csv_to_txt_and_sed.bash  user_data.csv
+
+  (downloading the csv file from the phpbb discussion board first if there are new users) to re-generate the user_list.txt file and the script
+
+       pad_results_with_private_data.bash
+
+  that fills in the private data in race results and league tables.
+  
+
+  
+
+  
 
 - Create (manually) the directory
 
