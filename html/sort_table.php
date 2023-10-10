@@ -318,13 +318,13 @@ function sort_column_in_table(th,n) {
       switching = true;
       //Each time a switch is done, increase this count by 1:
       switchcount ++;      
-    } else {
+    } /* else {
       /*If no switching has been done AND the direction is "asc",
       set the direction to "desc" and run the while loop again.*/
       if (switchcount == 0 && dir == "asc") {
         dir = "desc";
         switching = true;
-      }
+      } */
     }
   }
 }

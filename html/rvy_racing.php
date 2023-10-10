@@ -8,11 +8,34 @@
     <script src="script.js"></script>      
       
     <style>
-    table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 15px;    	
-    }
+      
+      table, th, td {
+	  border: 1px solid black;
+	  border-collapse: collapse;
+	  padding: 15px;    	
+      }
+
+      
+      .select_league_table_buttons {
+	  display: inline-block;
+	  padding: 5px 10px;
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  outline: none;
+	  color: black;
+	  background-color: yellow;
+	  border: none;
+	  border-radius: 15px;
+	  box-shadow: 0 2px #999;
+      }
+      
+      .row_of_league_table_buttons {
+	  white-space:nowrap;
+      }
+      
+
+    
     </style>
 
 
@@ -358,8 +381,7 @@ are a few rules anyway.
 
   <h1>Rvy Racing: The races</h1>
 
-    <?php readfile("all_races_in_series.html"); ?>
-  
+<?php readfile("all_races_in_series.html"); ?>
 
 </div>
 
@@ -368,7 +390,18 @@ are a few rules anyway.
 <div class="tab content4">
   
   <h1>Rvy Racing: The league table</h1>
-  <?php readfile("league_table_wed.html"); ?>
+
+<span class="row_of_league_table_buttons">
+<button id="full_league_table_button" class="select_league_table_buttons" onclick="show_league_table(1)">Full league table</button>
+<button id="wed_league_table_button"  class="select_league_table_buttons" style="background-color:lightyellow;" onclick="show_league_table(2)">League table from Wednesday races only</button>
+<button id="sat_league_table_button"  class="select_league_table_buttons" style="background-color:lightyellow;" onclick="show_league_table(3)">League table from Saturday races only</button>
+</span>
+
+<hr>
+
+<div id="full_league_table_div" style="display:block;"> <?php readfile("league_table.html"); ?></div>
+<div id="wed_league_table_div" style="display:none;"> <?php readfile("league_table_wed.html"); ?></div>
+<div id="sat_league_table_div" style="display:none;"> <?php readfile("league_table_sat.html"); ?></div>
 
 </div>
 
@@ -486,9 +519,127 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
 
     
 
-  <script>
+<script>
 
-    /* https://www.w3schools.com/howto/howto_js_sort_table.asp  */
+
+// Function to make full (1), wed-only (2) or sat-only (3) league
+// table visible
+function show_league_table(i_table) {
+
+switch(i_table) {
+  case 1:
+    document.getElementById("full_league_table_div").style.display = "block";
+    document.getElementById("wed_league_table_div").style.display = "none";
+    document.getElementById("sat_league_table_div").style.display = "none";
+    document.getElementById("full_league_table_button").style.background = "yellow";
+    document.getElementById("wed_league_table_button").style.background = "lightyellow";
+    document.getElementById("sat_league_table_button").style.background = "lightyellow";
+    break;
+  case 2:
+    // code block
+    document.getElementById("full_league_table_div").style.display = "none";
+    document.getElementById("wed_league_table_div").style.display = "block";
+    document.getElementById("sat_league_table_div").style.display = "none";
+    document.getElementById("full_league_table_button").style.background = "lightyellow";
+    document.getElementById("wed_league_table_button").style.background = "yellow";
+    document.getElementById("sat_league_table_button").style.background = "lightyellow";
+    break;
+  case 3:
+    document.getElementById("full_league_table_div").style.display = "none";
+    document.getElementById("wed_league_table_div").style.display = "none";
+    document.getElementById("sat_league_table_div").style.display = "block";
+    document.getElementById("full_league_table_button").style.background = "lightyellow";
+    document.getElementById("wed_league_table_button").style.background = "lightyellow";
+    document.getElementById("sat_league_table_button").style.background = "yellow";
+    break;
+  default:
+    // code block
+}
+ 
+
+}
+
+
+
+
+// Specify table column header that this is called from
+// (clicking on "this" object calls this function; we retrieve the
+// enclosing table by going up the dom hierarchy...
+// Sort entries in the n-th column.
+// Based on: https://www.w3schools.com/howto/howto_js_sort_table.asp
+function sort_column_in_table(th,n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  // oldtable = document.getElementById("myTable");
+  table = th.parentNode.parentNode;
+  var header_row=table.getElementsByTagName("th");
+  console.log(header_row);
+  for (i = 0; i < (header_row.length); i++) {
+  header_row[i].style.backgroundColor='yellow';
+  }
+  th.style.backgroundColor='lightyellow';
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc"; 
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+        var lhs=0;
+        // strip out "=" signs from draws
+        lhs=parseFloat(x.innerHTML.replace(/=/,''));
+	var rhs=0;
+	rhs=parseFloat(y.innerHTML.replace(/=/,''));
+	if (dir == "asc") {
+            //if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+	    if (lhs > rhs) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        //if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        if (lhs < rhs) {		    
+          //if so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;      
+    }  //hierher else {
+     // /*If no switching has been done AND the direction is "asc",
+     // set the direction to "desc" and run the while loop again.*/
+     // if (switchcount == 0 && dir == "asc") {
+     //   dir = "desc";
+     //   switching = true;
+     // } 
+     // } 
+  }
+}
+
+
+
+  
+// hierher kill 
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("overall_league_table");
