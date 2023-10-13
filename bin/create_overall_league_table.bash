@@ -150,8 +150,8 @@ for sub_series_number in `echo $sub_series_number_list`; do
     
     # Crazy hacky duplication with user_csv_to_txt_and_sed.bash; if you update the stuff below update there too (it fills in the private data)
     echo "<table id=\"league_table"$sub_series_postfix"\" style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
-    echo "<tr style=\"background-color:yellow;\"> <th class=\"th_sortable\" style=\"background-color:lightyellow;\" onclick=\"sort_column_in_table(this,0)\">Rank<span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> <th>Rouvy username</th> <th class=\"th_sortable\" onclick=\"sort_column_in_table(this,6)\">Points<span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> <th class=\"th_sortable\" onclick=\"sort_column_in_table(this,7)\"><span style=\"white-space:nowrap;\">
-# of races</span><span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> <th class=\"th_sortable\" onclick=\"sort_column_in_table(this,8)\">Points/Race<span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> </tr>" >>  $html_file
+    echo "<tr style=\"background-color:yellow;\"> <th class=\"th_sortable\" style=\"background-color:gold;\" onclick=\"sort_column_in_table('asc',this,0)\">Rank<span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> <th>Rouvy username</th> <th class=\"th_sortable\" onclick=\"sort_column_in_table('desc',this,6)\">Points<span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> <th class=\"th_sortable\" onclick=\"sort_column_in_table('desc',this,7)\"><span style=\"white-space:nowrap;\">
+# of races</span><span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> <th class=\"th_sortable\" onclick=\"sort_column_in_table('desc',this,8)\">Points/Race<span style=\"font-size:xx-large;color:Gray;\">&#8597;</span></th> </tr>" >>  $html_file
     rm -f .tmp_league_table.dat
     rm -f .tmp_league_table2.dat
     rm -f .tmp_league_table3.dat
