@@ -45,6 +45,11 @@ input ~ .tab {          /* grey line between tab and contents */
 }
 
 
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 15px;
+}
 
 /* class for triggering sorting of table when clicking on header */
 .th_sortable {
@@ -55,6 +60,26 @@ input ~ .tab {          /* grey line between tab and contents */
 
 .center {
 text-align: center;
+}
+
+
+
+.select_league_table_buttons {
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: black;
+    background-color: yellow;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 2px #999;
+}
+
+.row_of_league_table_buttons {
+    white-space:nowrap;
 }
 
 

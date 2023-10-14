@@ -197,6 +197,8 @@ done
 html_file="../results.html"
 cat ../$bin_dir/../html_templates/html_start.txt > $html_file
 
+echo "<div style=\"text-align:center;\"><button class=\"select_league_table_buttons\"  onclick=\"back_to_rvy_racing_homepage(2)\">Back to rvy_racing home page</button></div><hr>" >> $html_file
+
 
 # https://coderwall.com/p/cobcna/bash-removing-leading-zeroes-from-a-variable
 day=$(echo $day | sed 's/^0*//')

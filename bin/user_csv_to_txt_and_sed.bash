@@ -82,10 +82,6 @@ echo 'results_file_with_table=$1' >> pad_results_with_private_data.bash
 awk -F',' -v results_file='$results_file_with_table' 'BEGIN{first_line_done=0}
     {if (first_line_done==0){first_line_done=1}else{gsub("\"","",$2);gsub("\"","",$3);gsub("\"","",$4);gsub("\"","",$6);gsub("\"","",$7);;gsub("\"","",$8); if ($8=="Allow"){print "sed -i \x27s/<td> "$2" <\\/td>/<td> ",$2," <\\/td><td> ",$3," <\\/td><td> ",$4," <\\/td><td> ",$6," <\\/td><td> ",$7," <\\/td>/g\x27 ",results_file}else{print "sed -i \x27s/<td> "$2" <\\/td>/<td> ",$2," <\\/td><td> ","<small>--<\\/small>"," <\\/td><td> ","<small>--<\\/small>"," <\\/td><td> ","<small>--<\\/small>"," <\\/td><td> ","<small>--<\\/small>"," <\\/td>/g\x27 ", results_file}}}' $csv_file >> pad_results_with_private_data.bash
 
-
-#hierher kill
-#echo "sed -i 's/<th class=\"th_sortable\">Rouvy username<\/th> /<th class=\"th_sortable\">Rouvy username<\/th> <th class=\"th_sortable\">First name<\/th> <th class=\"th_sortable\">Surname<\/th> <th class=\"th_sortable\">YOB<\/th>  <th class=\"th_sortable\">Gender<\/th> /g' "'$results_file_with_table' >> pad_results_with_private_data.bash
-
 # Crazy hacky duplication from create_overall_league_table.bash; when updating make sure you escape all the "/" in the closing tags (or rewrite in a more easy to maintain way!)
 echo "sed -i 's/<th>Rouvy username<\/th>/<th>Rouvy username<\/th><th>First name<\/th><th>Surname<\/th><th>YOB<\/th><th>Gender<\/th>/g' "'$results_file_with_table' >> pad_results_with_private_data.bash
 

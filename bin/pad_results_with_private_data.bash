@@ -49,7 +49,10 @@ for dir in `echo $dir_list`; do
     file_list=$file_list" "`find . -name 'results.html'`
     for file in `echo $file_list`; do
 	if [ -e $file ]; then
-	    $bash_script_for_sed_based_padding $file
+	    n_gender_as_sign_of_having_been_padded=`grep -c Gender $file`
+	    if [ $n_gender_as_sign_of_having_been_padded -eq 0 ]; then
+		$bash_script_for_sed_based_padding $file
+	    fi
 	fi
     done
     cd $home_dir

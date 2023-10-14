@@ -123,13 +123,7 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		# Prefix 10# declares numbers to be decimals in base 10
 		# https://stackoverflow.com/questions/21049822/value-too-great-for-base-error-token-is-09
 		command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=$((10#$((${total_points["$4"]}))))+$((10#"$10")); "}}' results.html`
-		#echo "hierher "$command
-		#exit
 		eval $command
-		#echo "bla hierher: " ${total_points[MatthiasHeil]}
-		#echo "bla hierher: " ${total_points[whitesheep]}
-		#echo "bla hierher: " ${total_points[stfmgr_65]}
-		
 		
 		# Get the total number of races completed
 		# Entry 7 contains time as hh:mm:ss.t so if that entry contains a colon, we have a race time
@@ -140,6 +134,11 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		# Fill up body of file with individual race results (strip out body tags)
 		awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
 		sed -i 's/<\/body>//g' .tmp_html_body_for_race.html
+		
+		# Get rid of button line
+		cp .tmp_html_body_for_race.html .tmp_html_body_for_race2.html
+		awk '{if (index($0,"back_to_rvy_racing_homepage") == 0){print $0}}' .tmp_html_body_for_race2.html > .tmp_html_body_for_race.html
+		rm -f .tmp_html_body_for_race2.html
 	    fi
 	fi
 	cd $home_dir
@@ -158,7 +157,6 @@ for sub_series_number in `echo $sub_series_number_list`; do
     for i in "${!total_points[@]}"; do
 	ncompleted=0;
 	if [ "${races_completed[$i]}" != "" ]; then ncompleted=${races_completed[$i]}; fi
-	# hierher kill echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> <td> " ${races_completed[$i]} " </td> </tr>" >> .tmp_league_table.dat
 	echo "<tr>  <td> "$i" </td> <td> " ${total_points[$i]} " </td> <td> " $ncompleted " </td> </tr>" >> .tmp_league_table.dat
     done
     #echo ".tmp:"
