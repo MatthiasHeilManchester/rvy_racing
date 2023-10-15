@@ -277,9 +277,6 @@ for dir in `echo $dir_list`; do
         cat ../official_race_list_items.html >> ../results.html
         cat ../contributed_race_list_items.html >> ../results.html
         echo "</ul>"  >> ../results.html
-        
-        # Copy race info into tmp file which can be merged when processing the race
-        cp ../results.html .results_start.html
         echo "Race hasn't been raced or processed yet!" >> ../results.html
     fi
 

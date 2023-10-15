@@ -18,7 +18,7 @@ cd generated_race_data
 # Extracting generated data for all series and races
 # https://superuser.com/questions/513304/how-to-combine-the-tar-command-with-find
 # Also use -h in tar follow links so make a deep copy
-find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' -o -iname 'league_table.html' \) -print0 | tar -hcf  generated_html_files.tar --null -T -
+find . \( -iname 'results.html' -o -iname 'all_races_in_series.html' -o -iname 'league_table*.html' -o -iname 'style.css' -o -iname 'script.js' \) -print0 | tar -hcf  generated_html_files.tar --null -T -
 
 
 
@@ -69,8 +69,10 @@ fi
 for dir in `echo $dir_list`; do
     echo "Copying generic web stuff for dir: "$dir
     cp ../html/style.css $dir
+    cp ../html/script.js $dir
     cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
+    cp ../html/click-to-sort_thumbnail.png $dir
     cp ../html/nonono.png $dir
     cp ../html/add_your_own.jpg $dir
     cp ../html/private_message.jpg $dir
@@ -86,6 +88,12 @@ for dir in `echo $dir_list`; do
     cp ../html/profile2.jpg $dir
     cp ../html/profile3.jpg $dir
     cp ../html/profile4.jpg $dir
+    race_results_dir_list=`find $dir -name race????? -type d `
+    for race_results_dir in `echo $race_results_dir_list`; do
+	cp ../html/style.css $race_results_dir
+	cp ../html/script.js $race_results_dir
+    done
+	
 done
 
 

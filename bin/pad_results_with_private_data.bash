@@ -14,9 +14,9 @@ fi
 # Name of race series
 race_series=$1
 
-if [ ! -e  generated_html ]; then
-    echo -e "\033[0;31mERROR:\033[0m Script must be run in home directory so generated_html is"
-    echo "accessible as ./generated_html"
+if [ ! -e  generated_race_data ]; then
+    echo -e "\033[0;31mERROR:\033[0m Script must be run in home directory so generated_race_data is"
+    echo "accessible as ./generated_race_data"
     echo " "
     echo "You are in: "`pwd`
     echo " "
@@ -36,14 +36,23 @@ fi
 
 
 home_dir=`pwd`
-dir_list=`ls -d generated_html/$race_series*`
+dir_list=`ls -d generated_race_data/$race_series*`
 for dir in `echo $dir_list`; do
     cd $dir
     file_list='league_table.html'
+    if [ -e league_table_wed.html ]; then
+	file_list=$file_list" league_table_wed.html"
+    fi
+    if [ -e league_table_sat.html ]; then
+	file_list=$file_list" league_table_sat.html"
+    fi
     file_list=$file_list" "`find . -name 'results.html'`
     for file in `echo $file_list`; do
 	if [ -e $file ]; then
-	    $bash_script_for_sed_based_padding $file
+	    n_gender_as_sign_of_having_been_padded=`grep -c Gender $file`
+	    if [ $n_gender_as_sign_of_having_been_padded -eq 0 ]; then
+		$bash_script_for_sed_based_padding $file
+	    fi
 	fi
     done
     cd $home_dir

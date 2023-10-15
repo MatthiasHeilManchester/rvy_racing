@@ -153,5 +153,13 @@ for month_index in `echo $month_list`; do
 	sed -i "s/<h2>Overall league table/<h1>(Watt-)Monster of the Month<\/h1><h2>Overall league table/" $month_dir/league_table.html
     fi
 
+    # Add header and footer
+    cp $month_dir/league_table.html .tmp_body
+    echo "<div style=\"text-align:center;\"><button class=\"select_league_table_buttons\"  onclick=\"back_to_rvy_racing_homepage(1)\">Back to rvy_racing home page</button></div><hr>" > .tmp_body2
+    cat html_templates/html_start.txt .tmp_body2 .tmp_body html_templates/html_end.txt > $month_dir/league_table.html
+    cp html/script.js $month_dir
+    cp html/style.css $month_dir
+    rm .tmp_body .tmp_body2
+    
 done
 

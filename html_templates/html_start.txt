@@ -5,13 +5,6 @@
     <title>Rvy Racing</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-    <style>
-    table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    padding: 15px;
-    }
-    </style>
   </head>
   <body>
 

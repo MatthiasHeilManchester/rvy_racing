@@ -6,18 +6,6 @@
     <title>Rvy_racing</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>      
-      
-    <style>
-    table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-	padding: 15px;
-    }
-    </style>
-
-
-
-
   </head>
   <body>
 
@@ -358,8 +346,7 @@ are a few rules anyway.
 
   <h1>Rvy Racing: The races</h1>
 
-    <?php readfile("all_races_in_series.html"); ?>
-  
+<?php readfile("all_races_in_series.html"); ?>
 
 </div>
 
@@ -368,7 +355,18 @@ are a few rules anyway.
 <div class="tab content4">
   
   <h1>Rvy Racing: The league table</h1>
-  <?php readfile("league_table.html"); ?>
+
+<span class="row_of_league_table_buttons">
+<button id="full_league_table_button" class="select_league_table_buttons" onclick="show_league_table(1)">Full league table</button>
+<button id="wed_league_table_button"  class="select_league_table_buttons" style="background-color:lightyellow;" onclick="show_league_table(2)">League table from Wednesday races only</button>
+<button id="sat_league_table_button"  class="select_league_table_buttons" style="background-color:lightyellow;" onclick="show_league_table(3)">League table from Saturday races only</button>
+</span>
+
+<hr>
+
+<div id="full_league_table_div" style="display:block; font-size:smaller;"> <?php readfile("league_table.html"); ?></div>
+<div id="wed_league_table_div" style="display:none; font-size:smaller;"> <?php readfile("league_table_wed.html"); ?></div>
+<div id="sat_league_table_div" style="display:none; font-size:smaller;"> <?php readfile("league_table_sat.html"); ?></div>
 
 </div>
 
@@ -485,5 +483,9 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
 </div>
 
     
+
   </body>
+  
+
+  
 </html>
