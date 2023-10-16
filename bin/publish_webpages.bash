@@ -68,8 +68,10 @@ else
 fi
 for dir in `echo $dir_list`; do
     echo "Copying generic web stuff for dir: "$dir
-    cp ../html/style.css $dir
-    cp ../html/script.js $dir
+    mkdir $dir/js
+    mkdir $dir/css
+    cp ../html/style.css $dir/css
+    cp ../html/script.js $dir/js
     cp ../html/rvy_racing.php $dir
     cp ../html/rvy_racing.png $dir
     cp ../html/click-to-sort_thumbnail.png $dir
