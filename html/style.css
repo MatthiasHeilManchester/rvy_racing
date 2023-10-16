@@ -62,12 +62,22 @@ table, th, td {
 text-align: center;
 }
 
+a {
+    color: rgb(0, 0, 120);
+    text-decoration: none;
+}
 
+a:hover {
+    color:#00A0C6; 
+    text-decoration:none; 
+    cursor:pointer;  
+}
 
 .select_league_table_buttons {
     display: inline-block;
     padding: 5px 10px;
     cursor: pointer;
+    margin-left: 4%;
     text-align: center;
     text-decoration: none;
     outline: none;
@@ -82,6 +92,14 @@ text-align: center;
     white-space:nowrap;
 }
 
+.up_down_arrow_in_league_table {
+    font-size:xx-large;
+    color:Gray;
+    font-family:'Times New Roman',sans-serif;
+}
 
-
+body {
+    #font-family: 'Times New Roman', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
 

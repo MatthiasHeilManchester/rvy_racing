@@ -230,7 +230,7 @@ for dir in `echo $dir_list`; do
             echo "Route: " $route_title
             echo " "
             
-            echo "<h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" > .race.html
+            echo "<hr><h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" > .race.html
             echo "<b>Route:</b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> .race.html
             echo "<ul>" >> .race.html
 
@@ -277,7 +277,7 @@ for dir in `echo $dir_list`; do
         cat ../official_race_list_items.html >> ../results.html
         cat ../contributed_race_list_items.html >> ../results.html
         echo "</ul>"  >> ../results.html
-        echo "Race hasn't been raced or processed yet!" >> ../results.html
+        echo "Race hasn't been raced or processed yet!<br>" >> ../results.html
     fi
 
     # Provide link in summary file -- either to race results (if they've been processed)
@@ -286,10 +286,11 @@ for dir in `echo $dir_list`; do
     if [ $not_processed_yet_count != 0 ]; then
         # Undo increment from above
         let race_number=$race_number-1
-        echo "Race not raced/processed yet!<ul> <li><a href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day" "${month_names[${month}]}" "$year"\">Add your own?</a><li><a href=\"../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day" "${month_names[${month}]}" "$year"\">Find the most popular race</a></ul>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
+	route_title_with_padded_space=`echo $route_title | sed 's/ /%20/g'`
+        echo "Race not raced/processed yet!<br><br><div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Add your own?</a><a class=\"select_league_table_buttons\" href=\"../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day" "${month_names[${month}]}" "$year"\">Find the most popular race</a></div>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
     else
         race_results_file=`basename $dir`/results.html
-        echo "<a href=\"$race_results_file\">Race results</a>" >> .race.html
+        echo "<div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"$race_results_file\">Race results</a></div>" >> .race.html
     fi
     
     # Add to race info for overall series (reverse order)

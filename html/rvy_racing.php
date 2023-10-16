@@ -24,8 +24,7 @@
 
 
   <center>
-    <table style="border-spacing:10px; width:60%; background-color:white;">
-      <tr style="border: none"> <td style="border: none; padding: 35px;">
+    <div style="border: 1px solid black; background-color:rgb(250,250,250); border-radius:10px;   box-shadow: 4px 4px lightgray; padding: 10px; width:60%;">
 	  <h3>(Watt-)Monster of the Month</h3>
     Given that people may join this group at random points in the
     season it seems unfair to have them linger at the end of the league table forever, so here's
@@ -60,7 +59,7 @@
 		   $year=substr($result_file,$year_start,4);
 		   $month_start=$string_length-26;
 		   $month=substr($result_file,$month_start,3);
-		   echo "<li ><a href=\"$result_file\">".$month." ".$year."</a> <br>";
+		   echo "<li style=\"text-align:left;\"><a href=\"$result_file\">".$month." ".$year."</a> <br>";
 		   }
 		   }
 		   echo "</ul>";
@@ -69,8 +68,7 @@ Related to this: Feel free to join our races any time to try it out. There's no 
 protection, so just turn up. If you then decide to join us (see below for instructions)
 your previous efforts will be incorporated retrospectively next time the league table is
 updated. 
-      </td> </tr>
-    </table>
+    </div>
     </center>
       
     <h1>Rvy Racing: Welcome</h1>
