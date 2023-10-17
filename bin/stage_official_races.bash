@@ -287,9 +287,10 @@ for dir in `echo $dir_list`; do
         # Undo increment from above
         let race_number=$race_number-1
 	# https://rocketvalidator.com/html-validation/bad-value-x-for-attribute-href-on-element-a-illegal-character-in-query
-	route_title_with_padded_space=`echo $route_title | sed 's/ /%20/g' | sed 's/|/%7C/g' | sed 's/\[/%5B/g' `
+	route_title_with_padded_space=`echo $route_title | sed 's/ /%20/g' | sed 's/|/%7C/g' | sed 's/\[/%5B/g' | sed 's/&gt;/__rvy_padding_gt_sign_rvy_padding__/g' `
 	echo "hierher: old " $route_title
 	echo "hierher: new " $route_title_with_padded_space
+	# hierher echo $route_title_with_padded_space | sed 's/&gt;/__rvy_padding_gt_sign_rvy_padding__/g'
         echo "Race not raced/processed yet!<br><br><div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Add your own?</a><a class=\"select_league_table_buttons\" href=\"../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Find the most popular race</a></div>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
     else
         race_results_file=`basename $dir`/results.html

@@ -16,8 +16,9 @@
  $route_id=$_GET['route_id'];
 
  // Route title 
- $route_title=$_GET['route_title'];
-
+ $route_title_padded=$_GET['route_title'];
+ $route_title=str_replace("__rvy_padding_gt_sign_rvy_padding__","&gt;",$route_title_padded);
+ 
  // Name of race series
  $race_series=$_GET['race_series'];
 
