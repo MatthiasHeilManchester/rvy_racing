@@ -1,12 +1,12 @@
-
-<!DOCTYPE HTML>  
-<html>
-<head>
-<style>
-.error {color: #FF0000;}
-</style>
-</head>
-<body>  
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rvy Racing</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
 
 <?php
 
@@ -77,10 +77,10 @@ If your race registration page is
 <br>
 
 <form action="input_user_contributed_race_form_part2.php" method="post">
-  Please enter the race ID: <input type="text" name="newly_contributed_race_url_number">
+  Please enter the race ID: <input style="display:block;" type="text" name="newly_contributed_race_url_number">
   <br>
   <br>
-  <input type="submit" name="submit" value="Submit">  
+  <input style="display:block;" type="submit" name="submit" value="Submit">  
 </form>
 
 <br>
