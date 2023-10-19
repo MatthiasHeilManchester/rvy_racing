@@ -1,22 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rvy Racing</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
 
-<!DOCTYPE HTML>  
-<html>
-<head>
-<style>
-.error {color: #FF0000;}
-</style>
-<style>
-  table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 15px;
-  }
-  .center_text {
-      text-align: center;
-  }
-</style>
-</head>
-<body>  
 
   <?php
 

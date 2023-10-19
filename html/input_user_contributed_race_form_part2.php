@@ -1,12 +1,12 @@
-
-<!DOCTYPE HTML>  
-<html>
-<head>
-<style>
-.error {color: #FF0000;}
-</style>
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Rvy Racing</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
   
 <?php
  
