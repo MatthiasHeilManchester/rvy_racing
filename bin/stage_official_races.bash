@@ -230,7 +230,7 @@ for dir in `echo $dir_list`; do
             echo "Route: " $route_title
             echo " "
             
-            echo "<hr><h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2><br>" > .race.html
+            echo "<div class=\"race_blob\"><h2>Race "$race_number_in_series" : " $day " " ${month_names[${month}]} " " $year "</h2>" > .race.html
             echo "<b>Route:</b> <a href=\"https://my.rouvy.com/virtual-routes/detail/"$route_id_from_race1"\">"$route_title"</a>" >> .race.html
             echo "<ul>" >> .race.html
 
@@ -291,11 +291,21 @@ for dir in `echo $dir_list`; do
 	echo "hierher: old " $route_title
 	echo "hierher: new " $route_title_with_padded_space
 	# hierher echo $route_title_with_padded_space | sed 's/&gt;/__rvy_padding_gt_sign_rvy_padding__/g'
-        echo "Race not raced/processed yet!<br><br><div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Add your own?</a><a class=\"select_league_table_buttons\" href=\"../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Find the most popular race</a></div>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
+
+	find_most_popular_race_php_string="'../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"'"
+	echo "find_most_popular_race_php_string : "$find_most_popular_race_php_string
+
+	
+	
+        echo "Race not raced/processed yet!<br><br><div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Add your own?</a><a class=\"select_league_table_buttons\" href=\"javascript:javascript:void(0)\" onClick=\"javascript:display_cyclist_while_loading_most_popular_route($find_most_popular_race_php_string)\">Find the most popular race</a></div>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute
+
+	#echo "Race not raced/processed yet!<br><br><div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"../../html/input_user_contributed_race_form.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Add your own?</a><a class=\"select_league_table_buttons\" href=\"../../html/find_most_popular_race.php?route_id="$route_id_from_race1"&route_title="$route_title_with_padded_space"&race_number="$race_number_in_series"&race_series="$race_series"&race_date_string="$orig_day"%20"${month_names[${month}]}"%20"$year"\">Find the most popular race</a></div>" >> .race.html # Note: needs to be relative, so it's accesible from var/www etc. not absolute 
+	
     else
         race_results_file=`basename $dir`/results.html
         echo "<div style=\"font-size:small;\"><a class=\"select_league_table_buttons\" href=\"$race_results_file\">Race results</a></div>" >> .race.html
     fi
+    echo "</div>" >> .race.html
     
     # Add to race info for overall series (reverse order)
     touch $home_dir/generated_race_data/$race_series/all_races_in_series.html
@@ -311,8 +321,12 @@ done
 
 
 # Tell us what we're doing (on top!)
-echo "<h2>Overall race programme for race series <em>"$race_series"</em></h2>" > .tmp.txt
+echo "<div class=\"blurrable_during_popular_race_load\">" > .tmp.txt
+echo "<h2>Overall race programme for race series <em>"$race_series"</em></h2>" >> .tmp.txt
 echo "Race programme compiled: "`date --utc` >> .tmp.txt
+echo "</div>" >> .tmp.txt
+echo "<img id=\"most_popular_route_loader\" style=\"display:none;\" src=\"cyclist_displayed_while_finding_most_popular_rides.gif\" alt=\"loader\">" >> .tmp.txt
+#echo "<img src=\"cyclist_displayed_while_finding_most_popular_rides.gif\" alt=\"bla\">" >> .tmp.txt
 cat .tmp.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html > .tmp2.txt
 mv .tmp2.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html
 

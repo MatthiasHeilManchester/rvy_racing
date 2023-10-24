@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Rvy_racing</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>      
+    <script src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -341,10 +342,11 @@ are a few rules anyway.
 
 
 <div class="tab content3">
-
-  <h1>Rvy Racing: The races</h1>
-
-<?php readfile("all_races_in_series.html"); ?>
+  
+  <div class="blurrable_during_popular_race_load">
+    <h1>Rvy Racing: The races</h1>
+  </div>
+  <?php readfile("all_races_in_series.html"); ?>
 
 </div>
 

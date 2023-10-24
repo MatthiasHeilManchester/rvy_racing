@@ -148,7 +148,7 @@ for sub_series_number in `echo $sub_series_number_list`; do
     echo "<div style=\"text-align:left; font-size:medium;\">[Click on \"Rank\", \"Points\", \"# of races\" or \"Points/Race\" to re-sort. Overall rank remains based on total number of points.]</div><br>" >>  $html_file
     
     # Crazy hacky duplication with user_csv_to_txt_and_sed.bash; if you update the stuff below update there too (it fills in the private data)
-    echo "<table id=\"league_table"$sub_series_postfix"\" style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
+    echo "<table id=\"league_table"$sub_series_postfix"\" style=\"border-spacing:10px; width:60%; background-color:white; font-size:smaller;\">" >>  $html_file
     echo "<tr style=\"background-color:yellow;\"> <th class=\"th_sortable\" style=\"background-color:gold;\" onclick=\"sort_column_in_table('asc',this,0)\">Rank<span class=\"up_down_arrow_in_league_table\">&#8597;</span></th> <th>Rouvy username</th> <th class=\"th_sortable\" onclick=\"sort_column_in_table('desc',this,6)\">Points<span class=\"up_down_arrow_in_league_table\">&#8597;</span></th> <th class=\"th_sortable\" onclick=\"sort_column_in_table('desc',this,7)\"><span style=\"white-space:nowrap;\"># of races</span><span class=\"up_down_arrow_in_league_table\">&#8597;</span></th> <th class=\"th_sortable\" onclick=\"sort_column_in_table('desc',this,8)\">Points/Race<span class=\"up_down_arrow_in_league_table\">&#8597;</span></th> </tr>" >>  $html_file
     rm -f .tmp_league_table.dat
     rm -f .tmp_league_table2.dat
