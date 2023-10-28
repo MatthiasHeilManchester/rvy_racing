@@ -216,6 +216,7 @@ cat ../contributed_race_list_items.html >> ../results.html
 echo "</ul>"  >> ../results.html
 
 `echo $paste_command`| awk -f ../$bin_dir/create_rank_table_for_race.awk > .tmp_file
+
 #echo "<table border=1>" >>  $html_file
 echo "<table style=\"border-spacing:10px; width:60%; background-color:white;\">" >>  $html_file
 echo "<tr style=\"background-color:yellow\"> <th>Rank</th> <th>Rouvy username</th> <th>Finish time</th>  <th>Points</th> </tr>" >>  $html_file

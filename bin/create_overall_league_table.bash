@@ -66,7 +66,12 @@ for sub_series_number in `echo $sub_series_number_list`; do
     #echo "Title:   "$sub_series_title_postfix
 
     html_file=generated_race_data/$race_series/league_table$sub_series_postfix.html
+    active_users_json_file=generated_race_data/$race_series/head_to_head_active_users$sub_series_postfix.json
+    race_results_json_file=generated_race_data/$race_series/head_to_head_race_results$sub_series_postfix.json
 
+    echo "bla" >> $active_users_json_file
+    echo "bla" >> $race_results_json_file
+    
     # Do we have users?
     if [ ! -e ./master_race_data/$race_series/user_list.txt ]; then
 	echo -e "\033[0;31mERROR:\033[0m No users for series, i.e. master_race_data/$race_series/user_list.txt doesn't exist!"
@@ -94,7 +99,7 @@ for sub_series_number in `echo $sub_series_number_list`; do
 	let race_number_in_series=$race_number_in_series+1
 	echo " "
 	echo "Doing race "$race_number_in_series" in series"
-	
+
 	# Go into race
 	cd $dir
 	if [ ! -e results.html ]; then
@@ -119,23 +124,32 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		rm .tmp_html_body_for_race.html
 	    else
 		#echo "Including race from sub-series"
+
+		echo "Race number: "$race_number_in_series >> .head_to_head_race_results_json_file.json
+		echo "writing json files from"`pwd`
 		
 		# Prefix 10# declares numbers to be decimals in base 10
 		# https://stackoverflow.com/questions/21049822/value-too-great-for-base-error-token-is-09
 		command=`awk '{if ($1=="<tr><td>"){print "let total_points["$4"]=$((10#$((${total_points["$4"]}))))+$((10#"$10")); "}}' results.html`
 		eval $command
 		
+		# Output username and points
+		awk '{if ($1=="<tr><td>"){print $4" "$10"\n"}}' results.html >> .head_to_head_race_results_json_file.json
+		
 		# Get the total number of races completed
 		# Entry 7 contains time as hh:mm:ss.t so if that entry contains a colon, we have a race time
 		command=`awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print "let races_completed["$4"]=$((10#$((${races_completed["$4"]}))))+1; "}}}' results.html`
 		#echo "COMMAND: "$command
 		eval $command
+
+		# Active users hierher are they really active? What about dnf etc.
+		awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print $4"\n"}}}' results.html >> .head_to_head_active_users_json_file.json
 		
 		# Fill up body of file with individual race results (strip out body tags)
 		awk 'BEGIN{dont_print=1}{if (dont_print!=1){print $0}; if ($1=="<body>"){dont_print=0}; if ($1=="</body>"){dont_print=1};}' results.html > .tmp_html_body_for_race.html
 		sed -i 's/<\/body>//g' .tmp_html_body_for_race.html
 		
-		# Get rid of button line
+		# Get rid of bottom line
 		cp .tmp_html_body_for_race.html .tmp_html_body_for_race2.html
 		awk '{if (index($0,"back_to_rvy_racing_homepage") == 0){print $0}}' .tmp_html_body_for_race2.html > .tmp_html_body_for_race.html
 		rm -f .tmp_html_body_for_race2.html
@@ -211,5 +225,10 @@ for sub_series_number in `echo $sub_series_number_list`; do
     $home_dir/bin/rectify_ties.bash $html_file > .junk.txt
     mv .junk.txt $html_file
 
+
+    echo "hierher have yet to post-process "$active_users_json_file " and "$race_results_json_file
+    cat $active_users_json_file
+    cat $race_results_json_file
+    
 #end of loop over subseries
 done
