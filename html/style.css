@@ -85,7 +85,7 @@ a:hover {
     background-color: yellow;
     border: none;
     border-radius: 15px;
-    box-shadow: 0 2px #999;
+    box-shadow: 0 2px lightgray;
 }
 
 .row_of_league_table_buttons {
