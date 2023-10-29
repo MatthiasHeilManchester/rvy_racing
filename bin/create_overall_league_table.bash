@@ -133,8 +133,11 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		eval $command
 		
 		# Output username and points
-		awk '{if ($1=="<tr><td>"){print $4" "$10}}' results.html >> .head_to_head_race_results_json_file.json
-		
+		awk '{if (($1=="<tr><td>")&&($7!="DNR")&&($7!="Other")){print $4" "$10}}' results.html >> .head_to_head_race_results_json_file.json
+
+		echo "Column 7: "
+		awk '{if ($1=="<tr><td>"){print $7}}' results.html 
+
 		# Get the total number of races completed
 		# Entry 7 contains time as hh:mm:ss.t so if that entry contains a colon, we have a race time
 		command=`awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print "let races_completed["$4"]=$((10#$((${races_completed["$4"]}))))+1; "}}}' results.html`
@@ -251,7 +254,11 @@ for sub_series_number in `echo $sub_series_number_list`; do
 	    for active_user in `echo $active_user_list`; do
 		name=`grep $active_user $race_results_file | awk '{print $1}'`
 		points=`grep $active_user $race_results_file | awk '{print $2}'`
-		echo "{\"rouvy_username\":\""$name"\",\"points\":"$points"}," >> head_to_head_race_results$sub_series_postfix.json 
+		if [ "$name" != "" ]; then
+		    if [ "$points" != "" ]; then
+			echo "{\"rouvy_username\":\""$name"\",\"points\":"$points"}," >> head_to_head_race_results$sub_series_postfix.json
+		    fi
+		fi
 	    done
 	    echo -e "]},{\n" >> head_to_head_race_results$sub_series_postfix.json
 	    
