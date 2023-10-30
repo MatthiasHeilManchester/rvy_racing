@@ -75,13 +75,12 @@ function evaluate_head_to_head(form){
     }
     
     // Assemble result for display
-    var result='<div style="padding:1vw;"><span class="head_to_head_result_user">'+user1+"</span> "+
-	'<span class="head_to_head_result_wins">'+user1_wins+"</span>"+
-	'<span class="head_to_head_result_colon">:</span>'+
-	'<span class="head_to_head_result_wins">'+user2_wins+"</span>"+
-	'<span class="head_to_head_result_user">'+user2+"</span> </div>"+
-	"<br>"+
-	'<span class="head_to_head_result_sub_info">('+n_draw+" draws; "+n_joint_races+" joint races)</span>";
+    var result='<div style="padding:1vw;"><table style="border:0px;border-collapse:collapse;padding:0px;"><tr><td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_user">'+user1+"</span></td> "+
+	'<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_wins">'+user1_wins+"</span></td>"+
+	'<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_colon">:</span></td>'+
+	'<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_wins">'+user2_wins+"</span></td>"+
+	'<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_user">'+user2+"</span> </div></td></tr>"+
+	'<tr><td colspan="5" style="border:0px;border-collapse:collapse;padding:20px;"><span class="head_to_head_result_sub_info">('+n_draw+" draws; "+n_joint_races+" joint races)</span></td><tr></table>";
     
     // ...and display it
     document.getElementById("head_to_head_outcome").innerHTML=result;
