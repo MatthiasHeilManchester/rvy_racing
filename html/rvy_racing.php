@@ -355,8 +355,11 @@ are a few rules anyway.
   <h1>Rvy Racing: The league table</h1>
 
 
-
-  <div id="head_to_head">
+<hr>
+<div id="hhead_to_head">
+  <center>
+    <table id="head_to_head_table">
+      <tr><td style="border:0px;padding:0px;">
     <button id="head_to_head_hide_results_button" onclick="choose_display_head_to_head('form')">X</button>
     <form id="head_to_head_form" action="#" onsubmit="evaluate_head_to_head(this);">
       <div style="text-align:center;">
@@ -374,12 +377,15 @@ are a few rules anyway.
 	    </td></tr>
       </table>
       </div>
-      <input type="submit" value="Who wins the head to head?" class="head_to_head_action_button">
+      <center><input type="submit" value="Who wins the head to head?" class="head_to_head_action_button"></center>
     </form>
     <div id="head_to_head_outcome" style="text-align:center;"></div>
+    </td></tr>
+    </table>
+    </center>
     </div>
 
-
+  <hr style="border: 1px solid black;">
 
 <span class="row_of_league_table_buttons">
 <button id="full_league_table_button" class="select_league_table_buttons" onclick="show_league_table(1)">Full league table</button>

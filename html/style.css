@@ -105,9 +105,14 @@ body {
 
 
 #head_to_head{
-    width: 70%;
+}
+
+#head_to_head_table{
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 19px;
+    -webkit-border-radius: 19px;
+    -moz-border-radius: 19px;
+    overflow: hidden;
     text-align: center;
     margin: 3%;
     box-shadow: 2px 2px lightgray;
