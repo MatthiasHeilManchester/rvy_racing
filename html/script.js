@@ -4,7 +4,8 @@
 //===================================================================
 function display_cyclist_while_loading_most_popular_route(url_of_most_popular_route_php_script){
     window.location.assign(url_of_most_popular_route_php_script);
-    $("#most_popular_route_loader").attr('src', 'https://i.stack.imgur.com/SBv4T.gif');
+    $("#most_popular_route_loader").attr('src', 'rvy_racing.png');
+    //$("#most_popular_route_loader").attr('src', 'https://i.stack.imgur.com/SBv4T.gif');
     //)cyclist_displayed_while_finding_most_popular_rides.gif');
     $("#most_popular_route_loader").css('display','block');
     $("#most_popular_route_loader").css('visibility','visible');

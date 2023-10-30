@@ -325,7 +325,7 @@ echo "<div class=\"blurrable_during_popular_race_load\">" > .tmp.txt
 echo "<h2>Overall race programme for race series <em>"$race_series"</em></h2>" >> .tmp.txt
 echo "Race programme compiled: "`date --utc` >> .tmp.txt
 echo "</div>" >> .tmp.txt
-echo "<img id=\"most_popular_route_loader\" style=\"display:none;\" src=\"cyclist_displayed_while_finding_most_popular_rides.gif\" alt=\"loader\">" >> .tmp.txt
+echo "<img id=\"most_popular_route_loader\" style=\"display:none;\" src=\"rvy_racing.png\" alt=\"loader\">" >> .tmp.txt
 #echo "<img src=\"cyclist_displayed_while_finding_most_popular_rides.gif\" alt=\"bla\">" >> .tmp.txt
 cat .tmp.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html > .tmp2.txt
 mv .tmp2.txt $home_dir/generated_race_data/$race_series/all_races_in_series.html
