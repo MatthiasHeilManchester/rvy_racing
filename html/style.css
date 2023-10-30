@@ -103,3 +103,66 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
+
+#head_to_head{
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    margin: 3%;
+    box-shadow: 2px 2px lightgray;
+    background-color:rgb(250,250,250);
+}
+
+.head_to_head_result_user{
+    font-size: x-large;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+.head_to_head_result_wins{
+    font-size: xx-large;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1vw 1vw;
+    background-color: white;
+}
+.head_to_head_result_colon{
+    font-size: xx-large;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+.head_to_head_result_sub_info{
+    font-size: large;
+    padding-left: 3vw;
+    padding-right: 3vw;
+}
+.head_to_head_select_button{
+    border: 1px solid black;
+    font-size: small;
+    cursor: pointer;
+    padding: 1vw;
+    color: black;
+    background-color: lightyellow;
+    border-radius: 5px;
+    padding: 1vw 1vw;
+    margin: 2vw;
+    box-shadow: 2px 2px lightgray;
+
+}
+.head_to_head_action_button{
+    text-align: center;
+    border: 1px solid black;
+    display: block;
+    font-size: small;
+    cursor: pointer;
+    padding: 1vw;
+    color: black;
+    background-color: yellow;
+    border-radius: 5px;
+    padding: 1vw 1vw;
+    margin: 2vw;
+    box-shadow: 2px 2px lightgray;
+
+}
+#head_to_head_hide_results_button{
+    display: none;
+}

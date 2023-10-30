@@ -354,6 +354,33 @@ are a few rules anyway.
   
   <h1>Rvy Racing: The league table</h1>
 
+
+
+  <div id="head_to_head">
+    <button id="head_to_head_hide_results_button" onclick="choose_display_head_to_head('form')">X</button>
+    <form id="head_to_head_form" action="#" onsubmit="evaluate_head_to_head(this);">
+      <div style="text-align:center;">
+      <table style="text-align:center;border:0px;border-collapse:collapse;padding:0px;">
+	<tr><td style="border:0px;padding:0px;">
+	    <select id="user1_drop_down" class="head_to_head_select_button">
+	      <option value="MatthiasHeil">MatthiasHeil</option>
+	    </select>
+	  </td><td style="border:0px;padding:0px;">
+	    <span style="font-size:medium;">vs</span>
+	  </td><td style="border:0px;padding:0px;">	    
+	    <select id="user2_drop_down" class="head_to_head_select_button">
+	      <option value="nvdb">nvdb</option>
+	    </select>
+	    </td></tr>
+      </table>
+      </div>
+      <input type="submit" value="Who wins the head to head?" class="head_to_head_action_button">
+    </form>
+    <div id="head_to_head_outcome" style="text-align:center;"></div>
+    </div>
+
+
+
 <span class="row_of_league_table_buttons">
 <button id="full_league_table_button" class="select_league_table_buttons" onclick="show_league_table(1)">Full league table</button>
 <button id="wed_league_table_button"  class="select_league_table_buttons" style="background-color:lightyellow;" onclick="show_league_table(2)">League table from Wednesday races only</button>
@@ -362,9 +389,9 @@ are a few rules anyway.
 
 <hr>
 
-<div id="full_league_table_div" style="display:block; font-size:smaller;"> <?php readfile("league_table.html"); ?></div>
-<div id="wed_league_table_div" style="display:none; font-size:smaller;"> <?php readfile("league_table_wed.html"); ?></div>
-<div id="sat_league_table_div" style="display:none; font-size:smaller;"> <?php readfile("league_table_sat.html"); ?></div>
+<div id="full_league_table_div" style="display:block; font-size:small;"> <?php readfile("league_table.html"); ?></div>
+<div id="wed_league_table_div" style="display:none; font-size:small;"> <?php readfile("league_table_wed.html"); ?></div>
+<div id="sat_league_table_div" style="display:none; font-size:small;"> <?php readfile("league_table_sat.html"); ?></div>
 
 </div>
 
@@ -481,6 +508,24 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
 </div>
 
     
+<script>
+  
+  // Read the file containing the active users when the page is built.
+  // Needed for drop-down menu in head-to-head comparison
+  var xhttp = new XMLHttpRequest();
+  // final arg (false): (not a-)synchronous request 
+  xhttp.open("GET","head_to_head_active_users.json",false);
+  xhttp.send();
+  var user_list=JSON.parse(xhttp.responseText)["active_users"];
+  var n_user=user_list.length;
+  for (var i=0;i<n_user;i++){	 
+      var element = document.getElementById('user1_drop_down');
+      element.options[element.length] = new Option(user_list[i],user_list[i]);	 
+      element = document.getElementById('user2_drop_down');
+      element.options[element.length] = new Option(user_list[i],user_list[i]);
+  }
+</script>
+
 
   </body>
   

@@ -1,4 +1,96 @@
 
+      
+// Function to switch between displaying form or results for head-to-head
+function choose_display_head_to_head(what_to_show) {
+    var form = document.getElementById("head_to_head_form");
+    var result = document.getElementById("head_to_head_outcome");
+    if (what_to_show == "result") {
+	result.style.display = "block";
+	form.style.display = "none";
+	document.getElementById("head_to_head_hide_results_button").style.display = 'block';
+    } else if (what_to_show == "form"){
+	result.style.display = "none";
+	form.style.display = "block";
+	document.getElementById("head_to_head_hide_results_button").style.display = 'none';
+    } else {
+	console.log("Error. what_to_show = ",what_to_show);
+    }	  
+}
+
+
+
+// Function to evaluate the head-to-head evaluation on the league table;
+// argument points to the form via which the user selects the two racers
+function evaluate_head_to_head(form){
+    
+    // Get the two racers from the form
+    var user1=form.user1_drop_down.value;
+    var user2=form.user2_drop_down.value;
+    
+    // Read the file containing the race outcomes
+    var xhttp = new XMLHttpRequest();
+    // Note: final arg (false): (not a-)synchronous request 
+    xhttp.open("GET","head_to_head_race_results.json",false);
+    xhttp.send();
+    var race_data=JSON.parse(xhttp.responseText)
+    
+    
+    // loop over the races
+    var n_races=race_data.length;
+    var user1_wins=0;
+    var user2_wins=0;
+    var n_draw=0;
+    var n_joint_races=0;
+    var n_races=race_data.length;
+    for (var i=0; i<n_races; i++) {
+	var n_racers=race_data[i]["results"].length;
+	var user1_points=-1;
+	var user2_points=-1;
+	var n_found=0;
+	for (var j=0;j<n_racers;j++){
+	    if (race_data[i]["results"][j]["rouvy_username"] == user1){
+		user1_points=race_data[i]["results"][j]["points"];
+		n_found++;
+	    }
+	    if (race_data[i]["results"][j]["rouvy_username"] == user2){
+		user2_points=race_data[i]["results"][j]["points"];
+		n_found++;
+	    }
+	    if (n_found == 2){
+		break;
+	    }
+	}
+	if ( (user1_points >= 0) && (user2_points >= 0) ){
+	    n_joint_races++;
+	    if (user1_points > user2_points){
+		user1_wins++;
+	    }
+	    if (user1_points < user2_points){
+		user2_wins++;
+	    }
+	    if (user1_points == user2_points){
+		n_draw++;
+	    }		      
+	}
+    }
+    
+    // Assemble result for display
+    var result='<div style="padding:1vw;"><span class="head_to_head_result_user">'+user1+"</span> "+
+	'<span class="head_to_head_result_wins">'+user1_wins+"</span>"+
+	'<span class="head_to_head_result_colon">:</span>'+
+	'<span class="head_to_head_result_wins">'+user2_wins+"</span>"+
+	'<span class="head_to_head_result_user">'+user2+"</span> </div>"+
+	"<br>"+
+	'<span class="head_to_head_result_sub_info">('+n_draw+" draws; "+n_joint_races+" joint races)</span>";
+    
+    // ...and display it
+    document.getElementById("head_to_head_outcome").innerHTML=result;
+    
+    // toggle to displaying results
+    choose_display_head_to_head('result');
+}
+
+
 //===================================================================
 // Function to navigate to rvy home page. Specify number dir levels
 // we need to ascend to get above the rvy_racing home directory (in
