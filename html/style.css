@@ -105,6 +105,7 @@ body {
 
 
 #head_to_head{
+    width: 70%;
     border: 1px solid black;
     border-radius: 5px;
     text-align: center;
