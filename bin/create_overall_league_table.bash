@@ -76,6 +76,16 @@ for sub_series_number in `echo $sub_series_number_list`; do
 	echo -e "{\n\"active_users\" : [" > $active_users_json_file
 	echo -e "[\n{" > $race_results_json_file
     fi
+
+    
+    active_users_js_file=""
+    race_results_js_file=""
+    if [ "$sub_series_postfix" == "" ]; then
+	active_users_js_file=generated_race_data/$race_series/head_to_head_active_users.js
+	race_results_js_file=generated_race_data/$race_series/head_to_head_race_results.js
+	echo -e "export const active_users ='{\"user_list\": [\\" > $active_users_js_file
+	echo -e "[\n{" > $race_results_js_file
+    fi
     
     # Do we have users?
     if [ ! -e ./master_race_data/$race_series/user_list.txt ]; then
@@ -132,6 +142,7 @@ for sub_series_number in `echo $sub_series_number_list`; do
 
 		if [ "$sub_series_postfix" == "" ]; then
 		    echo "Race "$race_number_in_series > .head_to_head_race_results_json_file.json
+		    echo "Race "$race_number_in_series > .raw_race_results_list.txt 
 		fi
 		
 		# Prefix 10# declares numbers to be decimals in base 10
@@ -142,6 +153,8 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		if [ "$sub_series_postfix" == "" ]; then
 		    # Output username and points
 		    awk '{if (($1=="<tr><td>")&&($7!="DNR")&&($7!="Other")){print $4" "$10}}' results.html >> .head_to_head_race_results_json_file.json
+		    awk '{if (($1=="<tr><td>")&&($7!="DNR")&&($7!="Other")){print $4" "$10}}' results.html >> .raw_race_results_list.txt 
+
 		fi
 		
 		# Get the total number of races completed
@@ -151,8 +164,10 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		eval $command
 
 		if [ "$sub_series_postfix" == "" ]; then
-		    # Active users hierher are they really active? What about dnf etc.
+		    # Active users hierher are they really active? What about dnf etc
 		    awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print $4}}}' results.html >> .head_to_head_active_users_json_file.json
+		    awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print $4}}}' results.html >> .raw_user_list.txt
+		    awk '{if ($1=="<tr><td>"){pos_of_colon=match($7,":"); if (pos_of_colon!=0){print "{\"name\":\""$4"\"},\\"}}}' results.html >> .head_to_head_active_users_json_file.js
 		fi
 		
 		# Fill up body of file with individual race results (strip out body tags)
@@ -284,6 +299,65 @@ for sub_series_number in `echo $sub_series_number_list`; do
 		
 	    fi
 	fi
+
+
+
+
+	if [ -e race00001/.head_to_head_active_users_json_file.js ]; then
+	    
+	    # Find active users
+	    cat race*/.head_to_head_active_users_json_file.js > .tmp_combined_user_file
+	    # sed to replace just one occurence of comma with closing bracket:
+	    # https://stackoverflow.com/questions/8081297/sed-to-change-string-in-a-file-only-once
+	    sort -u .tmp_combined_user_file | tac | sed '0,/,\\/s//\\/' | tac >> head_to_head_active_users$sub_series_postfix.js
+	    echo "]}'; export default active_users;" >> head_to_head_active_users$sub_series_postfix.js
+
+	    cat race*/.raw_user_list.txt  > .tmp_combined_user_file
+	    if [ -e .tmp_combined_user_file ]; then
+		active_user_list="`sort -u .tmp_combined_user_file | awk '{if ($1!=""){print $1" "}}'`"
+		
+		# Loop over races
+		race_results_list="`find race* -name '.raw_race_results_list.txt'`"
+		for race_results_file in `echo $race_results_list`; do
+		    
+		    # Start header
+		    head -n 1 $race_results_file | awk '{print "\"name\": \"Race"$2"\",\n\"results\":\n["}' >> head_to_head_race_results$sub_series_postfix.js 
+		    
+		    # Now filter out active users
+		    for active_user in `echo $active_user_list`; do
+			name=`grep $active_user $race_results_file | awk '{print $1}'`
+			points=`grep $active_user $race_results_file | awk '{print $2}'`
+			if [ "$name" != "" ]; then
+			    if [ "$points" != "" ]; then
+				echo "{\"rouvy_username\":\""$name"\",\"points\":"$points"}," >> head_to_head_race_results$sub_series_postfix.js
+			    fi
+			fi
+		    done
+		    echo -e "]},{" >> head_to_head_race_results$sub_series_postfix.js
+		    
+		    # remove bloody trailing commas
+		    # https://unix.stackexchange.com/questions/485004/remove-trailing-commas-from-invalid-json-to-make-it-valid
+		    sed -i ':begin;$!N;s/,\n]/\n]/g;tbegin;P;D' head_to_head_race_results$sub_series_postfix.js 
+		    
+		done
+		
+		# ...and the final one I'm doing by brute force
+		tac head_to_head_race_results$sub_series_postfix.js  | awk 'BEGIN{done=0}{if (done==0){if ($1=="]},{"){print "]}]"; done=1}}else{print $0}}' | tac > .junk.txt
+		mv .junk.txt head_to_head_race_results$sub_series_postfix.js
+
+		# Add continuation line
+		awk '{print $0"\\"}' head_to_head_race_results$sub_series_postfix.js > .junk.txt
+		echo "export const race_results ='{\"race_list\": \\" > .junk_head.txt
+		echo "}'; export default race_results;" > .junk_tail.txt
+		cat .junk_head.txt .junk.txt .junk_tail.txt > head_to_head_race_results$sub_series_postfix.js
+		
+
+	       fi
+	    
+	fi
+
+
+	
 
 	cd $back_to_where_we_were
     fi
