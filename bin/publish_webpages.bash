@@ -90,6 +90,7 @@ for dir in `echo $dir_list`; do
     cp ../html/profile2.jpg $dir
     cp ../html/profile3.jpg $dir
     cp ../html/profile4.jpg $dir
+    cp ../html/head_to_head_module.js $dir
     race_results_dir_list=`find $dir -name race????? -type d `
     for race_results_dir in `echo $race_results_dir_list`; do
 	cp ../html/style.css $race_results_dir
