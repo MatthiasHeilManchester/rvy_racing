@@ -11,7 +11,6 @@ import active_users from "./head_to_head_active_users.js";
 
 var user_list=JSON.parse(active_users)["user_list"];
 var n_user=user_list.length;
-console.log("n_user",n_user);
 for (var i=0; i<n_user; i++) {
     var element = document.getElementById('user1_drop_down');
     element.options[element.length] = new Option(user_list[i]["name"],user_list[i]["name"]);	 
