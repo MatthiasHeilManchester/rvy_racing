@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Rvy_racing</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>      
+    <script src="js/script.js"></script>
+
+    
+    <script>
+      // Hmm, I'm a bit mystified by this construction
+      // but it works. This creates an empty thing (module)
+      const head_to_head_module = {};  
+    </script>
+    
+    <script type="module">
+      
+      // Get the processing function for head to head stuff from
+      // the js module file; note however that the entire module
+      // file appears to get processed, so the actions in it are
+      // are performed (e.g. assigning the entries in the drop-down
+      // menus)
+      import { evaluate_head_to_head } from "./head_to_head_module.js";
+
+      //...and add it to the module
+      head_to_head_module.evaluate_head_to_head = evaluate_head_to_head;
+      
+    </script>
+
   </head>
   <body>
 
@@ -16,8 +38,6 @@
 <label for="tab3">Races</label><input type="radio" name="tabs" id="tab4">
 <label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5">
 <label for="tab5">Contact/FAQ</label>
-
-<!-- <input type="radio" name="tabs" id="tab6" /><label for="tab6">Contact</label> -->
 
 
 <div class="tab content1">
@@ -356,12 +376,12 @@ are a few rules anyway.
 
 
 <hr>
-<div id="hhead_to_head">
+<div id="hierher_kill_head_to_head">
   <center>
     <table id="head_to_head_table">
       <tr><td style="border:0px;padding:0px;">
     <button id="head_to_head_hide_results_button" onclick="choose_display_head_to_head('form')">X</button>
-    <form id="head_to_head_form" action="#" onsubmit="evaluate_head_to_head(this);">
+    <form id="head_to_head_form" action="#" onsubmit="head_to_head_module.evaluate_head_to_head(this);">
       <div style="text-align:center;">
       <table style="text-align:center;border:0px;border-collapse:collapse;padding:0px;">
 	<tr><td style="border:0px;padding:0px;">
@@ -512,116 +532,7 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
 </center>
 
 </div>
-
-
-<script type="module">
   
-  // Read the file containing the active users when the page is built.
-  // Needed for drop-down menu in head-to-head comparison
-  import active_users from "./head_to_head_active_users.js";
-  
-  // hierher kill
-  // var xhttp = new XMLHttpRequest();
-  // // final arg (false): (not a-)synchronous request 
-  // xhttp.open("GET","head_to_head_active_users.json",false);
-  // xhttp.send();
-  // var user_list=JSON.parse(xhttp.responseText)["active_users"];
-  
-  
-  var user_list=JSON.parse(active_users)["user_list"];
-  var n_user=user_list.length;
-  for (var i=0; i<n_user; i++) {
-      var element = document.getElementById('user1_drop_down');
-      element.options[element.length] = new Option(user_list[i]["name"],user_list[i]["name"]);	 
-      element = document.getElementById('user2_drop_down');
-      element.options[element.length] = new Option(user_list[i]["name"],user_list[i]["name"]);
-  }
-
-  import race_results from "./head_to_head_race_results.js";
-
-  console.log("race_results ",race_results);
-
-
-//</script>
-//<script type="module">
-
-  // Function to evaluate the head-to-head evaluation on the league table;
-  // argument points to the form via which the user selects the two racers
-  function evaluate_head_to_head(form){
-      
-      // Get the two racers from the form
-      var user1=form.user1_drop_down.value;
-      var user2=form.user2_drop_down.value;
-      
-      // Read the file containing the race results
-      //import race_results from "./head_to_head_race_results.js";
-      
-      // hierher kill 
-      // // Read the file containing the race outcomes
-      // var xhttp = new XMLHttpRequest();
-      // Note: final arg (false): (not a-)synchronous request 
-      // xhttp.open("GET","head_to_head_race_results.json",false);
-      // xhttp.send();
-      // var race_data=JSON.parse(xhttp.responseText)
-      
-      var race_data=JSON.parse(race_results)["race_list"];
-      
-      // loop over the races
-      var n_races=race_data.length;
-      var user1_wins=0;
-      var user2_wins=0;
-      var n_draw=0;
-      var n_joint_races=0;
-      var n_races=race_data.length;
-      for (var i=0; i<n_races; i++) {
-	  var n_racers=race_data[i]["results"].length;
-	  var user1_points=-1;
-	  var user2_points=-1;
-	  var n_found=0;
-	  for (var j=0;j<n_racers;j++){
-	      if (race_data[i]["results"][j]["rouvy_username"] == user1){
-		  user1_points=race_data[i]["results"][j]["points"];
-		  n_found++;
-	      }
-	      if (race_data[i]["results"][j]["rouvy_username"] == user2){
-		  user2_points=race_data[i]["results"][j]["points"];
-		  n_found++;
-	      }
-	      if (n_found == 2){
-		  break;
-	      }
-	  }
-	  if ( (user1_points >= 0) && (user2_points >= 0) ){
-	      n_joint_races++;
-	      if (user1_points > user2_points){
-		  user1_wins++;
-	      }
-	      if (user1_points < user2_points){
-		  user2_wins++;
-	      }
-	      if (user1_points == user2_points){
-		  n_draw++;
-	      }		      
-	  }
-      }
-      
-      // Assemble result for display
-      var result='<div style="padding:1vw;"><table style="border:0px;border-collapse:collapse;padding:0px;"><tr><td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_user">'+user1+"</span></td> "+
-	  '<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_wins">'+user1_wins+"</span></td>"+
-	  '<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_colon">:</span></td>'+
-	  '<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_wins">'+user2_wins+"</span></td>"+
-	  '<td style="border:0px;border-collapse:collapse;padding:0px;"><span class="head_to_head_result_user">'+user2+"</span> </div></td></tr>"+
-	  '<tr><td colspan="5" style="border:0px;border-collapse:collapse;padding:20px;"><center><span class="head_to_head_result_sub_info">('+n_draw+" bla draws; "+n_joint_races+" joint races)</span></center></td><tr></table>";
-      
-      // ...and display it
-      document.getElementById("head_to_head_outcome").innerHTML=result;
-      
-      // toggle to displaying results
-      choose_display_head_to_head('result');
-  }
-
-</script>
-
   </body>
   
 
