@@ -376,12 +376,12 @@ are a few rules anyway.
 
 
 <hr>
-<div id="hierher_kill_head_to_head">
+<div id="kill_head_to_head_div">
   <center>
     <table id="head_to_head_table">
       <tr><td style="border:0px;padding:0px;">
     <button id="head_to_head_hide_results_button" onclick="choose_display_head_to_head('form')">X</button>
-    <form id="head_to_head_form" action="#" onsubmit="head_to_head_module.evaluate_head_to_head(this);">
+    <form id="head_to_head_form" action="#head_to_head_div" onsubmit="head_to_head_module.evaluate_head_to_head(this);">
       <div style="text-align:center;">
       <table style="text-align:center;border:0px;border-collapse:collapse;padding:0px;">
 	<tr><td style="border:0px;padding:0px;">
