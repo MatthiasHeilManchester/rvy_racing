@@ -14,7 +14,11 @@ function choose_display_head_to_head(what_to_show) {
 	document.getElementById("head_to_head_hide_results_button").style.display = 'none';
     } else {
 	console.log("Error. what_to_show = ",what_to_show);
-    }	  
+    }
+    // Now make sure the right tab gets displayed
+    //document.getElementById("tab1").checked = false;
+    //document.getElementById("tab4").checked = true;
+
 }
 
 

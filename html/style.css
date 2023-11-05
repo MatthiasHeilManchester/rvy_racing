@@ -171,4 +171,7 @@ body {
 }
 #head_to_head_hide_results_button{
     display: none;
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
 }

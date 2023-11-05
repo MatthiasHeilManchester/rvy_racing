@@ -10,7 +10,7 @@
     
     <script>
       // Hmm, I'm a bit mystified by this construction
-      // but it works. This creates an empty thing (module)
+      // but it works. This creates an empty class
       const head_to_head_module = {};  
     </script>
     
@@ -23,7 +23,8 @@
       // menus)
       import { evaluate_head_to_head } from "./head_to_head_module.js";
 
-      //...and add it to the module
+      //...and add it to the class. Not sure why it's not simply visible
+      // by itself, given that I've just imported it. Oh well
       head_to_head_module.evaluate_head_to_head = evaluate_head_to_head;
       
     </script>
@@ -33,13 +34,17 @@
 
     <img class="tabImage" src="rvy_racing.png" alt="rvy_racing logo">
     <input type="radio" name="tabs" id="tab1" checked>
-<label for="tab1">Welcome</label><input type="radio" name="tabs" id="tab2">
-<label for="tab2">The rules</label><input type="radio" name="tabs" id="tab3">
-<label for="tab3">Races</label><input type="radio" name="tabs" id="tab4">
-<label for="tab4">League Table</label><input type="radio" name="tabs" id="tab5">
-<label for="tab5">Contact/FAQ</label>
-
-
+    <label for="tab1">Welcome</label>
+    <input type="radio" name="tabs" id="tab2">
+    <label for="tab2">The rules</label>
+    <input type="radio" name="tabs" id="tab3">
+    <label for="tab3">Races</label>
+    <input type="radio" name="tabs" id="tab4">
+    <label for="tab4">League Table</label>
+    <input type="radio" name="tabs" id="tab5">
+    <label for="tab5">Contact/FAQ</label>
+    
+    
 <div class="tab content1">
 
 
@@ -376,12 +381,13 @@ are a few rules anyway.
 
 
 <hr>
-<div id="kill_head_to_head_div">
+<div id="head_to_head_div">
   <center>
     <table id="head_to_head_table">
       <tr><td style="border:0px;padding:0px;">
     <button id="head_to_head_hide_results_button" onclick="choose_display_head_to_head('form')">X</button>
-    <form id="head_to_head_form" action="#head_to_head_div" onsubmit="head_to_head_module.evaluate_head_to_head(this);">
+    <form id="head_to_head_form" action="javascript:void(0);" onsubmit="head_to_head_module.evaluate_head_to_head(this);">
+      <input type="hidden" id="reload_from_head_to_head" name="reload_from_head_to_head" value="yes">
       <div style="text-align:center;">
       <table style="text-align:center;border:0px;border-collapse:collapse;padding:0px;">
 	<tr><td style="border:0px;padding:0px;">
@@ -404,6 +410,8 @@ are a few rules anyway.
     </table>
     </center>
     </div>
+
+
 
   <hr style="border: 1px solid black;">
 
