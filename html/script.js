@@ -22,6 +22,14 @@ function choose_display_head_to_head(what_to_show) {
 }
 
 
+//===================================================================
+// Function to navigate to rvy home page from top level html directory
+//===================================================================
+function back_to_rvy_racing_homepage_from_top_level_html_dir() {
+    var dir="../generated_html/rvy_racing/rvy_racing.php";
+    console.log(dir);
+    window.location.href=dir;
+}
 
 
 //===================================================================

@@ -72,7 +72,7 @@ chmod a+x $tmp_dir/.tmp.command
 source $tmp_dir/.tmp.command
 rm $tmp_dir/.tmp.command
 count=0
-echo "<table border=1>"
+echo "<table class=\"head_to_head_table\">"
 echo "<tr style=\"background-color:yellow\"> <td> Race </td> <td> Number of currently registered riders </td> </tr>"
 for race_item in "${race_item_array[@]}"; do
     echo "<tr> <td> "$race_item" </td> <td class=\"center_text\"> "${count_array[$count]}" </td> </tr>"

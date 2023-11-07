@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Rvy Racing</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
   </head>
   <body>
 
@@ -36,7 +36,7 @@
    ?>
   
   <div style="text-align:center;">
-    <button class="select_league_table_buttons"  onclick="back_to_rvy_racing_homepage(2)">Back to rvy_racing home page</button>
+    <button class="select_league_table_buttons"  onclick="back_to_rvy_racing_homepage_from_top_level_html_dir()">Back to rvy_racing home page</button>
   </div>
   <hr>
   
