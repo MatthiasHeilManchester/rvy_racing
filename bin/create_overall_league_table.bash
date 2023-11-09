@@ -263,10 +263,10 @@ for sub_series_number in `echo $sub_series_number_list`; do
 	    cat race*/.head_to_head_active_users_json_file.json > .tmp_combined_user_file
 	    # sed to replace just one occurence of comma with closing bracket:
 	    # https://stackoverflow.com/questions/8081297/sed-to-change-string-in-a-file-only-once
-	    sort -u .tmp_combined_user_file | awk '{if ($1!=""){print "\""$1"\","}}' | tac | sed '0,/,/s//]/' | tac >> head_to_head_active_users$sub_series_postfix.json
+	    sort -uf .tmp_combined_user_file | awk '{if ($1!=""){print "\""$1"\","}}' | tac | sed '0,/,/s//]/' | tac >> head_to_head_active_users$sub_series_postfix.json
 	    echo "}" >> head_to_head_active_users$sub_series_postfix.json
 	    if [ -e .tmp_combined_user_file ]; then
-		active_user_list="`sort -u .tmp_combined_user_file | awk '{if ($1!=""){print $1" "}}'`"
+		active_user_list="`sort -uf .tmp_combined_user_file | awk '{if ($1!=""){print $1" "}}'`"
 		
 		# Loop over races
 		race_results_list="`find race* -name '.*results_json_file.json'`"
@@ -309,7 +309,7 @@ for sub_series_number in `echo $sub_series_number_list`; do
 	    cat race*/.head_to_head_active_users_json_file.js > .tmp_combined_user_file
 	    # sed to replace just one occurence of comma with closing bracket:
 	    # https://stackoverflow.com/questions/8081297/sed-to-change-string-in-a-file-only-once
-	    sort -u .tmp_combined_user_file | tac | sed '0,/,\\/s//\\/' | tac >> head_to_head_active_users$sub_series_postfix.js
+	    sort -uf .tmp_combined_user_file | tac | sed '0,/,\\/s//\\/' | tac >> head_to_head_active_users$sub_series_postfix.js
 	    echo "]}'; export default active_users;" >> head_to_head_active_users$sub_series_postfix.js
 
 	    cat race*/.raw_user_list.txt  > .tmp_combined_user_file
