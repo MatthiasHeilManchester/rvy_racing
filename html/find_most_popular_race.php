@@ -11,9 +11,6 @@
 
   <?php
 
-   // MH doesn't really understand this. I'm supposed to call this but when I do
-   // flushing doesn't work at all...
-   // ob_start();
    
    // GET REQUIRED RACE DATA FROM URL: THIS IS THE DATA FOR THE OFFICIAL RACE!
    
@@ -35,16 +32,13 @@
    
    // Race date (GMT)
    $race_date_string=$_GET['race_date_string'];
-   
-   // not be needed 
-   // Remember data for the next scripts; all for the official race(s)
-   //session_start();
-   //$_SESSION['route_id'] = $route_id;
-   //$_SESSION['race_series'] = $race_series;
-   //$_SESSION['race_number'] = $race_number;
-   //$_SESSION['race_date_string'] = $race_date_string;
-   
+      
    ?>
+  
+  <div style="text-align:center;">
+    <button class="select_league_table_buttons"  onclick="back_to_rvy_racing_homepage_from_top_level_html_dir()">Back to rvy_racing home page</button>
+  </div>
+  <hr>
   
   
   <h2>Want the most popular race?</h2>
@@ -56,28 +50,9 @@
   
   <?php
 
-   // Loading animation
-   echo "<div id=\"loading_image\">";
-   echo "<img src=\"cyclist.gif\" width=20%><br><br>Patience please. I'm interrogating rouvy -- while cycling up a hill!";
-   echo "</div>";
-
-   // Make loading animation visible
-   echo "<script type=\"text/javascript\">";
-   echo "document.getElementById('loading_image').style.display = 'visible'";
-									   echo "</script>";
-   // Flush; see above
-   ob_flush();
-   ob_end_flush();
-
-
    // Now do the actual work.
    $command="../bin/find_most_popular_race.bash ".$race_series." ".$race_number;
    system($command);
-
-   // Hide loading animation
-   echo "<script type=\"text/javascript\">";
-   echo "document.getElementById('loading_image').style.display = 'none'";
-   echo "</script>";
 
 ?>
 

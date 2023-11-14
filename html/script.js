@@ -1,4 +1,37 @@
 
+      
+// Function to switch between displaying form or results for head-to-head
+function choose_display_head_to_head(what_to_show) {
+    var form = document.getElementById("head_to_head_form");
+    var result = document.getElementById("head_to_head_outcome");
+    if (what_to_show == "result") {
+	result.style.display = "block";
+	form.style.display = "none";
+	document.getElementById("head_to_head_hide_results_button").style.display = 'block';
+    } else if (what_to_show == "form"){
+	result.style.display = "none";
+	form.style.display = "block";
+	document.getElementById("head_to_head_hide_results_button").style.display = 'none';
+    } else {
+	console.log("Error. what_to_show = ",what_to_show);
+    }
+    // Now make sure the right tab gets displayed
+    //document.getElementById("tab1").checked = false;
+    //document.getElementById("tab4").checked = true;
+
+}
+
+
+//===================================================================
+// Function to navigate to rvy home page from top level html directory
+//===================================================================
+function back_to_rvy_racing_homepage_from_top_level_html_dir() {
+    var dir="../generated_html/rvy_racing/rvy_racing.php";
+    console.log(dir);
+    window.location.href=dir;
+}
+
+
 //===================================================================
 // Function to navigate to rvy home page. Specify number dir levels
 // we need to ascend to get above the rvy_racing home directory (in
