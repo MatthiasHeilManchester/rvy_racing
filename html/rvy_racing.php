@@ -110,8 +110,8 @@ updated.
     set up by Robi Rini, but discontinued when he moved to
     <a href="https://www.kinomap.com">kinomap</a>.
     <br><br>
-    We're currently doing the Winter Series 23-24 (from
-    October-March) with two races a week.
+    We're currently doing the Summer Series 24 (from
+    May-September) with one race per week (on Wednesdays).
     The final league tables from the previous seasons have now been archived:
     <ul>
       <li><a href="../../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23</a> </li>
