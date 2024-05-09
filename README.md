@@ -62,14 +62,33 @@ Below we provide details of the overall process, but the amount of detail provid
 
        bin/process_monster_of_the_month.bash
 
-   (current = year in which winter season starts)
+   (current = year in which winter season starts). Also change winter to
+   summer (or vice versa) in that file, e.g., from
+  
+           # hierher Winter series or summer series?
+           winter=1
+  
+  to 
 
-- Update month_list in rvy_racing.php
+           winter=0
+
+
+- Update month_list in rvy_racing.php, e.g. from
+  
+           $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
+           #$month_list=["May","Jun","Jul","Aug","Sep"];
+
+      to
+  
+           #$month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
+           $month_list=["May","Jun","Jul","Aug","Sep"];
+
 
 - Machinery is now ready and subsequent races can be added with selenium script (on pi)
   and uploaded via the webpage.
   
 - Commit and hope for the best; keep an eye on it when processing the first few races
+
 
 ---    
 
