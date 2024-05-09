@@ -35,7 +35,7 @@ fi
 home_dir=`pwd`
 
 # hierher Winter series or summer series?
-winter=1
+winter=0
 
 # hierher update year (all relative to start in oct)
 current_year_string="2023" #hierher

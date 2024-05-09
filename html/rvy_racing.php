@@ -60,8 +60,8 @@
            echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";}
            else {
            $race_series="rvy_racing";
-	   $month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
-	   #$month_list=["May","Jun","Jul","Aug","Sep"];
+	   #$month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
+	   $month_list=["May","Jun","Jul","Aug","Sep"];
 	   echo "<ul>";
            foreach ($month_list as $my_month)
 	  {
