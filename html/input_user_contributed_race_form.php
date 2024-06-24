@@ -76,12 +76,19 @@ If your race registration page is
 <br>
 <br>
 
+<h1>Sorry, the ability to upload user-generated races is currently disabled; it'll return when Rouvy have completed the rewrite of their 
+webpages.</h1>
+<br>
+<br>
+
+<!--
 <form action="input_user_contributed_race_form_part2.php" method="post">
   Please enter the race ID: <input style="display:block;" type="text" name="newly_contributed_race_url_number">
   <br>
   <br>
   <input style="display:block;" type="submit" name="submit" value="Submit">  
 </form>
+-->
 
 <br>
 <br>

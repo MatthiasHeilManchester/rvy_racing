@@ -48,6 +48,10 @@
 		 $route_id?>"><?php echo $route_title ?></a> 
       <li> Date: <?php echo $race_date_string ?> (GMT).</ul>
   
+
+<h1>Sorry, the ability to determine the most popular race is currently broken. It will return once Rouvy have finished the rewrite of 
+their webpages.</h1>
+
   <?php
 
    // Now do the actual work.
