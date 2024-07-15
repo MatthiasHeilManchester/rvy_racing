@@ -1,0 +1,19 @@
+<hr><h2>{{ race.name }}</h2><br>
+<img src="./images/flags/4x3/{{ race.route.countryCode|lower|e }}.svg"
+     alt="{{ race.route.countryCode|upper|e }}" height="14"/>&nbsp;&nbsp;|
+&nbsp;&nbsp;{{ ((race.laps * race.route.distanceInMeters)/1000)|round(2, 'floor') }} km
+{% if race.laps > 1 %}<i>total</i>{% endif %}&nbsp;&nbsp;|
+&nbsp;&nbsp;{{ race.laps*race.route.elevationInMeters }} m
+<img src="./images/elevation-rise.svg"
+     alt="elevation" height="16"/> {% if race.laps > 1 %}<i>total</i>{% endif %}&nbsp;&nbsp;|
+&nbsp;&nbsp;{{ race.route.averageSlopeInDegrees }}% avg&nbsp;&nbsp;|
+&nbsp;&nbsp;{{ race.route.maxSlopeInDegrees }}% max{% if race.laps > 1 %}&nbsp;&nbsp;|
+    &nbsp;&nbsp;{{ race.laps }} laps <img src="./images/loop-once.svg" alt="laps" height="20"/>{% endif %}
+<br><img src="./images/route.svg" alt="laps" height="22"/>
+<b>Route:</b>
+<a href="https://riders.rouvy.com/route/{{ race.route.id }}">{{ race.route.name }}</a>
+{% if 'challenge' in race %}
+    &nbsp;&nbsp;
+    <img src="./images/challenge-17085.svg" alt="laps" height="26"/> <b>Challenge:</b>
+    <a href="https://riders.rouvy.com/challenges/{{ race.challenge.id }}">{{ race.challenge.title }}</a>
+{% endif %}

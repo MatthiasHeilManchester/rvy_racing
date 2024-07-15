@@ -1,0 +1,48 @@
+<h2>Overall race programme for race series <em>{{ race_series }}</em></h2>
+Race programme compiled: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
+
+{% for race in races %}
+    {% include 'race_block.jinja' %}
+    <br>
+    <ul>
+        {% for e in race.events if e.registrationsCount != -1 %}
+            <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Official
+                race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
+                    style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
+                    src="./images/team.svg"
+                    alt="riders" height="16"/></li>
+        {% endfor %}
+        {% for e in race.events if e.registrationsCount == -1 %}
+            <li><a href=https://riders.rouvy.com/events/leaderboard>All races lost due to Rouvy site update 😾</a><span
+                    style="font-family: monospace;">{{ "{:\xa0>3}".format("?") }}</span> <img
+                    src="./images/team.svg"
+                    alt="riders" height="16"/></li>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for e in race.user_contribute_events %}
+            <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Contributed
+                race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
+                    style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
+                    src="./images/team.svg"
+                    alt="riders" height="16"/></li>
+        {% endfor %}
+    </ul>
+    {% if race.processed %}
+        <div style="font-size:small;"><a class="select_league_table_buttons"
+                                         href="rvy_racing.php?races#race{{ race.number }}">Race
+            results</a>
+        </div>
+    {% else %}
+        Race not raced/processed yet!<br><br>
+        <div style="font-size:small;">
+            <a class="select_league_table_buttons"
+               href="../../html/input_user_contributed_race_form.php">
+                Add your own?</a>
+            {# make an ajax JS call #}
+            <a class="select_league_table_buttons"
+               href="refresh.php?race_date=2024-07-07">
+                Refresh registration count</a>
+        </div>
+    {% endif %}
+{% endfor %}

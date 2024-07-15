@@ -1,0 +1,5 @@
+Jinja2         # Templates
+requests       # https requests
+python-dotenv  # config
+pytz           # timezone handling
+beautifulsoup4 # If we need to do HTML parsing, legacy results etc
