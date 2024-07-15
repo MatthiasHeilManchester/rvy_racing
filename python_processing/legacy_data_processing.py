@@ -91,7 +91,7 @@ def parse_result_table(race: str, rt: bs4.BeautifulSoup) -> list:
 
 
 def get_race_results(race: str):
-    with open(f'../generated_html/rvy_racing/TO_BE_DELETED/{race}/results.html', mode='r', encoding='UTF-8') as f:
+    with open(f'../generated_html/rvy_racing/{race}/results.html', mode='r', encoding='UTF-8') as f:
         soup = BeautifulSoup(f, "html.parser")
     # Get the result_table, currently only one table on the page / it is the first table
     rt = soup.find("table")
