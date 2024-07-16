@@ -47,25 +47,6 @@ League table processed: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
 {% for race in races if race.processed%}
     <a id='race{{ race.number }}'></a>
     {% include 'race_block.jinja' %}
-    <br>
-    <ul>
-        {% for e in race.events %}
-            <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Official
-                race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
-                    style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
-                    src="./images/team.svg"
-                    alt="riders" height="16"/></li>
-        {% endfor %}
-    </ul>
-    <ul>
-        {% for e in race.user_contribute_events %}
-            <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Contributed
-                race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
-                    style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
-                    src="./images/team.svg"
-                    alt="riders" height="16"/></li>
-        {% endfor %}
-    </ul>
     <table style="border-spacing:10px; width:60%; background-color:white;">
         <tr style="background-color:yellow">
             <th>Rank</th>
