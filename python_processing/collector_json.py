@@ -172,7 +172,9 @@ def get_route_info(route_id: str) -> dict:
     route_info: dict = result.json()
     # Remove unneeded bloat
     route_info.pop('legacyRoute', None)  # Hope we never need this
-    route_info.get('route', dict()).pop('geometry', None)
+    # Let's keep geometry, you can do some cool things with it.
+    # From simple altitude plots to 3d course plots
+    # route_info.get('route', dict()).pop('geometry', None)
     route_info.get('route', dict()).pop('thumbnails', None)
     route_info.get('route', dict()).pop('videoPreview', None)
     route_info.get('route', dict()).pop('videoQualities', None)
