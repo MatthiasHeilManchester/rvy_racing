@@ -236,8 +236,7 @@ def generate_all_races_html():
     template = environment.get_template("all_races_in_series.jinja")
     template.globals['now'] = datetime.utcnow
     template.globals['race_series'] = Config.series.name
-    # TODO: Set this path via settings, not hard coded
-    all_race_file = Path('..', 'generated_html', 'rvy_racing', 'all_races_in_series.html')
+    all_race_file = Path(Config.series.gen_html_path, 'all_races_in_series.html')
     all_race_file.write_text(template.render(template_data), encoding='utf-8')
 
 
@@ -251,8 +250,7 @@ def generate_league_table_html():
     template = environment.get_template("league_table.jinja")
     template.globals['now'] = datetime.utcnow
     template.globals['race_series'] = Config.series.name
-    # TODO: Set this path via settings, not hard coded
-    all_race_file = Path('..', 'generated_html', 'rvy_racing', 'league_table.html')
+    all_race_file = Path(Config.series.gen_html_path, 'league_table.html')
     all_race_file.write_text(template.render(template_data), encoding='utf-8')
 
 
