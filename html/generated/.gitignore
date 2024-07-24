@@ -1,0 +1,5 @@
+# Ignore everything in this directory
+# Generated html files will be stored here
+*
+# Except this file
+!.gitignore
