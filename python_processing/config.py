@@ -66,6 +66,7 @@ class RvySeries:
     route_lap_list:         List[str]
     data_path:              Path
     series_path:            Path
+    gen_html_path:          Path
 
     def __parse(self):
         self.start_date = date.fromisoformat(config.get('RVYSERIES_START_DATE'))
@@ -92,13 +93,17 @@ class RvySeries:
     def __paths(self):
         data_path: str = config["DATA_DIR"]
         series_path: str = config["RVYSERIES_DATA_DIR"]
+        html_path: str = config['RVYSERIES_HTML_DIR']
         self.data_path = Path('..', data_path)
         self.series_path = Path(self.data_path, series_path)
+        self.gen_html_path = Path('..', html_path, 'generated')
         # check / make paths as required
         if not Path.exists(self.data_path):
             Path.mkdir(self.data_path)
         if not Path.exists(self.series_path):
             Path.mkdir(self.series_path)
+        if not Path.exists(self.gen_html_path):
+            Path.mkdir(self.gen_html_path)
 
     def __init__(self):
         self.__parse()
