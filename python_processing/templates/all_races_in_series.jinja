@@ -12,12 +12,33 @@ Race programme compiled: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
         Race not raced/processed yet!<br><br>
         <div style="font-size:small;">
             <a class="select_league_table_buttons"
-               href="../../html/input_user_contributed_race_form.php">
+               href="user_contributed_race.php?route_id={{ race.route.id }}&
+race_series={{ race_series }}&
+race_number={{ race.number }}&
+race_date_string={{ race.date }}&
+route_title={{ race.route.name }}&
+race_laps={{ race.laps }}">
                 Add your own?</a>
-            {# make an ajax JS call #}
-            <a class="select_league_table_buttons"
-               href="refresh.php?race_date=2024-07-07">
-                Refresh registration count</a>
+            <button class="select_league_table_buttons" value="{{ race.number }}"
+                    type="button" id="ajax_refresh_reg_count-{{ race.number }}">Refresh registration count</button>
+
+        <script>
+            $('#ajax_refresh_reg_count-{{ race.number }}').on('click', function () {
+                $('#ajax_refresh_reg_count-{{ race.number }}').attr("disabled", true);
+                $('#ajax_refresh_reg_count-{{ race.number }}').html("Refreshing....");
+                $.ajax({
+                    url: "refresh.php?race_number={{ race.number }}&existing=TRUE",
+                    type: "POST", //request type
+                    success: function (result) {
+                        location.reload();
+                    },
+                    complete: function () {
+                        $('#ajax_refresh_reg_count-{{ race.number }}').attr("disabled", false)
+                    }
+                });
+            });
+        </script>
+
         </div>
     {% endif %}
 {% endfor %}
