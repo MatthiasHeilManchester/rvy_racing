@@ -20,7 +20,7 @@
 <br>
 <ul>
     {% for e in race.events if e.registrationsCount != -1 %}
-        <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Official
+        <li><a href=https://riders.rouvy.com/events/{{ e.id }}{% if race.processed %}/leaderboard{% endif %}>Official
             race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
                 src="./images/team.svg"
