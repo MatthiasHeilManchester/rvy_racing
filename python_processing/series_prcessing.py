@@ -4,7 +4,7 @@ from config import Config, IsoDow
 from common import json_date_to_datetime
 from pathlib import Path
 from collector_json import (get_route_info, get_event_results, get_challenges,
-                            route_challenge_dict, convert_user_data_to_json)
+                            route_challenge_dict, convert_user_data_to_json, get_event_info)
 from datetime import datetime, date, timedelta
 from event_finder import find_events
 from jinja2 import Environment, FileSystemLoader
@@ -117,6 +117,23 @@ def init_series():
         print(f'[-] "{Config.series.name}" updated')
     else:
         print(f'[-] "{Config.series.name}" up to date')
+
+
+def refresh_known_events(race_number: int) -> None:
+    race = get_races()[race_number -1]
+    race_path: Path = Path(race['path'])
+    events_file: Path = Path(race_path, f'events.json')
+    events: list = json.load(open(events_file, 'r', encoding='utf-8'))
+    updated_events: list = list()
+    for event in events:
+        event_info: dict = get_event_info(event['id'])
+        updated_events.append(event_info)
+
+    json.dump(sorted(updated_events, key=lambda d: d['startDateTime']),
+              open(events_file, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+    generate_all_races_html()
+    generate_league_table_html()
 
 
 def collect_event_data(race_number: int):
