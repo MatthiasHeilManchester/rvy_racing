@@ -174,3 +174,31 @@ function sort_column_in_table(dir,th,n) {
     }
 }
 
+//===================================================================
+// UTC Day to local
+//===================================================================
+function utc_date_str_to_local(utc_date_str) {
+	const dt_from = new Date(Date.parse(utc_date_str + ' 00:00:00 GMT'));
+	const dt_to = new Date(Date.parse(utc_date_str + ' 23:59:00 GMT'));
+
+	return [format_date_uct_to_local(dt_from), format_date_uct_to_local(dt_to)];
+}
+
+function format_date_uct_to_local(d) {
+	let t = d.toLocaleString(navigator.language, {
+		hour12: false,
+		// day: "2-digit",
+		// year: "numeric",
+		// month: "long",
+		minute: "2-digit",
+		hour: "2-digit",
+		timeZoneName: "long"});
+	return ''.concat(
+		d.toLocaleString(navigator.language, {year: "numeric"}),
+		'-',
+		d.toLocaleString(navigator.language, {month: "2-digit"}),
+		'-' +
+		d.toLocaleString(navigator.language, {day: "2-digit"}),
+		' ', t
+	);
+}
