@@ -7,7 +7,7 @@
 
 // Read the file containing the active users when the page is built.
 // Needed for drop-down menu in head-to-head comparison
-import active_users from "./head_to_head_active_users.js";
+import active_users from "../generated/head_to_head_active_users.js";
 
 var user_list=JSON.parse(active_users)["user_list"];
 var n_user=user_list.length;
@@ -22,7 +22,7 @@ for (var i=0; i<n_user; i++) {
 
 
 // Now read in the head to head results
-import race_results from "./head_to_head_race_results.js";
+import race_results from "../generated/head_to_head_race_results.js";
 //console.log("race_results ",race_results);
 
 

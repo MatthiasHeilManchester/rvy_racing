@@ -22,7 +22,7 @@
       // file appears to get processed, so the actions in it are
       // are performed (e.g. assigning the entries in the drop-down
       // menus)
-      import { evaluate_head_to_head } from "js/head_to_head_module.js";
+      import { evaluate_head_to_head } from "./js/head_to_head_module.js";
 
       //...and add it to the class. Not sure why it's not simply visible
       // by itself, given that I've just imported it. Oh well

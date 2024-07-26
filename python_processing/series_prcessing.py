@@ -136,6 +136,37 @@ def refresh_known_events(race_number: int) -> None:
     generate_league_table_html()
 
 
+def update_head_to_head_data():
+    """
+    Collects data for the head-to-head module
+    """
+    lb_path: Path = Path(Config.series.series_path, 'series_leaderboard.json')
+    lb: list = json.load(open(lb_path, 'r', encoding='utf-8'))
+    user_list = list()
+    user: dict
+    for user in (val for val in lb if val['raceCompleteCount'] > 0):
+        user_list.append({"name": user['rvy_rouvy_name']})
+    jstr: str = json.dumps({"user_list": user_list}, ensure_ascii=False)
+    gen_path: Path = Path(Config.series.gen_html_path, 'head_to_head_active_users.js')
+    gen_path.write_text(f"export const active_users ='{jstr}';\nexport default active_users;", encoding='utf-8')
+
+    race_list: list = list()
+    race: dict
+    for race in get_races():
+        race_lb_path: Path = Path(race['path'], 'leaderboard.json')
+        if not race_lb_path.exists():
+            continue
+        race_lb: list = json.load(open(race_lb_path, 'r', encoding='utf-8'))
+        hh_results: list = list()
+        for result in (val for val in race_lb if val['userSessionStatus'] == 'finished'):
+            hh_results.append({"rouvy_username": result['rvy_rouvy_name'], "points": result['rvy_points']})
+        race_list.append({"name": race['name'], "results": hh_results})
+
+    jstr: str = json.dumps({"race_list": race_list}, ensure_ascii=False)
+    gen_path: Path = Path(Config.series.gen_html_path, 'head_to_head_race_results.js')
+    gen_path.write_text(f"export const race_results ='{jstr}';\nexport default race_results;", encoding='utf-8')
+
+
 def collect_event_data(race_number: int):
     """
     If results.json exists this race is over and the leaderboard collected, no additional action will be taken.
@@ -486,3 +517,4 @@ if __name__ == '__main__':
 
     generate_all_races_html()
     generate_league_table_html()
+    update_head_to_head_data()
