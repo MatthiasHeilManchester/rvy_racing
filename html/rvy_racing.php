@@ -379,7 +379,7 @@ are a few rules anyway.
 
   <h1>Rvy Racing: The races</h1>
 
-<?php readfile("generated/all_races_in_series.html"); ?>
+<?php readfile("./generated/all_races_in_series.html"); ?>
 
 </div>
 
@@ -433,9 +433,9 @@ are a few rules anyway.
 
 <hr>
 
-<div id="full_league_table_div" style="display:block; font-size:small;"> <?php readfile("generated/league_table.html"); ?></div>
-<div id="wed_league_table_div" style="display:none; font-size:small;"> <?php readfile("generated/league_table_wed.html"); ?></div>
-<div id="sat_league_table_div" style="display:none; font-size:small;"> <?php readfile("generated/league_table_sat.html"); ?></div>
+<div id="full_league_table_div" style="display:block; font-size:small;"> <?php readfile("./generated/league_table.html"); ?></div>
+<div id="wed_league_table_div" style="display:none; font-size:small;"> <?php readfile("./generated/league_table_wed.html"); ?></div>
+<div id="sat_league_table_div" style="display:none; font-size:small;"> <?php readfile("./generated/league_table_sat.html"); ?></div>
 
 </div>
 
