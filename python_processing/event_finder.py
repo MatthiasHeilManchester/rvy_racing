@@ -52,6 +52,8 @@ def find_events(race_date: datetime, route_id: str, laps: int, finished: bool) -
             extra_hours: int = Config.race_finder.allow_plus_n_hours
             if event_start < race_date or event_start > (race_date + timedelta(days=1, hours=extra_hours)):
                 continue  # Skip events outside the allowed time window
+            if event["event"]["type"] != 'RACE':
+                continue  # Skip event that are not a RACE, the search fiter above should only get us races anyhow
             if event["event"]["route"]["id"] != route_id:
                 continue  # Skip events that are not on the Route for the Race
             if event["event"]["laps"] != laps:
