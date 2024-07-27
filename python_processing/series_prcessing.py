@@ -369,7 +369,7 @@ def create_race_leaderboard(race_number: int):
     json.dump(best_results, leaderboard_file.open('w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 
-def create_series_leaderboard():
+def create_series_leaderboard(day_filter: IsoDow = IsoDow.ALL):
     """
     Creates a series_leaderboard.json file from all the race leaderboard.json files
     """
@@ -378,6 +378,9 @@ def create_series_leaderboard():
     league_table = dict()
     race: dict
     for race in sorted(get_races(), reverse=True, key=lambda d: d['number']):  # Reversed to get most current user Info
+        if day_filter != IsoDow.ALL:
+            if race['day'] != day_filter.value:
+                continue
         leaderboard_file = Path(race['path'], 'leaderboard.json')
         if not leaderboard_file.exists():
             continue
@@ -414,7 +417,10 @@ def create_series_leaderboard():
         ranked_league_list.append({'rank': allocated_rank, **lb_result})
         rank += 1
 
-    league_lb_file: Path = Path(Config.series.series_path, 'series_leaderboard.json')
+    if day_filter == IsoDow.ALL:
+        league_lb_file: Path = Path(Config.series.series_path, 'series_leaderboard.json')
+    else:
+        league_lb_file: Path = Path(Config.series.series_path, f'series_leaderboard_{day_filter}.json')
     json.dump(ranked_league_list, league_lb_file.open('w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 
@@ -512,7 +518,9 @@ if __name__ == '__main__':
     for _race_number in range(1, Config.series.length + 1):
         create_race_leaderboard(_race_number)
 
-    create_series_leaderboard()
+    create_series_leaderboard(IsoDow.ALL)
+    create_series_leaderboard(IsoDow.WEDNESDAY)
+    create_series_leaderboard(IsoDow.SATURDAY)
     create_iso3166_1_leaderboard()
 
     generate_all_races_html()
