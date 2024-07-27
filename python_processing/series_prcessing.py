@@ -133,7 +133,9 @@ def refresh_known_events(race_number: int) -> None:
               open(events_file, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
     generate_all_races_html()
-    generate_league_table_html()
+    generate_league_table_html(IsoDow.ALL)
+    generate_league_table_html(IsoDow.WEDNESDAY)
+    generate_league_table_html(IsoDow.SATURDAY)
 
 
 def update_head_to_head_data():
@@ -228,7 +230,7 @@ def format_race_date(val: str):
     return dt.strftime('%H:%M') + ' (UTC)'
 
 
-def __combine_everything_for_jinja_template() -> dict:
+def __combine_everything_for_jinja_template(day_fiter: IsoDow = IsoDow.ALL) -> dict:
     """
     Combines all the things into a single dictionary for JINJA templates.
     :return: JINJA template data
@@ -237,6 +239,9 @@ def __combine_everything_for_jinja_template() -> dict:
     reverse_races: list = sorted(races, key=lambda _: _['number'], reverse=True)
     race: dict
     for race in reverse_races:
+        if day_fiter != IsoDow.ALL:
+            if race['date'] != day_fiter.value:
+                continue
         # Add route info
         route_file: Path = Path(race['path'], 'route.json')
         route: dict = json.load(open(route_file, 'r', encoding='utf-8'))
@@ -267,7 +272,10 @@ def __combine_everything_for_jinja_template() -> dict:
         else:
             race['processed'] = False
 
-    series_leaderboard_file = Path(Config.series.series_path, 'series_leaderboard.json')
+    if day_fiter == IsoDow.ALL:
+        series_leaderboard_file = Path(Config.series.series_path, 'series_leaderboard.json')
+    else:
+        series_leaderboard_file = Path(Config.series.series_path, f'series_leaderboard_{day_fiter}.json')
     series_leaderboard = json.load(open(series_leaderboard_file, 'r', encoding='utf-8'))
     template_data: dict = {'series_leaderboard': series_leaderboard,
                            'races': reverse_races}
@@ -288,17 +296,20 @@ def generate_all_races_html():
     all_race_file.write_text(template.render(template_data), encoding='utf-8')
 
 
-def generate_league_table_html():
+def generate_league_table_html(day_filter: IsoDow = IsoDow.ALL):
     """
     Create league_table.html via JINJA template
     """
-    template_data: dict = __combine_everything_for_jinja_template()
+    template_data: dict = __combine_everything_for_jinja_template(day_filter)
     environment = Environment(autoescape=True, loader=FileSystemLoader("templates", encoding='utf-8'))
     environment.filters['parse_ts'] = format_race_date
     template = environment.get_template("league_table.jinja")
     template.globals['now'] = datetime.utcnow
     template.globals['race_series'] = Config.series.name
-    all_race_file = Path(Config.series.gen_html_path, 'league_table.html')
+    if day_filter == IsoDow.ALL:
+        all_race_file = Path(Config.series.gen_html_path, 'league_table.html')
+    else:
+        all_race_file = Path(Config.series.gen_html_path, f'league_table_{day_filter}.html')
     all_race_file.write_text(template.render(template_data), encoding='utf-8')
 
 
@@ -524,5 +535,7 @@ if __name__ == '__main__':
     create_iso3166_1_leaderboard()
 
     generate_all_races_html()
-    generate_league_table_html()
+    generate_league_table_html(IsoDow.ALL)
+    generate_league_table_html(IsoDow.WEDNESDAY)
+    generate_league_table_html(IsoDow.SATURDAY)
     update_head_to_head_data()
