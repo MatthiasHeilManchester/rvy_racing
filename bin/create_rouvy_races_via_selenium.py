@@ -8,6 +8,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
+
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support.ui import WebDriverWait
+
+
 import sys, getopt
 import re
 import time
@@ -125,7 +130,8 @@ def main(argv):
 
    
    # Race name (later modified with upper case letter to identify sub-race for different time-zones
-   specified_race_name="rvy_racing race "+race_number_string+ " "
+   # hierher return to this! specified_race_name="rvy_racing race "+race_number_string+ " "
+   specified_race_name="tmp_dummy ignore race "+race_number_string+ " "
 
 
    #print("done");
@@ -141,7 +147,7 @@ def main(argv):
 
    #sys.exit()
    
-   driver.get('https://my.rouvy.com/en')
+   driver.get('https://riders.rouvy.com/')
    driver.maximize_window()
 
    # Log in
@@ -174,19 +180,22 @@ def main(argv):
 
       
       #email_field_for_login = By.XPATH,("/html/body/div[2]/div/div/div[1]/div[1]/div/form/div[1]/input")
-      email_field_for_login = By.XPATH,("/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[1]/input")
+      #email_field_for_login = By.XPATH,("/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[1]/input")
+      email_field_for_login = By.XPATH,("/html/body/div/div/div/div[2]/div/form/div/div[1]/div/input")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(email_field_for_login)).send_keys("M.Heil@maths.manchester.ac.uk")
 
       
 
       #password_field_for_login = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[2]/input")
       #password_field_for_login = (By.XPATH,"/html/body/div[2]/div/div/div[1]/div[1]/div/form/div[2]/input")
-      password_field_for_login = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[2]/input")
+      #password_field_for_login = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/div[2]/input")
+      password_field_for_login = (By.XPATH,"/html/body/div/div/div/div[2]/div/form/div/div[2]/div/input")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(password_field_for_login)).send_keys(password_string)
 
       #login_button_on_homepage = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/input[1]")
       #login_button_on_homepage = (By.XPATH,"/html/body/div[2]/div/div/div[1]/div[1]/div/form/input[1]")
-      login_button_on_homepage = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/input[1]")
+      #login_button_on_homepage = (By.XPATH,"/html/body/div[3]/div/div/div[1]/div[1]/div/form/input[1]")
+      login_button_on_homepage = (By.XPATH,"/html/body/div/div/div/div[2]/div/form/div/button")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(login_button_on_homepage)).click()
 
 
@@ -194,37 +203,55 @@ def main(argv):
    #----------------
       
    # Should be able to bypass this but the subsequent xpaths get confused; not sure why
-   go_there_by_clicking=1
+   go_there_by_clicking=0
    if go_there_by_clicking:
 
       # Drop down menu "Explore"; choose "Races" option
       #------------------------------------------------
-      
+      print("Going to race generation page by clicking ",driver.current_url)
+
       explore_drop_down_menu = (By.XPATH,"/html/body/nav/div/div[2]/ul[2]/li[2]/a")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(explore_drop_down_menu)).click()
       
       race_option_in_explore_drop_down_menu =  (By.XPATH,"/html/body/nav/div/div[2]/ul[2]/li[2]/ul/li[4]")
       WebDriverWait(driver,20).until(EC.element_to_be_clickable(race_option_in_explore_drop_down_menu)).click()
       
-      print("CURRENT URL (AFTER CLICKING): ",driver.current_url)
+      #print("CURRENT URL (AFTER CLICKING): ",driver.current_url)
       
    else:
 
       # Go there directly
-      driver.get('https://my.rouvy.com/onlinerace')
+      print("Going to race generation page directly ",driver.current_url)
+
+      #driver.implicitly_wait(10)
+      # Dunno why I need to load this twice
+      #driver.get('https://riders.rouvy.com/events/setup')
+      #driver.get('https://riders.rouvy.com/events/setup')
+
+
+      # hierher if this works we need to pass in the route id
+      create_event_url="https://riders.rouvy.com/events/setup?route=62811"
+      driver.get(create_event_url);
+      driver.get(create_event_url);
+
+
       print("CURRENT URL (DIRECT): ",driver.current_url)
 
 
+   #wait = input("Hit return to continue")
 
    # Now loop over the races
    #------------------------
 
-   # Click on "Create online race" button:
-   create_online_race_button = (By.XPATH,"/html/body/div[3]/div/div/div/div[2]/div/div[2]/div/a")
-   print("create_online_race_button: ",create_online_race_button);
+   # Click on "Race" (rather than group ride) button:
+   #create_online_race_button = (By.XPATH,"/html/body/div[3]/div/div/div/div[2]/div/div[2]/div/a")
+   create_online_race_button = (By.XPATH,"/html/body/div[1]/main/div/form/div/div[1]/div/div[1]/div/div/button[2]")
 
+   #print("Info: create_online_race_button: ",create_online_race_button);
    WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_online_race_button)).click()
-      
+
+   #wait = input("Hit return to continue. (race button clicked?)")
+
    race_number=1
    for current_date_and_time_string in  date_and_time_string_array:
        print("About to create race at: ",date_and_time_string)
@@ -233,62 +260,84 @@ def main(argv):
           
            print("CURRENT URL at start of creating the actual race",driver.current_url)
 
-           smart_trainers_only_tick = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[2]/div[1]/label/span")
-           print("smart_trainers_only_tick: ",smart_trainers_only_tick);
-           WebDriverWait(driver,20).until(EC.element_to_be_clickable(smart_trainers_only_tick)).click()
-
            # Race name
            race_name=specified_race_name+chr(64+race_number)
            print("Race name: ",race_name)
            race_number += 1
-           race_name_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[1]/div[1]/div[2]/input")
+           #race_name_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[1]/div[1]/div[2]/input")
+           race_name_field = (By.XPATH,"/html/body/div[1]/main/div/form/div/div[1]/div/div[2]/div/input")
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(race_name_field)).send_keys(race_name)
 
            date_and_time_string = current_date_and_time_string # date_and_time_string_array[0] # "22.09.2022 07:00"
-           date_and_time_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[1]/div[2]/div/div[2]/input")
+           #date_and_time_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[1]/div[1]/div[2]/div/div[2]/input")
+           date_and_time_field = (By.XPATH,"/html/body/div[1]/main/div/form/div/div[1]/div/div[3]/div/input")
+
+
+           # new format hierher read in
+           date_and_time_string="23" # 09 2025\t07 00"
            WebDriverWait(driver,20).until(EC.element_to_be_clickable(date_and_time_field)).send_keys(date_and_time_string)
-
-           done_date_and_time_button = (By.XPATH,"/html/body/div[5]/div[3]/button[2]")
-           WebDriverWait(driver,20).until(EC.element_to_be_clickable(done_date_and_time_button)).click()
-
-           route_name = route_string # "Tuttensee 1st trial ever"
-           route_keywords_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[2]/div[2]/div[2]/input")
-           WebDriverWait(driver,40).until(EC.element_to_be_clickable(route_keywords_field)).send_keys(route_name)
-
-           route_select_button = (By.XPATH,"/html/body/ul[1]")
-           WebDriverWait(driver,40).until(EC.element_to_be_clickable(route_select_button)).click()
-
-           old_url=driver.current_url
-
-           # Not really sure why it needs that wait, but sleep is better than remembering
-           # to hit return...
-           #wait = input("Hit return to click on create race button")
-           time.sleep(5)
-
-           create_race_button = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[7]/div/input[3]")
-           WebDriverWait(driver,40).until(EC.element_to_be_clickable(create_race_button)).click()
            
-           # wait = input("Have clicked on create race button; hit return to continue")
+           date_and_time_string="09" # 09 2025\t07 00"
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(date_and_time_field)).send_keys(date_and_time_string)
+           
+           date_and_time_string="2045" # 09 2025\t07 00"
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(date_and_time_field)).send_keys(date_and_time_string)
+           
+           date_and_time_string="\t07" # 09 2025\t07 00"
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(date_and_time_field)).send_keys(date_and_time_string)
+           
+           date_and_time_string="15" # 09 2025\t07 00"
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(date_and_time_field)).send_keys(date_and_time_string)
+           
+           #wait = input("Hit return to continue. (date entered?)")
 
-           #new_url=driver.current_url
-           #print("old url: ",old_url)
-           #print("new url: ",new_url)
-           #while (new_url == old_url):
-           #    print("clicking again")
-           #    #WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
-           #    new_url=driver.current_url
-           #    print("new url: ",new_url)
+           advanced_options_button = (By.XPATH,"/html/body/div[1]/main/div/form/div/div[1]/div/div[5]/button")
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(advanced_options_button)).click()
+           
+           smart_trainers_button =(By.XPATH,"/html/body/div[1]/main/div/form/div/div[1]/div/div[5]/div/div[1]/div[1]/button")
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(smart_trainers_button)).click()
+
+           # hierher do we even need this?
+           #search_route_button = (By.XPATH,"/html/body/div[1]/main/div/form/div/div[2]/button")
+           #WebDriverWait(driver,20).until(EC.element_to_be_clickable(search_route_button)).click()
+
+           # hierher do we even need this?
+           #route_name = route_string # "Tuttensee 1st trial ever"
+           #route_keywords_field = (By.XPATH,"/html/body/div[3]/div/div/div[2]/form/div[2]/div[2]/div[2]/input")
+           #route_keywords_field = (By.XPATH,"/html/body/div[1]/main/div/div[2]/div[1]/div/input")
+           #WebDriverWait(driver,40).until(EC.element_to_be_clickable(route_keywords_field)).send_keys(route_name)
+
+           # hierher kill 
+           #first_route_offered_button = (By.XPATH,"/html/body/div[1]/main/div/div[2]/div[4]/div/div/div")
+           #first_route_offered_button = (By.XPATH,"/html/body/div[1]/main/div/div[2]/div[4]/div/div/div/article/div[1]");
+           #WebDriverWait(driver,20).until(EC.element_to_be_clickable(first_route_offered_button)).click()
+
+
+
+           # Coming back from this, it claims that we can't 
+           # background_to_click_on = (By.XPATH,"//html/body/div[1]/main/div/form/div/div[1]
+
+
+           create_race_button = (By.XPATH,"/html/body/div[1]/main/div/form/div/button")
+           WebDriverWait(driver,20).until(EC.element_to_be_clickable(create_race_button)).click()
+
+           # hierher displays error clicking on field fixes it and can then create race
+           # by pressing onbutton again. However, currently races can't be deleted!
+           #wait = input("Hit return to continue. (race created?)")
+
 
            print("Done race ",race_name)
 
-           driver.get('https://my.rouvy.com/onlinerace/create')
+           #driver.get('https://my.rouvy.com/onlinerace/create')
            #print("CURRENT URL (should be race create page): ",driver.current_url)
 
 
+           driver.get(create_event_url);
+           driver.get(create_event_url);
 
 
-   print("Done setting up races; now extract urls")
-   # wait = input("Hit return to shut down")
+   print("Done setting up races")
+   wait = input("Please kill me")
    #print("Shutting down")
    #wait = input("Extract urls")
 
