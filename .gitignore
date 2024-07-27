@@ -29,3 +29,4 @@
 
 # Except this file
 !.gitignore
+/python_processing/php_triggered_python.log
