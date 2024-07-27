@@ -14,6 +14,7 @@ class IsoDow(IntEnum):
     FRIDAY = 5
     SATURDAY = 6
     SUNDAY = 7
+    ALL = 8
 
     def __format__(self, spec):
         return f'{self._name_.capitalize()}'
