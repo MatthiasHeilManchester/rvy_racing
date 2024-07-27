@@ -5,7 +5,7 @@ $existing = isset($_GET['existing']) ? 'TRUE' : 'FALSE';
 // let's not accept arbitrary data
 if (preg_match("/^([0-9]{1,3})$/", $race_number)) {
     // Use local python if it exists
-    $filename = '~/.local/bin/python3';
+    $filename = '/home/jcx8vb3xd9vs/.local/bin/python3';
     if (!file_exists($filename)) {
         $filename = "/usr/local/bin/python3.9";
     }
