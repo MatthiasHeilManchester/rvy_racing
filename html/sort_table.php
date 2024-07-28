@@ -16,12 +16,12 @@ table {
 
 #th {
 #    #cursor: ns-resize;
-#    cursor: url(click-to-sort_thumbnail.png), nw-resize;
+#    cursor: url(images/click-to-sort_thumbnail.png), nw-resize;
 #}
 
 .th_sortable {
     #cursor: ns-resize;
-    cursor: url(click-to-sort_thumbnail.png), nw-resize;
+    cursor: url(images/click-to-sort_thumbnail.png), nw-resize;
 }
 
 td {
@@ -66,7 +66,7 @@ tr:nth-child(even) {
 
 <body>
 
-<img src="click-to-sort_thumbnail.png">
+<img src="images/click-to-sort_thumbnail.png">
 <br>
 
 <span class="row_of_league_table_buttons">

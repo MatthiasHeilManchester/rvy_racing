@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Rvy_racing</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
 
     
     <script>
@@ -21,7 +23,7 @@
       // file appears to get processed, so the actions in it are
       // are performed (e.g. assigning the entries in the drop-down
       // menus)
-      import { evaluate_head_to_head } from "./head_to_head_module.js";
+      import { evaluate_head_to_head } from "./js/head_to_head_module.js";
 
       //...and add it to the class. Not sure why it's not simply visible
       // by itself, given that I've just imported it. Oh well
@@ -32,7 +34,7 @@
   </head>
   <body>
 
-    <img class="tabImage" src="rvy_racing.png" alt="rvy_racing logo">
+    <img class="tabImage" src="images/rvy_racing.png" alt="rvy_racing logo">
     <input type="radio" name="tabs" id="tab1" checked>
     <label for="tab1">Welcome</label>
     <input type="radio" name="tabs" id="tab2">
@@ -43,7 +45,15 @@
     <label for="tab4">League Table</label>
     <input type="radio" name="tabs" id="tab5">
     <label for="tab5">Contact/FAQ</label>
-    
+
+<?php
+// This is to allow links + anchors from the all_races_in_series page to results, eg "rvy_racing.php?races#race7"
+// This removes a load of duplication and directories
+// need to clear the url prams after as it can make a mess of things
+if (isset($_GET['races'])) {
+    echo "<script>document.getElementById('tab4').click();
+    window.history.replaceState(null, '', window.location.pathname);</script>";
+} ?>
     
 <div class="tab content1">
 
@@ -139,8 +149,8 @@ updated.
         <center><a href="https://www.matthias-heil.co.uk/phpbb/">https://www.matthias-heil.co.uk/phpbb/</a></center>
       <li> Click on "Register" in the top right corner:
         <br><br>
-        <center><a href="registration1.jpg"><img class="myImage"
-                                                 src="registration1.jpg" alt="registration"
+        <center><a href="images/registration1.jpg"><img class="myImage"
+                                                        src="images/registration1.jpg" alt="registration"
                                                  ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
@@ -151,8 +161,8 @@ there. My offer to register you as proxy still stands. The message board is thir
         <br><br>
       <li> Read the terms and conditions (or not...) and accept:
         <br><br>
-        <center><a href="registration2.jpg"><img class="myImage"
-                                                 src="registration2.jpg" alt="registration"
+        <center><a href="images/registration2.jpg"><img class="myImage"
+                                                        src="images/registration2.jpg" alt="registration"
                                                  ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
@@ -177,14 +187,14 @@ there. My offer to register you as proxy still stands. The message board is thir
             registration has been processed.
         </ul>
         <br><br>
-        <center><a href="registration3.jpg"><img class="myImage" src="registration3.jpg"
- alt="registration"                                                 ></a><br><small>[click on
+        <center><a href="images/registration3.jpg"><img class="myImage" src="images/registration3.jpg"
+                                                        alt="registration"                                                 ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         <br>
       <li> When you're done it should look a bit like this:
         <br><br>
-        <center><a href="registration4.jpg"><img class="myImage" src="registration4.jpg"
-   alt="registration"                                               ></a><br><small>[click on
+        <center><a href="images/registration4.jpg"><img class="myImage" src="images/registration4.jpg"
+                                                        alt="registration"                                               ></a><br><small>[click on
           screenshot to enlarge]</small></center>
         Now press "submit".
         <br><br>
@@ -247,8 +257,8 @@ there. My offer to register you as proxy still stands. The message board is thir
     24 hours to do the route. Make sure you follow the link <b>"Add your
       own?"</b> for the appropriate race in the race tab on this page
     <br><br>
-    <center><a href="add_your_own.jpg"><img class="myImage" src="add_your_own.jpg"
- alt="add your own race"                                            ></a></center>
+    <center><a href="images/add_your_own.jpg"><img class="myImage" src="images/add_your_own.jpg"
+                                                   alt="add your own race"                                            ></a></center>
     <br>
     This allows our machinery to extract
     the finish time and insert it into the compound ranking. The
@@ -320,8 +330,8 @@ are a few rules anyway.
     you hide your data, you're raising questions. If you want to keep
     your data hidden, please race elsewhere.
     <br><br>
-    <center><a href="nonono.png"><img class="myImage" src="nonono.png"
- alt="nonono"                                      ></a></center>
+    <center><a href="images/nonono.png"><img class="myImage" src="images/nonono.png"
+                                             alt="nonono"                                      ></a></center>
     <br>
     Similarly, it would be appreciated if you kept your strava profile
                                       public and used a HRM. However,
@@ -347,8 +357,8 @@ are a few rules anyway.
     can have a quiet word (and/or escalate things if necessary; see
     below).
     <br><br>
- <center><a href="private_message.jpg"><img class="myImage" src="private_message.jpg"
-   alt="private message"                                   ></a></center>
+ <center><a href="images/private_message.jpg"><img class="myImage" src="images/private_message.jpg"
+                                                   alt="private message"                                   ></a></center>
     <br><br>
   <li> No overtly political etc. discussions because it's likely to create
     tension. This is not censorship -- there are plenty of other forums
@@ -370,7 +380,7 @@ are a few rules anyway.
 
   <h1>Rvy Racing: The races</h1>
 
-<?php readfile("all_races_in_series.html"); ?>
+<?php readfile("./generated/all_races_in_series.html"); ?>
 
 </div>
 
@@ -424,9 +434,9 @@ are a few rules anyway.
 
 <hr>
 
-<div id="full_league_table_div" style="display:block; font-size:small;"> <?php readfile("league_table.html"); ?></div>
-<div id="wed_league_table_div" style="display:none; font-size:small;"> <?php readfile("league_table_wed.html"); ?></div>
-<div id="sat_league_table_div" style="display:none; font-size:small;"> <?php readfile("league_table_sat.html"); ?></div>
+<div id="full_league_table_div" style="display:block; font-size:small;"> <?php readfile("./generated/league_table.html"); ?></div>
+<div id="wed_league_table_div" style="display:none; font-size:small;"> <?php readfile("./generated/league_table_Wednesday.html"); ?></div>
+<div id="sat_league_table_div" style="display:none; font-size:small;"> <?php readfile("./generated/league_table_Saturday.html"); ?></div>
 
 </div>
 
@@ -444,7 +454,7 @@ are a few rules anyway.
   <li >The race organiser can be contacted directly via
   the "Contact us" link on the registration page:
   <br><br>
-  <center><a href="contact.jpg"><img class="myImage" src="contact.jpg" alt="contact"
+  <center><a href="images/contact.jpg"><img class="myImage" src="images/contact.jpg" alt="contact"
                                       ></a></center>
   <br>
   You don't have to have registered to do this, though you will have
@@ -468,32 +478,32 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
   <ul>
   <li> Click on your username (here assumed to be joe_cool) in the top right corner:
     <br><br>
-    <center><a href="profile1.jpg"><img class="myImage"
-                                             src="profile1.jpg" alt="profile"
+    <center><a href="images/profile1.jpg"><img class="myImage"
+                                               src="images/profile1.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
     <br>
   <li> Click on "Profile" in the drop-down menu:
     <br><br>
-    <center><a href="profile2.jpg"><img class="myImage"
-                                             src="profile2.jpg" alt="profile"
+    <center><a href="images/profile2.jpg"><img class="myImage"
+                                               src="images/profile2.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
     <br>
   <li> Click on "Edit Profile" 
     <br><br>
-    <center><a href="profile3.jpg"><img class="myImage"
-                                             src="profile3.jpg" alt="profile"
+    <center><a href="images/profile3.jpg"><img class="myImage"
+                                               src="images/profile3.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
     <br>
   <li> Fill in/update whatever you want to add/change: 
     <br><br>
-    <center><a href="profile4.jpg"><img class="myImage"
-                                             src="profile4.jpg" alt="profile"
+    <center><a href="images/profile4.jpg"><img class="myImage"
+                                               src="images/profile4.jpg" alt="profile"
                                              ></a><br><small>[click on
         screenshot to enlarge]</small></center>
     <br>
@@ -507,8 +517,8 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
       <ul>
         <li> Click on the appropriate forum (here the "Races" one):
           <br><br>
-          <center><a href="subscribe_to_forum1.jpg"><img class="myImage"
-                                              src="subscribe_to_forum1.jpg" alt="subscribe"
+          <center><a href="images/subscribe_to_forum1.jpg"><img class="myImage"
+                                                                src="images/subscribe_to_forum1.jpg" alt="subscribe"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
           <br>
@@ -516,8 +526,8 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
         <li> Click on "Subscribe forum" (which, strangely, is already
         ticked, even though you're not subscribed yet!):
           <br><br>
-          <center><a href="subscribe_to_forum2.jpg"><img class="myImage"
-                                              src="subscribe_to_forum2.jpg" alt="subscribe"
+          <center><a href="images/subscribe_to_forum2.jpg"><img class="myImage"
+                                                                src="images/subscribe_to_forum2.jpg" alt="subscribe"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
 	  <br>
@@ -527,8 +537,8 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
         <li> Had enough of all these emails? Click on "Unsubscribe
         forum" and you'll be left alone again.
           <br><br>
-          <center><a href="subscribe_to_forum3.jpg"><img class="myImage"
-                                              src="subscribe_to_forum3.jpg" alt="subscribe"
+          <center><a href="images/subscribe_to_forum3.jpg"><img class="myImage"
+                                                                src="images/subscribe_to_forum3.jpg" alt="subscribe"
                                               ></a><br><small>[click on
               screenshot to enlarge]</small></center>
           <br>

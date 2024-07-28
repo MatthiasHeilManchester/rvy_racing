@@ -1,0 +1,84 @@
+<h2>Overall league table for race series <em>{{ race_series }}</em> (full series)</h2>
+
+<div style="text-align:left; font-size:medium;">[Click on "Rank", "Points", "# of races" or "Points/Race" to re-sort.
+    Overall rank remains based on total number of points.]
+</div><br>
+<table id="league_table" style="border-spacing:10px; width:60%; background-color:white;">
+    <tr style="background-color:yellow;">
+        <th class="th_sortable" style="background-color:gold;" onclick="sort_column_in_table('asc',this,0)">
+            Rank<span class="up_down_arrow_in_league_table">⇩</span></th>
+        <th>Flag</th>
+        <th>Rouvy username</th>
+        <th>First name</th>
+        <th>Surname</th>
+        <th>YOB</th>
+        <th>Gender</th>
+        <th class="th_sortable" onclick="sort_column_in_table('desc',this,7)">
+            Points<span class="up_down_arrow_in_league_table">⇩</span></th>
+        <th class="th_sortable" onclick="sort_column_in_table('desc',this,8)"><span style="white-space:nowrap;">
+            # of races</span><span class="up_down_arrow_in_league_table">⇩</span></th>
+        <th class="th_sortable" onclick="sort_column_in_table('desc',this,9)">
+            Points/Race<span class="up_down_arrow_in_league_table">⇩</span></th>
+    </tr>
+    {% for result in series_leaderboard %}
+        <tr>
+            <td>{{ result.rank }}</td>
+            <td><img src="./images/flags/4x3/{{ result.countryCode|lower }}.svg"
+                     alt="{{ result.countryCode|upper|e }} " height="14"/></td>
+            <td>{{ result.userName }}</td>
+            <td>{{ result.rvy_fname }}</td>
+            <td>{{ result.rvy_sname }}</td>
+            <td>{{ result.rvy_yob }}</td>
+            <td>{{ result.rvy_gender }}</td>
+            <td>{{ result.rvy_points }}</td>
+            <td>{{ result.raceCompleteCount }}</td>
+            <td>{% if result.raceCompleteCount > 0 %}
+                {{ '%0.2f'| format((result.rvy_points/result.raceCompleteCount)|round(2, 'floor')) }} {% else %}
+                {{ 0 }}{% endif %}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+League table processed: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
+<br>
+<hr>
+
+<h2>Individual race results:</h2>
+{% for race in races if race.processed%}
+    <a id='race{{ race.number }}'></a>
+    {% include 'race_block.jinja' %}
+    <table style="border-spacing:10px; width:60%; background-color:white;">
+        <tr style="background-color:yellow">
+            <th>Rank</th>
+            <th>Flag</th>
+            <th>Rouvy username</th>
+            <th>First name</th>
+            <th>Surname</th>
+            <th>YOB</th>
+            <th>Gender</th>
+            <th>Finish time</th>
+            <th>Power</th>
+            <th>Points</th>
+        </tr>
+        {% for result in race.results %}
+        <tr>
+            <td>{{ result.aggPosition }}</td>
+            <td><img src="./images/flags/4x3/{{ result.countryCode|lower }}.svg"
+                     alt="{{ result.countryCode|upper|e }} " height="14"/></td>
+            <td>{{ result.rvy_rouvy_name }}</td>
+            <td>{{ result.rvy_fname }}</td>
+            <td>{{ result.rvy_sname }}</td>
+            <td>{{ result.rvy_yob }}</td>
+            <td>{{ result.rvy_gender }}</td>
+            <td>{{ result.time }}</td>
+            <td>{{ (result.avgWattKg if result.avgWattKg) }}</td>
+            <td>{{ result.rvy_points }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    Race processed: Mon Jun 24 16:29:38 UTC 2024
+    <br>DNR = 'Did Not Register'.<br>Other = DNS/DNF/DSQ/ERROR.<br>Please report any errors via the <a
+            href=https://www.matthias-heil.co.uk/phpbb/>discussion board</a>
+    <br>
+{% endfor %}

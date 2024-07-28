@@ -1,0 +1,44 @@
+<h2>Overall race programme for race series <em>{{ race_series }}</em></h2>
+Race programme compiled: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
+
+{% for race in races %}
+    {% include 'race_block.jinja' %}
+    {% if race.processed %}
+        <div style="font-size:small;"><a class="select_league_table_buttons"
+                                         href="rvy_racing.php?races=true/#race{{ race.number }}">Race
+            results</a>
+        </div>
+    {% else %}
+        Race not raced/processed yet!<br><br>
+        <div style="font-size:small;">
+            <a class="select_league_table_buttons"
+               href="user_contributed_race.php?route_id={{ race.route.id }}&
+race_series={{ race_series }}&
+race_number={{ race.number }}&
+race_date_string={{ race.date }}&
+route_title={{ race.route.name }}&
+race_laps={{ race.laps }}">
+                Add your own?</a>
+            <button class="select_league_table_buttons" value="{{ race.number }}"
+                    type="button" id="ajax_refresh_reg_count-{{ race.number }}">Refresh registration count</button>
+
+        <script>
+            $('#ajax_refresh_reg_count-{{ race.number }}').on('click', function () {
+                $('#ajax_refresh_reg_count-{{ race.number }}').attr("disabled", true);
+                $('#ajax_refresh_reg_count-{{ race.number }}').html("Refreshing....");
+                $.ajax({
+                    url: "refresh.php?race_number={{ race.number }}&existing=TRUE",
+                    type: "POST", //request type
+                    success: function (result) {
+                        location.reload();
+                    },
+                    complete: function () {
+                        $('#ajax_refresh_reg_count-{{ race.number }}').attr("disabled", false)
+                    }
+                });
+            });
+        </script>
+
+        </div>
+    {% endif %}
+{% endfor %}
