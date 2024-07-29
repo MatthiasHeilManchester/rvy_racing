@@ -3,7 +3,7 @@
 @media not all and (min-resolution:.001dpcm)
 { @supports (-webkit-appearance:none) and (stroke-color:transparent) {
 selector { 
-property:value; 
+/* property:value; */
 }
 }}
 /* Test website on real Safari 11+ */
@@ -99,7 +99,7 @@ a:hover {
 }
 
 body {
-    #font-family: 'Times New Roman', sans-serif;
+    /* font-family: 'Times New Roman', sans-serif; */
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -111,7 +111,7 @@ body {
     border: 1px solid black;
     border-radius: 19px;
     -webkit-border-radius: 19px;
-    -moz-border-radius: 19px;
+    /* -moz-border-radius: 19px; */
     overflow: hidden;
     text-align: center;
     margin: 3%;

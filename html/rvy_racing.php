@@ -57,6 +57,7 @@ if (isset($_GET['races'])) {
     
 <div class="tab content1">
 
+  <!--
 
   <center>
     <div style="border: 1px solid black; background-color:rgb(250,250,250); border-radius:10px;   box-shadow: 4px 4px lightgray; padding: 10px; width:60%;">
@@ -105,7 +106,8 @@ your previous efforts will be incorporated retrospectively next time the league 
 updated. 
     </div>
     </center>
-      
+  -->
+  
     <h1>Rvy Racing: Welcome</h1>
     This is the official homepage of Rvy Racing - short for, yes, you
     guessed it: "Rouvy Racing".
@@ -118,15 +120,20 @@ updated.
     The group emerged from
     <a href="https://www.robirini66.com">RBF</a>, originally
     set up by Robi Rini, but discontinued when he moved to
-    <a href="https://www.kinomap.com">kinomap</a>.
+    <a href="https://www.kinomap.com">kinomap</a>. The initial machinery
+    for these pages was written (cobbled together!) by
+    <a href="https://www.strava.com/athletes/9652383">Matthias Heil</a> and
+    then significantly improved by <a href="https://www.strava.com/athletes/1140597">
+    Steven Brown</a> during a rewrite required to accommodate
+    <a href="https://www.rouvy.com">Rouvy</a>'s changes of their webpages.
     <br><br>
     We're currently doing the Summer Series 24 (from
     May-September) with one race per week (on Wednesdays).
     The final league tables from the previous seasons have now been archived:
     <ul>
-      <li><a href="../../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23</a> </li>
-      <li><a href="../../rvy_racing_archived_seasons/rvy_racing_summer_23/league_table.html">Summer 23</a> </li>
-      <li><a href="../../rvy_racing_archived_seasons/rvy_racing_winter_23-24/league_table.html">Winter 23-24</a> </li>
+      <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23</a> </li>
+      <li><a href="../rvy_racing_archived_seasons/rvy_racing_summer_23/league_table.html">Summer 23</a> </li>
+      <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_23-24/league_table.html">Winter 23-24</a> </li>
     </ul>
     If you're interested in joining our race series, please register
     on our <a href="https://www.matthias-heil.co.uk/phpbb/">phpBB
@@ -211,20 +218,6 @@ there. My offer to register you as proxy still stands. The message board is thir
     <br>
     <hr>
     <br>
-    <h3>Warning:</h3>
-    Rouvy do not provide a formal API to their (our!) data, so the 
-    information required to maintain our league table is extracted
-    from their webpages. There is a good chance
-    that the machinery developed to do this will break when they
-    move their route and race pages
-    from <a href="https://my.rouvy.com">
-      https://my.rouvy.com</a> to <a href="https://www.rouvy.com">
-      https://www.rouvy.com</a>, and it
-    may, in fact, prove impossible to continue this approach. If this
-    happens, we may have to suspend the races (or at least their
-    transfer to the league table) for a bit. Various possible alternatives
-    exist but they'd need to be implemented (quickly) and are not
-    super-attractive. Anyway, let's not worry about this just yet... 
 </div>
 
 
@@ -245,42 +238,22 @@ there. My offer to register you as proxy still stands. The message board is thir
   <li> Each race will be repeated several times (to cater for different
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
-    on <a href="https://my.rouvy.com/onlinerace">Rouvy</a> as usual. 
+    on <a href="https://rouvy.com/">Rouvy</a> as usual. 
     Direct links to the races are also provided directly from the race
     tab on this page. This lists
     dates, times, routes, etc. <br><br>
   <li> If none of the official times suit you, you can also arrange
     your own race
-    on <a href="https://my.rouvy.com/onlinerace">Rouvy</a>.
+    on <a href="https://rouvy.com">Rouvy</a>.
     The race must be on
     the same day (in GMT) as the first official race. This gives everybody
-    24 hours to do the route. Make sure you follow the link <b>"Add your
-      own?"</b> for the appropriate race in the race tab on this page
+    24 hours to do the route. Click on the  <b>"Add your
+      own?"</b> button for the race on the "Races" tab to get
+    specific instructions.
     <br><br>
-    <center><a href="images/add_your_own.jpg"><img class="myImage" src="images/add_your_own.jpg"
-                                                   alt="add your own race"                                            ></a></center>
-    <br>
-    This allows our machinery to extract
-    the finish time and insert it into the compound ranking. The
-    registration page will check that the race is held on the right
-    route and on the right day. Note that the link disappears and is
-    replaced by the race results once the race has been
-    processed. <br><br>Please do not delete races on rouvy once you've
-    registered them here. It breaks the scripts! <br><br>Finally,
-    there's a "feature" (bug?) which means that races
-    can't be added while the race is deemed to be running (i.e. while
-    the rouvy webpage displays the elapsed time since the race start). If
-    this is the case, a suitable error message is displayed. You
-    can upload races before and after the race. If you forget to
-    do this while the "Add your own" button is active
-    just send an email to the race organiser and he'll do it for you
-    retrospectively. <br><br>
   <li> You cannot get credit for individual rides (i.e. rides done outside
-    races). This is mainly a technical issue: Rouvy doesn't provide
-    script-based access to the finish times for individual rides and maintaining
-    spreadsheets by hand is not an option. Sorry. If you absolutely want to ride
-    by yourself, create your own race (see above) and password protect it; keep
-    the password to yourself and nobody will bother you.<br><br>
+    races).
+    <br><br>
   <li> If you participate in multiple instances of a race, your best
     time will count.<br><br>
   <li> Points will be awarded according to the UCI cyclocross scheme:
@@ -318,22 +291,7 @@ are a few rules anyway.
   <li> You may have noticed that Rouvy allows you to specify your
     weight. For the implications of this fact you are referred to rule
     1.<br><br>
-  <li> Make sure that your average power (W/kg) is displayed on the
-    rouvy route pages and that the link to the activity (magnifying
-    glass) is accessible.
-    The picture below (click on it to magnify) shows how to annoy
-    people. Please don't! You may
-    have privacy concerns (though I don't know what they would be...) but
-    people simply want to be able to convince themselves that other
-    racers' data looks plausible. Personally I don't think it's a huge
-    deal and I get annoyed about endless "cheater" discussions (see below), but if
-    you hide your data, you're raising questions. If you want to keep
-    your data hidden, please race elsewhere.
-    <br><br>
-    <center><a href="images/nonono.png"><img class="myImage" src="images/nonono.png"
-                                             alt="nonono"                                      ></a></center>
-    <br>
-    Similarly, it would be appreciated if you kept your strava profile
+  <li> It would be appreciated if you kept your strava profile
                                       public and used a HRM. However,
                                       this will not be
     enforced.<br><br>
@@ -348,7 +306,8 @@ are a few rules anyway.
   <li> Banter on
   the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
       board</a>
-    is actively encouraged. Taking
+    is actively encouraged (though, to be honest, it's not much used for this
+    purpose -- the post-race fun happens on strava). Taking
     yourself (or this whole thing) too seriously is not. Launching
     debates about possible cheaters (or other rule 1 violators) is
     strictly <em>verboten</em>. If you have any
@@ -450,7 +409,8 @@ are a few rules anyway.
   <ul>
 <li> Please use the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
       board</a> for, well, for discussions, I guess. Constructive suggestions for improvement, bug
-  reports/fixes, are also welcome. <br><br>
+  reports/fixes, are also welcome. However, note that the discussion board is mainy used for registering
+  new users; the post-race banter happens on strava!<br><br>
   <li >The race organiser can be contacted directly via
   the "Contact us" link on the registration page:
   <br><br>
@@ -471,6 +431,7 @@ the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
   <hr>
   
 <h1>FAQ</h1>
+[Not very frequently asked, actually; the discussion board never really took off, but if you're interested...]
 <ul>
   <li> <h2><b>How to change settings in the profile on the phpBB Discussion
   Forum (e.g. to add your strava url if you forgot to do so when you
