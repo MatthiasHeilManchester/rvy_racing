@@ -202,3 +202,7 @@ function format_date_uct_to_local(d) {
 		' ', t
 	);
 }
+function scrollToId(id){
+	let aTag = $("#" + id)
+	$('html,body').animate({scrollTop: aTag.offset().top},'fast');
+}
