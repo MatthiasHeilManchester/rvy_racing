@@ -5,7 +5,7 @@ Race programme compiled: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
     {% include 'race_block.jinja' %}
     {% if race.processed %}
         <div style="font-size:small;"><a class="select_league_table_buttons"
-                                         href="rvy_racing.php?races=true/#race{{ race.number }}">Race
+                                         href="rvy_racing.php?race={{ race.number }}">Race
             results</a>
         </div>
     {% else %}
