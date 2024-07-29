@@ -206,3 +206,7 @@ function scrollToId(id){
 	let aTag = $("#" + id)
 	$('html,body').animate({scrollTop: aTag.offset().top},'fast');
 }
+
+function scrollToPosition(pos){
+	$('html,body').animate({scrollTop: pos},'fast');
+}
