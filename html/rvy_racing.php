@@ -58,7 +58,19 @@ if (isset($_GET['race'])) {
             $(document).ready(function(){scrollToId('race" . $race . "');});
           </script>";
 } ?>
-    
+
+<?php
+// This is to allow a refresh and return to the same tab and scroll point
+// need to clear the url prams after as it can make a mess of things
+if (isset($_GET['RacesTab'])) {
+$scroll = $_GET['RacesTab'];
+echo "<script defer type='text/javascript'>
+    document.getElementById('tab3').click();
+    window.history.replaceState(null, '', window.location.pathname);
+    $(document).ready(function(){scrollToPosition( $scroll );});
+</script>";
+} ?>
+
 <div class="tab content1">
 
   <!--
