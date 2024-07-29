@@ -30,6 +30,7 @@ the race series <b><?php echo $race_series ?></b>
         <b><?php echo $route_title ?></b> selected.
         </li>
     <li>Set event type to Race</li>
+    <li>Make sure the race name contains the string "rvy_racing" otherwise it won't get picked up by our clever scripts. </li>
     <li> The race must be held on <?php echo $race_date_string ?> (GMT).<br>Locally this will be some time between:
         <ul>
             <script type="text/javascript">
