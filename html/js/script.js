@@ -178,8 +178,8 @@ function sort_column_in_table(dir,th,n) {
 // UTC Day to local
 //===================================================================
 function utc_date_str_to_local(utc_date_str) {
-	const dt_from = new Date(Date.parse(utc_date_str + ' 00:00:00 GMT'));
-	const dt_to = new Date(Date.parse(utc_date_str + ' 23:59:00 GMT'));
+	const dt_from = new Date(Date.parse(utc_date_str));
+	const dt_to = new Date(dt_from.valueOf() + (26 * 60 * 60 * 1000)-1);
 
 	return [format_date_uct_to_local(dt_from), format_date_uct_to_local(dt_to)];
 }
