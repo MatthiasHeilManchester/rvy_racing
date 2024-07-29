@@ -17,6 +17,7 @@ $race_series = $_GET['race_series'];
 $race_number = $_GET['race_number'];
 $race_laps = $_GET['race_laps'];
 $race_date_string = $_GET['race_date_string'];
+$scroll = isset($_GET['scroll']) ? $_GET['scroll'] : '0';
 ?>
 
 <h2>User contributed race instructions</h2>
@@ -56,20 +57,21 @@ the race series <b><?php echo $race_series ?></b>
 <br>
 
 
-If you have now created a new race, click
-<button type="button" id="ajax_refresh">Schedule Refresh</button>
+If you have now created a new race, click <button class="select_league_table_buttons" type="button" id="ajax_refresh">Schedule Refresh</button>
 
 <script>
     $('#ajax_refresh').on('click', function () {
-        $('#ajax_refresh').attr("disabled", true);
+        let btn = $('#ajax_refresh')
+        btn.attr("disabled", true)
+        btn.html("Refreshing....");
         $.ajax({
             url: "refresh.php?race_number=<?php echo $race_number ?>",
             type: "POST", //request type
             success: function (result) {
-                history.back();
+                window.location.href = "rvy_racing.php?RacesTab=<?php echo $scroll ?>";
             },
             complete: function () {
-                $('#ajax_refresh').attr("disabled", false)
+                $('#ajax_refresh').attr("disabled", false);
             }
         });
     });
