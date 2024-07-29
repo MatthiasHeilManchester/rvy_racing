@@ -5,7 +5,7 @@ Race programme compiled: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
     {% include 'race_block.jinja' %}
     {% if race.processed %}
         <div style="font-size:small;"><a class="select_league_table_buttons"
-                                         href="rvy_racing.php?races=true/#race{{ race.number }}">Race
+                                         href="rvy_racing.php?race={{ race.number }}">Race
             results</a>
         </div>
     {% else %}
@@ -19,7 +19,7 @@ race_date_string={{ race.date }}&
 route_title={{ race.route.name }}&
 race_laps={{ race.laps }}">
                 Add your own?</a>
-            <button class="select_league_table_buttons" value="{{ race.number }}"
+            <button class="select_league_table_buttons"
                     type="button" id="ajax_refresh_reg_count-{{ race.number }}">Refresh registration count</button>
 
         <script>
@@ -30,7 +30,7 @@ race_laps={{ race.laps }}">
                     url: "refresh.php?race_number={{ race.number }}&existing=TRUE",
                     type: "POST", //request type
                     success: function (result) {
-                        location.reload();
+                        window.location.href = '?RacesTab=' + $(window).scrollTop();
                     },
                     complete: function () {
                         $('#ajax_refresh_reg_count-{{ race.number }}').attr("disabled", false)

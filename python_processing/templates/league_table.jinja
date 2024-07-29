@@ -45,7 +45,7 @@ League table processed: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
 
 <h2>Individual race results:</h2>
 {% for race in races if race.processed%}
-    <a id='race{{ race.number }}'></a>
+    <div id="race{{ race.number }}"></div>
     {% include 'race_block.jinja' %}
     <table style="border-spacing:10px; width:60%; background-color:white;">
         <tr style="background-color:yellow">
