@@ -50,9 +50,13 @@
 // This is to allow links + anchors from the all_races_in_series page to results, eg "rvy_racing.php?races#race7"
 // This removes a load of duplication and directories
 // need to clear the url prams after as it can make a mess of things
-if (isset($_GET['races'])) {
-    echo "<script>document.getElementById('tab4').click();
-    window.history.replaceState(null, '', window.location.pathname);</script>";
+if (isset($_GET['race'])) {
+    $race  = $_GET['race'];
+    echo "<script defer type='text/javascript'>
+            document.getElementById('tab4').click();
+            window.history.replaceState(null, '', window.location.pathname);
+            $(document).ready(function(){scrollToId('race" . $race . "');});
+          </script>";
 } ?>
     
 <div class="tab content1">
