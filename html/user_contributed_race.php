@@ -57,7 +57,7 @@ the race series <b><?php echo $race_series ?></b>
 <br>
 
 
-If you have now created a new race, click <button class="select_league_table_buttons" type="button" id="ajax_refresh">Schedule Refresh</button>
+If you have now created a new race, click <button style="margin-left:0" class="select_league_table_buttons" type="button" id="ajax_refresh">Schedule Refresh</button>
 
 <script>
     $('#ajax_refresh').on('click', function () {

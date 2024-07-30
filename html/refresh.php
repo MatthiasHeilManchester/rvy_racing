@@ -25,7 +25,8 @@ if (preg_match("/^([0-9]{1,3})$/", $race_number)) {
         error_log("python_processing folder could not be found!", 0);
     }
 
-    $command = escapeshellcmd($filename . " include_user_event.py " . $race_number . " " . $existing);
+    $command = escapeshellcmd("flock --timeout 120 -x refresh.lock --command '" . $filename .
+                              " include_user_event.py " . $race_number . " " . $existing . "'");
     chdir("../python_processing");
     $result =  shell_exec($command);
     // TODO: check for issues
