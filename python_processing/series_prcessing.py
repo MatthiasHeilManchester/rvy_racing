@@ -8,6 +8,7 @@ from collector_json import (get_route_info, get_event_results, get_challenges,
 from datetime import datetime, date, timedelta
 from event_finder import find_events
 from jinja2 import Environment, FileSystemLoader
+from urllib.parse import quote_plus
 POINTS = Config.series.points
 """
 Less "Bolshy"?
@@ -289,6 +290,7 @@ def generate_all_races_html():
     template_data: dict = __combine_everything_for_jinja_template()
     environment = Environment(autoescape=True, loader=FileSystemLoader("templates", encoding='utf-8'))
     environment.filters['parse_ts'] = format_race_date
+    environment.filters['quote_plus'] = lambda u: quote_plus(u)
     template = environment.get_template("all_races_in_series.jinja")
     template.globals['now'] = datetime.utcnow
     template.globals['race_series'] = Config.series.name
@@ -303,6 +305,7 @@ def generate_league_table_html(day_filter: IsoDow = IsoDow.ALL):
     template_data: dict = __combine_everything_for_jinja_template(day_filter)
     environment = Environment(autoescape=True, loader=FileSystemLoader("templates", encoding='utf-8'))
     environment.filters['parse_ts'] = format_race_date
+    environment.filters['quote_plus'] = lambda u: quote_plus(u)
     template = environment.get_template("league_table.jinja")
     template.globals['now'] = datetime.utcnow
     template.globals['race_series'] = Config.series.name
