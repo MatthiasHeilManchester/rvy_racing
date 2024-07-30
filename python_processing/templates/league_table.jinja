@@ -3,7 +3,7 @@
 <div style="text-align:left; font-size:medium;">[Click on "Rank", "Points", "# of races" or "Points/Race" to re-sort.
     Overall rank remains based on total number of points.]
 </div><br>
-<table id="league_table" style="border-spacing:10px; width:60%; background-color:white;">
+<table style="border-spacing:10px; width:60%; background-color:white;">
     <tr style="background-color:yellow;">
         <th class="th_sortable" style="background-color:gold;" onclick="sort_column_in_table('asc',this,0)">
             Rank<span class="up_down_arrow_in_league_table">⇩</span></th>
@@ -24,7 +24,7 @@
         <tr>
             <td>{{ result.rank }}</td>
             <td><img src="./images/flags/4x3/{{ result.countryCode|lower }}.svg"
-                     alt="{{ result.countryCode|upper|e }} " height="14"/></td>
+                     alt="{{ result.countryCode|upper|e }}" height="14"></td>
             <td>{{ result.userName }}</td>
             <td>{{ result.rvy_fname }}</td>
             <td>{{ result.rvy_sname }}</td>
@@ -64,7 +64,7 @@ League table processed: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
         <tr>
             <td>{{ result.aggPosition }}</td>
             <td><img src="./images/flags/4x3/{{ result.countryCode|lower }}.svg"
-                     alt="{{ result.countryCode|upper|e }} " height="14"/></td>
+                     alt="{{ result.countryCode|upper|e }}" height="14"></td>
             <td>{{ result.rvy_rouvy_name }}</td>
             <td>{{ result.rvy_fname }}</td>
             <td>{{ result.rvy_sname }}</td>
@@ -78,7 +78,7 @@ League table processed: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
     </table>
     <br>
     Race processed: Mon Jun 24 16:29:38 UTC 2024
-    <br>DNR = 'Did Not Register'.<br>Other = DNS/DNF/DSQ/ERROR.<br>Please report any errors via the <a
-            href=https://www.matthias-heil.co.uk/phpbb/>discussion board</a>
+    <br>DNR = 'Did Not Register'.<br>Other = DNS/DNF/DSQ/ERROR.<br>Please report any errors via the
+    <a href=https://www.matthias-heil.co.uk/phpbb/>discussion board</a>
     <br>
 {% endfor %}
