@@ -1,44 +1,42 @@
 <hr><h2>{{ race.name }}</h2><br>
 <img src="./images/flags/4x3/{{ race.route.countryCode|lower|e }}.svg"
-     alt="{{ race.route.countryCode|upper|e }}" height="14"/>&nbsp;&nbsp;|
+     alt="{{ race.route.countryCode|upper|e }}" height="14">&nbsp;&nbsp;|
 &nbsp;&nbsp;{{ ((race.laps * race.route.distanceInMeters)/1000)|round(2, 'floor') }} km
 {% if race.laps > 1 %}<i>total</i>{% endif %}&nbsp;&nbsp;|
 &nbsp;&nbsp;{{ race.laps*race.route.elevationInMeters }} m
 <img src="./images/elevation-rise.svg"
-     alt="elevation" height="16"/> {% if race.laps > 1 %}<i>total</i>{% endif %}&nbsp;&nbsp;|
+     alt="elevation" height="16"> {% if race.laps > 1 %}<i>total</i>{% endif %}&nbsp;&nbsp;|
 &nbsp;&nbsp;{{ race.route.averageSlopeInDegrees }}% avg&nbsp;&nbsp;|
 &nbsp;&nbsp;{{ race.route.maxSlopeInDegrees }}% max{% if race.laps > 1 %}&nbsp;&nbsp;|
-    &nbsp;&nbsp;{{ race.laps }} laps <img src="./images/loop-once.svg" alt="laps" height="20"/>{% endif %}
-<br><img src="./images/route.svg" alt="laps" height="22"/>
+    &nbsp;&nbsp;{{ race.laps }} laps <img src="./images/loop-once.svg" alt="laps" height="20">{% endif %}
+<br><img src="./images/route.svg" alt="laps" height="22">
 <b>Route:</b>
 <a href="https://riders.rouvy.com/route/{{ race.route.id }}">{{ race.route.name }}</a>
 {% if 'challenge' in race %}
     &nbsp;&nbsp;
-    <img src="./images/challenge-17085.svg" alt="laps" height="26"/> <b>Challenge:</b>
+    <img src="./images/challenge-17085.svg" alt="laps" height="26"> <b>Challenge:</b>
     <a href="https://riders.rouvy.com/challenges/{{ race.challenge.id }}">{{ race.challenge.title }}</a>
 {% endif %}
 <br>
 <ul>
     {% for e in race.events if e.registrationsCount != -1 %}
-        <li><a href=https://riders.rouvy.com/events/{{ e.id }}{% if race.processed %}/leaderboard{% endif %}>Official
-            race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
+        <li><a href=https://riders.rouvy.com/events/{{ e.id }}{% if race.processed %}/leaderboard{% endif %}>Official race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
                 src="./images/team.svg"
-                alt="riders" height="16"/></li>
+                alt="riders" height="16"></li>
     {% endfor %}
     {% for e in race.events if e.registrationsCount == -1 %}
         <li><a href=https://riders.rouvy.com/events>All races lost due to Rouvy site update 😾</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format("?") }}</span> <img
                 src="./images/team.svg"
-                alt="riders" height="16"/></li>
+                alt="riders" height="16"></li>
     {% endfor %}
 </ul>
 <ul>
     {% for e in race.user_contribute_events %}
-        <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Contributed
-            race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
+        <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Contributed race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
                 src="./images/team.svg"
-                alt="riders" height="16"/></li>
+                alt="riders" height="16"></li>
     {% endfor %}
 </ul>
