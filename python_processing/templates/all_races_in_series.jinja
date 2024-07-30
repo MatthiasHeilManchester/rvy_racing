@@ -9,14 +9,7 @@ Race programme compiled: {{ now().strftime('%Y-%m-%d %H:%M:%S') }} UTC
     {% else %}
         Race not raced/processed yet!<br><br>
         <div style="font-size:small;">
-            <a class="select_league_table_buttons"
-               href="user_contributed_race.php?route_id={{ race.route.id }}&
-race_series={{ race_series }}&
-race_number={{ race.number }}&
-race_date_string={{ race.date }}&
-route_title={{ race.route.name }}&
-race_laps={{ race.laps }}">
-                Add your own?</a>
+            <a class="select_league_table_buttons" href="user_contributed_race.php?route_id={{ race.route.id }}&race_series={{ race_series|quote_plus }}&race_number={{ race.number }}&race_date_string={{ race.date }}&route_title={{ race.route.name|quote_plus }}&race_laps={{ race.laps }}">Add your own?</a>
             <button class="select_league_table_buttons"
                     type="button" id="ajax_refresh_reg_count-{{ race.number }}">Refresh registration count</button>
 
