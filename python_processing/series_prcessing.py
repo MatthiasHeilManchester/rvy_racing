@@ -1,7 +1,7 @@
 import json
 import operator
 from config import Config, IsoDow
-from common import json_date_to_datetime
+from common import json_date_to_datetime, backup_series
 from pathlib import Path
 from collector_json import (get_route_info, get_event_results, get_challenges,
                             route_challenge_dict, convert_user_data_to_json, get_event_info)
@@ -506,6 +506,8 @@ def create_user_data_json_file():
 
 
 if __name__ == '__main__':
+    # crate a backup, incase something goes horribly wrong
+    backup_series()
     # Based on the `.series.env` file loaded
     # Create directory and races.json
     # routes will be TBA unless otherwise specified in the `.series.env` file
