@@ -59,9 +59,9 @@ def backup_series() -> int:
     backup_path = Path(Config.series.data_path, 'Backup')
     backup_path.mkdir(exist_ok=True)
     series_folder: str = Config.series.series_path.name
-    backup_name: str = Path(backup_path, f'{series_folder}_{ts}.tar.lzma').as_posix()
+    backup_name: str = Path(backup_path, f'{series_folder}_{ts}.tar.gz').as_posix()
     series_path: str = Config.series.series_path.as_posix()
-    result = sh.tar(('--lzma', '-cf', backup_name, series_path), _return_cmd=True)
+    result = sh.tar(('cvfz', backup_name, series_path), _return_cmd=True)
     return result.exit_code
 
 
