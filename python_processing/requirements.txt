@@ -3,3 +3,5 @@ requests       # https requests
 python-dotenv  # config
 pytz           # timezone handling
 beautifulsoup4 # If we need to do HTML parsing, legacy results etc
+InquirerPy     # Menu for race_control
+sh             # for shell commands, works like subprocess

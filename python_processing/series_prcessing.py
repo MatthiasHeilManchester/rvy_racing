@@ -1,12 +1,13 @@
 import json
-import operator
+import sys
 from config import Config, IsoDow
-from common import json_date_to_datetime
+from common import json_date_to_datetime, backup_series
 from pathlib import Path
 from collector_json import (get_route_info, get_event_results, get_challenges,
                             route_challenge_dict, convert_user_data_to_json, get_event_info)
 from datetime import datetime, date, timedelta
 from event_finder import find_events
+from enums import (IsoDow, RaceMonth)
 from jinja2 import Environment, FileSystemLoader
 from urllib.parse import quote_plus
 POINTS = Config.series.points
@@ -137,6 +138,8 @@ def refresh_known_events(race_number: int) -> None:
     generate_league_table_html(IsoDow.ALL)
     generate_league_table_html(IsoDow.WEDNESDAY)
     generate_league_table_html(IsoDow.SATURDAY)
+    for m in range(1, 13):
+        generate_league_table_html(month_filter=RaceMonth(m))
 
 
 def update_head_to_head_data():
@@ -231,18 +234,33 @@ def format_race_date(val: str):
     return dt.strftime('%H:%M') + ' (UTC)'
 
 
-def __combine_everything_for_jinja_template(day_fiter: IsoDow = IsoDow.ALL) -> dict:
+def __combine_everything_for_jinja_template(day_filter: IsoDow = IsoDow.ALL, month_filter: RaceMonth = RaceMonth.ALL) -> dict:
     """
     Combines all the things into a single dictionary for JINJA templates.
     :return: JINJA template data
     """
+    assert (day_filter == IsoDow.ALL or month_filter == RaceMonth.ALL), \
+        'Day and Month filters can not be used at the same time'
+    title = {"name": "Overall league table",
+             "part": "Full series"}
+    if day_filter != IsoDow.ALL:
+        title['part'] = f'{day_filter}'
+    if month_filter != RaceMonth.ALL:
+        title['name'] = 'Watt Monster'
+        title['part'] = f'{month_filter}'
+
     races: list = get_races()
     reverse_races: list = sorted(races, key=lambda _: _['number'], reverse=True)
     race: dict
+    year: int = 0
     for race in reverse_races:
-        if day_fiter != IsoDow.ALL:
-            if race['date'] != day_fiter.value:
+        if day_filter != IsoDow.ALL:
+            if race['day'] != day_filter.value:
                 continue
+        if month_filter != RaceMonth.ALL:
+            if datetime.fromisoformat(race['date']).month != month_filter.value:
+                continue
+        year = datetime.fromisoformat(race['date']).year
         # Add route info
         route_file: Path = Path(race['path'], 'route.json')
         route: dict = json.load(open(route_file, 'r', encoding='utf-8'))
@@ -273,12 +291,19 @@ def __combine_everything_for_jinja_template(day_fiter: IsoDow = IsoDow.ALL) -> d
         else:
             race['processed'] = False
 
-    if day_fiter == IsoDow.ALL:
-        series_leaderboard_file = Path(Config.series.series_path, 'series_leaderboard.json')
+    if day_filter != IsoDow.ALL:
+        series_leaderboard_file = Path(Config.series.series_path, f'series_leaderboard_{day_filter}.json')
+    elif month_filter != RaceMonth.ALL:
+        series_leaderboard_file = Path(Config.series.series_path,
+                                       f'series_watt_monster_{year}_{month_filter.value:02}_{month_filter}.json')
     else:
-        series_leaderboard_file = Path(Config.series.series_path, f'series_leaderboard_{day_fiter}.json')
-    series_leaderboard = json.load(open(series_leaderboard_file, 'r', encoding='utf-8'))
-    template_data: dict = {'series_leaderboard': series_leaderboard,
+        series_leaderboard_file = Path(Config.series.series_path, 'series_leaderboard.json')
+
+    series_leaderboard = list()
+    if series_leaderboard_file.exists():
+        series_leaderboard = json.load(open(series_leaderboard_file, 'r', encoding='utf-8'))
+    template_data: dict = {'title': title,
+                           'series_leaderboard': series_leaderboard,
                            'races': reverse_races}
     return template_data
 
@@ -298,22 +323,29 @@ def generate_all_races_html():
     all_race_file.write_text(template.render(template_data), encoding='utf-8')
 
 
-def generate_league_table_html(day_filter: IsoDow = IsoDow.ALL):
+def generate_league_table_html(day_filter: IsoDow = IsoDow.ALL, month_filter: RaceMonth = RaceMonth.ALL):
     """
     Create league_table.html via JINJA template
     """
-    template_data: dict = __combine_everything_for_jinja_template(day_filter)
+    assert (day_filter == IsoDow.ALL or month_filter == RaceMonth.ALL), \
+        'Day and Month filters can not be used at the same time'
+    template_data: dict = __combine_everything_for_jinja_template(day_filter, month_filter)
     environment = Environment(autoescape=True, loader=FileSystemLoader("templates", encoding='utf-8'))
     environment.filters['parse_ts'] = format_race_date
     environment.filters['quote_plus'] = lambda u: quote_plus(u)
     template = environment.get_template("league_table.jinja")
     template.globals['now'] = datetime.utcnow
     template.globals['race_series'] = Config.series.name
-    if day_filter == IsoDow.ALL:
-        all_race_file = Path(Config.series.gen_html_path, 'league_table.html')
-    else:
+    if day_filter != IsoDow.ALL:
         all_race_file = Path(Config.series.gen_html_path, f'league_table_{day_filter}.html')
-    all_race_file.write_text(template.render(template_data), encoding='utf-8')
+    elif month_filter != RaceMonth.ALL:
+        year = datetime.fromisoformat(template_data['races'][0]['date']).year
+        all_race_file = Path(Config.series.gen_html_path, f'watt_monster_{year}_{month_filter.value:02}_{month_filter}.html')
+    else:
+        all_race_file = Path(Config.series.gen_html_path, 'league_table.html')
+
+    if len(template_data['series_leaderboard']) > 0 or month_filter == RaceMonth.ALL:
+        all_race_file.write_text(template.render(template_data), encoding='utf-8')
 
 
 def create_race_leaderboard(race_number: int):
@@ -383,18 +415,25 @@ def create_race_leaderboard(race_number: int):
     json.dump(best_results, leaderboard_file.open('w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 
-def create_series_leaderboard(day_filter: IsoDow = IsoDow.ALL):
+def create_series_leaderboard(day_filter: IsoDow = IsoDow.ALL, month_filter: RaceMonth = RaceMonth.ALL):
     """
     Creates a series_leaderboard.json file from all the race leaderboard.json files
     """
+    assert (day_filter == IsoDow.ALL or month_filter == RaceMonth.ALL), \
+        'Day and Month filters can not be used at the same time'
     # Things that are not useful in a series_leaderboard
     remove_list = ['time', 'timeSeconds', 'userSessionStatus', 'aggPosition', 'avgWattKg', 'avgSpeedmps']
     league_table = dict()
     race: dict
+    year: int = 0
     for race in sorted(get_races(), reverse=True, key=lambda d: d['number']):  # Reversed to get most current user Info
         if day_filter != IsoDow.ALL:
             if race['day'] != day_filter.value:
                 continue
+        if month_filter != RaceMonth.ALL:
+            if datetime.fromisoformat(race['date']).month != month_filter.value:
+                continue
+        year = datetime.fromisoformat(race['date']).year
         leaderboard_file = Path(race['path'], 'leaderboard.json')
         if not leaderboard_file.exists():
             continue
@@ -431,11 +470,16 @@ def create_series_leaderboard(day_filter: IsoDow = IsoDow.ALL):
         ranked_league_list.append({'rank': allocated_rank, **lb_result})
         rank += 1
 
-    if day_filter == IsoDow.ALL:
-        league_lb_file: Path = Path(Config.series.series_path, 'series_leaderboard.json')
-    else:
+    if day_filter != IsoDow.ALL:
         league_lb_file: Path = Path(Config.series.series_path, f'series_leaderboard_{day_filter}.json')
-    json.dump(ranked_league_list, league_lb_file.open('w', encoding='utf-8'), ensure_ascii=False, indent=2)
+    elif month_filter != RaceMonth.ALL:
+        league_lb_file: Path = Path(Config.series.series_path,
+                                    f'series_watt_monster_{year}_{month_filter.value:02}_{month_filter}.json')
+    else:
+        league_lb_file: Path = Path(Config.series.series_path, 'series_leaderboard.json')
+
+    if len(ranked_league_list) > 0:
+        json.dump(ranked_league_list, league_lb_file.open('w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 
 def create_iso3166_1_leaderboard():
@@ -506,28 +550,31 @@ def create_user_data_json_file():
 
 
 if __name__ == '__main__':
-    # Based on the `.series.env` file loaded
-    # Create directory and races.json
-    # routes will be TBA unless otherwise specified in the `.series.env` file
-    # This will only be created if it does not exist
-    init_series()
-    # It would be a good idea to now check races.json looks correct
+    # crate a backup, incase something goes horribly wrong
+    backup_series()
+    if len(sys.argv) == 1:  # if you pass anything in skip the collect, just process what we have
+        # Based on the `.series.env` file loaded
+        # Create directory and races.json
+        # routes will be TBA unless otherwise specified in the `.series.env` file
+        # This will only be created if it does not exist
+        init_series()
+        # It would be a good idea to now check races.json looks correct
 
-    # create a json version of user_data.csv
-    create_user_data_json_file()
+        # create a json version of user_data.csv
+        create_user_data_json_file()
 
-    # Collect route.json and put in it a race folder
-    # TBA races are ignored
-    init_races()
+        # Collect route.json and put in it a race folder
+        # TBA races are ignored
+        init_races()
 
-    # Add the first challenge we find that matches to races.json
-    update_races_with_challenge()
+        # Add the first challenge we find that matches to races.json
+        update_races_with_challenge()
 
-    # Collect events and if the event is completed the leaderboard
-    # races 1 to 5 have been lost in the Rouvy updates
-    # leaderboard.json files have been backfilled from rvy_racing html for races 1->5
-    for _race_number in range(6, Config.series.length + 1):
-        collect_event_data(_race_number)
+        # Collect events and if the event is completed the leaderboard
+        # races 1 to 5 have been lost in the Rouvy updates
+        # leaderboard.json files have been backfilled from rvy_racing html for races 1->5
+        for _race_number in range(6, Config.series.length + 1):
+            collect_event_data(_race_number)
 
     for _race_number in range(1, Config.series.length + 1):
         create_race_leaderboard(_race_number)
@@ -535,10 +582,16 @@ if __name__ == '__main__':
     create_series_leaderboard(IsoDow.ALL)
     create_series_leaderboard(IsoDow.WEDNESDAY)
     create_series_leaderboard(IsoDow.SATURDAY)
+    month_filter: RaceMonth
+    for m in range(1, 13):
+        create_series_leaderboard(month_filter=RaceMonth(m))
     create_iso3166_1_leaderboard()
 
     generate_all_races_html()
     generate_league_table_html(IsoDow.ALL)
     generate_league_table_html(IsoDow.WEDNESDAY)
     generate_league_table_html(IsoDow.SATURDAY)
+    for m in range(1, 13):
+        generate_league_table_html(month_filter=RaceMonth(m))
+
     update_head_to_head_data()

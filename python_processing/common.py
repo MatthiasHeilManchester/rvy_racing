@@ -1,4 +1,6 @@
+import sh
 import requests
+from pathlib import Path
 from config import Config
 from typing import Optional
 from datetime import datetime
@@ -45,6 +47,22 @@ def json_date_to_datetime(json_date: str) -> datetime:
     """
     dt: datetime = datetime.strptime(json_date, '%Y-%m-%dT%H:%M:%S.%fZ')
     return dt
+
+
+def backup_series() -> int:
+    """
+    Backup series with tar lzma (about 3 times smaller than gz)
+    zero exception handling, they will bubble up
+    :return: The tar return code
+    """
+    ts: str = datetime.now().strftime('%Y-%m-%d_%H%M%S')
+    backup_path = Path(Config.series.data_path, 'Backup')
+    backup_path.mkdir(exist_ok=True)
+    series_folder: str = Config.series.series_path.name
+    backup_name: str = Path(backup_path, f'{series_folder}_{ts}.tar.lzma').as_posix()
+    series_path: str = Config.series.series_path.as_posix()
+    result = sh.tar(('--lzma', '-cf', backup_name, series_path), _return_cmd=True)
+    return result.exit_code
 
 
 if __name__ == '__main__':

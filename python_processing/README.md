@@ -1,6 +1,6 @@
 ## Requirements / Setup
 Python 3.8+
-(Has only been tested against 3.8)
+(Has only been tested against 3.9)
 
 A virtual environment is recommended
 https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
@@ -13,6 +13,8 @@ pip install requests       # https requests
 pip install python-dotenv  # config
 pip install pytz           # timezone handling
 pip install beautifulsoup4 # If we need to do HTML parsing, legacy results etc
+pip install InquirerPy     # Menu for race_control
+pip install sh             # for shell commands, works like subprocess
 ```
 
 ## Nomenclature
