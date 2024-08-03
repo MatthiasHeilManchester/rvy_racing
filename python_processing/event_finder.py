@@ -1,3 +1,5 @@
+from time import sleep
+from pprint import pp
 from config import Config
 from datetime import datetime, timedelta
 from collector_json import get_event_info
@@ -40,7 +42,13 @@ def find_events(race_date: datetime, route_id: str, laps: int, finished: bool) -
         result = session.get(f"https://riders.rouvy.com/events?status={status.value}&"
                              f"from={date_from}&to={date_to}&eventType={event_type.value}&organizer={organizer.value}&"
                              f"index={index}&offset={offset}&_data=routes/_main.events._index")
+        sleep(2.1)  # rate limit the search
         j: dict = result.json()
+        if 'events' not in j:
+            # This will not be the best way to handel this but until we get more info IDK hot to recover from the issue
+            # the rate limiting sleep may help
+            print(f'{"X"*40}\n{"X"*40}\nSomething unexpected happened:\n{pp(vars(result))}\n{"X"*40}\n{"X"*40}')
+            exit(1)
         result_count: int = len(j["events"])
         if result_count == 0:
             break  # Stop if we don't have any more results to search through

@@ -1,3 +1,4 @@
+from time import sleep
 from pathlib import Path
 from config import Config
 from csv import DictReader
@@ -102,6 +103,7 @@ def get_rouvy_user(username: str) -> dict:
     session: Session = get_authenticated_session()
     result: Response = session.get(f"https://riders.rouvy.com/friends/search?query={username}"
                                    f"&_data=routes/_main.friends_.search")
+    sleep(2.1)  # rate limit the requests to Rouvy
     if result.status_code == 200:
         pass
         # print("[*] User exists")
