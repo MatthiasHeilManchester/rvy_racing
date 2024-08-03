@@ -73,57 +73,36 @@ echo "<script defer type='text/javascript'>
 
 <div class="tab content1">
 
-  <!--
 
   <center>
     <div style="border: 1px solid black; background-color:rgb(250,250,250); border-radius:10px;   box-shadow: 4px 4px lightgray; padding: 10px; width:60%;">
 	  <h3>(Watt-)Monster of the Month</h3>
-    Given that people may join this group at random points in the
-    season it seems unfair to have them linger at the end of the league table forever, so here's
-	  a new feature: the "(Watt-)Monster of the Month" competition, a mini-league table extracted from all the races in a given month. Now you can experience the end-of-season madness every month. Yay!  
+        Given that people may join this group at random points in the season it seems unfair to have
+        them linger at the end of the league table forever, so here's a new feature: the "(Watt-)Monster
+        of the Month" competition, a mini-league table extracted from all the races in a given month.
+        Now you can experience the end-of-season madness every month. Yay!
 	  <?php
-           if (1==0)
-           {
-           echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";}
-           else {
-           $race_series="rvy_racing";
-	   #$month_list=["Oct","Nov","Dec","Jan","Feb","Mar"];
-	   $month_list=["May","Jun","Jul","Aug","Sep"];
-	   echo "<ul>";
-           foreach ($month_list as $my_month)
-	  {
-	  $glob_string="../".$race_series."_".$my_month."*/league_table.html";
-	  $result_file_list = glob($glob_string);
-	  if (count($result_file_list)>1)
-	  {
-	    echo "Error: Too many entries in result file list: ".$result_file_list;
-	    //die();
-	  }
-	  if (count($result_file_list)<1)
-	  {
-	    //echo "ERROR: No league tables yet, so there are no monthly league tables either!\n";
-	  }	  
-	  foreach ($result_file_list as $result_file)
-	  {
-	  //echo "result file = ".$result_file."<br>";
-	  $string_length=strlen($result_file);
-	  $year_start=$string_length-22;
-		   $year=substr($result_file,$year_start,4);
-		   $month_start=$string_length-26;
-		   $month=substr($result_file,$month_start,3);
-		   echo "<li style=\"text-align:left;\"><a href=\"$result_file\">".$month." ".$year."</a> <br>";
-		   }
-		   }
-		   echo "</ul>";
-}?>
+      $file_glob = './generated/watt_monster_*_*.html';
+      $result_file_list = glob($file_glob);
+      if (count($result_file_list) == 0) {
+           echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";
+      }
+	  foreach ($result_file_list as $result_file) {
+          preg_match('@^(\./generated/watt_monster_)(\d{4})_(\d{2})_(\w{3})(.html)@i', $result_file, $matches);
+          if (count($matches) != 6) { continue; }
+          $year = $matches[2];
+          $month_num = (int)$matches[3];
+          $month_name = $matches[4];
+          echo "<li style=\"margin-left:50px; text-align:left;\"><a href=\"watt_monster.php?month=".$month_num."\">".$month_name." ".$year."</a></li>";
+      }
+      ?>
 Related to this: Feel free to join our races any time to try it out. There's no password
 protection, so just turn up. If you then decide to join us (see below for instructions)
 your previous efforts will be incorporated retrospectively next time the league table is
-updated. 
+updated.
     </div>
     </center>
-  -->
-  
+
     <h1>Rvy Racing: Welcome</h1>
     This is the official homepage of Rvy Racing - short for, yes, you
     guessed it: "Rouvy Racing".
