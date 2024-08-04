@@ -20,6 +20,18 @@ config = {
 }
 
 
+#################################################
+# ------------------ Constants ------------------
+# Things that are used in different places
+# but don't change (if they change) make them
+# a config setting in .env
+class Constants:
+    REQUEST_RATE_LIMIT: float = 2.1     # Delay in seconds between requests to Rouvy
+    REQUEST_RETRY_LIMIT: int = 3        # How many times will we retry
+    REQUEST_RETRY_DELAY: float = 5.0    # Delay between retries (will expand with the retry count eg DELAY * RETRY)
+#################################################
+
+
 def int_list_from_str(s: str) -> List[int]:
     """
     Takes a string that is (**assumed** to be a comma seperated list of ints), and returns a list of integers.

@@ -41,6 +41,19 @@ class RaceMonth(IntEnum):
 
 
 @enum.unique
+class HTTPMethod(Enum):  # This exists in Python 3.11+
+    CONNECT = "CONNECT"
+    DELETE = "DELETE"
+    GET = "GET"
+    HEAD = "HEAD"
+    OPTIONS = "OPTIONS"
+    PATCH = "PATCH"
+    POST = "POST"
+    PUT = "PUT"
+    TRACE = "TRACE"
+
+
+@enum.unique
 class RouvyEventType(Enum):
     RACE = 'RACE'
     GROUP_RIDE = 'GROUP_RIDE'

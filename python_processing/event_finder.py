@@ -1,7 +1,9 @@
+from time import sleep
+from pprint import pp
 from config import Config
 from datetime import datetime, timedelta
 from collector_json import get_event_info
-from common import get_authenticated_session, json_date_to_datetime
+from common import json_date_to_datetime, nice_request
 from enums import RouvyEventType, RouvyEventOrganizer, RouvyEventStatus
 """
 That magic that finds rvy events for rvy races
@@ -17,7 +19,6 @@ def find_events(race_date: datetime, route_id: str, laps: int, finished: bool) -
     :param finished: Search finished or planned events
     :return: A list of events in datetime order
     """
-    session = get_authenticated_session()
     # TODO: There is a bug where Rouvy forgot to include the restrictions eg "Smart Trainers Only"
     #       This messes up the website too, when they fix that we should include an additional check check for:
     # 	    "event": {"restrictions": ["smartTrainers"]}
@@ -37,10 +38,16 @@ def find_events(race_date: datetime, route_id: str, laps: int, finished: bool) -
     print(f'[-] Searching {str(status.value).capitalize()}', end='')
     while True:
         print(f'.', end='')
-        result = session.get(f"https://riders.rouvy.com/events?status={status.value}&"
-                             f"from={date_from}&to={date_to}&eventType={event_type.value}&organizer={organizer.value}&"
-                             f"index={index}&offset={offset}&_data=routes/_main.events._index")
+        url = (f"https://riders.rouvy.com/events?status={status.value}&"
+               f"from={date_from}&to={date_to}&eventType={event_type.value}&organizer={organizer.value}&"
+               f"index={index}&offset={offset}&_data=routes/_main.events._index")
+        result = nice_request(url=url)
         j: dict = result.json()
+        if 'events' not in j:
+            # This will not be the best way to handel this but until we get more info IDK hot to recover from the issue
+            # the rate limiting sleep may help
+            print(f'{"X"*40}\n{"X"*40}\nSomething unexpected happened:\n{pp(vars(result))}\n{"X"*40}\n{"X"*40}')
+            exit(1)
         result_count: int = len(j["events"])
         if result_count == 0:
             break  # Stop if we don't have any more results to search through

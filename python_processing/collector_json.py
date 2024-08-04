@@ -1,8 +1,9 @@
+from datetime import datetime, timedelta
 from pathlib import Path
-from config import Config
+from config import Config, Constants
 from csv import DictReader
-from requests import Session, Response
-from common import get_authenticated_session
+from requests import Response
+from common import nice_request
 """
 Here we collect json data from Rouvy, and return it for additional processing
 """
@@ -13,18 +14,12 @@ def get_challenges() -> list:
     Collect current and planned challenges from Rouvy.
     :return: A list of challenges.
     """
-    session: Session = get_authenticated_session()
     challenge_types: list = ['actual', 'planned']
     challenge_list: list = list()
     for challenge_type in challenge_types:
-        result: Response = session.get(f"https://riders.rouvy.com/challenges/status/{challenge_type}"
-                                       f"?_data=routes/_main.challenges.status.$status")
-        if result.status_code == 200:
-            pass
-            # print("[*] Get challenges OK")
-        else:
-            print(f"[X] Error {result.status_code} getting challenges")
-            exit(1)  # Let's just fail out
+        url = (f"https://riders.rouvy.com/challenges/status/{challenge_type}"
+               f"?_data=routes/_main.challenges.status.$status")
+        result: Response = nice_request(url=url)
         c_data: dict = result.json()
         # Remove unneeded bloat
         c_data.pop('latestSpotlight', None)
@@ -56,15 +51,8 @@ def get_event_info(event_id: str) -> dict:
     :param event_id: The ID of the event.
     :return: Event information.
     """
-    session: Session = get_authenticated_session()
-    result: Response = session.get(f"https://riders.rouvy.com/events/{event_id}"
-                                   f"?_data=routes/_main.events_.$id")
-    if result.status_code == 200:
-        pass
-        # print("[*] Event exists")
-    else:
-        print(f"[X] Error {result.status_code} getting event information")
-        exit(1)
+    url = f"https://riders.rouvy.com/events/{event_id}?_data=routes/_main.events_.$id"
+    result: Response = nice_request(url=url)
     race_info: dict = result.json()
     # Remove unneeded bloat
     race_info.pop('pageMeta', None)
@@ -81,15 +69,9 @@ def get_event_results(event_id: str) -> dict:
     :param event_id: The ID of the event.
     :return: A results leaderboard dictionary.
     """
-    session: Session = get_authenticated_session()
-    result: Response = session.get(f"https://riders.rouvy.com/events/{event_id}/leaderboard"
-                                   f"?_data=routes/_main.events_.$id.leaderboard")
-    if result.status_code == 200:
-        pass
-        # print("[*] Results found")
-    else:
-        print(f"[X] Error {result.status_code} getting results for event {event_id}")
-        exit(1)
+    url = f"https://riders.rouvy.com/events/{event_id}/leaderboard"\
+          f"?_data=routes/_main.events_.$id.leaderboard"
+    result: Response = nice_request(url=url)
     return result.json()
 
 
@@ -99,15 +81,8 @@ def get_rouvy_user(username: str) -> dict:
     :param username: Rouvy username.
     :return: User information.
     """
-    session: Session = get_authenticated_session()
-    result: Response = session.get(f"https://riders.rouvy.com/friends/search?query={username}"
-                                   f"&_data=routes/_main.friends_.search")
-    if result.status_code == 200:
-        pass
-        # print("[*] User exists")
-    else:
-        print(f"[X] Error {result.status_code} getting user: {username}")
-        exit(1)
+    url = f"https://riders.rouvy.com/friends/search?query={username}&_data=routes/_main.friends_.search"
+    result: Response = nice_request(url=url)
     user: dict
     for user in result.json()['searchUser']:
         if str(user['username']) == username:
@@ -160,15 +135,8 @@ def get_route_info(route_id: str) -> dict:
     :param route_id: The ID of the route.
     :return: Route information.
     """
-    session: Session = get_authenticated_session()
-    result: Response = session.get(f'https://riders.rouvy.com/route/{route_id}'
-                                   f'?_data=routes%2F_main.route.$id._index')
-    if result.status_code == 200:
-        pass
-        # print("[*] Route exists")
-    else:
-        print(f"[X] Error {result.status_code} getting route information")
-        exit(1)
+    url = f'https://riders.rouvy.com/route/{route_id}?_data=routes%2F_main.route.$id._index'
+    result: Response = nice_request(url=url)
     route_info: dict = result.json()
     # Remove unneeded bloat
     route_info.pop('legacyRoute', None)  # Hope we never need this

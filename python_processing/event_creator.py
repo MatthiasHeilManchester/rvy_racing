@@ -3,6 +3,9 @@ import requests
 from config import Config
 from datetime import datetime, timedelta
 from series_prcessing import get_races
+from common import nice_request
+from http import HTTPStatus
+from enums import HTTPMethod
 import common
 """
 Official event creator
@@ -58,16 +61,9 @@ def post_race_to_rouvy(route_id: int, race_date: datetime, offset_minutes: int, 
         print(json.dumps(payload, indent=2))
         return True
     else:
-        session = common.get_authenticated_session()
-        response = session.post('https://riders.rouvy.com/events/setup', payload)
-        if response.status_code == 200:
-            print("[*] Race create success")
-            # TODO: see if the race_id or anything useful is returned
-            print(response.text)
-            return True
-        else:
-            print(f"[X] Race create Fail :( error: {response.status_code}")
-            return False
+        url = 'https://riders.rouvy.com/events/setup'
+        response = nice_request(url=url, method=HTTPMethod.POST, payload=payload)
+        return response.status_code == HTTPStatus.OK
 
 
 def create_race(race_number: int):
