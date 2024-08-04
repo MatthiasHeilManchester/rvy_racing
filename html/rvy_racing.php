@@ -87,6 +87,7 @@ echo "<script defer type='text/javascript'>
       if (count($result_file_list) == 0) {
            echo "<p><center><b>[(Watt-)Monster of the Month results will appear here when the first race has been processed.]</b></center></p>";
       }
+      echo "<ul>";
 	  foreach ($result_file_list as $result_file) {
           preg_match('@^(\./generated/watt_monster_)(\d{4})_(\d{2})_(\w{3})(.html)@i', $result_file, $matches);
           if (count($matches) != 6) { continue; }
@@ -95,6 +96,7 @@ echo "<script defer type='text/javascript'>
           $month_name = $matches[4];
           echo "<li style=\"margin-left:50px; text-align:left;\"><a href=\"watt_monster.php?month=".$month_num."\">".$month_name." ".$year."</a></li>";
       }
+      echo "</ul>";
       ?>
 Related to this: Feel free to join our races any time to try it out. There's no password
 protection, so just turn up. If you then decide to join us (see below for instructions)
