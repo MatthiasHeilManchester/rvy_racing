@@ -108,17 +108,17 @@ updated.
     guessed it: "Rouvy Racing".
     <br><br>The abbreviation is a meek attempt
     to avoid trouble with
-    <a href="https://www.rouvy.com">Rouvy</a>'s legal department, and we
+    <a href="https://www.rouvy.com" target="_blank">Rouvy</a>'s legal department, and we
     should stress that this site is not affiliated
     with or endorsed by them; we're simply using their great platform 
     to host our races. <br><br>
     The group emerged from
-    <a href="https://www.robirini66.com">RBF</a>, originally
+    <a href="https://www.robirini66.com" target="_blank">RBF</a>, originally
     set up by Robi Rini, but discontinued when he moved to
-    <a href="https://www.kinomap.com">kinomap</a>. The initial machinery
+    <a href="https://www.kinomap.com" target="_blank">kinomap</a>. The initial machinery
     for these pages was written (cobbled together!) by
-    <a href="https://www.strava.com/athletes/9652383">Matthias Heil</a> and
-    then significantly improved by <a href="https://www.strava.com/athletes/1140597">
+    <a href="https://www.strava.com/athletes/9652383" target="_blank">Matthias Heil</a> and
+    then significantly improved by <a href="https://www.strava.com/athletes/1140597" target="_blank">
     Steven Brown</a> during a rewrite required to accommodate
     <a href="https://www.rouvy.com">Rouvy</a>'s changes of their webpages.
     <br><br>
@@ -233,13 +233,13 @@ there. My offer to register you as proxy still stands. The message board is thir
   <li> Each race will be repeated several times (to cater for different
     timezones). Once the route has been published (typically a week in
     advance) you can sign up for one (or more!) of these
-    on <a href="https://rouvy.com/">Rouvy</a> as usual. 
+    on <a href="https://rouvy.com/" target="_blank">Rouvy</a> as usual. 
     Direct links to the races are also provided directly from the race
     tab on this page. This lists
     dates, times, routes, etc. <br><br>
   <li> If none of the official times suit you, you can also arrange
     your own race
-    on <a href="https://rouvy.com">Rouvy</a>.
+    on <a href="https://rouvy.com" target="_blank">Rouvy</a>.
     The race must be on
     the same day (in GMT) as the first official race. This gives everybody
     24 hours to do the route. Click on the  <b>"Add your
@@ -418,7 +418,7 @@ are a few rules anyway.
                                       rather: get credit for them!).<br><br> 
 <li> Those interested in the coding aspect are welcome to contribute to the
       machinery via
-the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing">
+the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing" target="_blank">
     github repository</a>.
 </ul>
 
