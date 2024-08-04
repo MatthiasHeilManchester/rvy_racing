@@ -22,6 +22,7 @@ if (isset($_GET['month'])) {
     }
 } ?>
 
+<!--
 <div style="border: 1px solid black; background-color:rgb(250,250,250); border-radius:10px;   box-shadow: 4px 4px lightgray; padding: 10px; width:60%;">
     <h3>(Watt-)Monster of the Month</h3>
     Given that people may join this group at random points in the
@@ -29,6 +30,7 @@ if (isset($_GET['month'])) {
     a new feature: the "(Watt-)Monster of the Month" competition, a mini-league table extracted from all the races in a
     given month. Now you can experience the end-of-season madness every month. Yay!
 </div>
+-->
 
 <div>
     <h1>Rvy Racing: Watt Monster</h1>
