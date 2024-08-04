@@ -11,22 +11,22 @@
     &nbsp;&nbsp;{{ race.laps }} laps <img src="./images/loop-once.svg" alt="laps" height="20">{% endif %}
 <br><img src="./images/route.svg" alt="laps" height="22">
 <b>Route:</b>
-<a href="https://riders.rouvy.com/route/{{ race.route.id }}">{{ race.route.name }}</a>
+<a href="https://riders.rouvy.com/route/{{ race.route.id }}" target="_blank">{{ race.route.name }}</a>
 {% if 'challenge' in race %}
     &nbsp;&nbsp;
     <img src="./images/challenge-17085.svg" alt="laps" height="26"> <b>Challenge:</b>
-    <a href="https://riders.rouvy.com/challenges/{{ race.challenge.id }}">{{ race.challenge.title }}</a>
+    <a href="https://riders.rouvy.com/challenges/{{ race.challenge.id }}" target="_blank">{{ race.challenge.title }}</a>
 {% endif %}
 <br>
 <ul>
     {% for e in race.events if e.registrationsCount != -1 %}
-        <li><a href=https://riders.rouvy.com/events/{{ e.id }}{% if race.processed %}/leaderboard{% endif %}>Official race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
+        <li><a href="https://riders.rouvy.com/events/{{ e.id }}{% if race.processed %}/leaderboard{% endif %}" target="_blank">Official race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
                 src="./images/team.svg"
                 alt="riders" height="16"></li>
     {% endfor %}
     {% for e in race.events if e.registrationsCount == -1 %}
-        <li><a href=https://riders.rouvy.com/events>All races lost due to Rouvy site update 😾</a><span
+        <li><a href="https://riders.rouvy.com/events"  target="_blank">All races lost due to Rouvy site update 😾</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format("?") }}</span> <img
                 src="./images/team.svg"
                 alt="riders" height="16"></li>
@@ -34,7 +34,7 @@
 </ul>
 <ul>
     {% for e in race.user_contribute_events %}
-        <li><a href=https://riders.rouvy.com/events/{{ e.id }}/leaderboard>Contributed race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
+        <li><a href="https://riders.rouvy.com/events/{{ e.id }}/leaderboard"  target="_blank">Contributed race {{ loop.index }}: {{ e.startDateTime|parse_ts }}</a><span
                 style="font-family: monospace;">{{ "{:\xa0>3}".format(e.registrationsCount) }}</span> <img
                 src="./images/team.svg"
                 alt="riders" height="16"></li>
