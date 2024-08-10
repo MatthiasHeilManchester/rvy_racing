@@ -552,33 +552,33 @@ def create_user_data_json_file():
         json.dump(sorted_user_data, open(json_user_data_file, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
 
-if __name__ == '__main__':
+def series_processing():
     # crate a backup, incase something goes horribly wrong
     backup_series()
-    if len(sys.argv) == 1:  # if you pass anything in skip the collect, just process what we have
-        # Based on the `.series.env` file loaded
-        # Create directory and races.json
-        # routes will be TBA unless otherwise specified in the `.series.env` file
-        # This will only be created if it does not exist
-        init_series()
-        # It would be a good idea to now check races.json looks correct
+    # Based on the `.series.env` file loaded
+    # Create directory and races.json
+    # routes will be TBA unless otherwise specified in the `.series.env` file
+    # This will only be created if it does not exist
+    init_series()
+    # It would be a good idea to now check races.json looks correct
 
-        # create a json version of user_data.csv
-        create_user_data_json_file()
+    # create a json version of user_data.csv
+    create_user_data_json_file()
 
-        # Collect route.json and put in it a race folder
-        # TBA races are ignored
-        init_races()
+    # Collect route.json and put in it a race folder
+    # TBA races are ignored
+    init_races()
 
-        # Add the first challenge we find that matches to races.json
-        update_races_with_challenge()
+    # Add the first challenge we find that matches to races.json
+    update_races_with_challenge()
 
-        # Collect events and if the event is completed the leaderboard
-        # races 1 to 5 have been lost in the Rouvy updates
-        # leaderboard.json files have been backfilled from rvy_racing html for races 1->5
-        for _race_number in range(6, Config.series.length + 1):
-            collect_event_data(_race_number)
+    # Collect events and if the event is completed the leaderboard
+    for _race_number in range(1, Config.series.length + 1):
+        collect_event_data(_race_number)
+    regenerate_artifacts()
 
+
+def regenerate_artifacts():
     for _race_number in range(1, Config.series.length + 1):
         create_race_leaderboard(_race_number)
 
@@ -589,7 +589,11 @@ if __name__ == '__main__':
     for m in range(1, 13):
         create_series_leaderboard(month_filter=RaceMonth(m))
     create_iso3166_1_leaderboard()
+    update_head_to_head_data()
+    generate_html()
 
+
+def generate_html():
     generate_all_races_html()
     generate_league_table_html(IsoDow.ALL)
     generate_league_table_html(IsoDow.WEDNESDAY)
@@ -597,4 +601,6 @@ if __name__ == '__main__':
     for m in range(1, 13):
         generate_league_table_html(month_filter=RaceMonth(m))
 
-    update_head_to_head_data()
+
+if __name__ == '__main__':
+    series_processing()
