@@ -206,6 +206,10 @@ def collect_event_data(race_number: int):
         print(f'[*] {race["name"]} not ready for collection, based on time')
         return
 
+    if len(events) == 0:
+        print(f'[?] No events collected')
+        return
+
     # If we have an event that is not 'FINISHED' return
     if max([e['status'] != 'FINISHED' for e in events]):
         print(f'[*] {race["name"]} not ready for collection, all events not yet finished')
