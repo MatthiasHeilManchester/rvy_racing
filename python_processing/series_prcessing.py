@@ -184,6 +184,10 @@ def collect_event_data(race_number: int):
     :param race_number: The race number to process
     """
     race: dict = get_races()[race_number-1]
+    # events before 2024-06-12 are inconsistent in Rouvy.
+    if datetime.fromisoformat(race['date']) < datetime.fromisoformat('2024-06-12'):
+        print(f'[-] Skipping event collection for {race["name"]} events before 2024-06-12 are inconsistent in Rouvy')
+        return
     race_path: Path = Path(race['path'])
     race_path.mkdir(exist_ok=True)  # should already exist but you never know
     event_file: Path = Path(race_path, f'events.json')
