@@ -134,12 +134,7 @@ def refresh_known_events(race_number: int) -> None:
     json.dump(sorted(updated_events, key=lambda d: d['startDateTime']),
               open(events_file, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
 
-    generate_all_races_html()
-    generate_league_table_html(IsoDow.ALL)
-    generate_league_table_html(IsoDow.WEDNESDAY)
-    generate_league_table_html(IsoDow.SATURDAY)
-    for m in range(1, 13):
-        generate_league_table_html(month_filter=RaceMonth(m))
+    generate_html()
 
 
 def update_head_to_head_data():
