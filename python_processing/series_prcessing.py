@@ -362,7 +362,7 @@ def create_race_leaderboard(race_number: int):
     agg_results = list()
     results_file = Path(race_path, f'results.json')
     if not results_file.exists():
-        print(f'[*] No results for {race["name"]} currently available')
+        print(f'[*] No results for {race["name"]} available at this time')
         return
     results: list = json.load(results_file.open(mode='r', encoding='utf-8'))
     user_file = Path(Config.series.series_path, f'user_data.json')
