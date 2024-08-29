@@ -1,4 +1,3 @@
-from time import sleep
 from pprint import pp
 from config import Config
 from datetime import datetime, timedelta
@@ -19,11 +18,6 @@ def find_events(race_date: datetime, route_id: str, laps: int, finished: bool) -
     :param finished: Search finished or planned events
     :return: A list of events in datetime order
     """
-    # TODO: There is a bug where Rouvy forgot to include the restrictions eg "Smart Trainers Only"
-    #       This messes up the website too, when they fix that we should include an additional check check for:
-    # 	    "event": {"restrictions": ["smartTrainers"]}
-    # 	    This may also require a deeper check specifically into the event, "restrictions" is not present via search
-    #       It is via the event, but it is always an empty list regardless of any restrictions
     events: list = list()
     # search prams
     offset: int = 0  # pagination
@@ -66,16 +60,15 @@ def find_events(race_date: datetime, route_id: str, laps: int, finished: bool) -
             if event["event"]["laps"] != laps:
                 continue  # Skip events that do not have the correct number of laps
             print(f'\n[-] Found: {event["event"]["title"]}')
-            print(f'[-] Searching {str(status.value).capitalize()}', end='')
             event_info: dict = get_event_info(event['id'])
-            # TODO: Remove this when Rouvy fix their shit
-            if len(event_info['restrictions']) > 0:
-                print(f'{"x" * 40}\n{"x" * 40}')
-                print(f'Event restrictions found {event_info["restrictions"]}, Rouvy fixed something')
-                print(f'{"x" * 40}\n{"x" * 40}')
-            # TODO: When Rouvy fix their issue this should (a total guess) work
-            # if 'smartTrainers' not in event_info['restrictions']:
-            #     continue  # The event does not have the smart trainers restriction
+            smart_trainers_only = event_info.get("smartTrainersOnly", None)
+            if smart_trainers_only is not None:
+                if smart_trainers_only is False:
+                    print('[X] Rejected: Smart Trainer status = False')
+                    continue  # We only do smart trainers
+            else:
+                print('[?] Unknown Smart Trainer status')
+            print(f'[-] Searching {str(status.value).capitalize()}', end='')
             events.append(event_info)
     print('')
     return sorted(events, key=lambda d: d['startDateTime'])
