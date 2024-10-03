@@ -588,8 +588,10 @@ def regenerate_artifacts():
     month_filter: RaceMonth
     for m in range(1, 13):
         create_series_leaderboard(month_filter=RaceMonth(m))
-    # hierher temporary fix until we have race data create_iso3166_1_leaderboard()
-    # hierher temporary fix until we have race data update_head_to_head_data()
+    # hierher at start of season comment out until we have race data
+    create_iso3166_1_leaderboard()
+    # hierher at start of season comment out until we have race data
+    update_head_to_head_data()
     generate_html()
 
 
