@@ -189,6 +189,11 @@ def __parse_remix_node(node_id: int, remix_data: json) -> dict:
                     # TODO: collect the next value in the list
                     # TODO: Do something with this, if required, they are the other lines in he RemixJS data
                     break  # For now, we just ignore them
+                if list_item == 'SingleFetchClassInstance':
+                    # SingleFetchClassInstance What ever that is???? found, lets LOLO parse it
+                    assert len(val) == 2, f'Node list not 2: {val}'
+                    parsed_dict[node_name] = val[1]
+                    break  # For now, we just ignore them
                 if list_item == 'D':
                     # D Node Found, looks like a date
                     assert len(val) == 2, f'Node list not 2: {val}'
@@ -212,7 +217,7 @@ def __parse_remix_node(node_id: int, remix_data: json) -> dict:
                         assert False, f'NodeData not dict, int or list: {node_data}'
                     parsed_dict[node_name] = node_list
                 else:
-                    assert False, f"Some other value in list: '{list_item}'"
+                    assert False, f"Some other value in list: '{type(list_item)}':\t{list_item}"
         else:
             parsed_dict[node_name] = val
     return parsed_dict
