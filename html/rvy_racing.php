@@ -124,8 +124,8 @@ updated.
     Steven Brown</a> during a rewrite required to accommodate
     <a href="https://www.rouvy.com">Rouvy</a>'s changes of their webpages.
     <br><br>
-    We're currently doing the Winter Series 24-25 (from
-    October-March) with two races per week (on Wednesdays and Saturdays).
+    We're currently doing the Summer Series 2025 (from
+    May to September) with one race per week (on Wednesdays).
     The final league tables from the previous seasons have now been archived:
     <ul>
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23</a> </li>
@@ -134,9 +134,11 @@ updated.
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_summer_24/league_table.html">Summer 24</a> </li>
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_24-25/league_table.html">Winter 24-25</a> </li>
     </ul>
-    If you're interested in joining our race series, please register
-    on our <a href="https://www.matthias-heil.co.uk/phpbb/">phpBB
-    Discussion Board</a> (see below for detailed instructions). Once we have your rouvy username
+    If you're interested in joining our race series, please register by filling in our registration form
+    <div style="text-align: center; margin: 30px 0;">
+    <a href="https://www.matthias-heil.co.uk/rvy_racing_registration/" class="select_league_table_buttons">Registration
+      form</a></div>
+    Once we have your rouvy username
     and a few other details (which do not include your credit card number!),
     you will automatically be included in the rankings for each race
     (as DNS if you don't turn up). There's nothing else to do, apart
@@ -144,79 +146,6 @@ updated.
     And then hammer it -- not so easy...<br><br>
     The schedule of upcoming races, the rankings, and the overall
     league table are available via the tabs above.
-    <br>
-    <br>
-    <hr>
-    <br>
-    <h3>How to register</h3>
-    Here's a step-by-step guide for how to register:
-    <ol>
-      <li> Go to the discussion board at
-        <center><a href="https://www.matthias-heil.co.uk/phpbb/">https://www.matthias-heil.co.uk/phpbb/</a></center>
-      <li> Click on "Register" in the top right corner:
-        <br><br>
-        <center><a href="images/registration1.jpg"><img class="myImage"
-                                                        src="images/registration1.jpg" alt="registration"
-                                                 ></a><br><small>[click on
-          screenshot to enlarge]</small></center>
-        <br>
-        <br>
-        [Note: Sometimes there seems to be a problem where upon clicking "submit" in the final step (see below), you're returned to the empty form all over again. Aaaargh! No idea what's 
-going on 
-there. My offer to register you as proxy still stands. The message board is third-party software and this seems to be an intermittent bug. Will explore. For now: Sorry!]
-        <br><br>
-      <li> Read the terms and conditions (or not...) and accept:
-        <br><br>
-        <center><a href="images/registration2.jpg"><img class="myImage"
-                                                        src="images/registration2.jpg" alt="registration"
-                                                 ></a><br><small>[click on
-          screenshot to enlarge]</small></center>
-        <br>
-      <li> Fill in the required details.
-        <br><br>      
-        <b>Note:</b>
-        <br><br>
-        <ul>
-          <li> Make sure that your chosen username (in the first box)
-          doesn't contain any whitespace. So "<em>JoeCool</em>"
-            or "<em>Joe_Cool</em>"
-            are OK; "<em>Joe Cool</em>" isn't. Other than that you
-          can choose what you want.     <br><br>
-          <li> The rouvy username is case sensitive, so make sure you enter it
-            exactly as specified on rouvy. (Example: If your rouvy
-            username is "<em>JoeCool</em>" you won't be recognised (and thus
-            won't get any points!) if you enter "<em>joecool</em>"
-            here.)
-            <br><br>
-          <li> Make sure that your email
-            address is correct otherwise you'll never find out that your
-            registration has been processed.
-        </ul>
-        <br><br>
-        <center><a href="images/registration3.jpg"><img class="myImage" src="images/registration3.jpg"
-                                                        alt="registration"                                                 ></a><br><small>[click on
-          screenshot to enlarge]</small></center>
-        <br>
-      <li> When you're done it should look a bit like this:
-        <br><br>
-        <center><a href="images/registration4.jpg"><img class="myImage" src="images/registration4.jpg"
-                                                        alt="registration"                                               ></a><br><small>[click on
-          screenshot to enlarge]</small></center>
-        Now press "submit".
-        <br><br>
-        <li> Wait for your registration to be approved by the race
-        organiser. He does sleep (sometimes) so this may not be
-        instantaneous, but rest assured that it'll be dealt with as
-        soon as possible. You'll receive an email to the email address
-        that you specified during the registration.
-        <br><br>
-        <li> Still can't get it to work? Contact the race organiser
-        directly; see the Contact tab for details.
-    </ol>
-    <br>
-    <br>
-    <hr>
-    <br>
 </div>
 
 
@@ -302,16 +231,14 @@ are a few rules anyway.
     Related to this: It would be good if you could sign up
     for the races a.s.a.p. Well attended races tend to attract yet more racers and stampedes
     are more fun than TT-style solo races.<br><br>
-  <li> Banter on
-  the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
-      board</a>
-    is actively encouraged (though, to be honest, it's not much used for this
-    purpose -- the post-race fun happens on strava). Taking
+  <li> Post-race banter on <a href="https://www.strava.com/">strava</a> (we even have a
+    <a href="https://www.strava.com/clubs/rvy_racing">rvy_racing strava group!</a>)
+    is actively encouraged. However, taking
     yourself (or this whole thing) too seriously is not. Launching
     debates about possible cheaters (or other rule 1 violators) is
     strictly <em>verboten</em>. If you have any
-    concerns, please contact the race organiser (via a private (!) message
-    on the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion board</a>), so they
+    concerns, please contact the <a href="https://www.strava.com/athletes/9652383">race organiser</a>
+    (via a private (!) message on the <a href="https://www.strava.com">strava app</a>), so they
     can have a quiet word (and/or escalate things if necessary; see
     below).
     <br><br>
@@ -430,115 +357,22 @@ are a few rules anyway.
 <h1>Contact</h1>
 
 
-  <ul>
-<li> Please use the <a href="https://www.matthias-heil.co.uk/phpbb/">discussion
-      board</a> for, well, for discussions, I guess. Constructive suggestions for improvement, bug
-  reports/fixes, are also welcome. However, note that the discussion board is mainy used for registering
-  new users; the post-race banter happens on strava!<br><br>
-  <li >The race organiser can be contacted directly via
-  the "Contact us" link on the registration page:
-  <br><br>
-  <center><a href="images/contact.jpg"><img class="myImage" src="images/contact.jpg" alt="contact"
-                                      ></a></center>
-  <br>
-  You don't have to have registered to do this, though you will have
-                                      to register if you want to
-                                      participate in the races (or
-                                      rather: get credit for them!).<br><br> 
-<li> Those interested in the coding aspect are welcome to contribute to the
-      machinery via
-the  <a href="https://github.com/MatthiasHeilManchester/rvy_racing" target="_blank">
-    github repository</a>.
+<ul>
+  <li> We used to have a phpBB discussion board but it got hacked and turned into a spam-generating machine
+    so it was shut down. It wasn't used much anyway, but there's now a <a href="https://www.strava.com/clubs/rvy_racing">
+      rvy_racing strava club</a> where you can post anything you want to share with other users. However, note
+    that signing up for rvy_racing via our
+    <a href="https://www.matthias-heil.co.uk/rvy_racing_registration/"> registration form</a> doesn't make you a member
+    of the strava club; you'll have to sign up <a href="https://www.strava.com/clubs/rvy_racing">there</a>.</li>
+  <li>  You can contact the <a href="https://www.strava.com/athletes/9652383">race organiser</a>
+    via a private message on the <a href="https://www.strava.com">strava app</a> or just send him an email;
+    contact details are on his <a href="https://www.matthias-heil.co.uk">webpage</a>.
 </ul>
 
-
-  <hr>
-  
 <h1>FAQ</h1>
-[Not very frequently asked, actually; the discussion board never really took off, but if you're interested...]
 <ul>
-  <li> <h2><b>How to change settings in the profile on the phpBB Discussion
-  Forum (e.g. to add your strava url if you forgot to do so when you
-  first registered):</b></h2>
-  <ul>
-  <li> Click on your username (here assumed to be joe_cool) in the top right corner:
-    <br><br>
-    <center><a href="images/profile1.jpg"><img class="myImage"
-                                               src="images/profile1.jpg" alt="profile"
-                                             ></a><br><small>[click on
-        screenshot to enlarge]</small></center>
-    <br>
-    <br>
-  <li> Click on "Profile" in the drop-down menu:
-    <br><br>
-    <center><a href="images/profile2.jpg"><img class="myImage"
-                                               src="images/profile2.jpg" alt="profile"
-                                             ></a><br><small>[click on
-        screenshot to enlarge]</small></center>
-    <br>
-    <br>
-  <li> Click on "Edit Profile" 
-    <br><br>
-    <center><a href="images/profile3.jpg"><img class="myImage"
-                                               src="images/profile3.jpg" alt="profile"
-                                             ></a><br><small>[click on
-        screenshot to enlarge]</small></center>
-    <br>
-    <br>
-  <li> Fill in/update whatever you want to add/change: 
-    <br><br>
-    <center><a href="images/profile4.jpg"><img class="myImage"
-                                               src="images/profile4.jpg" alt="profile"
-                                             ></a><br><small>[click on
-        screenshot to enlarge]</small></center>
-    <br>
-    <br>
-  <li> Don't forget to press the "Submit" button!
-    <br>
-    <br>
-  </ul>
-    <li> <h2><b>How to subscribe to a forum (so you get an email when a new
-    response is posted):</b></h2>
-      <ul>
-        <li> Click on the appropriate forum (here the "Races" one):
-          <br><br>
-          <center><a href="images/subscribe_to_forum1.jpg"><img class="myImage"
-                                                                src="images/subscribe_to_forum1.jpg" alt="subscribe"
-                                              ></a><br><small>[click on
-              screenshot to enlarge]</small></center>
-          <br>
-          <br>
-        <li> Click on "Subscribe forum" (which, strangely, is already
-        ticked, even though you're not subscribed yet!):
-          <br><br>
-          <center><a href="images/subscribe_to_forum2.jpg"><img class="myImage"
-                                                                src="images/subscribe_to_forum2.jpg" alt="subscribe"
-                                              ></a><br><small>[click on
-              screenshot to enlarge]</small></center>
-	  <br>
-	  Now you'll get lots of lovely emails to distract you from your work.
-          <br>
-          <br>
-        <li> Had enough of all these emails? Click on "Unsubscribe
-        forum" and you'll be left alone again.
-          <br><br>
-          <center><a href="images/subscribe_to_forum3.jpg"><img class="myImage"
-                                                                src="images/subscribe_to_forum3.jpg" alt="subscribe"
-                                              ></a><br><small>[click on
-              screenshot to enlarge]</small></center>
-          <br>
-          <br>
-      </ul>
-  </ul>
-
-<center>
-  <a href="https://matthias-heil.co.uk/rvy_racing/html/admin.php">Admin menu</a>
-</center>
-
+  <li> Nobody's asked any questions yet!</li>
+</ul>
 </div>
-  
-  </body>
-  
-
-  
+</body>     
 </html>
