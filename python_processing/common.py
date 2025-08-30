@@ -79,15 +79,19 @@ def get_authenticated_session() -> Session:
             print(f'[?] Login failed with status {status_code} attempting retry {retry}')
             sleep(Constants.REQUEST_RETRY_DELAY * retry)
         session = Session()
+        # Let's totally accept the tos
+        session.cookies.update({'rouvysession_tos': 'ImNoZWNrZWQi'})  # b64 "checked"
+        # Yes I am a shitty mac running firefox
+        session.headers.update({'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:141.0) Gecko/20100101 Firefox/141.0'})
         payload = {'email': Config.rouvy.email,
                    'password': Config.rouvy.password}
         try:
-            response: Response = session.post("https://riders.rouvy.com/login", payload)
+            response: Response = session.post("https://riders.rouvy.com/login.data?redirectTo=/", payload)
         except requests.exceptions.ConnectionError:
             print("[X] Connection error, no internet?")
             continue  # Let's give it another go
         status_code = response.status_code
-        if status_code == HTTPStatus.OK:
+        if status_code in [HTTPStatus.OK, HTTPStatus.ACCEPTED]:
             # print("[*] Login Success")
             # Force our session to GMT / UTC
             session.cookies.set("CH-time-zone", "Greenwich", domain="riders.rouvy.com")
@@ -277,7 +281,7 @@ if __name__ == '__main__':
     #     c_data = remix_data["routes/_main.challenges.status.$status"]["data"]
     #     print(json.dumps(c_data.get('challenges', None), indent=2))
     #
-
+    #
     # query = 'spacech'
     # route = "routes/_main.friends_.search"
     # url = f"https://riders.rouvy.com/friends/search.data?query={query}&_routes={route}"
