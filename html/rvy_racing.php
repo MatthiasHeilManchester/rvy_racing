@@ -124,8 +124,8 @@ updated.
     Steven Brown</a> during a rewrite required to accommodate
     <a href="https://www.rouvy.com">Rouvy</a>'s changes of their webpages.
     <br><br>
-    We're currently doing the Summer Series 2025 (from
-    May to September) with one race per week (on Wednesdays).
+    We're currently doing the Winter Series 2025/26 (from
+    October to the end of March) with two races per week (on Wednesdays and Saturdays).
     The final league tables from the previous seasons have now been archived:
     <ul>
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23: </a> 🥇 Brian Ward 🥈 Mark Jones 🥉 Alessio Saviane</li>
