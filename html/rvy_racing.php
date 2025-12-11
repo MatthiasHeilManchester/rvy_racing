@@ -228,7 +228,7 @@ are a few rules anyway.
   actually turn up (or unregister a.s.a.p., if at all possible). People generally
   like to race with other people, and turning up in the expectation to
   find a proper stampede only to find that half the people couldn't
-    actually be bothered is annoying.<br><br>
+    actually be bothered is annoying.<br>
     Related to this: It would be good if you could sign up
     for the races a.s.a.p. Well attended races tend to attract yet more racers and stampedes
     are more fun than TT-style solo races.<br><br>
@@ -241,11 +241,7 @@ are a few rules anyway.
     concerns, please contact the <a href="https://www.strava.com/athletes/9652383">race organiser</a>
     (via a private (!) message on the <a href="https://www.strava.com">strava app</a>), so they
     can have a quiet word (and/or escalate things if necessary; see
-    below).
-    <br><br>
- <center><a href="images/private_message.jpg"><img class="myImage" src="images/private_message.jpg"
-                                                   alt="private message"                                   ></a></center>
-    <br><br>
+    below).<br><br>
   <li> No overtly political etc. discussions because it's likely to create
     tension. This is not censorship -- there are plenty of other forums
     on the internet (or in your local pub!) where you can raise your
