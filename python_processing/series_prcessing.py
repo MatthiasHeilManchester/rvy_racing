@@ -405,7 +405,9 @@ def create_race_leaderboard(race_number: int):
                 else:
                     rider['time'] = str(timedelta(seconds=rider['timeSeconds']))
 
-            if rider['time'] == '0':
+            if (rider['time'] == '0' or
+                    rider['time'] is None or
+                    str(rider['userSessionStatus']).lower() != 'finished'):
                 rider['time'] = rider['userSessionStatus']
             agg_results.append(rider)
 
