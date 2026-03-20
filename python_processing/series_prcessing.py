@@ -389,12 +389,15 @@ def create_race_leaderboard(race_number: int):
     for event in results:
         event_id: str = list(event.keys())[0]
         rider: dict
-        for rider in event[event_id].get('leaderboard', event[event_id].get('results', None)):
+        for rider in event[event_id].get('leaderboard', event[event_id].get('results', event[event_id].get('resultsData', {}).get('results', None))):
             # leaderboard is now results, with some key name changes
+            # This is an unholy mess now....
             if 'userSessionStatus' not in rider:
                 rider['userSessionStatus'] = rider['status']
             if 'userName' not in rider:
-                rider['userName'] = rider['user']['username']
+                rider['userName'] = rider.get('username', None)
+                if rider['userName'] is None:
+                    rider['userName'] = rider['user']['username']
             if 'countryCode' not in rider:
                 rider['countryCode'] = rider['user']['countryCode']
             if 'avgWattKg' not in rider:
