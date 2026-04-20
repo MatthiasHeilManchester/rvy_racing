@@ -124,8 +124,8 @@ updated.
     Steven Brown</a> during a rewrite required to accommodate
     <a href="https://www.rouvy.com">Rouvy</a>'s changes of their webpages.
     <br><br>
-    We're currently doing the Winter Series 2025/26 (from
-    October to the end of March) with two races per week (on Wednesdays and Saturdays).
+    We're currently doing the Summer Series 2026 (from
+    May to the end of September) with one race per week (on Wednesdays).
     The final league tables from the previous seasons have now been archived:
     <ul>
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_22-23/league_table.html">Winter 22-23: </a> 🥇 Brian Ward 🥈 Mark Jones 🥉 Alessio Saviane</li>
@@ -134,6 +134,7 @@ updated.
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_summer_24/league_table.html">Summer 24:</a> 🥇Przemyslaw Puchala 🥈 Mark Jones 🥉 Giovanni Berti</li>
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_24-25/league_table.html">Winter 24-25:</a> 🥇Brian Ward 🥈 Przemyslaw Puchala 🥉 Mark Jones</li>
       <li><a href="../rvy_racing_archived_seasons/rvy_racing_summer_25/league_table.html">Summer 25:</a> 🥇Stefan Aumueller 🥈 Przemyslaw Puchala 🥉 Giovanni Berti</li>
+      <li><a href="../rvy_racing_archived_seasons/rvy_racing_winter_25-26/league_table.html">Winter 25-26:</a> 🥇Brian Ward 🥈 Mark Jones 🥉 Przemyslaw Puchala</li>
     </ul>
     If you're interested in joining our race series, please register by filling in our registration form
     <div style="text-align: center; margin: 30px 0;">
