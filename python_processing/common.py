@@ -260,7 +260,7 @@ if __name__ == '__main__':
     # At some point Rouvy will likely kill off the old json api calls
     #######################################################################
     # route = "routes/_main.events_.$id.leaderboard"
-    # url = f"https://riders.rouvy.com/events/b153748a-c84f-4011-bebd-dd2f6843be87/leaderboard.data?_routes={route}"
+    # url = f"https://riders.rouvy.com/events/94861aed-9935-4105-9cd8-a98c251383c7/leaderboard.data?page=2&_routes={route}"
     # result = nice_request(url=url)
     # remix_data = remix_parse(result.content.decode(encoding='utf-8'), True)
     # data = remix_data[route]['data']
