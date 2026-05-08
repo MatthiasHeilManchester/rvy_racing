@@ -94,12 +94,32 @@ def get_event_info(event_id: str) -> dict:
 
 def get_event_results(event_id: str) -> dict:
     """
-    Collect results leaderboard for a specific event from Rouvy.
+    Collect ALL results leaderboard for a specific event from Rouvy.
+    :param event_id: The ID of the event.
+    :return: A results leaderboard dictionary.
+    """
+    results_exist: bool = True
+    page = 1
+    data = get_event_result_page(event_id=event_id, page=page)
+    while results_exist:
+        page += 1
+        next_data_page = get_event_result_page(event_id=event_id, page=page)
+        results_exist:bool = 'results' in next_data_page['resultsData']
+        if results_exist:
+            print(f'[*] found more results on page {page}')
+            data['resultsData']['results'] += next_data_page['resultsData']['results']
+
+    return data
+
+
+def get_event_result_page(event_id: str, page: int) -> dict:
+    """
+    Collect results leaderboard for a specific event from Rouvy by page number.
     :param event_id: The ID of the event.
     :return: A results leaderboard dictionary.
     """
     route = "routes/_main.events_.$id.leaderboard"
-    url = f"https://riders.rouvy.com/events/{event_id}/leaderboard.data?_routes={route}"
+    url = f"https://riders.rouvy.com/events/{event_id}/leaderboard.data?page={page}&_routes={route}"
     result = nice_request(url=url)
     remix_data = remix_parse(result.content.decode(encoding='utf-8'), False)
     return remix_data[route]['data']
