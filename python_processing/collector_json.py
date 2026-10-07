@@ -48,7 +48,7 @@ def get_challenges() -> list:
         ch_data = remix_data[route]["data"]
         challenge_routes: list = list()
         for task in ch_data['challenge']['tasks']:
-            if task['__typename'] !='RouteTask':
+            if task['taskType'] !='route':
                 continue # We only care about route based tasks
             # Remove unneeded bloat
             route = task['route']
