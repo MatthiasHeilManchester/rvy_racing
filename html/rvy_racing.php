@@ -34,6 +34,43 @@
   </head>
   <body>
 
+
+
+<div style="border: 1px solid black;
+            background-color:rgb(250,250,250);
+            border-radius:10px;
+            box-shadow: 4px 4px lightgray;
+            padding: 10px;
+            width:60%;
+            margin: 0 auto;">                                                                                                                                                                                                                                            
+<h3>Sorry -- we have a problem!</h3>
+Rouvy have recently made changes to the machinery that controls access to
+their site, meaning that we can't currently generate races and scrape
+the results automatically. We're trying to fix this but may not be able to
+retain the full functionality of what we used to have here.
+<p>
+Here's what you need to know:
+<ul>
+<li> No data will get lost! The league table is currently frozen at race 12 but we've recorded
+the outcomes of the subsequent races and will continue to do so. They
+will be included into the league table once we understand their new
+setup more clearly.
+<li> New races (beyond race 17) will not appear in the list under the "Races" tab. If I'm
+sufficiently bored I may add them manually here, but it's probably easier (certainly for
+  me!) if you just look them up on the rouvy website. Search for any
+  races containing "rvy_racing". The race times (7am, 3pm, 6pm, 2pm
+  Manchester time) will remain unchanged. In fact, here's
+  <strong><a href="https://riders.rouvy.com/events/search?searchQuery=rvy_racing&dateRange=upcoming&offset=0">
+    a link to the upcoming races</a></strong>.
+<li> Keep racing!
+</ul>
+</div>
+<hr>
+
+
+
+    
+    
     <img class="tabImage" src="images/rvy_racing.png" alt="rvy_racing logo">
     <input type="radio" name="tabs" id="tab1" checked>
     <label for="tab1">Welcome</label>

@@ -101,13 +101,16 @@ def create_race(race_number: int, test_mode: bool = False):
 
 if __name__ == '__main__':
     # Create a set of races based on the config...
-    create_race(1, test_mode=False)
-    create_race(2, test_mode=False)
-    create_race(3, test_mode=False)
-    create_race(4, test_mode=False)
-    create_race(5, test_mode=False)
-    create_race(6, test_mode=False)
-    create_race(7, test_mode=False)
+    create_race(8, test_mode=False)
+    create_race(9, test_mode=False)
+    create_race(10, test_mode=False)
+    create_race(11, test_mode=False)
+    create_race(12, test_mode=False)
+    create_race(13, test_mode=False)
+    create_race(14, test_mode=False)
+    create_race(15, test_mode=False)
+    create_race(16, test_mode=False)
+    create_race(17, test_mode=False)
 
     # Or
 
