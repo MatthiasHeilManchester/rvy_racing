@@ -58,7 +58,7 @@ setup more clearly.
 <li> New races (beyond race 17) will not appear in the list under the "Races" tab. If I'm
 sufficiently bored I may add them manually here, but it's probably easier (certainly for
   me!) if you just look them up on the rouvy website. Search for any
-  races containing "rvy_racing". The race times (7am, 3pm, 6pm, 2pm
+  races containing "rvy_racing". The race times (7am, 3pm, 6pm, 2am
   Manchester time) will remain unchanged. In fact, here's
   <strong><a href="https://riders.rouvy.com/events/search?searchQuery=rvy_racing&dateRange=upcoming&offset=0">
     a link to the upcoming races</a></strong>.
